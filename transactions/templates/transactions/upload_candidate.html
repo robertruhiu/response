@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bulma_tags %}
+
+{% block content %}
+    <div class="modal modal--is-active w3-padding-64">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Add Candidates</p>
+            </header>
+            <section class="modal-card-body">
+                <form action="." method="post">
+                    {% csrf_token %}
+                    {{ candidate_form |bulma }}
+                    <button class="button is-pulled-right" name="and_continue" value="continue" type="submit">Save and Continue</button>
+                    <button class="button is-pulled-left" name="add_another" value="addanother" type="submit">Save and Add Another</button>
+                </form>
+            </section>
+        </div>
+    </div>
+{% endblock %}

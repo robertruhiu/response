@@ -1,0 +1,44 @@
+{% extends "account/base.html" %}
+{% load bulma_tags socialaccount %}
+
+{% load i18n %}
+{% block title %}
+    Register
+{% endblock %}
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+    <div class="container w3-container w3-padding-64">
+        <div class="columns is-centered">
+            <div class="column is-half is-narrow">
+
+                <h1>{% trans "Sign Up" %}</h1>
+                <p class="w3-text-black">{% blocktrans %}Already have an account? Then please
+                    <a href="{{ login_url }}" class="w3-border-bottom">sign in</a>
+                    .{% endblocktrans %}</p>
+{#                {% providers_media_js %}#}
+{#                <a href="{% provider_login_url "facebook" method="js_sdk" %}"#}
+{#                   class="button is-fullwidth is-link w3-margin-top w3-margin-bottom">#}
+{#                    <span class="fab fa-facebook-square"></span>&nbsp;&nbsp;#}
+{#                    Continue with Facebook#}
+{#                </a>#}
+{#                <a href="{% provider_login_url "twitter" %}"#}
+{#                   class="button is-fullwidth w3-margin-bottom">#}
+{#                    <span class="fab fa-twitter"></span>&nbsp;&nbsp;#}
+{#                    Connect with Twitter#}
+{#                </a>#}
+
+
+                <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                    {% csrf_token %}
+                    {{ form|bulma }}
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    <button type="submit" class="button">{% trans "Sign Up" %}</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

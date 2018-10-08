@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load bulma_tags %}
+{% block content %}
+    <div class="modal modal--is-active w3-padding-64">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Your Profile</p>
+            </header>
+            <section class="modal-card-body">
+                <form action="." method="post">
+                    {% csrf_token %}
+                    {{ developer_filling_details_form|bulma }}
+                    <button class="button" type="submit">Next</button>
+                </form>
+            </section>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @font-face {
+            font-family: 'CircularStd-Book';
+            src: url('{% static 'frontend/fonts/circularstd-book.woff2' %}') format('woff2'),
+            url('{% static 'frontend/fonts/circularstd-book.ttf' %}') format('truetype'),
+            url('{% static 'frontend/fonts/circularstd-book.woff' %}') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Tiempos Headline';
+            src: url('{% static 'frontend/fonts/tiempos-headline/TiemposHeadline-Bold.ttf' %}') format('truetype'),
+            url('{% static 'frontend/fonts/tiempos-headline/TiemposHeadline-Bold.woff' %}') format('woff'),
+            url('{% static 'frontend/fonts/tiempos-headline/TiemposHeadline-Bold.woff2' %}') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Tiempos Text';
+            src: url('{% static 'frontend/fonts/tiempos-text/TiemposText-Regular.ttf' %}') format('truetype'),
+            url('{% static 'frontend/fonts/tiempos-text/TiemposText-Regular.woff' %}') format('woff'),
+            url('{% static 'frontend/fonts/tiempos-text/TiemposText-Regular.woff2' %}') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}
+
+    {% endblock %} | Codeln</title>
+    <link rel="stylesheet" href="{% static 'frontend/css/w3.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/bulma.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="{% static 'frontend/css/tradesbydesign.css' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    {% block css %}
+
+    {% endblock %}
+</head>
+<body>
+<nav class="navbar" style="padding: 10px 0;">
+    <div class="navbar-brand w3-margin-left w3-margin-right">
+        <a class="navbar-item w3-hover-none" href="/">
+            <span class="title">Code\n</span>
+        </a>
+
+
+        <button class="button navbar-burger is-white" data-target="navMenu" id="navBurger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+    <div class="navbar-menu" id="navMenu">
+
+        <div class="navbar-end w3-center w3-margin-right">
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+            {% else %}
+                <a href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                <a href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+            {% endif %}
+        </div>
+
+    </div>
+</nav>
+<div class="block-content-offset">
+    {% block content %}
+
+    {% endblock %}
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // Get all "navbar-burger" elements
+        var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
+
+            // Add a click event on each of them
+            $navbarBurgers.forEach(function ($el) {
+                $el.addEventListener('click', function () {
+
+                    // Get the target from the "data-target" attribute
+                    var target = $el.dataset.target;
+                    var $target = document.getElementById(target);
+
+                    // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+                    $el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+
+                });
+            });
+        }
+
+    });
+</script>
+{% block script %}
+
+{% endblock %}
+</body>
+</html>

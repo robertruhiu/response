@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="container w3-margin-bottom" >
+        <div class="hero is-primary" style="height: 25%">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title">Codeln Projects</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container w3-margin-top w3-margin-bottom">
+        <div class="columns is-multiline">
+            {% for project in all_projects %}
+                <div class="column is-10 is-offset-1 w3-padding">
+                    <div class="columns is-multiline">
+                        <div class="column is-2">{{ project.name }}</div>
+                        <div class="column is-4">{{ project.description }}</div>
+                        <div class="column is-2">{{ project.framework.name }}</div>
+                        <div class="column is-2">{{ project.framework.language }}</div>
+                        <div class="column is-2">
+                            <a href="{% url 'projects:project' project.id%}">Go to project</a>
+                        </div>
+                    </div>
+
+
+                </div>
+            {% endfor %}
+
+        </div>
+    </section>
+{% endblock %}
