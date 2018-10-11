@@ -13,7 +13,7 @@ class Profile(models.Model):
         ('developer', 'DEVELOPER'),
     )
     STAGE_CHOICES = (
-        ('profile_type_selection','profile_type_selection'),
+        ('profile_type_selection', 'profile_type_selection'),
         ('recuiter_filling_details', 'recuiter_filling_details'),
         ('developer_filling_details', 'developer_filling_details'),
         ('complete', 'complete'),
@@ -31,22 +31,20 @@ class Profile(models.Model):
     profile_photo = models.ImageField(upload_to='users/%Y/%m/%d', blank=True)
     date_of_birth = models.DateTimeField(null=True, blank=True)
     phone_number = models.IntegerField(null=True, blank=True)
-    #developer profile
+    # developer profile
     github_repo = models.URLField(blank=True, null=True, )
     programming_languages = models.CharField(max_length=30, choices=PROGRAMMING_LANGUAGE_CHOICES, null=True, blank=True)
     frameworks = models.CharField(max_length=30, null=True, blank=True, choices=FRAMEWORK_CHOICES)
     years = models.CharField(max_length=30, choices=YEARS_ACTIVE_CHOICES, null=True, blank=True)
-    #recruiter profile
+    # recruiter profile
     company = models.CharField(max_length=140, null=True, blank=True)
     job_role = models.CharField(max_length=140, null=True, blank=True)
     industry = models.CharField(max_length=80, null=True, blank=True)
     staff_size = models.IntegerField(null=True, blank=True)
-    company_url = models.URLField(null=True,blank=True)
-
+    company_url = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return self.user.username
-
 
     def photo(self, default_path="default_user_photo.png"):
         if self.profile_photo:
@@ -64,12 +62,10 @@ class Profile(models.Model):
     def date_joined(self):
         return self.user.date_joined
 
-
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
             Profile.objects.create(user=instance)
-
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):

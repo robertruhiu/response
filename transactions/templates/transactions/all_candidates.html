@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="modal modal--is-active w3-padding-64">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Add Candidates</p>
+            </header>
+            <section class="modal-card-body">
+                {% for candidate in candidates %}
+                    <p class="w3-text-black box ">{{ candidate.first_name }}, {{ candidate.last_name }},
+                        {{ candidate.email }}
+                        <span class="is-pulled-right">
+                            <a href="#">Edit</a>
+                            <a href="#">Remove</a>
+                        </span>
+                    </p>
+                {% endfor %}
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-info">Total Cost = {{ total_amount }}</button>
+                <a href="{% url 'payments:pay' current_transaction.id %}" class="button is-success">
+                    Proceed to make Payment.</a>
+            </footer>
+        </div>
+    </div>
+{% endblock %}

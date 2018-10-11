@@ -38,6 +38,7 @@
         </div>
         <p class="title button w3-border-green"><a href="{% url 'projects:all-projects' %}">Back to Projects</a></p>
         <p class="title button w3-green w3-text-white is-pulled-right">
-            <a href="{% url 'transactions:transaction' project.id %}">Choose Project</a></p>
+            <a href="{% url 'transactions:transaction' project.id %}">Choose Project</a>
+        </p>
     </section>
 {% endblock %}

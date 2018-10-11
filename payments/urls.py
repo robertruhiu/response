@@ -15,12 +15,20 @@ Including another URLconf
 """
 
 from django.urls import path
-#TODO: create payment handlers for paypal, mobile money etc
+from .views import process_payment, payment_done, payment_canceled
+
+# TODO: create payment handlers for paypal, flutterwave, paystack etc
 
 app_name = 'payments'
 
 urlpatterns = [
     # the id here is transaction id
-    #path('payment/<int:id>', payment, name='payment'),
+    path('pay/<int:id>/', process_payment, name='pay'),
+    path('done/<int:id>/', payment_done, name='done'),
+    path('canceled/<int:id>/', payment_canceled, name='canceled'),
+]
 
+# paystack urls
+urlpatterns += [
+    #path()
 ]

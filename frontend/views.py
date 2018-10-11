@@ -14,12 +14,12 @@ def developer_filling_details(request, current_profile):
             current_profile.github_repo = developer_filling_details_form.cleaned_data['github_repo']
             current_profile.stage = 'complete'
             current_profile.save()
-
             return redirect(reverse('frontend:index'))
     else:
         developer_filling_details_form = DeveloperFillingDetailsForm()
     return render(request, 'frontend/developer_filling_details.html',
                   {'developer_filling_details_form': developer_filling_details_form})
+
 
 def recruiter_filling_details(request, current_profile):
     if request.method == 'POST':
@@ -57,7 +57,6 @@ def profile_type_selection(request, current_profile):
 
 
 def index(request):
-
     if request.user.is_authenticated:
         current_profile = request.user.profile
         if request.user.profile.stage == 'profile_type_selection':

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'bulma',
     'django_filters',
+    'paypal.standard.ipn',
     #'allauth.socialaccount.providers.linkedin',
 
 ]
@@ -181,5 +182,8 @@ SOCIALACCOUNT_AUTO_SIGNUP = True
 SOCIALACCOUNT_EMAIL_VERIFICATION = ACCOUNT_EMAIL_VERIFICATION
 SOCIALACCOUNT_EMAIL_REQUIRED = ACCOUNT_EMAIL_REQUIRED
 SOCIALACCOUNT_QUERY_EMAIL = ACCOUNT_EMAIL_REQUIRED
+
+PAYPAL_RECEIVER_EMAIL  = 'sphilisiah-facilitator@gmail.com'
+PAYPAL_TEST = True
 
 
