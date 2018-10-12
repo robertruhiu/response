@@ -35,8 +35,8 @@ class Transaction(models.Model):
 
 
 class Candidate(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
     email = models.EmailField()
     transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
 

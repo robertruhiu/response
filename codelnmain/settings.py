@@ -17,7 +17,6 @@ import django_heroku
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -52,7 +51,7 @@ INSTALLED_APPS = [
     'bulma',
     'django_filters',
     'paypal.standard.ipn',
-    #'allauth.socialaccount.providers.linkedin',
+    # 'allauth.socialaccount.providers.linkedin',
 
 ]
 # Application definition
@@ -94,7 +93,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 WSGI_APPLICATION = 'codelnmain.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -157,7 +155,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
-#allauth settings
+# allauth settings
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_AUTHENTICATION_METHOD = ('email')
@@ -173,7 +171,6 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = '/'
 
-
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignUpForm'
@@ -183,7 +180,5 @@ SOCIALACCOUNT_EMAIL_VERIFICATION = ACCOUNT_EMAIL_VERIFICATION
 SOCIALACCOUNT_EMAIL_REQUIRED = ACCOUNT_EMAIL_REQUIRED
 SOCIALACCOUNT_QUERY_EMAIL = ACCOUNT_EMAIL_REQUIRED
 
-PAYPAL_RECEIVER_EMAIL  = 'sphilisiah-facilitator@gmail.com'
+PAYPAL_RECEIVER_EMAIL = 'sphilisiah-facilitator@gmail.com'
 PAYPAL_TEST = True
-
-
