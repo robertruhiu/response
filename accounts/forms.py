@@ -15,8 +15,8 @@ class ProfileTypeForm(forms.Form):
 
 
 class DeveloperFillingDetailsForm(forms.Form):
-    PROGRAMMING_LANGUAGE_CHOICES = (('python', 'Python'),)
-    FRAMEWORK_CHOICES = (('django', 'Django'),)
+    PROGRAMMING_LANGUAGE_CHOICES = (('python', 'Python'),('javascript', 'Javascript'))
+    FRAMEWORK_CHOICES = (('django', 'Django'),('express','Express'))
     YEARS_ACTIVE_CHOICES = (
         ('1-2', '1-2'),
         ('2-4', '2-4'),
@@ -36,8 +36,8 @@ class RecruiterFillingDetailsForm(forms.Form):
 
 class SignUpForm(forms.Form):
     first_name = forms.CharField(max_length=30, required=True,
-                                 widget=forms.TextInput(attrs={'placeholder': 'Philisiah'}))
-    last_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'placeholder': 'Mwaluma'}))
+                                 widget=forms.TextInput(attrs={'placeholder': ''}))
+    last_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'placeholder': ''}))
     field_order = [
         'first_name',
         'last_name',

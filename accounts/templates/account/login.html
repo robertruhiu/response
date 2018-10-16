@@ -1,5 +1,5 @@
 {% extends "account/base.html" %}
-{% load bulma_tags %}
+
 {% load i18n %}
 {% load account socialaccount %}
 {% block title %}
@@ -8,37 +8,87 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
-    <div class="container w3-container w3-padding-64">
-        <div class="columns is-centered">
-            <div class="column is-half is-narrow">
-                <h1>{% trans "Sign In" %}</h1>
-                {% providers_media_js %}
-{#                <a href="{% provider_login_url "facebook" method="js_sdk" %}"#}
-{#                   class="button is-fullwidth is-link w3-margin-top w3-margin-bottom">#}
-{#                    <i class="fab fa-facebook-square"></i>&nbsp;&nbsp;#}
-{#                    Continue with Facebook#}
-{#                </a>#}
-{#                <a href="{% provider_login_url "twitter" %}"#}
-{#                   class="button is-fullwidth w3-margin-bottom">#}
-{#                    <i class="fab fa-twitter"></i>&nbsp;&nbsp;#}
-{#                    Connect with Twitter#}
-{#                </a>#}
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="cardno great gr">
+                    <div class="card-body">
 
-                <p class="w3-margin-bottom w3-text-black">{% blocktrans %}If you have not created an account yet, then
-                    please
-                    <a href="{{ signup_url }}" class="w3-border-bottom">sign up</a> first{% endblocktrans %}</p>
-                <form class="login" method="POST" action="{% url 'account_login' %}">
+                        <img class="beer" src="https://cdn.dribbble.com/users/333243/screenshots/5343222/hiring-manager-for-codility.png">
+                        <div class="h4">Codeln as a trust authority</div>
+
+                        <div class="h5">
+                            <ul>
+                                <li>Skill validation</li>
+                                <li>Enhancing proper workplace fit</li>
+                                <li>Enabling skilled labor</li>
+                                <li>Setting standards for programmers</li>
+                                <li>Certifying skills</li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-lg-4" style="margin-top: 6%">
+                <h5>Login</h5>
+
+
+                    {% providers_media_js %}
+                    {#                <a href="{% provider_login_url "facebook" method="js_sdk" %}"#}
+                    {#                   class="button is-fullwidth is-link w3-margin-top w3-margin-bottom">#}
+                    {#                    <i class="fab fa-facebook-square"></i>&nbsp;&nbsp;#}
+                    {#                    Continue with Facebook#}
+                    {#                </a>#}
+                    {#                <a href="{% provider_login_url "twitter" %}"#}
+                    {#                   class="button is-fullwidth w3-margin-bottom">#}
+                    {#                    <i class="fab fa-twitter"></i>&nbsp;&nbsp;#}
+                    {#                    Connect with Twitter#}
+                    {#                </a>#}
+
+
+
+                <form method="POST" action="{% url 'account_login' %}">
                     {% csrf_token %}
-                    {{ form|bulma }}
+                    <div class="form-group">
+                        <label for="id_login">Email address</label>
+                        <input type="email" class="form-control" name="login" aria-describedby="emailHelp" placeholder="Enter email" autofocus="autofocus" required="" id="id_login">
+
+
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password">Password</label>
+                        <input type="password" name="password" placeholder="Password" required="" id="id_password" class="form-control"  >
+                    </div>
+
+
+
                     {% if redirect_field_value %}
-                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                     {% endif %}
-                    <button class="primaryAction button" type="submit">{% trans "Sign In" %}</button>
-                    <a class="button  is-outlined is-text secondaryAction"
-                       href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                    <button class="btn btn-primary" type="submit">{% trans "Sign In" %}</button>
+                    <a class="btn btn-link" href="{% url 'account_reset_password' %}">
+                        {% trans "Forgot Password?" %}
+                    </a>
+                    <a class="btn btn-link" href="{{ signup_url }}">
+                        I dont have an account
+                    </a>
+
                 </form>
+
+
+
 
             </div>
         </div>
+
+
     </div>
+
+</div>
+
 {% endblock %}

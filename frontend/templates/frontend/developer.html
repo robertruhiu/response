@@ -1,14 +1,84 @@
-{% extends 'base.html' %}
+{% extends 'candidatesbase.html' %}
 
 {% block content %}
-    <div class="container is-fluid">
-        <div class="columns">
-            <div class="column is-4">
-                {% lorem 3 %}
-            </div>
-            <div class="column is-8">
-                {% lorem 6 %}
-            </div>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
+        <div class="navbar fixed-top fine border-bottom">
+
+            <h5>Home</h5>
+
+            <nav>
+
+                <ul class="nav ">
+                    <!-- Authentication Links -->
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                    </li>
+                    {% endif %}
+
+
+                </ul>
+
+            </nav>
         </div>
     </div>
+    <div class="jumbotron jumbotron-fluid"
+         style="background: 0/30% no-repeat,linear-gradient(61deg,#6e1a52,#76c5d6 42%);">
+
+    </div>
+    <div class="row" >
+        <div class="col-lg-4">
+            <div class="card " style="width: 18rem;border-radius: 0;">
+                <a href="pendingproject">
+                    <div class="card-body">
+                        <p class="card-text">Current projects</p>
+
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-4">
+            <div class="card " style="width: 18rem;border-radius: 0;">
+                <a href="calltoapply">
+                    <div class="card-body">
+                        <p class="card-text">Invites</p>
+
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-4">
+            <div class="card " style="width: 18rem;border-radius: 0;">
+                <a href="myresume">
+                    <div class="card-body">
+                        <p class="card-text">Polish your resume</p>
+
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+</main>
+</div>
+</div>
 {% endblock %}

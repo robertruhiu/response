@@ -1,19 +1,112 @@
-{% extends 'base.html' %}
-{% load bulma_tags %}
+{% extends 'candidatesbase.html' %}
+
 {% block content %}
-    <div class="modal modal--is-active w3-padding-64">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">Your Profile</p>
-            </header>
-            <section class="modal-card-body">
-                <form action="." method="post">
-                    {% csrf_token %}
-                    {{ developer_filling_details_form|bulma }}
-                    <button class="button" type="submit">Next</button>
-                </form>
-            </section>
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
+        <div class="navbar fixed-top fine border-bottom">
+
+            <h5>My profile</h5>
+
+            <nav>
+
+                <ul class="nav ">
+                    <!-- Authentication Links -->
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                    </li>
+                    {% endif %}
+
+
+                </ul>
+
+            </nav>
         </div>
     </div>
+    <div class="jumbotron jumbotron-fluid"
+         style="background: 0/30% no-repeat,linear-gradient(61deg,#6e1a52,#76c5d6 42%);">
+
+    </div>
+    <form action="." method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <h6 >Github profile url</h6>
+                    <div>
+                        <input class="form-control" type="url" name="github_repo"   required="" id="id_github_repo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h6 >Years</h6>
+                    <div >
+                <span>
+                    <select name="years" class="form-control" id="id_years">
+                        <option value="1-2">1-2</option>
+                        <option value="2-4">2-4</option>
+                        <option value="4-above">4-above</option>
+                    </select>
+                </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg">
+                <div class="form-group">
+                    <h6>Programming languages</h6>
+                    <small class="text-muted">hold ctrl to multi select or command</small>
+                    <div>
+                        <select multiple class="form-control" name="programming_languages"  required="" id="id_programming_languages" >
+                            <option value="python">python </option>
+                            <option value="javascript">javascript </option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg">
+                <div class="form-group">
+                    <h6 >Frameworks</h6>
+
+                    <small class="text-muted">hold ctrl to multi select or command</small>
+                    <div >
+                <span >
+                    <select multiple class="form-control" name="frameworks" required="" id="id_frameworks">
+                        <option  value="django" > Django</option>
+                        <option value="django">Express</option>
+                    </select>
+                </span>
+                    </div>
+                </div>
+                <div style="text-align: -webkit-right;">
+                    <button class="btn btn-primary" type="submit">Next</button>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </form>
+
+
+
+</main>
+</div>
+</div>
+
+
 {% endblock %}
