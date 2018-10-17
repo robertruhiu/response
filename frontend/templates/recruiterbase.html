@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}
+
+        {% endblock %} | Codeln</title>
+
+    <link rel="stylesheet" href="{% static 'frontend/css/css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+
+
+    <link rel="stylesheet" href="{% static 'frontend/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/stay.css' %}">
+    {% block css %}
+
+    {% endblock %}
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row" style="height: 50vmax">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="row" style="width: 100%">
+                <div class="col-lg-12">
+                    <div>
+                        <a class="brandhome codelnlogo" style="text-decoration: none" href="http://rareapp.herokuapp.com/candidate/home">CODELN</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="sidebar-sticky">
+                <ul style="margin-left: -15%;">
+                    <li class="nav-item">
+                        <a class="nav-link " href="/dashboard">
+                            <span data-feather="home"></span>
+                            My projects
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/library">
+                            <span data-feather="book"></span>
+                            Project library
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">
+                            <span data-feather="users"></span>
+                            Source Candidates
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file"></span>
+                            Reports
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="layers"></span>
+                            Integrations
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+
+
+
+
+        {% block content %}
+
+        {% endblock %}
+
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <link rel="script" href="{% static 'frontend/css/js/bootstrap.min.js' %}" >
+        <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+        <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script>
+            feather.replace()
+        </script>
+        <script>
+            $(document).ready(function(e){
+                $(".img-check").click(function(){
+                    $(this).toggleClass("check");
+                });
+            });
+        </script>
+        {% block script %}
+
+        {% endblock %}
+</body>
+</html>

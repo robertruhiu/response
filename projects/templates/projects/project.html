@@ -1,44 +1,93 @@
-{% extends 'base.html' %}
+{% extends 'recruiterbase.html' %}
 
 {% block content %}
-    <section class="container w3-margin-top">
-        <div class="tile is-ancestor w3-margin-top w3-padding">
-            <div class="tile is-parent">
-                <article class="tile is-child">
-                    <p class="title">Project Name : {{ project.name }}</p>
-                </article>
-            </div>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
+        <div class="navbar fixed-top fine border-bottom">
+
+            <h5>Project details</h5>
+
+            <nav>
+
+                <ul class="nav ">
+                    <!-- Authentication Links -->
+                    <li class="nav-item">
+                        <span data-feather="user">
+
+                        </span>
+                        {{ user.username }}
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                    </li>
+                    {% endif %}
+
+
+                </ul>
+
+            </nav>
         </div>
-        <div class="tile is-ancestor w3-margin-top w3-padding">
-            <div class="tile is-4 is-vertical is-parent">
-                <div class="tile is-child box">
-                    <p class="title">Languages</p>
-                    <p class="subtitle">{{ project.framework.language }}</p>
-                </div>
-                <div class="tile is-child box">
-                    <p class="title">Framework</p>
-                    <p class="subtitle">{{ project.framework }}</p>
+    </div>
+    <div class="row">
+
+
+        <div class="col-lg-7">
+            <div class="card" >
+                <img class="card-img-top" src="../../static/frontend/images/house.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h6 >{{ project.name }}
+                        <span class="badge badge-primary">Level : {{ project.level }}</span>
+                    </h6>
+                    <p> {{ project.description }}</p>
+                    <p> Concept tested: {{ project.concept }}</p>
+                    <p>
+                        <span class="badge badge-primary">Language : {{ project.framework.language }}</span>
+                        <span class="badge badge-primary">Framework : {{ project.framework.name }}</span>
+                    </p>
+
+
                 </div>
             </div>
-            <div class="tile is-parent">
-                <div class="tile is-child box">
-                    <p class="title">Requirements</p>
-                    <p class="w3-text-black">{% lorem 3 %}</p>
-                </div>
-            </div>
+
         </div>
-        <div class="tile is-ancestor w3-margin-top w3-padding">
-            <div class="tile is-child box">
-                <p class="title">Project Files</p>
-                <figure class="image is-4by3">
-                    <img src="https://bulma.io/images/placeholders/640x480.png" alt="">
-                </figure>
-                <p class="title button w3-border-green">View Project Files</p>
+        <div class="col-lg-4" >
+            <div class="card" style="height: available" >
+
+                <div class="card-body">
+
+                    <h6 class="card-title">Requirements</h6>
+                    <ul>
+                        <li>{{ project.requirement1 }}</li>
+                        <li>{{ project.requirement2 }}</li>
+                        <li>{{ project.requirement3 }}</li>
+                        <li>{{ project.requirement4 }}</li>
+                        <li>{{ project.requirement5 }}</li>
+                    </ul>
+
+                    <div style="text-align: right">
+                        <a href="{% url 'projects:all-projects' %}" >
+                            <button type="button" class="btn btn-primary">Go back </button>
+                        </a>
+                        <a href="{% url 'transactions:transaction' project.id %}">
+                            <button type="button" class="btn btn-success">Choose project</button>
+                        </a>
+                    </div>
+
+                </div>
+
+
             </div>
+
         </div>
-        <p class="title button w3-border-green"><a href="{% url 'projects:all-projects' %}">Back to Projects</a></p>
-        <p class="title button w3-green w3-text-white is-pulled-right">
-            <a href="{% url 'transactions:transaction' project.id %}">Choose Project</a>
-        </p>
-    </section>
+
+    </div>
+</main>
 {% endblock %}

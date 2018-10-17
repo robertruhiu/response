@@ -1,22 +1,100 @@
-{% extends 'base.html' %}
+{% extends 'recruiterbase.html' %}
 
 {% block content %}
-<div class="row">
-    <div class="col-lg">
-        <div class="card mb-3">
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
+        <div class="navbar fixed-top fine border-bottom">
+
+            <h5>My profile</h5>
+
+            <nav>
+
+                <ul class="nav ">
+                    <!-- Authentication Links -->
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                    </li>
+                    {% endif %}
 
 
+                </ul>
+
+            </nav>
         </div>
     </div>
-    <div class="col-lg">
-        <form action="." method="post">
-            {% csrf_token %}
-            {{ recruiter_filling_details_form }}
-            <button class="button w3-green" type="submit">Next</button>
-        </form>
+
+    <div class="row">
+
+
+        <div class="card" style="width: 84%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);border-radius: 0;margin-left: auto;margin-right: auto">
+            <div class="card-header" style="background: 0/30% no-repeat,linear-gradient(61deg,#6e1a52,#76c5d6 42%);border-radius: 0;height: 4em">
+            </div>
+            <div class="card-body">
+
+
+
+                <form action="." method="post">
+                    {% csrf_token %}
+                    <div class="row">
+
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label class="label">Company</label>
+
+                                <input class="form-control " type="text" name="company" maxlength="140"  required="" id="id_company">
+
+                            </div>
+                            <div class="form-group">
+                                <label class="label">Job role</label>
+
+                                <input class="form-control " type="text" name="job_role" maxlength="140"  required="" id="id_job_role">
+
+                            </div>
+                            <div class="form-group">
+                                <label class="label  ">Industry</label>
+
+                                <input class="form-control " type="text" name="industry" maxlength="80"  required="" id="id_industry">
+
+                            </div>
+                        </div>
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label class="label">Staff size</label>
+
+                                <input class="form-control " type="number" name="staff_size"  required="" id="id_staff_size">
+
+                            </div>
+                            <div class="form-group">
+                                <label class="label">Company url</label>
+
+                                <input class="form-control " type="url" name="company_url" class="input" required="" id="id_company_url">
+
+                            </div>
+                            <div style="text-align: -webkit-center;">
+                            <button class="btn btn-primary" type="submit">Next</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </form>
+
+
+            </div>
+        </div>
+
 
     </div>
-</div>
+</main>
 
 
 {% endblock %}

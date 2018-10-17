@@ -23,6 +23,11 @@ def project_list(request):
     all_projects = Project.objects.all()
     return render(request, 'projects/all_projects.html', {'all_projects': all_projects})
 
+def categories(request):
+
+
+    return render(request, 'projects/categories.html')
+
 
 def project(request, id):
     project = Project.objects.get(id=id)

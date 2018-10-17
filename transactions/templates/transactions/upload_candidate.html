@@ -1,21 +1,80 @@
-{% extends 'base.html' %}
-{% load bulma_tags %}
+{% extends 'recruiterbase.html' %}
+
 
 {% block content %}
-    <div class="modal modal--is-active w3-padding-64">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">Add Candidates</p>
-            </header>
-            <section class="modal-card-body">
-                <form action="." method="post">
-                    {% csrf_token %}
-                    {{ candidate_form |bulma }}
-                    <button class="button is-pulled-right" name="and_continue" value="continue" type="submit">Save and Continue</button>
-                    <button class="button is-pulled-left" name="add_another" value="addanother" type="submit">Save and Add Another</button>
-                </form>
-            </section>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
+        <div class="navbar fixed-top fine border-bottom">
+
+            <h5>Add candidates</h5>
+
+            <nav>
+
+                <ul class="nav ">
+                    <!-- Authentication Links -->
+                    <li class="nav-item">
+                        <span data-feather="user">
+
+                        </span>
+                        {{ user.username }}
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                    </li>
+                    {% endif %}
+
+
+                </ul>
+
+            </nav>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card" >
+
+                <div class="card-body">
+                    <form action="." method="post">
+                        {% csrf_token %}
+
+                        <button class="btn is-pulled-right" name="and_continue" value="continue" type="submit">Save and Continue</button>
+                        <button class="btn is-pulled-left" name="add_another" value="addanother" type="submit">Save and Add Another</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+            <div class="card" >
+
+                <div class="card-body">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+
+            </div>
+                    <img src="../asset/upload.svg">
+                </div>
+            </div>
+
         </div>
     </div>
+
+
+
+</main>
 {% endblock %}

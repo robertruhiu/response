@@ -2,6 +2,16 @@ body {
     height: 100%;
     font-size: .875rem;
 }
+.homecard{
+    width: 21rem;
+}
+.recruithomecard{
+    box-shadow:0 20px 50px rgba(0,0,0,.1);
+    border-radius: 0;
+    width: 15em;
+
+
+}
 
 .feather {
     width: 16px;
@@ -122,7 +132,9 @@ body {
 
 
 }
-
+.categoriescard{
+    width: 40%;
+}
 .frontend{
    background-image: url("../images2/frontend.png");
    background-repeat: no-repeat;

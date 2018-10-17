@@ -1,33 +1,75 @@
-{% extends 'base.html' %}
+{% extends 'recruiterbase.html' %}
 
 {% block content %}
-    <section class="container w3-margin-bottom" >
-        <div class="hero is-primary" style="height: 25%">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">Codeln Projects</h1>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
+        <div class="navbar fixed-top fine border-bottom">
+
+            <h5>Codeln Projects</h5>
+
+            <nav>
+
+                <ul class="nav ">
+                    <!-- Authentication Links -->
+                    <li class="nav-item">
+                        <span data-feather="user">
+
+                        </span>
+                        {{ user.username }}
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                    </li>
+                    {% endif %}
+
+
+                </ul>
+
+            </nav>
+        </div>
+
+    </div>
+    <div class="row">
+        {% for project in all_projects %}
+        <div class="col-lg-3">
+            <a href="{% url 'projects:project' project.id%}" >
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="https://scontent.facc5-1.fna.fbcdn.net/v/t1.0-9/37867635_1885414921516504_7279325115467169792_n.jpg?_nc_cat=0&oh=c1dc8af03057b700bb6249ad0a45b121&oe=5BD00460" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">{{ project.name }}
+                        <span class="badge badge-primary">Level : {{ project.level }}</span>
+                    </p>
+                    <p> Concept tested : {{ project.concept }}</p>
+
+
+
                 </div>
+                <div class="card-footer text-muted">
+                    <span class="badge badge-info">Framework : {{ project.framework.name }}</span>
+                    <span class="badge badge-info">Language : {{ project.framework.language }}</span>
+                    <span data-feather="heart"></span>
+                </div>
+
             </div>
-        </div>
-    </section>
-    <section class="container w3-margin-top w3-margin-bottom">
-        <div class="columns is-multiline">
-            {% for project in all_projects %}
-                <div class="column is-10 is-offset-1 w3-padding">
-                    <div class="columns is-multiline">
-                        <div class="column is-2">{{ project.name }}</div>
-                        <div class="column is-4">{{ project.description }}</div>
-                        <div class="column is-2">{{ project.framework.name }}</div>
-                        <div class="column is-2">{{ project.framework.language }}</div>
-                        <div class="column is-2">
-                            <a href="{% url 'projects:project' project.id%}">Go to project</a>
-                        </div>
-                    </div>
-
-
-                </div>
-            {% endfor %}
+            </a>
 
         </div>
-    </section>
+        {% endfor %}
+    </div>
+
+
+
+
+
+</main>
+
+
 {% endblock %}
