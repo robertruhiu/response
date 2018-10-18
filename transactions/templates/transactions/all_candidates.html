@@ -20,7 +20,7 @@
             </section>
             <footer class="modal-card-foot">
                 <button class="button is-info">Total Cost = {{ total_amount }}</button>
-                <a href="{% url 'payments:pay' current_transaction.id %}" class="button is-success">
+                <a href="{% url 'payments:pay' current_transaction.id  total_amount %}" class="button is-success">
                     Proceed to make Payment.</a>
             </footer>
         </div>

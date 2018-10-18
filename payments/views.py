@@ -9,7 +9,7 @@ from transactions.models import Transaction
 
 # Create your views here.
 
-def process_payment(request, id):
+def process_payment(request, id, amount):
     transaction = get_object_or_404(Transaction, id=id)
     transaction.stage = 'make-payment'
     transaction.save()
@@ -25,7 +25,7 @@ def process_payment(request, id):
     }
     form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request, 'payments/process.html',
-                  {'form': form, 'transaction': transaction})
+                  {'form': form, 'transaction': transaction, 'amount':amount})
 
 @csrf_exempt
 def payment_done(request, id):
