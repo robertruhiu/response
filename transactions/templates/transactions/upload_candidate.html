@@ -1,5 +1,6 @@
 {% extends 'recruiterbase.html' %}
 
+{%load static %}
 
 {% block content %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
@@ -40,40 +41,70 @@
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <div class="card" >
+            <div class="card" style="height: 100%">
+
 
                 <div class="card-body">
+
                     <form action="." method="post">
                         {% csrf_token %}
+                        <label class="label ">First name</label>
+                        <div >
+                            <input type="text" name="first_name" maxlength="255" class="form-control" required="" id="id_first_name">
+                        </div>
+                        <label class="label  ">Last name</label>
+                        <div >
+                            <input type="text" name="last_name" maxlength="255" class="form-control" required="" id="id_last_name">
+                        </div>
+                        <label class="label ">Email</label>
+                        <div >
+                            <input type="email" name="email" maxlength="254" class="form-control" required="" id="id_email">
+                        </div>
+                        <br>
 
-                        <button class="btn is-pulled-right" name="and_continue" value="continue" type="submit">Save and Continue</button>
-                        <button class="btn is-pulled-left" name="add_another" value="addanother" type="submit">Save and Add Another</button>
-                    </form>
-                </div>
+
+                        <button class="btn btn-warning " name="and_continue" value="continue" type="submit">Save and
+                            Continue
+                        </button>
+                        <button class="btn btn-success" name="add_another" value="addanother" type="submit">Save and
+                            Add Another
+                        </button>
+
+
+
+                </form>
+
             </div>
-
         </div>
-        <div class="col-lg-6">
-            <div class="card" >
 
-                <div class="card-body">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card" style="height: 100%">
 
-            </div>
-                    <img src="../asset/upload.svg">
+            <div class="card-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01"
+                               aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+
+
+                </div>
+                <div style="text-align: -webkit-center">
+                <img style="width: 32%" src="{%static 'frontend/images/cloud.svg' %}"
+                     alt="Card image cap">
+                    <br>
+                    <small class="text-muted">upload csv containing candidates from computer</small>
                 </div>
             </div>
+
 
         </div>
     </div>
-
 
 
 </main>

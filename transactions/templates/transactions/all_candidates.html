@@ -1,28 +1,121 @@
-{% extends 'base.html' %}
+{% extends 'recruiterbase.html' %}
+
+{%load static %}
 
 {% block content %}
-    <div class="modal modal--is-active w3-padding-64">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">Add Candidates</p>
-            </header>
-            <section class="modal-card-body">
-                {% for candidate in candidates %}
-                    <p class="w3-text-black box ">{{ candidate.first_name }}, {{ candidate.last_name }},
-                        {{ candidate.email }}
-                        <span class="is-pulled-right">
-                            <a href="#">Edit</a>
-                            <a href="#">Remove</a>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
+        <div class="navbar fixed-top fine border-bottom">
+
+            <h5>Candidates</h5>
+
+            <nav>
+
+                <ul class="nav ">
+                    <!-- Authentication Links -->
+                    <li class="nav-item">
+                        <span data-feather="user">
+
                         </span>
-                    </p>
-                {% endfor %}
-            </section>
-            <footer class="modal-card-foot">
-                <button class="button is-info">Total Cost = {{ total_amount }}</button>
-                <a href="{% url 'payments:pay' current_transaction.id %}" class="button is-success">
-                    Proceed to make Payment.</a>
-            </footer>
+                        {{ user.username }}
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                    </li>
+                    {% endif %}
+
+
+                </ul>
+
+            </nav>
         </div>
     </div>
+    <div class="row">
+
+
+    <div>
+        <img style="margin-left: 327%;width: 400%;" src="/static/frontend/images/networking.svg" alt="Card image cap">
+    </div>
+        <div style="margin-top: 3%;margin-left: -6%">
+            <div class="card" style="width: 35em;box-shadow: 5px 5px 25px 0px rgba(46,61,73,0.2);">
+
+                <div class="card-body">
+                    <h5>list of candidates</h5>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+
+                            <th scope="col">First name</th>
+                            <th scope="col">Last name</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+
+                            <td>dennis</td>
+                            <td>ruhiu</td>
+                            <td> <span class="is-pulled-right">
+                            <a href="#" class="badge badge-primary">Edit</a>
+                            <a href="#" class="badge badge-danger">Remove</a>
+                        </span></td>
+                        </tr>
+
+                        <tr>
+
+                            <td>test</td>
+                            <td>works</td>
+                            <td> <span class="is-pulled-right">
+                            <a href="#" class="badge badge-primary">Edit</a>
+                            <a href="#" class="badge badge-danger">Remove</a>
+                        </span></td>
+                        </tr>
+
+                        <tr>
+
+                            <td>work</td>
+                            <td>account</td>
+                            <td> <span class="is-pulled-right">
+                            <a href="#" class="badge badge-primary">Edit</a>
+                            <a href="#" class="badge badge-danger">Remove</a>
+                        </span></td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                    <div style="text-align: -webkit-center;">
+                        <button disabled="" class="btn btn-info">Total Cost = $60</button>
+
+                        <a href="/payments/pay/7/" class="btn btn-success">
+                            Proceed to make Payment.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+</main>
 {% endblock %}
