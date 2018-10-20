@@ -135,19 +135,7 @@ body {
 .categoriescard{
     width: 40%;
 }
-.frontend{
-   background-image: url("../images2/frontend.png");
-   background-repeat: no-repeat;
-}
-.backend{
-    background-image: url("../images2/back.png");
-    background-repeat: no-repeat;
-}
-.fullstack{
-    background-image: url("../images2/frontend.png");
-    background-repeat: no-repeat;
 
-}
 
 .cardtitle2 {
     margin-top: 19px;
