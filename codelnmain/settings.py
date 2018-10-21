@@ -21,11 +21,6 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "!&)6qusz5um2+_6=465*-t-=*gks#q=o@z*db8b_4v-zrbyh7x"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +36,7 @@ INSTALLED_APPS = [
     'accounts',
     'projects',
     'frontend',
+    'paypal.standard.ipn',
     'transactions',
     'payments',
 
@@ -50,10 +46,14 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'bulma',
     'django_filters',
-    'paypal.standard.ipn',
     # 'allauth.socialaccount.providers.linkedin',
 
 ]
+SECRET_KEY = "!&)6qusz5um2+_6=465*-t-=*gks#q=o@z*db8b_4v-zrbyh7x"
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
 # Application definition
 SITE_ID = 1
 
