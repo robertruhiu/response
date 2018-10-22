@@ -23,12 +23,7 @@ app_name = 'payments'
 
 urlpatterns = [
     # the id here is transaction id
-    path('pay/<int:id>/', process_payment, name='pay'),
+    path('pay/<int:id>/<int:amount>', process_payment, name='pay'),
     path('done/<int:id>/', payment_done, name='done'),
     path('canceled/<int:id>/', payment_canceled, name='canceled'),
-]
-
-# paystack urls
-urlpatterns += [
-    #path()
 ]

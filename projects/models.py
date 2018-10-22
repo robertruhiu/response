@@ -29,6 +29,7 @@ class Project(models.Model):
     description = models.CharField(max_length=200, blank=True, null=True, )
     level = models.CharField(max_length=200, blank=True, null=True, )
     concept = models.CharField(max_length=200, blank=True, null=True, )
+    projectimage = models.CharField(max_length=200, blank=True, null=True, )
     requirement1 = models.CharField(max_length=200, blank=True, null=True, )
     requirement2 = models.CharField(max_length=200, blank=True, null=True, )
     requirement3 = models.CharField(max_length=200, blank=True, null=True, )

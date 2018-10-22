@@ -42,7 +42,7 @@
         <div class="col-lg-3">
             <a href="{% url 'projects:project' project.id%}" >
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="https://scontent.facc5-1.fna.fbcdn.net/v/t1.0-9/37867635_1885414921516504_7279325115467169792_n.jpg?_nc_cat=0&oh=c1dc8af03057b700bb6249ad0a45b121&oe=5BD00460" alt="Card image cap">
+                <img class="card-img-top" src="{{project.projectimage}}" alt="Card image cap">
                 <div class="card-body">
                     <p class="card-text">{{ project.name }}
                         <span class="badge badge-primary">Level : {{ project.level }}</span>

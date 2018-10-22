@@ -51,6 +51,7 @@
                     <h5>list of candidates</h5>
                     <table class="table table-hover">
                         <thead>
+
                         <tr>
 
                             <th scope="col">First name</th>
@@ -59,44 +60,28 @@
                         </tr>
                         </thead>
                         <tbody>
+                        {% for candidate in candidates %}
 
                         <tr>
 
-                            <td>dennis</td>
-                            <td>ruhiu</td>
+                            <td>{{ candidate.first_name }}</td>
+                            <td>{{ candidate.last_name }}</td>
                             <td> <span class="is-pulled-right">
                             <a href="#" class="badge badge-primary">Edit</a>
                             <a href="#" class="badge badge-danger">Remove</a>
                         </span></td>
                         </tr>
+                        {% endfor %}
 
-                        <tr>
 
-                            <td>test</td>
-                            <td>works</td>
-                            <td> <span class="is-pulled-right">
-                            <a href="#" class="badge badge-primary">Edit</a>
-                            <a href="#" class="badge badge-danger">Remove</a>
-                        </span></td>
-                        </tr>
-
-                        <tr>
-
-                            <td>work</td>
-                            <td>account</td>
-                            <td> <span class="is-pulled-right">
-                            <a href="#" class="badge badge-primary">Edit</a>
-                            <a href="#" class="badge badge-danger">Remove</a>
-                        </span></td>
-                        </tr>
 
 
                         </tbody>
                     </table>
                     <div style="text-align: -webkit-center;">
-                        <button disabled="" class="btn btn-info">Total Cost = $60</button>
+                        <button disabled="" class="btn btn-info">Total Cost = ${{ total_amount }}</button>
 
-                        <a href="/payments/pay/7/" class="btn btn-success">
+                        <a href="{% url 'payments:pay' current_transaction.id  total_amount %}" class="btn btn-success">
                             Proceed to make Payment.</a>
                     </div>
                 </div>
