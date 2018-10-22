@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'bulma',
     'django_filters',
+    'invitations',
     # 'allauth.socialaccount.providers.linkedin',
 
 ]
@@ -182,3 +183,10 @@ SOCIALACCOUNT_QUERY_EMAIL = ACCOUNT_EMAIL_REQUIRED
 
 PAYPAL_RECEIVER_EMAIL = 'sphilisiah-facilitator@gmail.com'
 PAYPAL_TEST = True
+
+ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
+INVITATIONS_INVITATION_EXPIRY = 7
+INVITATIONS_CONFIRM_INVITE_ON_GET = True
+INVITATIONS_ALLOW_JSON_INVITES = True
+INVITATIONS_ADAPTER = ACCOUNT_ADAPTER
+INVITATIONS_EMAIL_SUBJECT_PREFIX = 'Codeln'

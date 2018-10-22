@@ -16,7 +16,7 @@ def process_payment(request, id, amount):
     transaction.save()
     paypal_dict = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
-        'amount': transaction.amount(),
+        'amount': amount,
         'item_name': transaction.user,
         'invoice': str(transaction.project.id),
         'currency_code': 'USD',
@@ -26,18 +26,19 @@ def process_payment(request, id, amount):
     }
     form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request, 'payments/process.html',
-                  {'form': form, 'transaction': transaction, 'amount':amount})
+                  {'form': form, 'transaction': transaction, 'amount': amount})
+
 
 @csrf_exempt
 def payment_done(request, id):
     transaction = Transaction.objects.get(id=id)
     transaction.stage = 'payment-confirmed'
     transaction.save()
-    #verifypaymentsuccess
+    # verifypaymentsuccess
     return redirect(reverse('transactions:process_transaction', args=[transaction.id]))
 
 
 @csrf_exempt
 def payment_canceled(request, id):
-    #redirect to add candidates
-    return  redirect(reverse('transactions:process_transaction', args=[id]))
+    # redirect to add candidates
+    return redirect(reverse('transactions:process_transaction', args=[id]))

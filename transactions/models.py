@@ -12,6 +12,7 @@ class Transaction(models.Model):
         ('upload-candidates', 'upload-candidates'),
         ('payment-stage', 'payment-stage'),
         ('make-payment', 'make-payment'),
+        ('payment-confirmed', 'payment-confirmed'),
         ('payment-verified', 'payment-verified'),
         ('complete', 'complete'),
     )

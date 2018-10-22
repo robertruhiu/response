@@ -29,4 +29,5 @@ urlpatterns = [
     path('payments/', include('payments.urls', namespace='payments')),
     path('paypal/', include('paypal.standard.ipn.urls')),
     path('', include('frontend.urls', namespace='frontend')),
+    path('invitations/', include('invitations.urls', namespace='invitations')),
 ]

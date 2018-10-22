@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for foo in candidates %}
+        {{ foo }}
+    {% endfor %}
+    {% if current_transaction.stage == 'payment-verified' %}
+        <form action="." method="post">
+            {% csrf_token %}
+            <button class="button is-pulled-right" type="submit">Proceed</button>
+        </form>
+    {% endif %}
+
+{% endblock %}

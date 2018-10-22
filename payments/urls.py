@@ -27,8 +27,3 @@ urlpatterns = [
     path('done/<int:id>/', payment_done, name='done'),
     path('canceled/<int:id>/', payment_canceled, name='canceled'),
 ]
-
-# paystack urls
-urlpatterns += [
-    #path()
-]
