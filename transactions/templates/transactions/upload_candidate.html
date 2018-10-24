@@ -1,5 +1,7 @@
 {% extends 'recruiterbase.html' %}
-
+{% block title %}
+Add candidates
+{% endblock %}
 {%load static %}
 
 {% block content %}
@@ -62,12 +64,11 @@
                         </div>
                         <br>
 
-
-                        <button class="btn btn-warning " name="and_continue" value="continue" type="submit">Save and
-                            Continue
-                        </button>
                         <button class="btn btn-success" name="add_another" value="addanother" type="submit">Save and
                             Add Another
+                        </button>
+                        <button class="btn btn-warning " name="and_continue" value="continue" type="submit">Save and
+                            Continue
                         </button>
 
 

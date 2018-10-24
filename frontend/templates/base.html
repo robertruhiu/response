@@ -22,37 +22,45 @@
     {% endblock %}
 </head>
 <body>
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light ">
+        <a class="brandhome codelnlogo" href="/">CODELN</a>
 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-
-        <nav id="mynav" class="navbar sticky-top  nav-colored">
-            <a class="brandhome codelnlogo" href="">CODELN</a>
-
-            <ul class="nav justify-content-end orient">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="nav">
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                    <a href="{% url 'account_logout' %}" class="nav-link w3-opacity" title="Logout">Logout</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                    <a class="nav-item" href="{% url 'account_login' %}" class="nav-link">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                    <a class="nav-item" href="{% url 'account_signup' %}" class="nav-link">Register</a>
                 </li>
                 {% endif %}
 
 
             </ul>
-
-
-
-        </nav>
-
-
+        </div>
+    </nav>
     {% block content %}
 
     {% endblock %}
+
+</div>
+
+
+
+
+
+
+
 
 
 
@@ -63,6 +71,11 @@
 
 
         <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+
         {% block script %}
 
 {% endblock %}

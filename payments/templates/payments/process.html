@@ -1,4 +1,7 @@
 {% extends 'recruiterbase.html' %}
+{% block title %}
+Payment
+{% endblock %}
 {%load static %}
 {% block content %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
@@ -41,10 +44,11 @@
     <div class="row">
 
         <div class="col-lg-6" style="margin: auto">
-            <div class="card" style="width: 28em;box-shadow:0 20px 50px rgba(0,0,0,.1);height: 408px">
+            <div class="card" style="width: 28em;box-shadow:0 20px 50px rgba(0,0,0,.1);">
+                <img class="card-img-top" style="width: 75%;margin: auto" src="/static/frontend/images/ill/card.svg" alt="Card image cap">
 
                 <div class="card-body">
-                    <div class="card-title text-center h5" style="padding-top: 10%">Payment method</div>
+                    <div class=" text-center h5" style="padding-top: 10%">Payment methods</div>
                     <hr>
 
                         <div class="row" style="margin: auto">
@@ -56,11 +60,24 @@
                             </div>
                         </div>
                     <hr>
+                    <div class="row" style="margin: auto">
+                        <div class="col-lg-4">
+                            <h6 style="margin-top:10% ">Flutterwave</h6>
+                        </div>
+                        <div class="col-lg-3">
                     <form style="text-align: -webkit-center;">
                         {#                    <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>#}
                         <script src="https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
-                        <button type="button" class="btn-5" onClick="payWithRave('{{amount}}')"><span>Flutterwave</span></button>
+                        <a onClick="payWithRave('{{amount}}')"><img style="width: 10rem" src="/static/frontend/images/flutter.svg"></a>
+                        
                     </form>
+                    {#            <footer class="modal-card-foot">#}
+                    {#                <button class="button is-info">Total Cost = {{ total_amount }}</button>#}
+                    {#                <a href="{% url 'payments:pay' current_transaction.id %}" class="button is-success">#}
+                        {#                    Proceed to make Payment.</a>#}
+                    {#            </footer>#}
+                        </div>
+                    </div>
 
 
                 </div>

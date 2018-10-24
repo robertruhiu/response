@@ -12,7 +12,14 @@ body {
 
 
 }
+.howcard{
 
+    border-radius: 0;
+}
+.cardtext{
+    text-align: center;
+
+}
 .feather {
     width: 16px;
     height: 16px;
