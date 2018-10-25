@@ -17,9 +17,11 @@ Including another URLconf
 from django.urls import path
 
 from frontend.views import index
+from frontend.views import activity
 
 app_name = 'frontend'
 urlpatterns = [
-    path('', index, name='index')
+    path('', index, name='index'),
+    path('activity/', activity, name='my-activity'),
 
 ]

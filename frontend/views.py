@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from accounts.forms import ProfileTypeForm, DeveloperFillingDetailsForm, RecruiterFillingDetailsForm
+from transactions.models import Transaction
 
 
 def developer_filling_details(request, current_profile):
@@ -17,7 +18,7 @@ def developer_filling_details(request, current_profile):
             return redirect(reverse('frontend:index'))
     else:
         developer_filling_details_form = DeveloperFillingDetailsForm()
-    return render(request, 'frontend/developer_filling_details.html',
+    return render(request, 'frontend/developer/developer_filling_details.html',
                   {'developer_filling_details_form': developer_filling_details_form})
 
 
@@ -35,7 +36,7 @@ def recruiter_filling_details(request, current_profile):
             return redirect(reverse('frontend:index'))
     else:
         recruiter_filling_details_form = RecruiterFillingDetailsForm()
-    return render(request, 'frontend/recruiter_filling_details.html',
+    return render(request, 'frontend/recruiter/recruiter_filling_details.html',
                   {'recruiter_filling_details_form': recruiter_filling_details_form})
 
 
@@ -67,8 +68,17 @@ def index(request):
             return recruiter_filling_details(request, current_profile)
         elif request.user.profile.stage == 'complete':
             if request.user.profile.user_type == 'developer':
-                return render(request, 'frontend/developer.html')
+                return render(request, 'frontend/developer/developer.html')
             elif request.user.profile.user_type == 'recruiter':
-                return render(request, 'frontend/recruiter.html')
+                return render(request, 'frontend/recruiter/recruiter.html')
     else:
         return render(request, 'frontend/landing.html')
+
+
+def activity(request):
+    if request.user.is_authenticated:
+        transactions = Transaction.objects.filter(user=request.user)
+        if request.user.profile.user_type == 'recruiter':
+            return render(request, 'frontend/recruiter/my-activity.html', {'transactions': transactions})
+        elif request.user.profile.user_type == 'developer':
+            return render(request, 'frontend/developer/my-activity.html', {'transactions': transactions})
