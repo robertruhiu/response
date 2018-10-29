@@ -101,9 +101,10 @@ Payment
 
     function payWithRave(amnt) {
         console.log(amnt);
+
         var x = getpaidSetup({
             PBFPubKey: API_publicKey,
-            customer_email: "{{ user.username }}",
+            customer_email:"test@gmail.com" ,
             amount: amnt,
             customer_phone: "234099940409",
             currency: "USD",
