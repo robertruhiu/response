@@ -41,48 +41,74 @@ developers
             </nav>
         </div>
     </div>
-    <div class="jumbotron jumbotron-fluid"
-         style="background: 0/30% no-repeat,linear-gradient(61deg,#2b63b7,#76c5d6 42%);">
+
+
+    <div class="row">
+
+
+        <div class="col-lg-4" style="width: 100%;">
+            <div class="card recruithomecard" style="margin: auto">
+
+
+                <a   href="{% url 'frontend:inprogress' %}">
+                    <div style="text-align: -webkit-center;">
+                        <img class="card-img-top " src="../../../static/frontend/images/coding.svg" style="width: 50%" alt="Card image cap">
+                    </div>
+
+                    <div class="card" style="border: 0 ">
+
+
+                        <div class="card-body">
+
+                            <h6 class="card-title" style="text-align: -webkit-center;">Ongoing projects</h6>
+
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4" style="width: 100%;">
+            <div class="card recruithomecard" style="margin: auto">
+                <a   href="{% url 'frontend:invites' %}">
+                    <div style="text-align: -webkit-center;">
+                        <img class="card-img-top" src="../../../static/frontend/images/invitation.svg" style="width: 50%" alt="Card image cap">
+                    </div>
+                    <div class="card" style="border: 0 ">
+
+
+                        <div class="card-body">
+
+                            <h6 class="card-title" style="text-align: -webkit-center;">Project invites</h6>
+
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4" style="width: 100%;">
+            <div class="card recruithomecard" style="margin: auto">
+                <a  href="{% url 'projects:all-projects' %}">
+                    <div style="text-align: -webkit-center;">
+                        <img class="card-img-top" src="../../../static/frontend/images/resume.svg" style="width: 50%" alt="Card image cap">
+                    </div>
+                    <div class="card" style="border: 0 ">
+
+
+                        <div class="card-body">
+
+                            <h6 class="card-title" style="text-align: -webkit-center;">Polish resume</h6>
+
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+        </div>
 
     </div>
-    <div class="row" >
-        <div class="col-lg-4">
-            <div class="card " style="width: 18rem;border-radius: 0;">
-                <a href="{% url 'frontend:inprogress' %}">
-                    <div class="card-body">
-                        <p class="card-text">Current projects</p>
 
-                    </div>
-                </a>
-            </div>
-
-
-        </div>
-        <div class="col-lg-4">
-            <div class="card " style="width: 18rem;border-radius: 0;">
-                <a href="{% url 'frontend:invites' %}">
-                    <div class="card-body">
-                        <p class="card-text">Invites</p>
-
-                    </div>
-                </a>
-            </div>
-
-
-        </div>
-        <div class="col-lg-4">
-            <div class="card " style="width: 18rem;border-radius: 0;">
-                <a href="myresume">
-                    <div class="card-body">
-                        <p class="card-text">Polish your resume</p>
-
-                    </div>
-                </a>
-            </div>
-
-
-        </div>
-    </div>
 
 
 
