@@ -1,22 +1,27 @@
-{% extends 'recruiterbase.html' %}
-
+{% extends 'candidatesbase.html' %}
+{% block title %}
+developers
+{% endblock %}
+{%load static %}
 {% block content %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
         <div class="navbar fixed-top fine border-bottom">
 
-            <h5>My Projects</h5>
+            <h5>Home</h5>
 
             <nav>
 
                 <ul class="nav ">
-                    <!-- Authentication Links -->
                     <li class="nav-item">
                         <span data-feather="user">
 
                         </span>
                         {{ user.username }}
                     </li>
+                    <!-- Authentication Links -->
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
                         <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
@@ -40,29 +45,49 @@
          style="background: 0/30% no-repeat,linear-gradient(61deg,#2b63b7,#76c5d6 42%);">
 
     </div>
-
-    <div class="row">
-        {% for transaction in transactions %}
-        <div class="col-lg-3" style="margin-left: 2%">
-            <a href="{% url 'frontend:tracker' %}">
-                <div class="card" style="width: 18rem;">
-
+    <div class="row" >
+        <div class="col-lg-4">
+            <div class="card " style="width: 18rem;border-radius: 0;">
+                <a href="{% url 'frontend:inprogress' %}">
                     <div class="card-body">
-                        <h5 class="card-title">{{ transaction.project.name}}</h5>
+                        <p class="card-text">Current projects</p>
 
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
+
 
         </div>
-        {% endfor %}
+        <div class="col-lg-4">
+            <div class="card " style="width: 18rem;border-radius: 0;">
+                <a href="{% url 'frontend:invites' %}">
+                    <div class="card-body">
+                        <p class="card-text">Invites</p>
+
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-4">
+            <div class="card " style="width: 18rem;border-radius: 0;">
+                <a href="myresume">
+                    <div class="card-body">
+                        <p class="card-text">Polish your resume</p>
+
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
     </div>
 
 
-<!---#projects here name + create new project--->
 
-    <!---#onclick should open up showing transaction id candidates
-        this contains an ats type system in places showing stages accepted,in progress report-->
 
-    </main>
-    {% endblock %}
+</main>
+</div>
+</div>
+{% endblock %}

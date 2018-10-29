@@ -1,0 +1,214 @@
+{% extends 'candidatesbase.html' %}
+{% block title %}
+pendingproject
+{% endblock %}
+{%load static %}
+{% block content %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
+        <div class="navbar fixed-top fine border-bottom">
+
+            <h5>Pending project</h5>
+
+            <nav>
+
+                <ul class="nav ">
+                    <li class="nav-item">
+                        <span data-feather="user">
+
+                        </span>
+                        {{ user.username }}
+                    </li>
+                    <!-- Authentication Links -->
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                    </li>
+                    {% endif %}
+
+
+                </ul>
+
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8" style="text-align: left">
+
+
+            <div class="card5" style="text-align: left">
+                <div class="card-body">
+
+                    <h5 class="card-subtitle mb-2 ">Project brief</h5>
+                    <hr>
+                    <p class="card-text ">
+                        <span class="badge badge-primary">Level : intermediate</span>
+                    </p><p>
+                    Ilightup analytics is set to create its own Api to distribute sensitive data to its client.They currently want a GET request only. Due to the nature of sensitivity the data access restrictions have to be put into place. They want you to automate a system that uniquely generates an Api key and assigns it to each first time user.
+                </p>
+
+                    <p></p>
+
+
+                    <h5 class="card-subtitle mb-2 ">Enviroment variables</h5>
+                    <hr>
+                    <p class="card-text ">
+                    </p><ul>
+                    <li>Base language : </li>
+                    <li>Frontend client : </li>
+                    <li>Time : 180 minutes</li>
+                </ul>
+
+                    <p></p>
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-lg-4 " style="text-align: left">
+            <div class="card5" style="width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-subtitle mb-2 text-muted">Assessment Dates</h5>
+                    <form method="post" action="http://rareapp.herokuapp.com/candidate/pendingproject_detail" enctype="multipart/form-data">
+                        <input type="hidden" name="_token" value="wN5SrDj9pzFdQeqaQqzcMPZcuyEhPr4uKaWqYes3">
+                        <div class="form-group">
+                            <label for="name">Date Assessment</label>
+                            <input type="text" id="dateassessment" required="required" name="dateassessment" value="2018-08-14" class="form-control ">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">End Assessment</label>
+                            <input type="text" id="endassessment" required="required" name="endassessment" value="2018-08-18" class="form-control ">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mytimeassessment">Choose your date of Assessment</label>
+                            <input type="date" id="mytimeassessment" required="required" name="mytimeassessment" value="" class="form-control ">
+                        </div>
+
+                        <!---data to be collected-->
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="candidate_id" name="candidate_id" value="14">
+
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="candidate_name" name="candidate_name" value="kweku mensah">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <input type="hidden" class="form-control" id="store_id" name="store_id" value="21">
+                        </div>
+                        <div class="form-group">
+
+                            <input type="hidden" class="form-control" id="user_id" name="user_id" value="21">
+                        </div>
+                        <div class="form-group">
+
+                            <input type="hidden" class="form-control" id="level" name="level" value="intermediate">
+                        </div>
+                        <div class="form-group">
+
+                            <input type="hidden" class="form-control" id="type" name="type" value="backend">
+                        </div>
+                        <div class="form-group">
+
+                            <input type="hidden" class="form-control" id="numberapplicant" name="numberapplicant" value="20">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="level" name="framelanguage" value="">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="description" name="description" value="Ilightup analytics is set to create its own Api to distribute sensitive data to its client.They currently want a GET request only. Due to the nature of sensitivity the data access restrictions have to be put into place. They want you to automate a system that uniquely generates an Api key and assigns it to each first time user.">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="timeassessment" name="timeassessment" value="180">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="image1" name="image1" value="https://www.htbridge.com/images/blog/api-security.jpg">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="proglanguage" name="proglanguage" value="laravel">
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <input type="hidden" id="requirement1" required="required" name="requirement1" value="A simple interface like sample idea above meant for new users.Each user should have a unique key." class="form-control ">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <input type="hidden" id="requirement2" required="required" name="requirement2" value="A user database that stores user info inclusive of their api key" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <input type="hidden" id="requirement3" required="required" name="requirement3" value="Create a simple database and put sample data that will be served out eg(weather)" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <input type="hidden" id="requirement4" required="required" name="requirement4" value="Create a simple database  REST api data end point(json format) example" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <input type="hidden" id="requirement5" required="required" name="requirement5" value="Include the Api key as one of the parameters of each get requests. example http://ziarafrica.herokuapp.com/orders?key=Your_key_here" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <input type="hidden" id="requirement6" required="required" name="requirement6" value="Ensure proper error handling.example http://bustime.mta.info/api/where/stops-for-location.json?lat=40.748433&amp;lon=-73.985656&amp;latSpan=0.005&amp;lonSpan=0.005&amp;key=YOUR_KEY_HERE" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div>
+                                <input type="hidden" id="framecss" required="required" name="framecss" value="" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div>
+                                <input type="hidden" id="framehtml" required="required" name="framehtml" value="" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div>
+                                <input type="hidden" id="assessment_id" required="required" name="assessment_id" value="1" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <input type="hidden" id="name" required="required" name="name" value="Secure Api" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <input type="hidden" id="validate" required="required" name="validate" value="1" class="form-control ">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Accept the offer</button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

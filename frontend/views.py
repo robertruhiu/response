@@ -82,3 +82,29 @@ def activity(request):
             return render(request, 'frontend/recruiter/my-activity.html', {'transactions': transactions})
         elif request.user.profile.user_type == 'developer':
             return render(request, 'frontend/developer/my-activity.html', {'transactions': transactions})
+
+
+def tracker(request):
+
+
+    return render(request, 'frontend/recruiter/tracker.html')
+
+def inprogress(request):
+
+
+    return render(request, 'frontend/developer/inprogress.html')
+
+def invites(request):
+
+
+    return render(request, 'frontend/developer/invites.html')
+
+def projectdetails(request):
+
+
+    return render(request, 'frontend/developer/projectdetails.html')
+
+def pendingproject(request):
+
+
+    return render(request, 'frontend/developer/pendingproject.html')

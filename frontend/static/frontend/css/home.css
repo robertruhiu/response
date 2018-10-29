@@ -30,12 +30,7 @@
 .proce{margin-left:35%;width:32%;}
 .role{width: 40%;margin-left: 32%}
 .nav-tabs .nav-link.active {color: #1e50c9;background-color: #fff; /* border-color: #dee2e6 #dee2e6 #fff; */}
-a {
-    color: #000000;
-    text-decoration: none;
-    background-color: transparent;
-    -webkit-text-decoration-skip: objects;
-}
+
 .nav-tabs .nav-link {
 
     border-top-left-radius: 0rem;

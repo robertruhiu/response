@@ -1,4 +1,7 @@
 {% extends 'candidatesbase.html' %}
+{% block title %}
+invites
+{% endblock %}
 {%load static %}
 {% block content %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
@@ -7,11 +10,17 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
         <div class="navbar fixed-top fine border-bottom">
 
-            <h5>Home</h5>
+            <h5>Project invitations</h5>
 
             <nav>
 
                 <ul class="nav ">
+                    <li class="nav-item">
+                        <span data-feather="user">
+
+                        </span>
+                        {{ user.username }}
+                    </li>
                     <!-- Authentication Links -->
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
@@ -32,53 +41,33 @@
             </nav>
         </div>
     </div>
-    <div class="jumbotron jumbotron-fluid"
-         style="background: 0/30% no-repeat,linear-gradient(61deg,#2b63b7,#76c5d6 42%);">
+
+    <div class="row">
+
+
+
+        <div class="col-lg-4">
+            <div class="card" style="width: 18rem;height: 100%">
+                <img class="card-img-top" src="https://www.htbridge.com/images/blog/api-security.jpg" style="height: 150px" alt="Card image cap">
+                <div class="card-body">
+                    <h5>Project name: Secure Api</h5>
+                    <p class="card-text">Project type : backend</p>
+                    <p class="card-text">Company name : codeln</p>
+
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'frontend:pendingproject' %}">
+                        <button type="button" class="btn btn-success btn-xs">See more</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+
 
     </div>
-    <div class="row" >
-        <div class="col-lg-4">
-            <div class="card " style="width: 18rem;border-radius: 0;">
-                <a href="{% url 'frontend:my-activity' %}">
-                    <div class="card-body">
-                        <p class="card-text">Current projects</p>
-
-                    </div>
-                </a>
-            </div>
-
-
-        </div>
-        <div class="col-lg-4">
-            <div class="card " style="width: 18rem;border-radius: 0;">
-                <a href="calltoapply">
-                    <div class="card-body">
-                        <p class="card-text">Invites</p>
-
-                    </div>
-                </a>
-            </div>
-
-
-        </div>
-        <div class="col-lg-4">
-            <div class="card " style="width: 18rem;border-radius: 0;">
-                <a href="myresume">
-                    <div class="card-body">
-                        <p class="card-text">Polish your resume</p>
-
-                    </div>
-                </a>
-            </div>
-
-
-        </div>
-    </div>
-
-
-
 
 </main>
-</div>
-</div>
+
 {% endblock %}

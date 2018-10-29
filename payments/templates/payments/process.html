@@ -103,7 +103,7 @@ Payment
         console.log(amnt);
         var x = getpaidSetup({
             PBFPubKey: API_publicKey,
-            customer_email: "user@example.com",
+            customer_email: "{{ user.username }}",
             amount: amnt,
             customer_phone: "234099940409",
             currency: "USD",

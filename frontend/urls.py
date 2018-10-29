@@ -17,11 +17,16 @@ Including another URLconf
 from django.urls import path
 
 from frontend.views import index
-from frontend.views import activity
+from frontend.views import activity,tracker,inprogress,invites,projectdetails,pendingproject
 
 app_name = 'frontend'
 urlpatterns = [
     path('', index, name='index'),
+    path('tracker', tracker, name='tracker'),
+    path('inprogress', inprogress, name='inprogress'),
+    path('invites', invites, name='invites'),
+    path('pendingproject', pendingproject, name='pendingproject'),
+    path('projectdetails', projectdetails, name='projectdetails'),
     path('activity/', activity, name='my-activity'),
 
 ]

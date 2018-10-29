@@ -1,0 +1,191 @@
+{% extends 'candidatesbase.html' %}
+{% block title %}
+project details
+{% endblock %}
+{%load static %}
+{% block content %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
+        <div class="navbar fixed-top fine border-bottom">
+
+            <h5>Project prerequisites</h5>
+
+            <nav>
+
+                <ul class="nav ">
+                    <li class="nav-item">
+                        <span data-feather="user">
+
+                        </span>
+                        {{ user.username }}
+                    </li>
+                    <!-- Authentication Links -->
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                    </li>
+                    {% endif %}
+
+
+                </ul>
+
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4  text-center">
+            <h6>Internet is working and stable</h6>
+            <img src="https://codeln.herokuapp.com/images/building.png" height="80" alt="..."> <br><br>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-danger">Test it</button>
+            </div>
+        </div>
+        <div class="col-sm-4  text-center">
+            <h6>Webcam is unobstructed during test time</h6>
+            <img src="https://codeln.herokuapp.com/images/webcam.png" height="80" alt="..."> <br><br>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-danger">Test it</button>
+            </div>
+        </div>
+        <div class="col-sm-4  text-center">
+            <h6>Don't use any VPN (virtual Private Network)</h6>
+            <img src="https://codeln.herokuapp.com/images/vpn.png" height="80" alt="...">
+        </div>
+    </div>
+    <div class="row" style="margin-top: 5%">
+        <div class="col-lg-12">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Project details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">IDE guide(Must read) </a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="col-lg-12">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="row">
+                        <div class="col-lg-8" style="text-align: left">
+
+
+                            <div class="card5" style="text-align: left">
+                                <div class="card-body">
+
+                                    <h5 class="card-subtitle mb-2 ">Secure Api</h5>
+                                    <hr>
+
+                                    <p class="card-text ">
+                                        Ilightup analytics is set to create its own Api to distribute sensitive data to its client.They currently want a GET request only. Due to the nature of sensitivity the data access restrictions have to be put into place. They want you to automate a system that uniquely generates an Api key and assigns it to each first time user.
+
+                                    </p>
+
+
+                                    <h5 class="card-subtitle mb-2 ">Deliverables</h5>
+                                    <hr>
+                                    <p class="card-text ">
+                                    </p><ul>
+                                    <li>A simple interface like sample idea above meant for new users.Each user should have a unique key.</li>
+                                    <li>A user database that stores user info inclusive of their api key</li>
+                                    <li>Create a simple database and put sample data that will be served out eg(weather)</li>
+                                    <li>Create a simple database  REST api data end point(json format) example</li>
+                                    <li>Include the Api key as one of the parameters of each get requests. example http://ziarafrica.herokuapp.com/orders?key=Your_key_here</li>
+                                    <li>Ensure proper error handling.example http://bustime.mta.info/api/where/stops-for-location.json?lat=40.748433&amp;lon=-73.985656&amp;latSpan=0.005&amp;lonSpan=0.005&amp;key=YOUR_KEY_HERE</li>
+                                </ul>
+
+                                    <p></p>
+
+
+
+                                    <h5 class="card-subtitle mb-2 ">Enviroment variables</h5>
+                                    <hr>
+                                    <p class="card-text ">
+                                    </p><ul>
+
+                                    <li>Frontend client : </li>
+                                    <li>Backend client : laravel</li>
+                                    <li>Time : 3 hrs</li>
+                                </ul>
+
+                                    <p></p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-lg-4 " style="text-align: left">
+                            <div class="card5" style="width: 100%;">
+                                <div class="card-body">
+
+                                    <h5 class="card-subtitle mb-2 text-muted">IDE Login access</h5>
+                                    <hr>
+                                    <p class="card-text">
+
+                                        Username: kweku@gmail.com<br>
+                                        password: ****************<br>
+                                        <a href="http://ide.codeln.com:8080/dashboard/#/ide/che/wksp-ecmf" target="_blank" class="btn btn-primary">Start
+                                            project</a>
+
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="row" style="margin-top: 3%">
+                        <div class="col-lg-3 " style="position: sticky" >
+                            <div id="list-example" class="list-group ">
+                                <a class="list-group-item list-group-item-action" style="border-top-left-radius: 0;border-top-right-radius: 0;" href="#list-item-1">IDE Basics</a>
+                                <a class="list-group-item list-group-item-action" href="#list-item-2">Running a project</a>
+                                <a class="list-group-item list-group-item-action" href="#list-item-3">Database</a>
+                                <a class="list-group-item list-group-item-action" style="border-bottom-right-radius: 0;border-bottom-left-radius: 0;" href="#list-item-4">Connect to phone</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
+                                <h4 id="list-item-1">Ide basics</h4>
+                                <p>Ex consequat commodo adipisicing exercitation aute excepteur occaecat ullamco duis aliqua id magna ullamco eu. Do aute ipsum ipsum ullamco cillum consectetur ut et aute consectetur labore. Fugiat laborum incididunt tempor eu consequat enim dolore proident. Qui laborum do non excepteur nulla magna eiusmod consectetur in. Aliqua et aliqua officia quis et incididunt voluptate non anim reprehenderit adipisicing dolore ut consequat deserunt mollit dolore. Aliquip nulla enim veniam non fugiat id cupidatat nulla elit </p>
+                                <h4 id="list-item-2">How to run project</h4>
+                                <p>Ex consequat commodo adipisicing exercitation aute excepteur occaecat ullamco duis aliqua id magna ullamco eu. Do aute ipsum ipsum ullamco cillum consectetur ut et aute consectetur labore. Fugiat laborum incididunt tempor eu consequat enim dolore proident. Qui laborum do non excepteur nulla magna eiusmod consectetur in. Aliqua et aliqua officia quis et incididunt voluptate non anim reprehenderit adipisicing dolore ut consequat deserunt mollit dolore. Aliquip nulla enim veniam non fugiat id cupidatat nulla elit </p>
+                                <h4 id="list-item-3">Databases</h4>
+                                <p>Ex consequat commodo adipisicing exercitation aute excepteur occaecat ullamco duis aliqua id magna ullamco eu. Do aute ipsum ipsum ullamco cillum consectetur ut et aute consectetur labore. Fugiat laborum incididunt tempor eu consequat enim dolore proident. Qui laborum do non excepteur nulla magna eiusmod consectetur in. Aliqua et aliqua officia quis et incididunt voluptate non anim reprehenderit adipisicing dolore ut consequat deserunt mollit dolore. Aliquip nulla enim veniam non fugiat id cupidatat nulla elit </p>
+                                <h4 id="list-item-4">Connect to phone</h4>
+                                <p>Ex consequat commodo adipisicing exercitation aute excepteur occaecat ullamco duis aliqua id magna ullamco eu. Do aute ipsum ipsum ullamco cillum consectetur ut et aute consectetur labore. Fugiat laborum incididunt tempor eu consequat enim dolore proident. Qui laborum do non excepteur nulla magna eiusmod consectetur in. Aliqua et aliqua officia quis et incididunt voluptate non anim reprehenderit adipisicing dolore ut consequat deserunt mollit dolore. Aliquip nulla enim veniam non fugiat id cupidatat nulla elit </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+</main>
+
+{% endblock %}
