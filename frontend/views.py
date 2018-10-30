@@ -108,10 +108,10 @@ def pendingproject(request):
 
 
     return render(request, 'frontend/developer/pendingproject.html')
-def screen(request):
+def recruit(request):
 
 
-    return render(request, 'frontend/screen.html')
+    return render(request, 'frontend/recruit.html')
 
 def dev(request):
 
