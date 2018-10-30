@@ -1,17 +1,17 @@
-.codelnlogo{padding-left:0;font-size:19px;letter-spacing:.4em;font-family:'sans-serif',Montserrat;font-weight:bold;color:#2b63b7;text-transform:uppercase;}
+.codelnlogo{padding-left:0;font-size:19px;letter-spacing:.4em;font-family:'sans-serif',Montserrat;font-weight:bold;color: #ffffff;text-transform:uppercase;}
 .colorlink{color:black;}
-.brandhome{float:left;padding:16px 15px;font-size:20px;height:40px;margin-left:7%;}
+.brandhome{float:left;padding:16px 15px;font-size:20px;margin-left:7%;}
 .rowalign{margin-right:0;margin-left:0;}
 .intro{margin-top:8%;}
 .jumbo{margin-bottom:0rem;background-color:#ffffff;border-radius:.0px;}
-.jumbo1{background-color:#ffffff;border-radius:.0px;margin-top:1%;}
+.jumbo1{background-color:#ffffff;border-radius:.0px;margin-top:-3%;}
 .jumbo5{background-color:#ffffff;border-radius:.0px;margin-top:-7%;}
 .jumbo10{background-color:#ffffff;border-radius:.0px;margin-top:-5%;}
 .jumbo4{background-color:#ffffff;border-radius:.0px;margin-top:-7%;}
 .jumbo2{background-color:#e1f2f678;border-radius:.0px;}
 .jumbo7{background-color:#ffffff;border-radius:.0px;margin-top:-4%;}
 .jumbo3{background-color:rgba(255, 255, 255, 0.47);border-radius:.0px;margin-top: -4%}
-.jumbofoot{margin-top:-6%;margin-bottom:0rem;background-color:#E8EBEF;border-radius:.0px;}
+.jumbofoot{margin-bottom:0rem;background-color:#E8EBEF;border-radius:.0px;}
 .beer1{height:100%;width:100%;}
 .nav-colored{background-color:#ffffff;}
 .nav-transparent{background-color:transparent;}
@@ -48,15 +48,15 @@
 }
 .little-box p{
     font-size:15px;
-    
+
 }
 .little-box h5{
     padding-bottom:0;
-    
+
 }
 .top-logo img {
-height: 50px;
-width:100px;
+    height: 50px;
+    width:100px;
 }
 .forbtn{
     background-color:#2dc997;
@@ -107,4 +107,132 @@ nav ul li a{
     opacity:0.5;
     color:#996;
 
+}
+.jumbotron1 {
+    display: block;
+    top: 0;
+    transition: .3s cubic-bezier(.25,.8,.5,1);
+    width: 100%;
+}
+.jumbotron1__wrapper {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    transition: inherit;
+    width: 100%;
+}
+.jumbotron1__image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    min-width: 100%;
+    will-change: transform;
+    transition: inherit;
+}
+.jumbotron1__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    contain: strict;
+    transition: inherit;
+}
+
+
+
+.nav-container {
+    height: 58px;
+    width: 100%;
+    position: fixed;
+    color: #ffffff;
+    transition: background-color 0.2s linear;
+}
+.nav-container.solid-nav{
+    background-color: #272339;
+    transition: background-color 0.2s linear;
+}
+
+
+.nav-container .nav-row {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding-right: 25px;
+    padding-left: 25px;
+    padding-top: 18px;
+}
+.nav-container .nav-row .nav-logo {
+    display: inline-block;
+    font-weight: 900;
+}
+.nav-container .nav-row .nav-controls {
+    float: right;
+}
+.nav-container .nav-row .nav-controls a {
+    padding-left: 20px;
+}
+
+
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+.hero-text2 {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+.subheading {
+    color: white;
+    font-size: 16px!important;
+    font-weight: 400;
+}
+.display-2 {
+    color: white;
+    font-weight: 400;
+    letter-spacing: normal!important;
+    font-size: 45px!important;
+    line-height: 48px!important;
+}
+.primary {
+    background-color: #2196f3 !important;
+    border-color: #2196f3 !important;
+}
+
+.btn__content {
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: inherit;
+    color: white;
+    display: -ms-flexbox;
+    display: flex;
+    height: inherit;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0 16px;
+    transition: .3s cubic-bezier(.25,.8,.5,1);
+    white-space: nowrap;
+    width: inherit;
+}
+.product{
+    width: 40%;
+}
+.loginbar{
+    background-color: #272339;
+    height: 58px;
+    width: 100%;
 }

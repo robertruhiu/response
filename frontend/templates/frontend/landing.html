@@ -4,141 +4,80 @@ index
 {% endblock %}
 {%load static %}
 {% block content %}
-<section class="jumbotron jumbo" >
 
-    <div class="row rowalign">
-        <div class="col-lg-6 intro text-center" style="margin: auto">
-            <h2>Verify Developer skills through real world projects.</h2>
-            <div >
-                <br>
-                <a class="btn btn-primary"  href="/signup">Get Started</a>
-            </div>
+<!---- Hero image intro----->
+<div class="jumbotron1 theme--dark" style="height: 30vmax;">
+    <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/home.jpg" class="jumbotron1__image">
+        <div class="jumbotron1__background"
+             style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
+        <div class="hero-text">
 
+            <h1 class="display-2">Hire Skilled Software Developers — Faster.</h1>
+            <div class="subheading">We Validate and Verify Skills using Real World Projects</div>
+
+            <button type="button"  onclick="location.href='accounts/login';" value="Go to login" class="btn theme--dark primary px-4 mt-5" style="border-radius: 0"><div class="btn__content"href="{% url 'account_login' %}">
+                Get started
+            </div></button>
 
         </div>
-        <div class="col-lg-5">
-            <img class="beer1" src="../../static/frontend/images/ill/deal.svg">
 
-        </div>
     </div>
+</div>
 
-
-</section>
-
-<!--how it works-->
-<section class="jumbotron jumbo1" >
+<!--products-->
+<section class="jumbotron jumbo1" style="padding-top:-2%" >
     <div class="row" style="margin-left: 0;margin-right: 0">
-        <div class="col-lg-12 text-center h2">
-            How it works
+        <div class="col-lg-12 text-center h3">
+            Products
 
         </div>
 
     </div>
     <div class="row" style="margin-top: 2%">
-        <div class="col-lg-3" style="margin-bottom: 2%;text-align: -webkit-center;">
-            <div class="card howcard" style="width: 18rem;height: 100%">
-                <img class="card-img-top" src="../../static/frontend/images/ill/frame.svg" alt="Card image cap">
+        <div class="col-lg-4" style="margin-bottom: 2%;margin-left:auto;text-align: -webkit-center;">
+            <div class="card" style="width: 18rem;border: 0">
+                <img class="card-img-top product"  src="../../static/frontend/images/computer.svg" alt="Card image cap">
                 <div class="card-body">
+                    <h5 class="card-title">Screening</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
-                    <p class="card-text"></p>
-
-                </div>
-                <div class="card-footer cardtext text-muted">
-                    Real world projects
                 </div>
             </div>
 
         </div>
-        <div class="col-lg-3" style="margin-bottom: 2%;text-align: -webkit-center;">
-            <div class="card howcard" style="width: 18rem;height: 100%">
-                <img class="card-img-top" src="../../static/frontend/images/ill/dev.svg" style="margin-top: 20%;" alt="Card image cap">
+        <div class="col-lg-4" style="margin-bottom: 2%;text-align: -webkit-center;">
+            <div class="card" style="width: 18rem;border: 0">
+                <img class="card-img-top product" src="../../static/frontend/images/pick.svg" alt="Card image cap">
                 <div class="card-body">
+                    <h5 class="card-title">Sourcing</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
-                    <p class="card-text"></p>
-
-                </div>
-                <div class="card-footer cardtext text-muted">
-                    Candidates monitored enviroment
                 </div>
             </div>
 
         </div>
-        <div class="col-lg-3" style="margin-bottom: 2%;text-align: -webkit-center;">
-            <div class="card howcard" style="width: 18rem;height: 100%">
-                <img class="card-img-top" src="../../static/frontend/images/ill/anlyze.svg" alt="Card image cap">
+        <div class="col-lg-4" style="margin-bottom: 2%;text-align: -webkit-center;">
+            <div class="card" style="width: 18rem;border: 0">
+                <img class="card-img-top product" src="../../static/frontend/images/certificate.svg" alt="Card image cap">
                 <div class="card-body">
+                    <h5 class="card-title">Certifications</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
-                    <p class="card-text"></p>
-
-                </div>
-                <div class="card-footer cardtext text-muted">
-                    Code analysis of project
                 </div>
             </div>
 
         </div>
-        <div class="col-lg-3" style="margin-bottom: 2%;text-align: -webkit-center;">
-            <div class="card howcard" style="width: 18rem;height: 100%">
-                <img class="card-img-top" src="../../static/frontend/images/ill/report.svg" alt="Card image cap">
-                <div class="card-body">
 
-                    <p class="card-text"></p>
-
-                </div>
-                <div class="card-footer cardtext text-muted">
-                    Recruiter recieves ranked reports
-                </div>
-            </div>
-
-        </div>
     </div>
 
 
 
 
 </section>
-<!--features-->
-<section  class="jumbotron jumbo5">
-    <div class="row" style="margin-left: 0;margin-right: 0">
-        <div class="col-lg-12 text-center h2">
-            Features
-            <br> <br>
-        </div>
-
-        <div class='row' style="margin-left: 0;margin-right: 0">
-            <div class='col-md-3'>
-                <div class='little-box'>
-                    <h5 class="text-center"> <strong>Project Library </strong></h5>
-                    <p> We offer  Workplace Sample Coding Tests which from research has proven to be a trusted indicator of a Programmer’s prowess. </p>
-                </div>
-            </div>
-            <div class='col-md-3'>
-                <div class='little-box'>
-                    <h5 class="text-center"> <strong>IDE & Proctoring</strong></h5>
-                    <p>We offer a user-friendly IDE with required tech stack pre-installed for the Candidate. We also offer cheat protection using AI monitoring</p>
-                </div>
-            </div>
-            <div class='col-md-3'>
-                <div class='little-box'>
-                    <h5 class="text-center"> <strong>Analysis & Evaluation</strong></h5>
-                    <p>We analyze the code of the Project, benchmark them against key metrics and provide a comprehensive report</p>
-                </div>
-            </div>
-            <div class='col-md-3'>
-                <div class='little-box'>
-                    <h5 class="text-center"> <strong>Holistic Automation</strong></h5>
-                    <p>Seamless Integration with your preferred Applicant Tracking System</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
 <!--benefits-->
 <section class="jumbotron jumbo1" >
     <div class="row" style="margin-left: 0;margin-right: 0">
-        <div class="col-lg-12 text-center h2">
+        <div class="col-lg-12 text-center h3">
             Benefits
         </div>
     </div>
@@ -213,29 +152,26 @@ index
 
 </section>
 
-<!--get started-->
-<section class="jumbotron jumbo2" >
-    <div class="row" style="margin-left: 0;margin-right: 0">
-        <div class="col-md-6 text-center">
-            <p class="h3">Get started</p>
+<!--Call to action for programmers-->
+<section class="jumbotron jumbo2" style="padding-bottom: 7%;padding-top: 2%;">
+    <div class="row" style="margin-left: 0;margin-right: 0;margin-top: 2%">
+        <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+            <p class="h3">Are you a programmer?</p>
         </div>
-        <div class="col-md-6 text-center">
-            <a class="btn btn-primary" href="/signup">Recruiter</a> &nbsp;
-            <a class="btn forbtn" href="/dev">Invited for test?</a>
+        <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+
+            <a class="btn forbtn" href="accounts/login">Invited for test?</a>
 
 
         </div>
     </div>
 </section>
 
-<!--devs section-->
-
-
 <!--our friends-->
-<section class="jumbotron jumbo10" >
+<section class="jumbotron jumbo10" style="padding-bottom: 7%" >
     <div class="row" style="margin-left: 0;margin-right: 0">
         <div class="col-lg-12 text-center ">
-            <h2>Companies accepting Codeln certificates</h2>
+            <h3>Companies accepting Codeln certificates</h3>
 
         </div>
 
@@ -294,10 +230,79 @@ index
 
 </section>
 
+<div class="jumbotron1 theme--dark" style="height: 30vmax;">
+    <div class="jumbotron1__wrapper">
+
+        <div class="jumbotron1__background"
+             style="background: linear-gradient(to right top, #051937, #131b36, #1d1d35, #241f35, #292234);"></div>
+        <div class="hero-text2">
+
+
+            <h5 style="color: white;margin-bottom: 5%">Testimonials</h5>
+            <br>
+            <br>
+            <br>
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width: auto;margin: auto">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" style="margin-bottom: 10%">
+                    <div class="carousel-item active">
+                        <blockquote class="blockquote">
+                            <p class="mb-0" style="color: white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                        </blockquote>
+
+                    </div>
+                    <div class="carousel-item">
+                        <blockquote class="blockquote">
+                            <p class="mb-0" style="color: white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                        </blockquote>
+
+                    </div>
+                    <div class="carousel-item">
+                        <blockquote class="blockquote">
+                            <p class="mb-0" style="color: white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                        </blockquote>
+
+                    </div>
+                </div>
+                <br>
+                <div >
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+
 
 
 <!--footer-->
-<footer class="jumbotron jumbofoot" >
+<footer class="jumbotron jumbofoot"  >
     <div class="container">
         <div class="row">
             <div class="directory col-xs-6 col-sm-3">
