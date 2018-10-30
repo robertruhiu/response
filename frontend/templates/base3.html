@@ -50,21 +50,31 @@
                 </div>
             </li>
 
+
+
+            {% if request.user.is_authenticated %}
             <li class="nav-item">
-                <a  href="/screen" style="color: white" class="nav-link" >Recruiter</a>
+                <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+            </li>
+
+            {% else %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
             </li>
             <li class="nav-item">
-                <a  href="/dev" style="color: white" class="nav-link" >Developer</a>
+                <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
             </li>
+            {% endif %}
 
 
 
         </ul>
     </div>
 </nav>
-    {% block content %}
+{% block content %}
 
-    {% endblock %}
+{% endblock %}
 
 
 

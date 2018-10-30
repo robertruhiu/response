@@ -108,3 +108,12 @@ def pendingproject(request):
 
 
     return render(request, 'frontend/developer/pendingproject.html')
+def screen(request):
+
+
+    return render(request, 'frontend/screen.html')
+
+def dev(request):
+
+
+    return render(request, 'frontend/dev.html')

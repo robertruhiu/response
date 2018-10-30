@@ -1,0 +1,80 @@
+{% extends 'base3.html' %}
+{% block title %}
+index
+{% endblock %}
+{%load static %}
+{% block content %}
+
+<!---- Hero image intro----->
+<div class="jumbotron1 theme--dark" style="height: 30vmax;">
+    <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/home.jpg" class="jumbotron1__image">
+        <div class="jumbotron1__background"
+             style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
+        <div class="hero-text">
+
+            <h1 class="display-2">Hire Skilled Software Developers — Faster.</h1>
+            <div class="subheading">We Validate and Verify Skills using Real World Projects</div>
+
+            <button type="button"  onclick="location.href='accounts/login';" value="Go to login" class="btn theme--dark primary px-4 mt-5" style="border-radius: 0"><div class="btn__content"href="{% url 'account_login' %}">
+                Get started
+            </div></button>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!--footer-->
+<footer class="jumbotron jumbofoot"  >
+    <div class="container">
+        <div class="row">
+            <div class="directory col-xs-6 col-sm-3">
+                <h3 class="directory-title">Products</h3>
+                <ul class="directory-items list-unstyled">
+                    <li><a class="colorlink" href="/pair">Pair programming</a></li>
+                    <li><a class="colorlink" href="/video">Video proctor</a></li>
+
+                </ul>
+            </div>
+            <div class="directory col-xs-6 col-sm-3">
+                <h3 class="directory-title">Company</h3>
+                <ul class="directory-items list-unstyled">
+                    <li><a class="colorlink" href="/about">About us</a></li>
+                    <li><a class="colorlink" href="/careers">Careers</a></li>
+                    <li><a class="colorlink" href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="directory col-xs-6 col-sm-3">
+                <h3 class="directory-title">Resources</h3>
+                <ul class="directory-items list-unstyled">
+                    <li><a class="colorlink" href="#">Contact us</a></li>
+                    <li><a class="colorlink" href="#">Help center</a></li>
+
+                </ul>
+            </div>
+            <div class="directory col-xs-6 col-sm-3">
+                <h3 class="directory-title">Follow</h3>
+                <ul class="directory-items list-unstyled">
+                    <li>
+                        <a href="https://twitter.com/Codeln_spaces" target="_blank">
+                            <i><span data-feather="twitter"></span></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/company/codeln/" target="_blank">
+                            <i><span data-feather="linkedin"></span></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}
