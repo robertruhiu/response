@@ -6,7 +6,28 @@ index
 {% block content %}
 
 <!---- Hero image intro----->
-<div class="jumbotron1 theme--dark" style="height: 30vmax;">
+<div class="jumbotron1 theme--dark d-none d-lg-block" style="height: 30vmax;">
+    <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/dev.jpg" class="jumbotron1__image">
+        <div class="jumbotron1__background"
+             style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
+        <div class="hero-text">
+
+            <div class="display-2 h1 d-none d-lg-block" style="color: white" >Get hired for your skill.</div>
+
+            <div class="d-lg-none h5" style="color: white;margin-top: 2em;" >Get hired for your skill.</div>
+
+            <div class="subheading d-none d-lg-block">We Validate and Verify Skills using Real World Projects</div>
+
+            <button type="button"  onclick="location.href='accounts/login';" value="Go to login" class="btn theme--dark primary px-4 mt-5" style="border-radius: 0"><div class="btn__content"href="{% url 'account_login' %}">
+                Get started
+            </div></button>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="jumbotron1 theme--dark d-lg-none" style="height: 40vmax;">
     <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/dev.jpg" class="jumbotron1__image">
         <div class="jumbotron1__background"
              style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>

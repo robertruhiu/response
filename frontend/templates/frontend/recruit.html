@@ -6,7 +6,7 @@ index
 {% block content %}
 
 <!---- Hero image intro----->
-<div class="jumbotron1 theme--dark" style="height: 30vmax;">
+<div class="jumbotron1 theme--dark d-none d-lg-block" style="height: 30vmax;">
     <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/home.jpg" class="jumbotron1__image">
         <div class="jumbotron1__background"
              style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
@@ -27,6 +27,28 @@ index
 
     </div>
 </div>
+<div class="jumbotron1 theme--dark d-lg-none" style="height: 40vmax;">
+    <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/home.jpg" class="jumbotron1__image">
+        <div class="jumbotron1__background"
+             style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
+        <div class="hero-text">
+
+            <div class="display-2 h1 d-none d-lg-block" style="color: white" >Hire Skilled Software Developers — Faster.</div>
+
+            <div class="d-lg-none h5" style="color: white;margin-top: 2em;margin-left: 5%;margin-right: 5%" >Hire Skilled Software Developers Faster.</div>
+
+            <h1 class="display-2 d-none d-lg-block"></h1>
+            <div class="subheading d-none d-lg-block">We Validate and Verify Skills using Real World Projects</div>
+
+            <button type="button"  onclick="location.href='accounts/login';" value="Go to login" class="btn theme--dark primary px-4 mt-5" style="border-radius: 0"><div class="btn__content"href="{% url 'account_login' %}">
+                Get started
+            </div></button>
+
+        </div>
+
+    </div>
+</div>
+
 
 
 
