@@ -7,7 +7,7 @@ index
 
 
 <!---- Hero image intro----->
-<div class="jumbotron1 theme--dark" style="height: 30vmax;position: -ms-device-fixed">
+<div class="jumbotron1 theme--dark" style="height: 30vmax;">
     <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/storm.jpg" class="jumbotron1__image">
         <div class="jumbotron1__background"
              style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
@@ -15,13 +15,20 @@ index
 
             <div class="display-2 h1 d-none d-lg-block" style="color: white" >Empower your workforce with better hires</div>
 
-            <div class="d-lg-none h5" style="color: white;margin-top: 2em;" >Empower your workforce with better hires</div>
+            <div class="d-lg-none h5 " style="color: white;margin-top: 4em;" >Empower your workforce with better hires</div>
 
-            <div class="subheading d-none d-lg-block">We Validate and Verify Skills using Real World Projects</div>
 
-            <button type="button"  onclick="location.href='accounts/login';" value="Go to login" class="btn theme--dark primary px-4 mt-5" style="border-radius: 0"><div class="btn__content"href="{% url 'account_login' %}">
+
+            <div class="subheading d-none d-lg-block h4">We Validate and Verify Skills using Real World Projects</div>
+
+            <button type="button"  onclick="location.href='accounts/login';" value="Go to login" class="btn d-lg-none theme--dark primary  " style="border-radius: 0"><div class="btn__content"href="{% url 'account_login' %}">
                 Get started
             </div></button>
+
+            <button type="button"  onclick="location.href='accounts/login';" value="Go to login" class="btn d-none d-lg-block theme--dark primary " style="border-radius: 0;margin: auto"><div class="btn__content"href="{% url 'account_login' %}">
+                Get started
+            </div></button>
+
 
         </div>
 

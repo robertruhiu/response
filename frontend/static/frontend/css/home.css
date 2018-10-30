@@ -144,7 +144,7 @@ nav ul li a{
 
 
 .nav-container {
-    height: 58px;
+
     width: 100%;
     position: fixed;
     color: #ffffff;
@@ -235,6 +235,6 @@ nav ul li a{
 .loginbar{
     background-color: #272339;
 
-    height: 58px;
+
     width: 100%;
 }
