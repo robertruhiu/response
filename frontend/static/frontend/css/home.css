@@ -7,6 +7,7 @@
 .jumbo{margin-bottom:0rem;background-color:#ffffff;border-radius:.0px;}
 .jumbo1{background-color:#ffffff;border-radius:.0px;margin-top:-3%;}
 .jumbo5{background-color:#ffffff;border-radius:.0px;margin-top:-7%;}
+.jumbo8{background-color:#f1f9fb;border-radius:.0px;}
 .jumbo10{background-color:#ffffff;border-radius:.0px;margin-top:-5%;}
 .jumbo4{background-color:#ffffff;border-radius:.0px;margin-top:-7%;}
 .jumbo2{background-color:#e1f2f678;border-radius:.0px;}
@@ -196,7 +197,7 @@ nav ul li a{
 }
 .subheading {
     color: white;
-    font-size: 16px!important;
+    font-size: 22px!important;
     font-weight: 400;
 }
 .display-2 {
@@ -204,6 +205,13 @@ nav ul li a{
     font-weight: 400;
     letter-spacing: normal!important;
     font-size: 45px!important;
+    line-height: 48px!important;
+}
+.display-6 {
+    color: white;
+    font-weight: 400;
+    letter-spacing: normal!important;
+    font-size: 30px!important;
     line-height: 48px!important;
 }
 .primary {

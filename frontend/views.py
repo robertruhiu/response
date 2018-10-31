@@ -108,12 +108,16 @@ def pendingproject(request):
 
 
     return render(request, 'frontend/developer/pendingproject.html')
-def recruit(request):
+def pricing(request):
 
 
-    return render(request, 'frontend/recruit.html')
+    return render(request, 'frontend/pricing.html')
 
 def dev(request):
 
 
     return render(request, 'frontend/dev.html')
+def howitworks(request):
+
+
+    return render(request, 'frontend/how.html')

@@ -1,0 +1,98 @@
+{% extends 'base3.html' %}
+{% block title %}
+index
+{% endblock %}
+{%load static %}
+{% block content %}
+
+<!---- Hero image intro----->
+<div class="jumbotron1 theme--dark d-none d-lg-block" style="height: 8vmax;">
+    <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/home.jpg" class="jumbotron1__image">
+        <div class="jumbotron1__background"
+             style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
+        <div class="hero-text">
+
+            <div class="display-6 h3 d-none d-lg-block" style="color: white" >Pricing</div>
+
+
+
+
+
+
+
+        </div>
+
+
+    </div>
+</div>
+<!---for smaller devices-->
+<div class="jumbotron1 theme--dark d-lg-none" style="height: 20vmax;">
+    <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/home.jpg" class="jumbotron1__image">
+        <div class="jumbotron1__background"
+             style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
+        <div class="hero-text">
+
+
+
+            <div class="d-lg-none h5" style="color: white;margin-top: 2em;" >Pricing</div>
+
+
+
+        </div>
+
+
+    </div>
+</div>
+<div class="row mt-3" style="margin: 0">
+    <div class="col-lg-3 text-center" style="margin-left: auto">
+        <div class="card mb-4 " style="height: 100%">
+            <div class="card-header" style="background-color: #2b2773;color: white;height: 7rem">
+                <h4 class="font-weight-normal " style="padding-top: 10%">On demand</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">$20 <small class="text-muted">/ candidate</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Priority email support</li>
+                    <li class="list-group-item">Help center access</li>
+                </ul>
+
+
+            </div>
+            <div class="card-footer text-muted" style="background-color: white">
+                <button type="button" class="btn btn-lg btn-block btn-primary" style="border-radius: 0">Get started</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 text-center" style="margin-right: auto">
+        <div class="card mb-4 shadow-sm" style="height: 100%">
+            <div class="card-header" style="background-color: #2b2773;color: white;height: 7rem">
+                <h4 class=" font-weight-normal" style="padding-top: 10%">Enterprise</h4>
+            </div>
+            <div class="card-body">
+
+                <ul class="list-unstyled mt-3 mb-4">
+
+                    <li class="list-group-item">Phone and email support</li>
+                    <li class="list-group-item">Help center access</li>
+                </ul>
+
+            </div>
+            <div class="card-footer text-muted" style="background-color: white">
+                <button type="button" class="btn btn-lg btn-block btn-primary" style="border-radius: 0">Contact us</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

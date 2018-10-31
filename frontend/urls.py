@@ -17,14 +17,15 @@ Including another URLconf
 from django.urls import path
 
 from frontend.views import index
-from frontend.views import activity,tracker,inprogress,invites,projectdetails,pendingproject,dev,recruit
+from frontend.views import activity,tracker,inprogress,invites,projectdetails,pendingproject,dev,pricing,howitworks
 
 app_name = 'frontend'
 urlpatterns = [
     path('', index, name='index'),
     path('tracker', tracker, name='tracker'),
     path('dev', dev, name='dev'),
-    path('recruit', recruit, name='recruit'),
+    path('howitworks', howitworks, name='howitworks'),
+    path('pricing', pricing, name='pricing'),
     path('inprogress', inprogress, name='inprogress'),
     path('invites', invites, name='invites'),
     path('pendingproject', pendingproject, name='pendingproject'),
