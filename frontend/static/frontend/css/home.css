@@ -65,6 +65,30 @@
     color:white;
 }
 
+
+
+
+.pulse {
+
+    box-shadow: 0 0 0 0 rgb(132, 134, 255);
+    webkit-perspective: 1000;
+
+    cursor: pointer;
+    -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+.pulse:hover
+{
+    -webkit-animation: none;-moz-animation: none;-ms-animation: none;animation: none;
+}
+
+@-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+@-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+@-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+@keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+
 .dev-text p{
     font-size: 15px !important;
 }
@@ -219,6 +243,10 @@ nav ul li a{
 .primary {
     background-color: #2196f3 !important;
     border-color: #2196f3 !important;
+}
+.primary1 {
+    background-color: #9247fd !important;
+    border-color: #9247fd !important;
 }
 
 .btn__content {
