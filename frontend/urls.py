@@ -17,7 +17,7 @@ Including another URLconf
 from django.urls import path
 
 from frontend.views import index
-from frontend.views import activity,tracker,inprogress,invites,projectdetails,pendingproject,dev,pricing,howitworks
+from frontend.views import activity,tracker,inprogress,invites,projectdetails,pendingproject,dev,pricing,howitworks,report
 
 app_name = 'frontend'
 urlpatterns = [
@@ -31,5 +31,6 @@ urlpatterns = [
     path('pendingproject', pendingproject, name='pendingproject'),
     path('projectdetails', projectdetails, name='projectdetails'),
     path('activity/', activity, name='my-activity'),
+    path('report', report, name='report'),
 
 ]

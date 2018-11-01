@@ -117,7 +117,13 @@ def dev(request):
 
 
     return render(request, 'frontend/dev.html')
+
 def howitworks(request):
 
 
     return render(request, 'frontend/how.html')
+
+def report(request):
+
+
+    return render(request, 'frontend/recruiter/report.html')
