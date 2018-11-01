@@ -5,29 +5,22 @@
 {% block title %}
     Sign In
 {% endblock %}
+{%load static %}
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
 <div class="container-fluid" style="margin-top: 5%">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 d-none d-lg-block">
+            <div class="col-lg-8 d-none d-lg-block mt-5">
                 <div class="cardno great gr">
                     <div class="card-body">
+                        <div class="h4">Welcome Back</div>
 
-                        <img class="beer" src="https://cdn.dribbble.com/users/333243/screenshots/5343222/hiring-manager-for-codility.png">
-                        <div class="h4">Codeln as a trust authority</div>
+                        <img class="beer" src="{%static 'frontend/images/ill/work.svg' %}">
 
-                        <div class="h5">
-                            <ul>
-                                <li>Skill validation</li>
-                                <li>Enhancing proper workplace fit</li>
-                                <li>Enabling skilled labor</li>
-                                <li>Setting standards for programmers</li>
-                                <li>Certifying skills</li>
 
-                            </ul>
-                        </div>
+
 
                     </div>
                 </div>
@@ -39,18 +32,6 @@
 
 
                     {% providers_media_js %}
-                    {#                <a href="{% provider_login_url "facebook" method="js_sdk" %}"#}
-                    {#                   class="button is-fullwidth is-link w3-margin-top w3-margin-bottom">#}
-                    {#                    <i class="fab fa-facebook-square"></i>&nbsp;&nbsp;#}
-                    {#                    Continue with Facebook#}
-                    {#                </a>#}
-                    {#                <a href="{% provider_login_url "twitter" %}"#}
-                    {#                   class="button is-fullwidth w3-margin-bottom">#}
-                    {#                    <i class="fab fa-twitter"></i>&nbsp;&nbsp;#}
-                    {#                    Connect with Twitter#}
-                    {#                </a>#}
-
-
 
                 <form method="POST" action="{% url 'account_login' %}">
                     {% csrf_token %}
