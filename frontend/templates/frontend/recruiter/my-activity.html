@@ -1,5 +1,5 @@
 {% extends 'recruiterbase.html' %}
-
+{%load static %}
 {% block content %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
@@ -36,19 +36,33 @@
             </nav>
         </div>
     </div>
-    <div class="jumbotron jumbotron-fluid"
-         style="background: 0/30% no-repeat,linear-gradient(61deg,#2b63b7,#76c5d6 42%);">
 
-    </div>
 
     <div class="row">
         {% for transaction in transactions %}
         <div class="col-lg-3" style="margin-left: 2%">
-            <a href="{% url 'frontend:tracker' %}">
-                <div class="card" style="width: 18rem;">
+            <a href="{% url 'frontend:tracker' %}" style="text-decoration: none">
+                <div class="card" style="width: 18rem;border-radius: 0;height: 100%">
+                    <img class="card-img-top" src="{{ transaction.project.projectimage}}" alt="Card image cap">
 
                     <div class="card-body">
                         <h5 class="card-title">{{ transaction.project.name}}</h5>
+
+
+                    </div>
+                    <div class="card-footer text-muted">
+                        <p>{{ transaction.created}}</p>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+        <div class="col-lg-3" style="margin-left: 2%">
+            <a href="{% url 'projects:categories' %}" style="text-decoration: none">
+                <div class="card" style="width: 18rem;border-radius: 0;">
+                    <img class="card-img-top" src="{%static 'frontend/images/add.svg' %}" style="width: 45%;margin-right: auto;margin-left: auto" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center" style="margin-top: 1em">Create a new project</h5>
 
                     </div>
                 </div>
