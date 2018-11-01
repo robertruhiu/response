@@ -19,8 +19,7 @@
     <link rel="stylesheet" href="{% static 'frontend/css/home.css' %}">
     <link rel="stylesheet" href="{% static 'frontend/css/stay.css' %}">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" rel="stylesheet">
+
 
     {% block css %}
 
@@ -111,20 +110,7 @@
         });
     });
 </script>
-<script>
-    $(document).ready(function() {
-        $(".testimonial-carousel").slick({
-            infinite: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: false,
-            arrows: true,
-            prevArrow: $(".testimonial-carousel-controls .prev"),
-            nextArrow: $(".testimonial-carousel-controls .next")
-        });
-    });
 
-</script>
 
 
 {% block script %}
