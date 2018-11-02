@@ -18,9 +18,10 @@ class Transaction(models.Model):
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    stage = models.CharField(choices=STAGE_CHOICES, default='upload_candidate', max_length=100)
+    stage = models.CharField(choices=STAGE_CHOICES, default='created', max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     completed = models.DateTimeField(auto_now=True)
+    paid = models.BooleanField(default=False)
 
     def allcandidates(self):
         candidates = Candidate.objects.filter(transaction=self.id)

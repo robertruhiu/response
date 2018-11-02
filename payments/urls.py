@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import process_payment, payment_done, payment_canceled
+from .views import process_payment, payment_done, payment_canceled, flutterwavepayment_done
 
 # TODO: create payment handlers for paypal, flutterwave, paystack etc
 
@@ -26,4 +26,9 @@ urlpatterns = [
     path('pay/<int:id>/<int:amount>', process_payment, name='pay'),
     path('done/<int:id>/', payment_done, name='done'),
     path('canceled/<int:id>/', payment_canceled, name='canceled'),
+]
+
+# flutterwave confirmation url
+urlpatterns += [
+    path('flutterdone/<int:id>/', flutterwavepayment_done, name='flutter-done'),
 ]

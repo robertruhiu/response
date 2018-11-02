@@ -9,6 +9,7 @@ def payment_notification(sender, **kwargs):
     if ipn_obj.payment_status == ST_PP_COMPLETED:
         transaction = get_object_or_404(Transaction, id=ipn_obj.invoice)
         transaction.stage = 'payment-verified'
+        transaction.paid = True
         transaction.save()
 
 
