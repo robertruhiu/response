@@ -38,9 +38,6 @@ body{height:100%;font-size:.875rem;}
 .form-box{padding-top:40px;}
 .leo{border:0px;}
 .nel{margin-top:-15px;}
-#biggestp{font-size:50px;}
-#bigp{font-size:20px;}
-#smallp{font-size:13px;}
 .great{margin-top:-4%;}
 .great1{margin-top:25%;}
 .gr{height:100%;}
@@ -55,3 +52,5 @@ body{height:100%;font-size:.875rem;}
 .fley{padding-bottom:2.5rem!important;}
 .fine{margin-left:17%;background-color:white;}
 .trackercard{border-radius: 0}
+.competencecard{margin: auto;width: 15em;border: 0;margin-bottom: 1em}
+.metric{margin-bottom: 2em;}
