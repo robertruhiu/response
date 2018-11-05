@@ -42,3 +42,13 @@ def payment_done(request, id):
 def payment_canceled(request, id):
     # redirect to add candidates
     return redirect(reverse('transactions:process_transaction', args=[id]))
+
+
+@csrf_exempt
+def flutterwavepayment_done(request, id):
+    transaction = Transaction.objects.get(id=id)
+    transaction.stage = 'payment-verified'
+    transaction.paid = True
+    transaction.save()
+    # verifypaymentsuccess
+    return redirect(reverse('transactions:process_transaction', args=[transaction.id]))
