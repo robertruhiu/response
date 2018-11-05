@@ -72,10 +72,9 @@ def upload_candidates(request, current_transaction):
 def all_candidates(request, current_transaction):
     #candidates = current_transaction.allcandidates()
     candidates = Candidate.objects.filter(transaction=current_transaction)
-    count = candidates.count()
-    total_amount = count * 20
+    total_amount = current_transaction.amount()
     return render(request, 'transactions/all_candidates.html',
-                  {'candidates': candidates, 'count': count, 'total_amount': total_amount,
+                  {'candidates': candidates,'total_amount': total_amount,
                    'current_transaction': current_transaction})
 
 

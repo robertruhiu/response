@@ -60,6 +60,7 @@ def profile_type_selection(request, current_profile):
 def index(request):
     if request.user.is_authenticated:
         current_profile = request.user.profile
+        transactions = Transaction.objects.filter(user=request.user)
         if request.user.profile.stage == 'profile_type_selection':
             return profile_type_selection(request, current_profile)
         elif request.user.profile.stage == 'developer_filling_details':
@@ -70,7 +71,7 @@ def index(request):
             if request.user.profile.user_type == 'developer':
                 return render(request, 'frontend/developer/developer.html')
             elif request.user.profile.user_type == 'recruiter':
-                return render(request, 'frontend/recruiter/recruiter.html')
+                return render(request, 'frontend/recruiter/recruiter.html',{'transactions': transactions})
     else:
         return render(request, 'frontend/landing.html')
 
@@ -132,3 +133,7 @@ def credits(request):
 
 
     return render(request, 'frontend/credits.html')
+def privacy(request):
+
+
+    return render(request, 'frontend/privacy.html')

@@ -23,12 +23,15 @@ class Transaction(models.Model):
 
     def allcandidates(self):
         candidates = Candidate.objects.filter(transaction=self.id)
-        count = candidates.count()
-        return candidates, count
+        return candidates
 
     def amount(self):
-        total_amount = self.allcandidates() * 20
+        if self.allcandidates().count() <= 10:
+            total_amount = 200
+        elif self.allcandidates().count() > 10 and self.allcandidates().count() <= 50:
+            total_amount = 500
         return total_amount
+
 
     def __str__(self):
         return "{},{},{}".format(self.user.username, self.project.name, self.stage)

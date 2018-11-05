@@ -43,23 +43,29 @@ my projects
 
     <div class="row">
         {% for transaction in transactions %}
-        <div class="col-lg-3 mb-2" style="margin-left: 2%;">
-            <a href="{% url 'frontend:tracker' %}" style="text-decoration: none">
-                <div class="card" style="width: 18rem;border-radius: 0;height: 100%">
-                    <img class="card-img-top" src="{{ transaction.project.projectimage1}}" alt="Card image cap">
+            {% if transaction.stage == "payment-verified" %}
+                <div class="col-lg-3 mb-2" style="margin-left: 2%;">
+                    <a href="{% url 'frontend:tracker' %}" style="text-decoration: none">
+                        <div class="card" style="width: 18rem;border-radius: 0;height: 100%">
+                            <img class="card-img-top" src="{{ transaction.project.projectimage1}}" alt="Card image cap">
 
-                    <div class="card-body">
-                        <h5 class="card-title">{{ transaction.project.name}}</h5>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ transaction.project.name}}</h5>
 
 
-                    </div>
-                    <div class="card-footer text-muted">
-                        <p>{{ transaction.created}}</p>
-                    </div>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <p>{{ transaction.created}}</p>
+                            </div>
+                        </div>
+                    </a>
+
                 </div>
-            </a>
 
-        </div>
+            {% else %}
+
+            {% endif %}
+
 
         {% endfor %}
         <div class="col-lg-3" style="margin-left: 2%">
@@ -74,6 +80,7 @@ my projects
             </a>
 
         </div>
+
     </div>
 
 
