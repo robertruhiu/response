@@ -40,11 +40,9 @@ recruiter dashboard
             </nav>
         </div>
     </div>
-    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <div class="alert alert-primary " role="alert">
         Welcome {{ user.username }}  to Codeln.Choose one of the paths below to start
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+
     </div>
 
 
@@ -57,7 +55,7 @@ recruiter dashboard
 
             <a   href="{% url 'frontend:my-activity' %}">
                 <div style="text-align: -webkit-center;">
-                <img class="card-img-top " src="../../../static/frontend/images/management.svg" style="width: 50%" alt="Card image cap">
+                <img class="card-img-top "  src="../../../static/frontend/images/management.svg" style="width: 50%;margin-left: 25%;margin-right: 25%" alt="Card image cap">
                 </div>
 
                     <div class="card" style="border: 0 ">
@@ -65,7 +63,7 @@ recruiter dashboard
 
                     <div class="card-body">
 
-                        <h6 class="card-title" style="text-align: -webkit-center;">Ongoing tests</h6>
+                        <h6 class="card-title text-center" style="text-align: -webkit-center;">Ongoing tests</h6>
 
                     </div>
 
@@ -77,14 +75,14 @@ recruiter dashboard
             <div class="card recruithomecard" style="margin: auto">
             <a   href="{% url 'projects:categories' %}">
                 <div style="text-align: -webkit-center;">
-                <img class="card-img-top" src="../../../static/frontend/images/interview.svg" style="width: 50%" alt="Card image cap">
+                <img class="card-img-top" src="../../../static/frontend/images/interview.svg" style="width: 50%;margin-left: 25%;margin-right: 25%" alt="Card image cap">
                 </div>
             <div class="card" style="border: 0 ">
 
 
                 <div class="card-body">
 
-                    <h6 class="card-title" style="text-align: -webkit-center;">Create a new test</h6>
+                    <h6 class="card-title text-center" style="text-align: -webkit-center;">Create a new test</h6>
 
                 </div>
 
@@ -96,14 +94,14 @@ recruiter dashboard
             <div class="card recruithomecard" style="margin: auto">
             <a target="_blank" href="https://goo.gl/forms/33Ju1jpgsuQI4gKw2">
                 <div style="text-align: -webkit-center;">
-                <img class="card-img-top" src="../../../static/frontend/images/search.svg" style="width: 50%" alt="Card image cap">
+                <img class="card-img-top" src="../../../static/frontend/images/search.svg" style="width: 50%;margin-left: 25%;margin-right: 25%" alt="Card image cap">
                 </div>
                 <div class="card" style="border: 0 ">
 
 
                     <div class="card-body">
 
-                        <h6 class="card-title" style="text-align: -webkit-center;">Source candidates</h6>
+                        <h6 class="card-title text-center" style="text-align: -webkit-center;">Source candidates</h6>
 
                     </div>
 

@@ -128,7 +128,7 @@ def report(request):
 
     return render(request, 'frontend/recruiter/report.html')
 
-def source(request):
+def credits(request):
 
 
-    return render(request, 'frontend/recruiter/source.html')
+    return render(request, 'frontend/credits.html')

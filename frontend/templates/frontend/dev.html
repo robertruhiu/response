@@ -57,9 +57,9 @@ index
     <div class="row" style="margin-top: 2%">
         <div class="col-lg-3" style="margin-bottom: 2%;margin-left:auto;text-align: -webkit-center;">
             <div class="card" style="width: 18rem;border: 0">
-                <img class="card-img-top product"  src="../../static/frontend/images/computer.svg" alt="Card image cap">
+                <img class="card-img-top product " style="margin-right: auto;margin-left: auto"  src="../../static/frontend/images/computer.svg" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Pre vet process</h5>
+                    <h5 class="card-title text-center">Pre vet process</h5>
                     <p class="card-text">This stage will test the basic skills based on
                         languages candidate selected as part of his/her profile</p>
 
@@ -69,9 +69,9 @@ index
         </div>
         <div class="col-lg-3" style="margin-bottom: 2%;text-align: -webkit-center;">
             <div class="card" style="width: 18rem;border: 0">
-                <img class="card-img-top product" src="../../static/frontend/images/coding.svg" alt="Card image cap">
+                <img class="card-img-top product" style="margin-right: auto;margin-left: auto" src="../../static/frontend/images/coding.svg" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Build a Real world project</h5>
+                    <h5 class="card-title text-center">Build a Real world project</h5>
                     <p class="card-text">After a successful prevet you will build a real world
                         project in a monitored online workspace.</p>
 
@@ -81,9 +81,9 @@ index
         </div>
         <div class="col-lg-3" style="margin-bottom: 2%;text-align: -webkit-center;">
             <div class="card" style="width: 18rem;border: 0">
-                <img class="card-img-top product" src="../../static/frontend/images/diploma.svg" alt="Card image cap">
+                <img class="card-img-top product" style="margin-right: auto;margin-left: auto" src="../../static/frontend/images/diploma.svg" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Certification</h5>
+                    <h5 class="card-title text-center">Certification</h5>
                     <p class="card-text">Certificates are awarded to projects that merit.These can be used to easily prove your skills
                         to our partner companies </p>
 
@@ -94,9 +94,9 @@ index
 
         <div class="col-lg-3" style="margin-bottom: 2%;text-align: -webkit-center;">
             <div class="card" style="width: 18rem;border: 0">
-                <img class="card-img-top product" src="../../static/frontend/images/notify.svg" alt="Card image cap">
+                <img class="card-img-top product" style="margin-right: auto;margin-left: auto" src="../../static/frontend/images/notify.svg" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Job matching</h5>
+                    <h5 class="card-title text-center">Job matching</h5>
                     <p class="card-text">Codeln will continuously notify you of job openings that fit your profile and will
                     readily recommend you</p>
 
@@ -246,50 +246,54 @@ index
 
 
 
-<!--footer-->
-<footer class="jumbotron jumbofoot"  >
-    <div class="container">
-        <div class="row">
-            <div class="directory col-xs-6 col-sm-3">
-                <h3 class="directory-title">Products</h3>
-                <ul class="directory-items list-unstyled">
-                    <li><a class="colorlink" href="/pair">Pair programming</a></li>
-                    <li><a class="colorlink" href="/video">Video proctor</a></li>
+    <!--footer-->
+    <footer class="jumbotron jumbofoot"  >
+        <div class="container">
+            <div class="row">
+                <div class="directory col-xs-6 col-sm-3" style="margin-left: auto">
+                    <h3 class="directory-title">Menu</h3>
+                    <ul class="directory-items list-unstyled">
+                        <li><a class="colorlink" href="/pricing">Pricing</a></li>
+                        <li><a class="colorlink" href="{% url 'account_login' %}">Testing</a></li>
+                        <li><a class="colorlink" href="https://goo.gl/forms/33Ju1jpgsuQI4gKw2">Sourcing</a></li>
 
-                </ul>
-            </div>
-            <div class="directory col-xs-6 col-sm-3">
-                <h3 class="directory-title">Company</h3>
-                <ul class="directory-items list-unstyled">
-                    <li><a class="colorlink" href="/about">About us</a></li>
-                    <li><a class="colorlink" href="/careers">Careers</a></li>
-                    <li><a class="colorlink" href="#">Blog</a></li>
-                </ul>
-            </div>
-            <div class="directory col-xs-6 col-sm-3">
-                <h3 class="directory-title">Resources</h3>
-                <ul class="directory-items list-unstyled">
-                    <li><a class="colorlink" href="#">Contact us</a></li>
-                    <li><a class="colorlink" href="#">Help center</a></li>
+                    </ul>
+                </div>
 
-                </ul>
-            </div>
-            <div class="directory col-xs-6 col-sm-3">
-                <h3 class="directory-title">Follow</h3>
-                <ul class="directory-items list-unstyled">
-                    <li>
-                        <a href="https://twitter.com/Codeln_spaces" target="_blank">
-                            <i><span data-feather="twitter"></span></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.linkedin.com/company/codeln/" target="_blank">
-                            <i><span data-feather="linkedin"></span></i>
-                        </a>
-                    </li>
-                </ul>
+                <div class="directory col-xs-6 col-sm-3">
+                    <h3 class="directory-title">Resources</h3>
+                    <ul class="directory-items list-unstyled">
+                        <li><a class="colorlink" href="#">Privacy policy</a></li>
+                        <li><a class="colorlink" href="#">Terms</a></li>
+                        <li><a class="colorlink" href="/credits">Credits</a></li>
+
+                    </ul>
+                </div>
+                <div class="directory col-xs-6 col-sm-3" style="margin-right: auto">
+                    <h3 class="directory-title">Contact</h3>
+                    <ul class="directory-items list-unstyled">
+                        <li>
+
+                            <i><span data-feather="mail"></span>info@codeLn.com</i>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/Codeln_spaces" target="_blank">
+                                <i><span data-feather="twitter"></span></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/company/codeln/" target="_blank">
+                                <i><span data-feather="linkedin"></span></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/CodelnSpaces/" target="_blank">
+                                <i><span data-feather="facebook"></span></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 {% endblock %}

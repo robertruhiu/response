@@ -41,6 +41,18 @@
 
 
         <ul class="nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Product
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'account_login' %}" >Screening</a>
+                    <a class="dropdown-item" href="https://goo.gl/forms/33Ju1jpgsuQI4gKw2">Sourcing</a>
+                    <a class="dropdown-item" href="/pricing">Pricing</a>
+
+
+                </div>
+            </li>
 
 
             {% if request.user.is_authenticated %}
