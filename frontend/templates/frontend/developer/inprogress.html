@@ -43,19 +43,22 @@ Project in progress
     </div>
 
     <div class="row">
+        {% for foo in candidates %}
 
         <div class="col-lg-4">
-            <a href="{% url 'frontend:projectdetails' %}">
+
+            <a href="{% url 'frontend:projectdetails' foo.transaction.project.id %}">
                 <div class="card" style="width: 18rem;height: 100%">
-                    <img class="card-img-top" src="https://www.htbridge.com/images/blog/api-security.jpg" alt="Card image cap">
+                    <img class="card-img-top" src="{{ foo.transaction.project.projectimage1 }}" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Secure Api</h5>
+                        <h5 class="card-title">{{ foo.transaction.project.name }}</h5>
 
                     </div>
                 </div>
 
             </a>
         </div>
+        {% endfor %}
     </div>
 
 </main>

@@ -5,8 +5,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from accounts.forms import ProfileTypeForm, DeveloperFillingDetailsForm, RecruiterFillingDetailsForm
-from transactions.models import Transaction
-
+from transactions.models import Transaction , Candidate
+from invitations.models import Invitation
+from projects.models import Project
 
 def developer_filling_details(request, current_profile):
     if request.method == 'POST':
@@ -91,24 +92,26 @@ def tracker(request):
     return render(request, 'frontend/recruiter/tracker.html')
 
 def inprogress(request):
+    candidates = Candidate.objects.filter(email=request.user.email)
 
 
-    return render(request, 'frontend/developer/inprogress.html')
+    return render(request, 'frontend/developer/inprogress.html',{'candidates': candidates})
 
 def invites(request):
+    candidates = Candidate.objects.filter(email=request.user.email)
+    return render(request, 'frontend/developer/invites.html', {'candidates': candidates})
 
 
-    return render(request, 'frontend/developer/invites.html')
 
-def projectdetails(request):
+def projectdetails(request,id):
+    project = Project.objects.get(id=id)
 
+    return render(request, 'frontend/developer/projectdetails.html',{'project': project})
 
-    return render(request, 'frontend/developer/projectdetails.html')
+def pendingproject(request,id):
+    project = Project.objects.get(id=id)
+    return render(request, 'frontend/developer/pendingproject.html',{'project': project})
 
-def pendingproject(request):
-
-
-    return render(request, 'frontend/developer/pendingproject.html')
 def pricing(request):
 
 

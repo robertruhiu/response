@@ -43,25 +43,28 @@ invites
     </div>
 
     <div class="row">
+        {% for foo in candidates %}
 
-
-
+        
         <div class="col-lg-4">
             <div class="card" style="width: 18rem;height: 100%">
-                <img class="card-img-top" src="https://www.htbridge.com/images/blog/api-security.jpg" style="height: 150px" alt="Card image cap">
+                <img class="card-img-top" src="{{ foo.transaction.project.projectimage1 }}" style="height: 150px" alt="Card image cap">
                 <div class="card-body">
-                    <h5>Project name: Secure Api</h5>
-                    <p class="card-text">Project type : backend</p>
-                    <p class="card-text">Company name : codeln</p>
+                    <div class="card-title">Project name: {{ foo.transaction.project.name }}</div>
+
+                    <p class="card-text">Framework : {{ foo.transaction.project.framework.name }}</p>
+                    <p class="card-text">Company name : {{ foo.transaction.user.profile.company }}</p>
 
                 </div>
                 <div class="card-footer">
-                    <a href="{% url 'frontend:pendingproject' %}">
+
+                    <a href="{% url 'frontend:pendingproject' foo.transaction.project.id %}">
                         <button type="button" class="btn btn-success btn-xs">See more</button>
                     </a>
                 </div>
             </div>
         </div>
+        {% endfor %}
 
 
 

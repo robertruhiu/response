@@ -14,6 +14,7 @@ class Transaction(models.Model):
         ('make-payment', 'make-payment'),
         ('payment-verified', 'payment-verified'),
         ('complete', 'complete'),
+
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
@@ -38,6 +39,7 @@ class Transaction(models.Model):
 
 
 class Candidate(models.Model):
+
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.EmailField()

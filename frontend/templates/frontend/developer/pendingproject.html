@@ -49,13 +49,14 @@ pendingproject
             <div class="card5" style="text-align: left">
                 <div class="card-body">
 
-                    <h5 class="card-subtitle mb-2 ">Project brief</h5>
+                    <h5 class="card-subtitle mb-2 ">{{ project.name }}</h5>
 
                     <hr>
                     <p class="card-text ">
-                        <span class="badge badge-primary">Level : intermediate</span>
+                        <span class="badge badge-primary">Level :{{ project.level }} </span>
                     </p><p>
-                    Ilightup analytics is set to create its own Api to distribute sensitive data to its client.They currently want a GET request only. Due to the nature of sensitivity the data access restrictions have to be put into place. They want you to automate a system that uniquely generates an Api key and assigns it to each first time user.
+                    {{ project.description }}
+
                 </p>
 
                     <p></p>
@@ -65,9 +66,9 @@ pendingproject
                     <hr>
                     <p class="card-text ">
                     </p><ul>
-                    <li>Base language : </li>
-                    <li>Frontend client : </li>
-                    <li>Time : 180 minutes</li>
+                    <li>Framework to be used : {{ project.framework.name }}</li>
+
+
                 </ul>
 
                     <button type="submit" class="btn btn-primary">Accept the offer</button>

@@ -43,7 +43,7 @@ my projects
 
     <div class="row">
         {% for transaction in transactions %}
-            {% if transaction.stage == "payment-verified" %}
+            {% if transaction.stage == "complete" %}
                 <div class="col-lg-3 mb-2" style="margin-left: 2%;">
                     <a href="{% url 'frontend:tracker' %}" style="text-decoration: none">
                         <div class="card" style="width: 18rem;border-radius: 0;height: 100%">
