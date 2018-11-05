@@ -42,36 +42,25 @@
             <div class="sidebar-sticky">
                 <ul style="margin-left: -15%;">
                     <li class="nav-item" >
-                        <a class="nav-link " style="color:#FFFFFF;" href="/dashboard">
+                        <a class="nav-link " style="color:#FFFFFF;" href="{% url 'frontend:my-activity' %}">
                             <span data-feather="home"></span>
-                            My projects
+                            Ongoing tests
                         </a>
                     </li>
                     <span></span>
                     <li class="nav-item">
-                        <a class="nav-link" style="color:#FFFFFF;" href="/library">
+                        <a class="nav-link" style="color:#FFFFFF;" href="{% url 'projects:categories' %}">
                             <span data-feather="book"></span>
-                            Project library
+                            Create new test
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color:#FFFFFF;" href="/contact">
+                        <a class="nav-link" style="color:#FFFFFF;" href="">
                             <span data-feather="users"></span>
                             Source Candidates
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:#FFFFFF;" href="#">
-                            <span data-feather="file"></span>
-                            Reports
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:#FFFFFF;" href="#">
-                            <span data-feather="layers"></span>
-                            Integrations
-                        </a>
-                    </li>
+
                 </ul>
             </div>
         </nav>

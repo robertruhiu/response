@@ -7,7 +7,7 @@ project categories
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
         <div class="navbar fixed-top fine border-bottom">
 
-            <h5>Which skill are you looking for?</h5>
+            <h5>Which skill are you looking to test for?</h5>
 
             <nav>
 
@@ -38,9 +38,17 @@ project categories
             </nav>
         </div>
     </div>
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        This chart helps you to filter out tests in regards to the skill you want it is based on the types of software developers
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
 
 
     <div class="row" style="margin-bottom: 2% ">
+
 
         <div class="col-lg-3" style="width: 100%;">
             <div class="card recruithomecard" style="margin: auto">
@@ -56,7 +64,7 @@ project categories
 
                         <div class="card-body">
 
-                            <h6 class="card-title" style="text-align: -webkit-center;">Web developer</h6>
+                            <h6 class="card-title" style="text-align: -webkit-center;">Web development</h6>
 
                         </div>
 
@@ -64,25 +72,7 @@ project categories
                 </a>
             </div>
         </div>
-        <div class="col-lg-3" style="width: 100%;">
-            <div class="card recruithomecard" style="margin: auto">
-                <a   href="{% url 'projects:categories' %}">
-                    <div style="text-align: -webkit-center;">
-                        <img class="card-img-top categoriescard" src="../../static/frontend/images/programming.svg" alt="Card image cap">
-                    </div>
-                    <div class="card" style="border: 0 ">
 
-
-                        <div class="card-body">
-
-                            <h6 class="card-title" style="text-align: -webkit-center;">Desktop developer</h6>
-
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
         <div class="col-lg-3" style="width: 100%;">
             <div class="card recruithomecard" style="margin: auto">
                 <a  href="{% url 'projects:all-projects' %}">
@@ -94,7 +84,7 @@ project categories
 
                         <div class="card-body">
 
-                            <h6 class="card-title" style="text-align: -webkit-center;">Mobile developer</h6>
+                            <h6 class="card-title" style="text-align: -webkit-center;">Mobile development</h6>
 
                         </div>
 
@@ -113,7 +103,7 @@ project categories
 
                         <div class="card-body">
 
-                            <h6 class="card-title" style="text-align: -webkit-center;">Graphics developer</h6>
+                            <h6 class="card-title" style="text-align: -webkit-center;">Graphics design</h6>
 
                         </div>
 
@@ -138,7 +128,7 @@ project categories
 
                         <div class="card-body">
 
-                            <h6 class="card-title" style="text-align: -webkit-center;">Frontend developer</h6>
+                            <h6 class="card-title" style="text-align: -webkit-center;">Frontend development</h6>
 
                         </div>
 
@@ -157,7 +147,7 @@ project categories
 
                         <div class="card-body">
 
-                            <h6 class="card-title" style="text-align: -webkit-center;">Backend developer</h6>
+                            <h6 class="card-title" style="text-align: -webkit-center;">Backend development</h6>
 
                         </div>
 
@@ -176,7 +166,7 @@ project categories
 
                         <div class="card-body">
 
-                            <h6 class="card-title" style="text-align: -webkit-center;">Fullstack developer</h6>
+                            <h6 class="card-title" style="text-align: -webkit-center;">Fullstack development</h6>
 
                         </div>
 
