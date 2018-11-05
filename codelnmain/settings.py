@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'bulma',
     'django_filters',
     'paypal.standard.ipn',
+    'invitations',
     #'allauth.socialaccount.providers.linkedin',
 
 ]

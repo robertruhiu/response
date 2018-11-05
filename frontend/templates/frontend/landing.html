@@ -115,7 +115,7 @@ index
 
 </section>
 
-<!--features-->
+<!--features
 <section class="jumbotron jumbo1" style="padding: 0;margin-top: 0">
     <div class="row" style="margin-left: 0;margin-right: 0">
         <div class="col-lg-12 text-center h2">
@@ -152,11 +152,13 @@ index
         </div>
     </div>
 </section>
+-->
+
 <!--Call to action how it works-->
 <section class="jumbotron jumbo2" style="padding-bottom: 7%;padding-top: 2%;">
     <div class="row" style="margin-left: 0;margin-right: 0;margin-top: 2%">
         <div class="col-md-6 col-lg-6 col-xl-6 text-center" style="margin-left: auto;margin-right: auto">
-            <p class="h3">Curios About Our Screening Process?
+            <p class="h3">Curious About Our Screening Process?
                 <br>
                 <a class="btn theme--dark primary1 mt-3 pulse" style="border-radius: 0;color: white" href="/howitworks">See How It Works</a>
 
@@ -401,7 +403,7 @@ index
 <section class="jumbotron jumbo10" style="padding-bottom: 7%" >
     <div class="row" style="margin-left: 0;margin-right: 0">
         <div class="col-lg-12 text-center ">
-            <h3>Companies accepting Codeln certificates</h3>
+            <h3>Trusted by</h3>
 
         </div>
 
@@ -448,7 +450,7 @@ index
     </div>
     <div class="row" style="margin-left: 0;margin-right: 0">
         <div class="col-lg-12 text-center ">
-            <button class="btn btn-success" style="width: 20%">Join</button>
+            <button class="btn btn-primary mt-5" onclick="location.href='https://goo.gl/forms/DqLs3ezL36KWbMoW2';"  >Become a partner</button>
 
         </div>
 
@@ -464,6 +466,10 @@ index
 
 <section class="jumbotron jumbo7">
     <div class="row">
+        <div class="col-lg-12 text-center ">
+            <h3>Media buzz</h3>
+
+        </div>
 
     </div>
     <div class="row" style="margin-top: 2%">
@@ -508,32 +514,25 @@ index
 <footer class="jumbotron jumbofoot"  >
     <div class="container">
         <div class="row">
-            <div class="directory col-xs-6 col-sm-3">
+            <div class="directory col-xs-6 col-sm-3" style="margin-left: auto">
                 <h3 class="directory-title">Menu</h3>
                 <ul class="directory-items list-unstyled">
                     <li><a class="colorlink" href="/pricing">Pricing</a></li>
-                    <li><a class="colorlink" href="/pair">Pair programming</a></li>
-                    <li><a class="colorlink" href="/video">Video proctor</a></li>
+                    <li><a class="colorlink" href="{% url 'account_login' %}">Testing</a></li>
+                    <li><a class="colorlink" href="https://goo.gl/forms/33Ju1jpgsuQI4gKw2">Sourcing</a></li>
 
                 </ul>
             </div>
-            <div class="directory col-xs-6 col-sm-3">
-                <h3 class="directory-title">Company</h3>
-                <ul class="directory-items list-unstyled">
-                    <li><a class="colorlink" href="/about">About us</a></li>
-                    <li><a class="colorlink" href="/careers">Careers</a></li>
-                    <li><a class="colorlink" href="#">Blog</a></li>
-                </ul>
-            </div>
+
             <div class="directory col-xs-6 col-sm-3">
                 <h3 class="directory-title">Resources</h3>
                 <ul class="directory-items list-unstyled">
-                    <li><a class="colorlink" href="#">Contact us</a></li>
-                    <li><a class="colorlink" href="#">Help center</a></li>
+                    <li><a class="colorlink" href="#">Privacy policy</a></li>
+                    <li><a class="colorlink" href="#">Terms</a></li>
 
                 </ul>
             </div>
-            <div class="directory col-xs-6 col-sm-3">
+            <div class="directory col-xs-6 col-sm-3" style="margin-right: auto">
                 <h3 class="directory-title">Follow</h3>
                 <ul class="directory-items list-unstyled">
                     <li>
@@ -544,6 +543,11 @@ index
                     <li>
                         <a href="https://www.linkedin.com/company/codeln/" target="_blank">
                             <i><span data-feather="linkedin"></span></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/CodelnSpaces/" target="_blank">
+                            <i><span data-feather="facebook"></span></i>
                         </a>
                     </li>
                 </ul>
