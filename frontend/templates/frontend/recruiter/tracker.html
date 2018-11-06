@@ -45,7 +45,7 @@ application tracker
             <div class="card trackercard" >
                 <div class="card-body">
                     <h5 class="card-title">Applicants</h5>
-                    <p class="card-text">20</p>
+                    <p class="card-text">{{ candidates.count}}</p>
 
                 </div>
             </div>
@@ -92,9 +92,10 @@ application tracker
         </tr>
         </thead>
         <tbody>
+        {% for candidate in candidates %}
         <tr>
 
-            <td>Mark twain</td>
+            <td>{{ candidate.first_name}} {{ candidate.last_name}} </td>
 
             <td>
 
@@ -110,25 +111,9 @@ application tracker
 
 
         </tr>
-
-        <tr>
-
-            <td>Jacob Ari</td>
-
-            <td>
-
-                    <span class="badge badge-info">In progress</span>
-
-            </td>
-
-            <td>
-                <a href="/report">
-                    Report
-                </a>
-            </td>
+        {% endfor %}
 
 
-        </tr>
 
 
 

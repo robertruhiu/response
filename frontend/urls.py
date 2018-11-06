@@ -22,7 +22,7 @@ from frontend.views import activity,tracker,inprogress,invites,projectdetails,pe
 app_name = 'frontend'
 urlpatterns = [
     path('', index, name='index'),
-    path('tracker', tracker, name='tracker'),
+    path('tracker/<int:id>', tracker, name='tracker'),
     path('dev', dev, name='dev'),
     path('howitworks', howitworks, name='howitworks'),
     path('pricing', pricing, name='pricing'),
@@ -31,7 +31,7 @@ urlpatterns = [
     path('inprogress/', inprogress, name='inprogress'),
     path('invites/', invites, name='invites'),
     path('pendingproject/<int:id>', pendingproject, name='pendingproject'),
-    path('projectdetails//<int:id>', projectdetails, name='projectdetails'),
+    path('projectdetails/<int:id>', projectdetails, name='projectdetails'),
     path('activity/', activity, name='my-activity'),
     path('report', report, name='report'),
 

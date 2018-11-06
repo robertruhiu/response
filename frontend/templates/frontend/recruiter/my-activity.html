@@ -45,12 +45,13 @@ my projects
         {% for transaction in transactions %}
             {% if transaction.stage == "complete" %}
                 <div class="col-lg-3 mb-2" style="margin-left: 2%;">
-                    <a href="{% url 'frontend:tracker' %}" style="text-decoration: none">
+                    <a href="{% url 'frontend:tracker' transaction.id %}" style="text-decoration: none">
                         <div class="card" style="width: 18rem;border-radius: 0;height: 100%">
                             <img class="card-img-top" src="{{ transaction.project.projectimage1}}" alt="Card image cap">
 
                             <div class="card-body">
                                 <h5 class="card-title">{{ transaction.project.name}}</h5>
+
 
 
                             </div>
