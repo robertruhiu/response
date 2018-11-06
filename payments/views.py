@@ -26,7 +26,7 @@ def process_payment(request, id, amount):
     }
     form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request, 'payments/process.html',
-                  {'form': form, 'transaction': transaction, 'amount': amount})
+                  {'form': form, 'amount': amount})
 
 
 @csrf_exempt
@@ -44,11 +44,11 @@ def payment_canceled(request):
     return redirect(reverse('transactions:process_transaction'))
 
 
-@csrf_exempt
-def flutterwavepayment_done(request, id):
-    transaction = Transaction.objects.get(id=id)
-    transaction.stage = 'payment-verified'
-    transaction.paid = True
-    transaction.save()
-    # verifypaymentsuccess
-    return redirect(reverse('transactions:process_transaction', args=[transaction.id]))
+# @csrf_exempt
+# def flutterwavepayment_done(request, id):
+#     transaction = Transaction.objects.get(id=id)
+#     transaction.stage = 'payment-verified'
+#     transaction.paid = True
+#     transaction.save()
+#     # verifypaymentsuccess
+#     return redirect(reverse('transactions:process_transaction', args=[transaction.id]))
