@@ -39,7 +39,7 @@ def payment_done(request):
 
 
 @csrf_exempt
-def payment_canceled(request, id):
+def payment_canceled(request):
     # redirect to add candidates
     return redirect(reverse('transactions:process_transaction'))
 
