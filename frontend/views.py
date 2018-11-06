@@ -11,7 +11,7 @@ from projects.models import Project
 
 def developer_filling_details(request, current_profile):
     if request.method == 'POST':
-        developer_filling_details_form = DeveloperFillingDetailsForm(request.POST)
+        developer_filling_details_form = DeveloperFillingDetailsForm(request.POST, request.FILES)
         if developer_filling_details_form.is_valid():
             current_profile.github_repo = developer_filling_details_form.cleaned_data['github_repo']
             current_profile.stage = 'complete'
@@ -140,3 +140,7 @@ def privacy(request):
 
 
     return render(request, 'frontend/privacy.html')
+def terms(request):
+
+
+    return render(request, 'frontend/terms.html')

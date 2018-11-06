@@ -36,16 +36,19 @@
     <div class="alert alert-info" role="alert">
         You are highly encouraged to fill all details.It will enable  better job matching
     </div>
-    <form action=".." method="post">
+    <form action=".." method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="form-group">
                     <h6 >Github profile url</h6>
                     <div>
                         <input class="form-control" type="url" name="github_repo"   required="" id="id_github_repo">
                     </div>
                 </div>
+
+
+
                 <div class="form-group">
                     <h6 >Years</h6>
                     <div >
@@ -86,12 +89,38 @@
                 </span>
                     </div>
                 </div>
-                <div style="text-align: -webkit-right;">
+                <div style="text-align: -webkit-right" >
                     <button class="btn btn-primary" type="submit">Next</button>
                 </div>
 
             </div>
         </div>
+{#        <div class="row">#}
+{#            <div class="card" style="height: 100%">#}
+{#                <h5 class="text-center">Upload Profile picture</h5>#}
+{##}
+{#                <div class="card-body">#}
+{#                    <div class="input-group mb-3">#}
+{##}
+{#                        <div class="custom-file">#}
+{#                            <input type="file" class="custom-file-input" name="profile_photo" id="id_profile_photo" aria-describedby="inputGroupFileAddon01">#}
+{#                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>#}
+{#                        </div>#}
+{##}
+{##}
+{#                    </div>#}
+{#                    <div style="text-align: -webkit-center">#}
+{#                        <img style="width: 32%" src="{%static 'frontend/images/cloud.svg' %}" alt="Card image cap">#}
+{#                        <br>#}
+{#                        <small class="text-muted">upload image from computer</small>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{##}
+{#            </div>#}
+{##}
+{#        </div>#}
+
 
 
 

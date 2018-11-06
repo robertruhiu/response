@@ -22,6 +22,7 @@ class DeveloperFillingDetailsForm(forms.Form):
         ('2-4', '2-4'),
         ('4-above', '4-above'),
     )
+    profile_photo = forms.ImageField()
     github_repo = forms.URLField(help_text='Example: https://www.github.com/username')
     programming_languages = forms.MultipleChoiceField(choices=PROGRAMMING_LANGUAGE_CHOICES)
     frameworks = forms.MultipleChoiceField(choices=FRAMEWORK_CHOICES)
