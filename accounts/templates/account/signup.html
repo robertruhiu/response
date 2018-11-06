@@ -16,19 +16,20 @@
                 <p class="w3-text-black">{% blocktrans %}Already have an account? Then please
                     <a href="{{ login_url }}" class="w3-border-bottom">sign in</a>
                     .{% endblocktrans %}</p>
-{#                {% providers_media_js %}#}
-{#                <a href="{% provider_login_url "facebook" method="js_sdk" %}"#}
-{#                   class="button is-fullwidth is-link w3-margin-top w3-margin-bottom">#}
-{#                    <span class="fab fa-facebook-square"></span>&nbsp;&nbsp;#}
-{#                    Continue with Facebook#}
-{#                </a>#}
-{#                <a href="{% provider_login_url "twitter" %}"#}
-{#                   class="button is-fullwidth w3-margin-bottom">#}
-{#                    <span class="fab fa-twitter"></span>&nbsp;&nbsp;#}
-{#                    Connect with Twitter#}
-{#                </a>#}
+                {#                {% providers_media_js %}#}
+                {#                <a href="{% provider_login_url "facebook" method="js_sdk" %}"#}
+                {#                   class="button is-fullwidth is-link w3-margin-top w3-margin-bottom">#}
+                {#                    <span class="fab fa-facebook-square"></span>&nbsp;&nbsp;#}
+                {#                    Continue with Facebook#}
+                {#                </a>#}
+                {#                <a href="{% provider_login_url "twitter" %}"#}
+                {#                   class="button is-fullwidth w3-margin-bottom">#}
+                {#                    <span class="fab fa-twitter"></span>&nbsp;&nbsp;#}
+                {#                    Connect with Twitter#}
+                {#                </a>#}
 
-
+{#                <a href="{% provider_login_url 'linkedin_oauth2' %}" class="btn btn-block btn-social btn-linkedin"#}
+{#                >Linked In</a>#}
                 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                     {% csrf_token %}
                     {{ form|bulma }}

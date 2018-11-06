@@ -15,13 +15,16 @@ Including another URLconf
 """
 
 from django.urls import path
-from transactions.views import process_transaction, transaction, all_candidates
+from transactions.views import process_transaction, transaction, all_candidates, my_invites
 
 app_name = 'transactions'
+
+
+
 
 urlpatterns = [
     # path('', project_categories, name='categories'),
     path('transaction/<int:id>', transaction, name='transaction'),
     path('process_transaction/<int:id>/', process_transaction, name='process_transaction'),
-    #path('all-candidates/<int:id>', all_candidates, name = 'all-candidates'),
+    path('my-invites/', my_invites, name = 'my-invites'),
 ]

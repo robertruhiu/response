@@ -62,11 +62,11 @@ def upload_candidates(request, current_transaction):
                 return redirect(reverse('transactions:process_transaction', args=[current_transaction.id]))
         else:
             candidate_form = CandidateForm()
-            return render(request, 'transactions/upload_candidate.html', {'candidate_form': candidate_form})
+            return render(request, 'transactions/upload_candidate.html', {'candidate_form': candidate_form, 'current_transaction':current_transaction})
 
     else:
         candidate_form = CandidateForm()
-        return render(request, 'transactions/upload_candidate.html', {'candidate_form': candidate_form})
+        return render(request, 'transactions/upload_candidate.html', {'candidate_form': candidate_form, 'current_transaction': current_transaction})
 
 
 def all_candidates(request, current_transaction):
@@ -91,3 +91,9 @@ def invitations(request, current_transaction):
         return redirect(reverse('transactions:process_transaction', args=[current_transaction.id]))
     return render(request, 'transactions/invitations.html',
                   {'candidates': candidates, 'current_transaction': current_transaction})
+
+
+
+def my_invites(request):
+    candidates = Candidate.objects.filter(email=request.user.email)
+    return  render(request, 'transactions/send_credentials.html', {'candidates': candidates})

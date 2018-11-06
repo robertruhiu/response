@@ -49,8 +49,7 @@ INSTALLED_APPS = [
     'bulma',
     'django_filters',
     'invitations',
-    # 'allauth.socialaccount.providers.linkedin',
-
+    'allauth.socialaccount.providers.linkedin',
 ]
 SECRET_KEY = "!&)6qusz5um2+_6=465*-t-=*gks#q=o@z*db8b_4v-zrbyh7x"
 
@@ -188,6 +187,22 @@ SOCIALACCOUNT_AUTO_SIGNUP = True
 SOCIALACCOUNT_EMAIL_VERIFICATION = ACCOUNT_EMAIL_VERIFICATION
 SOCIALACCOUNT_EMAIL_REQUIRED = ACCOUNT_EMAIL_REQUIRED
 SOCIALACCOUNT_QUERY_EMAIL = ACCOUNT_EMAIL_REQUIRED
+SOCIALACCOUNT_PROVIDERS = {
+    'linkedin': {
+        'SCOPE': [
+            'r_basicprofile',
+            'r_emailaddress'
+        ],
+        'PROFILE_FIELDS': [
+            'id',
+            'first-name',
+            'last-name',
+            'email-address',
+            'picture-url',
+            'public-profile-url',
+        ]
+    }
+}
 
 PAYPAL_RECEIVER_EMAIL = config('PAYPAL_RECEIVER_EMAIL')
 PAYPAL_TEST = True

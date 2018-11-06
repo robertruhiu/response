@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm, Textarea, DateInput, TextInput, Select, EmailInput, RadioSelect, FileInput, \
     SelectMultiple
 from django.utils.translation import ugettext_lazy as _
-from .models import *
+from accounts.models import Profile
 
 
 class ProfileTypeForm(forms.Form):
@@ -14,18 +14,21 @@ class ProfileTypeForm(forms.Form):
     profile_type = forms.ChoiceField(choices=USER_TYPE_CHOICES)
 
 
-class DeveloperFillingDetailsForm(forms.Form):
-    PROGRAMMING_LANGUAGE_CHOICES = (('python', 'Python'),)
-    FRAMEWORK_CHOICES = (('django', 'Django'),)
-    YEARS_ACTIVE_CHOICES = (
-        ('1-2', '1-2'),
-        ('2-4', '2-4'),
-        ('4-above', '4-above'),
-    )
-    github_repo = forms.URLField(help_text='Example: https://www.github.com/username')
-    programming_languages = forms.MultipleChoiceField(choices=PROGRAMMING_LANGUAGE_CHOICES)
-    frameworks = forms.MultipleChoiceField(choices=FRAMEWORK_CHOICES)
-    years = forms.ChoiceField(choices=YEARS_ACTIVE_CHOICES)
+class DeveloperFillingDetailsForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['github_repo', 'years', 'language', 'framework']
+    # PROGRAMMING_LANGUAGE_CHOICES = (('python', 'Python'),)
+    # FRAMEWORK_CHOICES = (('django', 'Django'),)
+    # YEARS_ACTIVE_CHOICES = (
+    #     ('1-2', '1-2'),
+    #     ('2-4', '2-4'),
+    #     ('4-above', '4-above'),
+    # )
+    # github_repo = forms.URLField(help_text='Example: https://www.github.com/username')
+    # programming_languages = forms.MultipleChoiceField(choices=PROGRAMMING_LANGUAGE_CHOICES)
+    # frameworks = forms.MultipleChoiceField(choices=FRAMEWORK_CHOICES)
+    # years = forms.ChoiceField(choices=YEARS_ACTIVE_CHOICES)
 
 class RecruiterFillingDetailsForm(forms.Form):
     company = forms.CharField(max_length=140)
@@ -69,7 +72,17 @@ class UserEditForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ('user',)
+        exclude = ('user', 'stage', )
         widgets = {
             'profile_photo': FileInput(attrs={'class': 'file-input', }),
         }
+
+class DeveloperProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['github_repo', 'years', 'language', 'framework']
+
+class RecruiterProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['company', 'job_role', 'industry', 'staff_size', 'company_url']

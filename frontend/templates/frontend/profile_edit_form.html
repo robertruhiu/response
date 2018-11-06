@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load bulma_tags %}
+{% block content %}
+    <div class="w3-container w3-text-black">
+        <form method="post">
+            {% csrf_token %}
+            {{ user_form| bulma}}
+            {{ profile_form | bulma}}
+            <button type="submit">Save changes</button>
+        </form>
+    </div>
+{% endblock %}

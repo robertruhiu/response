@@ -18,10 +18,13 @@ from django.urls import path
 
 from frontend.views import index
 from frontend.views import activity
+from frontend.views import home
+from accounts.views import update_profile
 
 app_name = 'frontend'
 urlpatterns = [
     path('', index, name='index'),
+    path('home/', home, name='home'),
     path('activity/', activity, name='my-activity'),
-
+    path('update_profile/', update_profile, name='update-profile'),
 ]

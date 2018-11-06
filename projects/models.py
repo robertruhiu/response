@@ -17,7 +17,7 @@ class Language(models.Model):
 
 class Framework(models.Model):
     name = models.CharField(max_length=140)
-    language = models.ForeignKey(Language, on_delete=models.CASCADE)
+    language = models.ForeignKey(Language, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.name
@@ -26,8 +26,9 @@ class Framework(models.Model):
 class Project(models.Model):
     name = models.CharField(max_length=140)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    description = models.CharField(max_length=200, blank=True, null=True, )
-    framework = models.ForeignKey(Framework, on_delete=False, null=True)
+    description = models.CharField(max_length=200, blank=True, null=True)
+    language = models.ForeignKey(Language, on_delete=models.DO_NOTHING, related_name= 'language', null=True)
+    framework = models.ForeignKey(Framework, on_delete=models.DO_NOTHING, related_name='framework',null=True)
 
     def __str__(self):
         return self.name
