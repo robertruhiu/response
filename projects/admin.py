@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from projects.models import Project, Framework, Language
+from projects.models import Project, Framework, Language,Projecttype,Devtype
 
 
 # Register your models here.
@@ -23,3 +23,15 @@ class LanguageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Language, LanguageAdmin)
+
+class ProjecttypeAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Projecttype, ProjecttypeAdmin)
+
+class DevtypeAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Devtype, DevtypeAdmin)
