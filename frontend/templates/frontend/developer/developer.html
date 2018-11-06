@@ -1,4 +1,5 @@
 {% extends 'candidatesbase.html' %}
+{% load bootstrap4 %}
 {% block title %}
 developers
 {% endblock %}
@@ -19,7 +20,7 @@ developers
                         <span data-feather="user">
 
                         </span>
-                        {{ user.first_name }} {{ user.last_name }}
+                        <a href="/update_profile/">edit profile</a>
                     </li>
                     <!-- Authentication Links -->
                     {% if request.user.is_authenticated %}

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'bootstrap4',
     'bulma',
     'django_filters',
     'paypal.standard.ipn',

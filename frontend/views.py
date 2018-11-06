@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -9,11 +10,17 @@ from transactions.models import Transaction , Candidate
 from invitations.models import Invitation
 from projects.models import Project
 
+
+@login_required
 def developer_filling_details(request, current_profile):
     if request.method == 'POST':
         developer_filling_details_form = DeveloperFillingDetailsForm(request.POST, request.FILES)
         if developer_filling_details_form.is_valid():
+            current_profile.profile_photo = developer_filling_details_form.cleaned_data['profile_photo']
             current_profile.github_repo = developer_filling_details_form.cleaned_data['github_repo']
+            current_profile.language = developer_filling_details_form.cleaned_data['language']
+            current_profile.framework = developer_filling_details_form.cleaned_data['framework']
+            current_profile.years = developer_filling_details_form.cleaned_data['years']
             current_profile.stage = 'complete'
             current_profile.save()
             return redirect(reverse('frontend:index'))
@@ -22,7 +29,7 @@ def developer_filling_details(request, current_profile):
     return render(request, 'frontend/developer/developer_filling_details.html',
                   {'developer_filling_details_form': developer_filling_details_form})
 
-
+@login_required
 def recruiter_filling_details(request, current_profile):
     if request.method == 'POST':
         recruiter_filling_details_form = RecruiterFillingDetailsForm(request.POST)
@@ -40,7 +47,7 @@ def recruiter_filling_details(request, current_profile):
     return render(request, 'frontend/recruiter/recruiter_filling_details.html',
                   {'recruiter_filling_details_form': recruiter_filling_details_form})
 
-
+@login_required
 def profile_type_selection(request, current_profile):
     if request.method == 'POST':
         profile_type_form = ProfileTypeForm(request.POST)
@@ -76,7 +83,7 @@ def index(request):
     else:
         return render(request, 'frontend/landing.html')
 
-
+@login_required
 def activity(request):
     if request.user.is_authenticated:
         transactions = Transaction.objects.filter(user=request.user)

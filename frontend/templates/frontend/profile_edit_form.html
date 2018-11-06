@@ -1,0 +1,73 @@
+{% extends 'candidatesbase.html' %}
+{% load bootstrap4 %}
+{% block title %}
+    developers
+{% endblock %}
+{%load static %}
+{% block content %}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
+            <div class="navbar fixed-top fine border-bottom">
+
+                <h5>Home</h5>
+
+                <nav>
+
+                    <ul class="nav ">
+                        <li class="nav-item">
+                        <span data-feather="user">
+
+                        </span>
+                            {{ user.first_name }} {{ user.last_name }}
+                        </li>
+                        <!-- Authentication Links -->
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                            </li>
+                        {% endif %}
+
+
+                    </ul>
+
+                </nav>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <form method="post">
+                {% csrf_token %}
+                {% bootstrap_form user_form %}
+                {% bootstrap_form profile_form %}
+                {% buttons %}
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                {% endbuttons %}
+            </form>
+
+        </div>
+        <div class="col-lg-4">
+            <img src="../../../media/{{ user.profile.profile_photo }}" style="width: 50%">
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

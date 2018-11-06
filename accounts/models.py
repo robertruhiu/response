@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from projects.models import Language, Framework
 
 # Create your models here.
 from django.db.models.signals import post_save
@@ -18,8 +19,6 @@ class Profile(models.Model):
         ('developer_filling_details', 'developer_filling_details'),
         ('complete', 'complete'),
     )
-    PROGRAMMING_LANGUAGE_CHOICES = (('python', 'Python'),)
-    FRAMEWORK_CHOICES = (('django', 'Django'),)
     YEARS_ACTIVE_CHOICES = (
         ('1-2', '1-2'),
         ('2-4', '2-4'),
@@ -33,8 +32,9 @@ class Profile(models.Model):
     phone_number = models.IntegerField(null=True, blank=True)
     # developer profile
     github_repo = models.URLField(blank=True, null=True, )
-    programming_languages = models.CharField(max_length=30, choices=PROGRAMMING_LANGUAGE_CHOICES, null=True, blank=True)
-    frameworks = models.CharField(max_length=30, null=True, blank=True, choices=FRAMEWORK_CHOICES)
+    language = models.ForeignKey(Language, on_delete=models.DO_NOTHING,
+                                              related_name='languages', null=True)
+    framework = models.ForeignKey(Framework, on_delete=models.DO_NOTHING, related_name='frameworks', null=True)
     years = models.CharField(max_length=30, choices=YEARS_ACTIVE_CHOICES, null=True, blank=True)
     # recruiter profile
     company = models.CharField(max_length=140, null=True, blank=True)

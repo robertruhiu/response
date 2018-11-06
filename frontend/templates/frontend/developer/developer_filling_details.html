@@ -1,140 +1,60 @@
 {% extends 'candidatesbase.html' %}
-{%load static %}
+{% load bootstrap4 %}
+{% load static %}
 {% block content %}
 
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
 
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
-        <div class="navbar fixed-top fine border-bottom">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
+            <div class="navbar fixed-top fine border-bottom">
 
-            <h5>My profile</h5>
+                <h5>My profile</h5>
 
-            <nav>
+                <nav>
 
-                <ul class="nav ">
-                    <!-- Authentication Links -->
-                    {% if request.user.is_authenticated %}
-                    <li class="nav-item">
-                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
-                    </li>
-                    {% endif %}
-
-
-                </ul>
-
-            </nav>
-        </div>
-    </div>
-    <div class="alert alert-info" role="alert">
-        You are highly encouraged to fill all details.It will enable  better job matching
-    </div>
-    <form action=".." method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="form-group">
-                    <h6 >Github profile url</h6>
-                    <div>
-                        <input class="form-control" type="url" name="github_repo"   required="" id="id_github_repo">
-                    </div>
-                </div>
+                    <ul class="nav ">
+                        <!-- Authentication Links -->
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                            </li>
+                        {% endif %}
 
 
+                    </ul>
 
-                <div class="form-group">
-                    <h6 >Years</h6>
-                    <div >
-                <span>
-                    <select name="years" class="form-control" id="id_years">
-                        <option value="1-2">1-2</option>
-                        <option value="2-4">2-4</option>
-                        <option value="4-above">4-above</option>
-                    </select>
-                </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg">
-                <div class="form-group">
-                    <h6>Programming languages</h6>
-                    <small class="text-muted">hold ctrl to multi select or command</small>
-                    <div>
-                        <select multiple class="form-control" name="programming_languages"  required="" id="id_programming_languages" >
-                            <option value="python">python </option>
-                            <option value="javascript">javascript </option>
-                        </select>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-lg">
-                <div class="form-group">
-                    <h6 >Frameworks</h6>
-
-                    <small class="text-muted">hold ctrl to multi select or command</small>
-                    <div >
-                <span >
-                    <select multiple class="form-control" name="frameworks" required="" id="id_frameworks">
-                        <option  value="django" > Django</option>
-                        <option value="django">Express</option>
-                    </select>
-                </span>
-                    </div>
-                </div>
-                <div style="text-align: -webkit-right" >
-                    <button class="btn btn-primary" type="submit">Next</button>
-                </div>
-
+                </nav>
             </div>
         </div>
-{#        <div class="row">#}
-{#            <div class="card" style="height: 100%">#}
-{#                <h5 class="text-center">Upload Profile picture</h5>#}
-{##}
-{#                <div class="card-body">#}
-{#                    <div class="input-group mb-3">#}
-{##}
-{#                        <div class="custom-file">#}
-{#                            <input type="file" class="custom-file-input" name="profile_photo" id="id_profile_photo" aria-describedby="inputGroupFileAddon01">#}
-{#                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>#}
-{#                        </div>#}
-{##}
-{##}
-{#                    </div>#}
-{#                    <div style="text-align: -webkit-center">#}
-{#                        <img style="width: 32%" src="{%static 'frontend/images/cloud.svg' %}" alt="Card image cap">#}
-{#                        <br>#}
-{#                        <small class="text-muted">upload image from computer</small>#}
-{#                    </div>#}
-{#                </div>#}
-{##}
-{##}
-{#            </div>#}
-{##}
-{#        </div>#}
+        <div class="alert alert-info" role="alert">
+            You are highly encouraged to fill all details.It will enable better job matching
+        </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <form action="." method="post" enctype="multipart/form-data" class="form">
+                {% csrf_token %}
+                {% bootstrap_form developer_filling_details_form %}
+                {% buttons %}
+                    <button class="btn btn-primary"  type="submit">Next</button>
+                {% endbuttons %}
+            </form>
+
+        </div>
+    </div>
 
 
 
-
-
-
-
-
-    </form>
-
-
-
-</main>
-</div>
-</div>
+    </main>
+    </div>
+    </div>
 
 
 {% endblock %}
