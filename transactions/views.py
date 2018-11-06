@@ -3,9 +3,11 @@ from django.urls import reverse
 
 from projects.models import Project
 from transactions.models import Transaction, Candidate
-from transactions.forms import CandidateForm
+from transactions.forms import CandidateForm, SourcingForm
 from invitations.models import Invitation
 
+
+from django.core.mail import send_mail, BadHeaderError
 # payments view
 from payments.views import process_payment
 
@@ -97,3 +99,32 @@ def invitations(request, current_transaction):
 def my_invites(request):
     candidates = Candidate.objects.filter(email=request.user.email)
     return  render(request, 'transactions/send_credentials.html', {'candidates': candidates})
+
+
+def sourcing(request):
+    if request.method == 'POST':
+        form = SourcingForm(request.POST)
+        if form.is_valid():
+            subject = 'Sourcing Request'
+            from_email = form.cleaned_data['email_address']
+            data = [
+                form.cleaned_data['name'],
+                form.cleaned_data['phone_number'],
+                form.cleaned_data['company_name'],
+                form.cleaned_data['job_role'],
+                form.cleaned_data['engagement_types'],
+                form.cleaned_data['tech_stack'],
+                form.cleaned_data['project_description'],
+                form.cleaned_data['devs_needed'],
+                form.cleaned_data['renumeration'],
+                form.cleaned_data['tech_staff'],
+                form.cleaned_data['skills_test']
+            ]
+            try:
+                send_mail(subject,data, from_email, ['sales@codeln.com'])
+            except BadHeaderError:
+                print('invalid error')
+            return redirect('frontend:home')
+    else:
+        form = SourcingForm()
+        return render(request, 'transactions/sourcing.html', {'form':form})

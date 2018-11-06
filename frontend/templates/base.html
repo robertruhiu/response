@@ -68,7 +68,8 @@
 
         <div class="navbar-end w3-center w3-margin-right">
             {% if request.user.is_authenticated %}
-                <a href="{% url 'frontend:update-profile' %}" class="navbar-item w3-opacity" title="Logout">Update Profile</a>
+                <a href="{% url 'frontend:update-profile' %}" class="navbar-item w3-opacity" title="Update profile">Update Profile</a>
+                <a href="{% url 'transactions:sourcing' %}" class="navbar-item w3-opacity" title="Sourcing">Sourcing</a>
                 <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
             {% else %}
                 <a href="{% url 'account_login' %}" class="navbar-item">Login</a>

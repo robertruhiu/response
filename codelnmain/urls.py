@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 from accounts.views import profile
 
@@ -31,3 +33,7 @@ urlpatterns = [
     path('', include('frontend.urls', namespace='frontend')),
     path('invitations/', include('invitations.urls', namespace='invitations')),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

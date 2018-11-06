@@ -12,8 +12,9 @@ from transactions.models import Transaction
 @login_required
 def developer_filling_details(request, current_profile):
     if request.method == 'POST':
-        developer_filling_details_form = DeveloperFillingDetailsForm(request.POST)
+        developer_filling_details_form = DeveloperFillingDetailsForm(request.POST, request.FILES)
         if developer_filling_details_form.is_valid():
+            current_profile.profile_photo = developer_filling_details_form.cleaned_data['profile_photo']
             current_profile.github_repo = developer_filling_details_form.cleaned_data['github_repo']
             current_profile.language = developer_filling_details_form.cleaned_data['language']
             current_profile.framework = developer_filling_details_form.cleaned_data['framework']

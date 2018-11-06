@@ -50,3 +50,7 @@ class Candidate(models.Model):
 
     def __str__(self):
         return "{}, {}".format(self.first_name, self.last_name)
+
+
+
+

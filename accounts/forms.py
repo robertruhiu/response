@@ -17,7 +17,7 @@ class ProfileTypeForm(forms.Form):
 class DeveloperFillingDetailsForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['github_repo', 'years', 'language', 'framework']
+        fields = ['github_repo', 'years', 'language', 'framework', 'profile_photo']
     # PROGRAMMING_LANGUAGE_CHOICES = (('python', 'Python'),)
     # FRAMEWORK_CHOICES = (('django', 'Django'),)
     # YEARS_ACTIVE_CHOICES = (
@@ -80,7 +80,7 @@ class ProfileEditForm(forms.ModelForm):
 class DeveloperProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['github_repo', 'years', 'language', 'framework']
+        fields = ['github_repo', 'years', 'language', 'framework', 'profile_photo']
 
 class RecruiterProfileEditForm(forms.ModelForm):
     class Meta:
