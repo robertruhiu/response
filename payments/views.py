@@ -21,8 +21,8 @@ def process_payment(request, id, amount):
         'invoice': str(transaction.project.id),
         'currency_code': 'USD',
         'notify_url': request.build_absolute_uri(reverse('paypal-ipn')),
-        'return_url': request.build_absolute_uri(reverse('payments:done', args=[transaction.id])),
-        'cancel_return': request.build_absolute_uri(reverse('payments:canceled', args=[transaction.id])),
+        'return_url': request.build_absolute_uri(reverse('payments:done')),
+        'cancel_return': request.build_absolute_uri(reverse('payments:canceled')),
     }
     form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request, 'payments/process.html',
@@ -30,18 +30,18 @@ def process_payment(request, id, amount):
 
 
 @csrf_exempt
-def payment_done(request, id):
-    transaction = Transaction.objects.get(id=id)
-    transaction.stage = 'payment-confirmed'
-    transaction.save()
+def payment_done(request):
+    # transaction = Transaction.objects.get(id=id)
+    # transaction.stage = 'payment-confirmed'
+    # transaction.save()
     # verifypaymentsuccess
-    return redirect(reverse('transactions:process_transaction', args=[transaction.id]))
+    return redirect(reverse('frontend:my-activity'))
 
 
 @csrf_exempt
 def payment_canceled(request, id):
     # redirect to add candidates
-    return redirect(reverse('transactions:process_transaction', args=[id]))
+    return redirect(reverse('transactions:process_transaction'))
 
 
 @csrf_exempt

@@ -6,16 +6,17 @@
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title">Confirm Project</p>
+                <p class="modal-card-title">Your Transaction</p>
             </header>
             <section class="modal-card-body">
                 {{ project.name }} <br>
                 {{ project.framework.language }}/{{ project.framework }}<br>
                 {{ project.description }}<br>
                 <div>
-                    <p class="title button w3-border-green">
-                        <a href="{% url 'projects:project' project.id %}">Back</a>
-                    </p>
+{#                    <p class="title button w3-border-green">#}
+{#                        <a href="{% url 'projects:project' project.id %}">Back</a>#}
+{#                    </p>#}
+                    {% if  %}
                     <form action="." method="post">
                     {% csrf_token %}
                     <button class="button is-pulled-right" type="submit">Proceed</button>
