@@ -30,7 +30,7 @@ def process_payment(request, id, amount):
 
 
 @csrf_exempt
-def payment_done(request):
+def payment_done(request, id):
     transaction = Transaction.objects.get(id=id)
     transaction.stage = 'payment-confirmed'
     transaction.save()
@@ -39,7 +39,7 @@ def payment_done(request):
 
 
 @csrf_exempt
-def payment_canceled(request):
+def payment_canceled(request, id):
     # redirect to add candidates
     return redirect(reverse('transactions:process_transaction', args=[id]))
 

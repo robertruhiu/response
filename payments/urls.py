@@ -24,8 +24,8 @@ app_name = 'payments'
 urlpatterns = [
     # the id here is transaction id
     path('pay/<int:id>/<int:amount>', process_payment, name='pay'),
-    path('done/', payment_done, name='done'),
-    path('canceled/', payment_canceled, name='canceled'),
+    path('done/<int:id>/', payment_done, name='done'),
+    path('canceled/<int:id>/', payment_canceled, name='canceled'),
 ]
 
 # flutterwave confirmation url
