@@ -16,10 +16,16 @@ Candidates
                 <ul class="nav ">
                     <!-- Authentication Links -->
                     <li class="nav-item">
+                        <a class="nav-item" href="/pricing">
+                            Pricing
+                        </a>
+
+                    </li>
+                    <li class="nav-item">
                         <span data-feather="user">
 
                         </span>
-                        {{ user.username }}
+                        {{ user.first_name }} {{ user.last_name }}
                     </li>
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
@@ -39,6 +45,10 @@ Candidates
 
             </nav>
         </div>
+    </div>
+    <div class="alert alert-primary " role="alert">
+        Refer to our candidate pricing packs  for  details.
+
     </div>
     <div class="row">
 
@@ -69,8 +79,7 @@ Candidates
                             <td>{{ candidate.first_name }}</td>
                             <td>{{ candidate.last_name }}</td>
                             <td> <span class="is-pulled-right">
-                            <a href="#" class="badge badge-primary">Edit</a>
-                            <a href="#" class="badge badge-danger">Remove</a>
+
                         </span></td>
                         </tr>
                         {% endfor %}

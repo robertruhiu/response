@@ -1,11 +1,15 @@
 {% extends 'recruiterbase.html' %}
+{% block title %}
+    all projects
+{% endblock %}
+{%load static %}
 
 {% block content %}
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
             <div class="navbar fixed-top fine border-bottom">
 
-                <h5>Payment</h5>
+                <h5>Codeln Projects</h5>
 
                 <nav>
 
@@ -37,31 +41,37 @@
             </div>
 
         </div>
-    {% for foo in candidates %}
-        {{ foo }}
-    {% endfor %}
-    {% if current_transaction.stage == 'payment-verified' %}
-        <div class="row">
-        <div class="col-lg-6" style="margin-left: auto;margin-right: auto">
-        <div class="card" style="width: 28em;box-shadow:0 20px 50px rgba(0,0,0,.1);">
-            <img class="card-img-top" style="width: 75%;margin: auto" src="/static/frontend/images/creditcard.svg" alt="Card image cap">
+        <h5>{{ categoryname.name }} projects</h5>
 
-            <div class="card-body">
-                <div class=" text-center h5" style="padding-top: 10%">Payment verified</div>
+        <div class="row" >
+            {% for foo in devtypes %}
+                <div class="col-lg-3" style="margin-right: 3%">
+                    <a href="{% url 'projects:project' foo.id%}" style="text-decoration: none;">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{foo.projectimage1}}" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">{{ foo.name }}
+                                    <span class="badge badge-primary">Level : {{ foo.level }}</span>
+                                </p>
+                                <p> Concept tested : {{ foo.concept }}</p>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <span class="badge badge-info">Framework : {{ foo.framework.name }}</span>
+                                <span class="badge badge-info">Language : {{ foo.framework.language }}</span>
+                                <span data-feather="heart"></span>
+                            </div>
 
-            <form action="." method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn d-none d-lg-block theme--dark primary " style="border-radius: 0;margin: auto">
-                    Proceed to dashboard
-                </button>
+                        </div>
+                    </a>
 
-            </form>
-            </div>
+                </div>
+            {% endfor %}
         </div>
-        </div>
-        </div>
 
-    {% endif %}
+
+
+
+
     </main>
 
 

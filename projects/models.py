@@ -22,6 +22,19 @@ class Framework(models.Model):
     def __str__(self):
         return self.name
 
+class Devtype(models.Model):
+    name = models.CharField(max_length=140)
+
+
+    def __str__(self):
+        return self.name
+
+class Projecttype(models.Model):
+    name = models.CharField(max_length=140)
+
+    def __str__(self):
+        return  self.name
+
 
 class Project(models.Model):
     name = models.CharField(max_length=140)
@@ -38,6 +51,8 @@ class Project(models.Model):
     requirement4 = models.CharField(max_length=200, blank=True, null=True, )
     requirement5 = models.CharField(max_length=200, blank=True, null=True, )
     framework = models.ForeignKey(Framework, on_delete=False, null=True)
+    devtype = models.ForeignKey(Devtype, on_delete=False, null=True)
+    projecttype = models.ForeignKey(Projecttype, on_delete=False, null=True)
 
     def __str__(self):
         return self.name

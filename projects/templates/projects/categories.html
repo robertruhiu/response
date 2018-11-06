@@ -1,230 +1,206 @@
 {% extends 'recruiterbase.html' %}
 {% block title %}
-project categories
+    project categories
 {% endblock %}
- {% block content %}
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
-        <div class="navbar fixed-top fine border-bottom">
+{% block content %}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
+            <div class="navbar fixed-top fine border-bottom">
 
-            <h5>Which skill are you looking to test for?</h5>
+                <h5>Which skill are you looking to test for?</h5>
 
-            <nav>
+                <nav>
 
-                <ul class="nav ">
-                    <!-- Authentication Links -->
-                    <li class="nav-item">
+                    <ul class="nav ">
+                        <!-- Authentication Links -->
+                        <li class="nav-item">
                         <span data-feather="user">
 
                         </span>
-                        {{ user.username }}
-                    </li>
-                    {% if request.user.is_authenticated %}
-                    <li class="nav-item">
-                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
-                    </li>
-                    {% endif %}
+                            {{ user.first_name }} {{ user.last_name }}
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                            </li>
+                        {% endif %}
 
 
-                </ul>
+                    </ul>
 
-            </nav>
-        </div>
-    </div>
-    <div class="alert alert-primary" role="alert">
-        This chart helps you to filter out tests in regards to the skill you want it is based on the types of software developers
-
-    </div>
-
-
-
-    <div class="row" style="margin-bottom: 2% ">
-
-
-        <div class="col-lg-3" style="width: 100%;">
-            <div class="card recruithomecard" style="margin: auto">
-
-
-                <a   href="{% url 'projects:all-projects' %}">
-                    <div style="text-align: -webkit-center;">
-                        <img class="card-img-top categoriescard " src="../../static/frontend/images/www.svg" style="margin-left: 25%;margin-right: 25%" alt="Card image cap">
-                    </div>
-
-                    <div class="card" style="border: 0 ">
-
-
-                        <div class="card-body">
-
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Web development</h6>
-
-                        </div>
-
-                    </div>
-                </a>
+                </nav>
             </div>
         </div>
+        <div class="alert alert-primary" role="alert">
+            This chart helps you to filter out tests in regards to the skill you want it is based on the types of
+            software developers
 
-        <div class="col-lg-3" style="width: 100%;">
-            <div class="card recruithomecard" style="margin: auto">
-                <a  href="{% url 'projects:all-projects' %}">
-                    <div style="text-align: -webkit-center;">
-                        <img class="card-img-top categoriescard" src="../../static/frontend/images/smartphone.svg" style="margin-left: 25%;margin-right: 25%" alt="Card image cap">
+        </div>
+
+
+        <div class="row" style="margin-bottom: 2% ">
+
+            {% for projectype in projecttypes %}
+                {% if projectype.name == 'web' %}
+                    <div class="col-lg-3" style="width: 100%;">
+                        <div class="card recruithomecard" style="margin: auto">
+
+
+                            <a href="{% url 'projects:all-projects' projectype.id %}">
+                                <div style="text-align: -webkit-center;">
+                                    <img class="card-img-top categoriescard " src="../../static/frontend/images/www.svg"
+                                         style="margin-left: 25%;margin-right: 25%" alt="Card image cap">
+                                </div>
+
+                                <div class="card" style="border: 0 ">
+
+
+                                    <div class="card-body">
+
+                                        <h6 class="card-title text-center" style="text-align: -webkit-center;">Web
+                                            development</h6>
+
+
+
+
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                    <div class="card" style="border: 0 ">
+                {% elif projectype.name == 'mobile'%}
+                    <div class="col-lg-3" style="width: 100%;">
+                        <div class="card recruithomecard" style="margin: auto">
+                            <a href="{% url 'projects:all-projects' projectype.id %}">
+                                <div style="text-align: -webkit-center;">
+                                    <img class="card-img-top categoriescard" src="../../static/frontend/images/smartphone.svg"
+                                         style="margin-left: 25%;margin-right: 25%" alt="Card image cap">
+                                </div>
+                                <div class="card" style="border: 0 ">
 
 
-                        <div class="card-body">
+                                    <div class="card-body">
 
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Mobile development</h6>
+                                        <h6 class="card-title text-center" style="text-align: -webkit-center;">Mobile
+                                            development</h6>
 
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% elif projectype.name == 'graphics' %}
+                    <div class="col-lg-3" style="width: 100%;">
+                        <div class="card recruithomecard" style="margin: auto">
+                            <a href="{% url 'projects:all-projects' projectype.id %}">
+                                <div style="text-align: -webkit-center;">
+                                    <img class="card-img-top categoriescard" src="../../static/frontend/images/graphic.svg"
+                                         style="margin-left: 25%;margin-right: 25%" alt="Card image cap">
+                                </div>
+                                <div class="card" style="border: 0 ">
+
+
+                                    <div class="card-body">
+
+                                        <h6 class="card-title text-center" style="text-align: -webkit-center;">Graphics
+                                            design</h6>
+
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="row" style="margin-bottom: 2% ">
+            {% for devtype in devtypes %}
+                {% if devtype.name == 'frontend' %}
+                    <div class="col-lg-3" style="width: 100%;">
+                <div class="card recruithomecard" style="margin: auto">
+
+
+                    <a href="{% url 'projects:devtypes' devtype.id %}">
+                        <div style="text-align: -webkit-center;">
+                            <img class="card-img-top categoriescard " src="../../static/frontend/images/web-design.svg"
+                                 style="margin-left: 25%;margin-right: 25%" alt="Card image cap">
                         </div>
 
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3" style="width: 100%;">
-            <div class="card recruithomecard" style="margin: auto">
-                <a  href="{% url 'projects:all-projects' %}">
-                    <div style="text-align: -webkit-center;">
-                        <img class="card-img-top categoriescard" src="../../static/frontend/images/graphic.svg" style="margin-left: 25%;margin-right: 25%"  alt="Card image cap">
-                    </div>
-                    <div class="card" style="border: 0 ">
+                        <div class="card" style="border: 0 ">
 
 
-                        <div class="card-body">
+                            <div class="card-body">
 
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Graphics design</h6>
+                                <h6 class="card-title text-center" style="text-align: -webkit-center;">Frontend
+                                    development</h6>
+
+                            </div>
 
                         </div>
-
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
-        </div>
-    </div>
-
-    <div class="row" style="margin-bottom: 2% ">
-        <div class="col-lg-3" style="width: 100%;">
-            <div class="card recruithomecard" style="margin: auto">
-
-
-                <a   href="{% url 'projects:all-projects' %}">
-                    <div style="text-align: -webkit-center;">
-                        <img class="card-img-top categoriescard " src="../../static/frontend/images/web-design.svg" style="margin-left: 25%;margin-right: 25%" alt="Card image cap">
-                    </div>
-
-                    <div class="card" style="border: 0 ">
+                {% elif devtype.name == 'backend'%}
+                    <div class="col-lg-3" style="width: 100%;">
+                <div class="card recruithomecard" style="margin: auto">
+                    <a href="{% url 'projects:devtypes' devtype.id %}">
+                        <div style="text-align: -webkit-center;">
+                            <img class="card-img-top categoriescard" src="../../static/frontend/images/web.svg"
+                                 style="margin-left: 25%;margin-right: 25%" alt="Card image cap">
+                        </div>
+                        <div class="card" style="border: 0 ">
 
 
-                        <div class="card-body">
+                            <div class="card-body">
 
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Frontend development</h6>
+                                <h6 class="card-title text-center" style="text-align: -webkit-center;">Backend
+                                    development</h6>
+
+                            </div>
 
                         </div>
-
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-3" style="width: 100%;">
-            <div class="card recruithomecard" style="margin: auto">
-                <a   href="{% url 'projects:categories' %}">
-                    <div style="text-align: -webkit-center;">
-                        <img class="card-img-top categoriescard" src="../../static/frontend/images/web.svg" style="margin-left: 25%;margin-right: 25%"  alt="Card image cap">
-                    </div>
-                    <div class="card" style="border: 0 ">
+                {% elif devtype.name == 'fullstack' %}
+                    <div class="col-lg-3" style="width: 100%;">
+                <div class="card recruithomecard" style="margin: auto">
+                    <a href="{% url 'projects:devtypes' devtype.id %}">
+                        <div style="text-align: -webkit-center;">
+                            <img class="card-img-top categoriescard" src="../../static/frontend/images/network.svg"
+                                 style="margin-left: 25%;margin-right: 25%" alt="Card image cap">
+                        </div>
+                        <div class="card" style="border: 0 ">
 
 
-                        <div class="card-body">
+                            <div class="card-body">
 
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Backend development</h6>
+                                <h6 class="card-title text-center" style="text-align: -webkit-center;">Fullstack
+                                    development</h6>
+
+                            </div>
 
                         </div>
-
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
+                {% endif %}
+            {% endfor %}
         </div>
-        <div class="col-lg-3" style="width: 100%;">
-            <div class="card recruithomecard" style="margin: auto">
-                <a  href="{% url 'projects:all-projects' %}">
-                    <div style="text-align: -webkit-center;">
-                        <img class="card-img-top categoriescard" src="../../static/frontend/images/network.svg" style="margin-left: 25%;margin-right: 25%" alt="Card image cap">
-                    </div>
-                    <div class="card" style="border: 0 ">
+
+    </main>
 
 
-                        <div class="card-body">
-
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Fullstack development</h6>
-
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-<!---
-<div class="row" style="margin-bottom: 2% ">
-        <div class="col-lg-3" style="width: 100%;">
-            <div class="card recruithomecard" style="margin: auto">
-
-
-                <a   href="{% url 'projects:all-projects' %}">
-                    <div style="text-align: -webkit-center;">
-                        <img class="card-img-top categoriescard " src="../../static/frontend/images/thinking.svg"  alt="Card image cap">
-                    </div>
-
-                    <div class="card" style="border: 0 ">
-
-
-                        <div class="card-body">
-
-                            <h6 class="card-title" style="text-align: -webkit-center;">CTO</h6>
-
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3" style="width: 100%;">
-            <div class="card recruithomecard" style="margin: auto">
-
-
-                <a   href="{% url 'projects:all-projects' %}">
-                    <div style="text-align: -webkit-center;">
-                        <img class="card-img-top categoriescard " src="../../static/frontend/images/develop.svg"  alt="Card image cap">
-                    </div>
-
-                    <div class="card" style="border: 0 ">
-
-
-                        <div class="card-body">
-
-                            <h6 class="card-title" style="text-align: -webkit-center;">Senior developer</h6>
-
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
---->
-
-
-
-
-</main>
 
 {% endblock %}

@@ -17,7 +17,7 @@ project details
                         <span data-feather="user">
 
                         </span>
-                        {{ user.username }}
+                        {{ user.first_name }} {{ user.last_name }}
                     </li>
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
@@ -88,7 +88,7 @@ project details
                     </ul>
 
                     <div style="text-align: right">
-                        <a href="{% url 'projects:all-projects' %}" >
+                        <a href="{% url 'projects:categories'%}" >
                             <button type="button" class="btn btn-primary">Go back </button>
                         </a>
                         <a href="{% url 'transactions:transaction' project.id %}">

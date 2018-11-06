@@ -42,11 +42,12 @@ index
     <div class="row mt-2" style="margin: 0">
         <div class="col-lg-6">
             <div style="margin-left: 33%;margin-top: 10%">
-                <b class="display-7 h6">Choose the skill category </b>
+                <b class="display-7 h6">Pick a Test </b>
                 <p>
-                    We endevour to provide a streamlined process for you to set your sight on the specific skillset
-                    you want to onboard onto your company.From the figure you can see the varios representations in accordance to the different
-                    facets that go into making of software developers
+                    We offer  project-based tests which represents real world tasks.
+                    From research, these kinds of tests have proven to be a true test of a Programmers prowess.
+                    The Projects are workplace sample tests that truely emulate the tasks that candidates will be employed to perform.
+                    These tests are segmented into various categories you can pick from: full stack, frontend, backend and mobile.
 
                 </p>
             </div>
@@ -67,51 +68,6 @@ index
     <div class="row" style="margin: 0">
         <div class="col-lg-6">
             <div class="card"  style="border: 0">
-                <img class="card-img-top" src="../../static/frontend/images/how/details.PNG" alt="Card image cap">
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div style="margin-right: 33%;margin-top: 10%">
-                <b class="display-7 h6">Pick project that suites your needs </b>
-                <p>
-                    Browse through our project library and find a match to your needs.Codeln projects are grounded upon concepts
-                    that are to be implemented on specified language or framework.You are sure to find are frameworks current in the market
-                    represented.
-
-
-                </p>
-            </div>
-
-
-        </div>
-    </div>
-    <hr>
-
-
-    <div class="row" style="margin: 0">
-        <div class="col-lg-6">
-            <div style="margin-left: 33%;margin-top: 10%">
-                <b class="display-7 h6">Invite candidates </b>
-                <p>
-                    Easily onboard your targeted candidates.Our system will send emails to them with an invitation to build a
-                    project.Now all you have to do is wait and relax as the results flow in.
-
-                </p>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card"  style="border: 0">
-                <img class="card-img-top" src="../../static/frontend/images/how/invite.PNG" alt="Card image cap">
-            </div>
-
-        </div>
-    </div>
-    <hr>
-
-
-    <div class="row" style="margin: 0">
-        <div class="col-lg-6">
-            <div class="card"  style="border: 0">
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="../../static/frontend/images/video/candidate.gif"></iframe>
                 </div>
@@ -119,11 +75,11 @@ index
         </div>
         <div class="col-lg-6">
             <div style="margin-right: 33%;margin-top: 10%">
-                <b class="display-7 h6">Candidates build project </b>
+                <b class="display-7 h6">Invite Candidates </b>
                 <p>
-                    We provide a monitored online workspace to the candidates where they can implement project requirements.
-                    The IDE is timed and uses live imagery to detect identity fraud.This info is also relayed to recruit
-                    to ascertain individual coming for interview matches one who did the test
+                    Once candidates are done with the test, we conduct code analysis and evaluate their coding skills based on
+                    language specific standards and best practices.
+                    Some of the key metrics we measure are: code quality, problem solving, language knowledge and code security.
 
                 </p>
             </div>
@@ -136,7 +92,7 @@ index
     <div class="row" style="margin: 0">
         <div class="col-lg-6">
             <div style="margin-left: 33%;margin-top: 10%">
-                <b class="display-7 h6">Reports,live demos and interview invitations</b>
+                <b class="display-7 h6">Receive Reports</b>
                 <p>
                     Our report focuses to best bring out the various aspects that could give the most competent candidate may it be features implimented,
                     coding standards and security
@@ -156,53 +112,55 @@ index
     </div>
 </div>
 
-<!--footer-->
-<footer class="jumbotron jumbofoot"  >
-    <div class="container">
-        <div class="row">
-            <div class="directory col-xs-6 col-sm-3">
-                <h3 class="directory-title">Menu</h3>
-                <ul class="directory-items list-unstyled">
-                    <li><a class="colorlink" href="/pricing">Pricing</a></li>
-                    <li><a class="colorlink" href="/pair">Pair programming</a></li>
-                    <li><a class="colorlink" href="/video">Video proctor</a></li>
+    <!--footer-->
+    <footer class="jumbotron jumbofoot"  >
+        <div class="container">
+            <div class="row">
+                <div class="directory col-xs-6 col-sm-3" style="margin-left: auto">
+                    <h3 class="directory-title">Menu</h3>
+                    <ul class="directory-items list-unstyled">
+                        <li><a class="colorlink" href="/pricing">Pricing</a></li>
+                        <li><a class="colorlink" href="{% url 'account_login' %}">Testing</a></li>
+                        <li><a class="colorlink" href="https://goo.gl/forms/33Ju1jpgsuQI4gKw2">Sourcing</a></li>
 
-                </ul>
-            </div>
-            <div class="directory col-xs-6 col-sm-3">
-                <h3 class="directory-title">Company</h3>
-                <ul class="directory-items list-unstyled">
-                    <li><a class="colorlink" href="/about">About us</a></li>
-                    <li><a class="colorlink" href="/careers">Careers</a></li>
-                    <li><a class="colorlink" href="#">Blog</a></li>
-                </ul>
-            </div>
-            <div class="directory col-xs-6 col-sm-3">
-                <h3 class="directory-title">Resources</h3>
-                <ul class="directory-items list-unstyled">
-                    <li><a class="colorlink" href="#">Contact us</a></li>
-                    <li><a class="colorlink" href="#">Help center</a></li>
+                    </ul>
+                </div>
 
-                </ul>
-            </div>
-            <div class="directory col-xs-6 col-sm-3">
-                <h3 class="directory-title">Follow</h3>
-                <ul class="directory-items list-unstyled">
-                    <li>
-                        <a href="https://twitter.com/Codeln_spaces" target="_blank">
-                            <i><span data-feather="twitter"></span></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.linkedin.com/company/codeln/" target="_blank">
-                            <i><span data-feather="linkedin"></span></i>
-                        </a>
-                    </li>
-                </ul>
+                <div class="directory col-xs-6 col-sm-3">
+                    <h3 class="directory-title">Resources</h3>
+                    <ul class="directory-items list-unstyled">
+                        <li><a class="colorlink" href="/privacy">Terms and Privacy policy</a></li>
+                        <li><a class="colorlink" href="/credits">Credits</a></li>
+
+                    </ul>
+                </div>
+                <div class="directory col-xs-6 col-sm-3" style="margin-right: auto">
+                    <h3 class="directory-title">Contact</h3>
+                    <ul class="directory-items list-unstyled">
+                        <li>
+
+                            <i><span data-feather="mail"></span>info@codeLn.com</i>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/Codeln_spaces" target="_blank">
+                                <i><span data-feather="twitter"></span></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/company/codeln/" target="_blank">
+                                <i><span data-feather="linkedin"></span></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/CodelnSpaces/" target="_blank">
+                                <i><span data-feather="facebook"></span></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
 
 

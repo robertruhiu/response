@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from projects.models import Project
+from projects.models import Project,Projecttype,Devtype
 
 
 # Create your views here.
@@ -18,15 +18,25 @@ from projects.models import Project
 #     pass
 
 
-def project_list(request):
+def project_list(request,id):
     # TODO: filter projects by framework, language and category using django filter
-    all_projects = Project.objects.all()
-    return render(request, 'projects/all_projects.html', {'all_projects': all_projects})
+    categoryname=Projecttype.objects.get(id=id)
+
+    projecttypes = Project.objects.filter(projecttype_id=id)
+    return render(request, 'projects/all_projects.html', {'projecttypes': projecttypes,'categoryname':categoryname})
+
+def devtypes(request,id):
+    # TODO: filter projects by framework, language and category using django filter
+
+    categoryname=Devtype.objects.get(id=id)
+    devtypes = Project.objects.filter(devtype_id=id)
+    return render(request, 'projects/devtypes.html', {'devtypes':devtypes,'categoryname':categoryname})
 
 def categories(request):
+    projecttypes = Projecttype.objects.all()
+    devtypes = Devtype.objects.all()
 
-
-    return render(request, 'projects/categories.html')
+    return render(request, 'projects/categories.html',{'projecttypes':projecttypes, 'devtypes': devtypes})
 
 
 def project(request, id):

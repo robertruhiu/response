@@ -88,8 +88,8 @@ def activity(request):
 
 def tracker(request,id):
     candidates = Candidate.objects.filter(transaction_id=id)
-    number = Candidate.objects.filter(transaction_id=id).count()
-    return render(request, 'frontend/recruiter/tracker.html',{'candidates': candidates},{'number',number})
+
+    return render(request, 'frontend/recruiter/tracker.html',{'candidates': candidates})
 
 def inprogress(request):
     candidates = Candidate.objects.filter(email=request.user.email)

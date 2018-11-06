@@ -19,7 +19,7 @@ recruiter dashboard
                         <span data-feather="user">
 
                         </span>
-                        {{ user.username }}
+                        {{ user.first_name }} {{ user.last_name }}
                     </li>
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
@@ -41,7 +41,7 @@ recruiter dashboard
         </div>
     </div>
     <div class="alert alert-primary " role="alert">
-        Welcome {{ user.username }}  to Codeln.Choose one of the paths below to start
+        Welcome {{ user.first_name }} {{ user.last_name }} to Codeln.Choose one of the paths below to start
 
     </div>
 

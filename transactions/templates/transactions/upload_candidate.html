@@ -19,7 +19,7 @@ Add candidates
                         <span data-feather="user">
 
                         </span>
-                        {{ user.username }}
+                        {{ user.first_name }} {{ user.last_name }}
                     </li>
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">

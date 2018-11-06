@@ -19,7 +19,7 @@ all projects
                         <span data-feather="user">
 
                         </span>
-                        {{ user.username }}
+                        {{ user.first_name }} {{ user.last_name }}
                     </li>
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
@@ -41,21 +41,26 @@ all projects
         </div>
 
     </div>
+    <h5>{{ categoryname.name }} projects</h5>
     <div class="row" >
-        {% for project in all_projects %}
-        <div class="col-lg-3">
-            <a href="{% url 'projects:project' project.id%}" style="text-decoration: none;">
+
+
+
+        {% for foo in projecttypes %}
+
+        <div class="col-lg-3" style="margin-right: 3%">
+            <a href="{% url 'projects:project' foo.id %}" style="text-decoration: none;">
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{project.projectimage1}}" alt="Card image cap">
+                <img class="card-img-top" src="{{foo.projectimage1}}" alt="Card image cap">
                 <div class="card-body">
-                    <p class="card-text">{{ project.name }}
-                        <span class="badge badge-primary">Level : {{ project.level }}</span>
+                    <p class="card-text">{{ foo.name }}
+                        <span class="badge badge-primary">Level : {{ foo.level }} </span>
                     </p>
-                    <p> Concept tested : {{ project.concept }}</p>
+                    <p> Concept tested : {{ foo.concept }}</p>
                 </div>
                 <div class="card-footer text-muted">
-                    <span class="badge badge-info">Framework : {{ project.framework.name }}</span>
-                    <span class="badge badge-info">Language : {{ project.framework.language }}</span>
+                    <span class="badge badge-info">Framework : {{ foo.framework.name }}</span>
+                    <span class="badge badge-info">Language : {{ foo.framework.language }}</span>
                     <span data-feather="heart"></span>
                 </div>
 
@@ -65,6 +70,7 @@ all projects
         </div>
         {% endfor %}
     </div>
+
 
 
 
