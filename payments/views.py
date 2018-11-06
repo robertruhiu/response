@@ -22,7 +22,7 @@ def process_payment(request, id, amount):
         'currency_code': 'USD',
         'notify_url': request.build_absolute_uri(reverse('paypal-ipn')),
         'return_url': request.build_absolute_uri(reverse('payments:done')),
-        'cancel_return': request.build_absolute_uri(reverse('payments:canceled')),
+        'cancel_return': request.build_absolute_uri(reverse('payments:canceled', args=[transaction.id])),
     }
     form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request, 'payments/process.html',
@@ -39,9 +39,9 @@ def payment_done(request):
 
 
 @csrf_exempt
-def payment_canceled(request):
+def payment_canceled(request, id):
     # redirect to add candidates
-    return redirect(reverse('transactions:process_transaction'))
+    return redirect(reverse('transactions:process_transaction', args=[id]))
 
 
 # @csrf_exempt
