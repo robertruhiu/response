@@ -12,21 +12,17 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 import dj_database_url
 import django_heroku
+from decouple import config
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "!&)6qusz5um2+_6=465*-t-=*gks#q=o@z*db8b_4v-zrbyh7x"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,6 +38,7 @@ INSTALLED_APPS = [
     'accounts',
     'projects',
     'frontend',
+    'paypal.standard.ipn',
     'transactions',
     'payments',
 
@@ -52,11 +49,14 @@ INSTALLED_APPS = [
     'bootstrap4',
     'bulma',
     'django_filters',
-    'paypal.standard.ipn',
     'invitations',
-    #'allauth.socialaccount.providers.linkedin',
-
+    'allauth.socialaccount.providers.linkedin',
 ]
+SECRET_KEY = config('SECRET_KEY')
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = config('DEBUG')
+
 # Application definition
 SITE_ID = 1
 
@@ -84,6 +84,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media'
             ],
             'debug': DEBUG,
         },
@@ -96,7 +97,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 WSGI_APPLICATION = 'codelnmain.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -159,12 +159,18 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
-MEDIA_URL ='/media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-#allauth settings
+# allauth settings
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
 ACCOUNT_AUTHENTICATION_METHOD = ('email')
 
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
@@ -178,7 +184,6 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = '/'
 
-
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignUpForm'
@@ -187,8 +192,29 @@ SOCIALACCOUNT_AUTO_SIGNUP = True
 SOCIALACCOUNT_EMAIL_VERIFICATION = ACCOUNT_EMAIL_VERIFICATION
 SOCIALACCOUNT_EMAIL_REQUIRED = ACCOUNT_EMAIL_REQUIRED
 SOCIALACCOUNT_QUERY_EMAIL = ACCOUNT_EMAIL_REQUIRED
+SOCIALACCOUNT_PROVIDERS = {
+    'linkedin': {
+        'SCOPE': [
+            'r_basicprofile',
+            'r_emailaddress'
+        ],
+        'PROFILE_FIELDS': [
+            'id',
+            'first-name',
+            'last-name',
+            'email-address',
+            'picture-url',
+            'public-profile-url',
+        ]
+    }
+}
 
-PAYPAL_RECEIVER_EMAIL  = 'sphilisiah-facilitator@gmail.com'
+PAYPAL_RECEIVER_EMAIL = config('PAYPAL_RECEIVER_EMAIL')
 PAYPAL_TEST = True
 
-
+ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
+INVITATIONS_INVITATION_EXPIRY = 7
+INVITATIONS_CONFIRM_INVITE_ON_GET = True
+INVITATIONS_ALLOW_JSON_INVITES = True
+INVITATIONS_ADAPTER = ACCOUNT_ADAPTER
+INVITATIONS_EMAIL_SUBJECT_PREFIX = 'Codeln'

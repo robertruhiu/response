@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 
 # Create your views here.
 from django.urls import reverse
@@ -96,6 +97,7 @@ def activity(request):
 def tracker(request,id):
     candidates = Candidate.objects.filter(transaction_id=id)
 
+
     return render(request, 'frontend/recruiter/tracker.html',{'candidates': candidates})
 
 def inprogress(request):
@@ -134,10 +136,11 @@ def howitworks(request):
 
     return render(request, 'frontend/how.html')
 
-def report(request):
+def report(request,id):
 
-
-    return render(request, 'frontend/recruiter/report.html')
+    candidate = Candidate.objects.get(id=id)
+    user = User.objects.get(email=candidate.email)
+    return render(request, 'frontend/recruiter/report.html', {user})
 
 def credits(request):
 
