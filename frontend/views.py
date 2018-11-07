@@ -92,3 +92,10 @@ def activity(request):
             return render(request, 'frontend/recruiter/my-activity.html', {'transactions': transactions})
         elif request.user.profile.user_type == 'developer':
             return render(request, 'frontend/developer/my-activity.html', {'transactions': transactions})
+
+
+def page_404(request):
+    return render(request, 'frontend/error_pages/404.html')
+
+def page_500(request):
+    return render(request, 'frontend/error_pages/500.html')

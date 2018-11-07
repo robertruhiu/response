@@ -51,10 +51,10 @@ INSTALLED_APPS = [
     'invitations',
     'allauth.socialaccount.providers.linkedin',
 ]
-SECRET_KEY = "!&)6qusz5um2+_6=465*-t-=*gks#q=o@z*db8b_4v-zrbyh7x"
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG')
 
 # Application definition
 SITE_ID = 1
