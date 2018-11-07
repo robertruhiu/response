@@ -42,9 +42,10 @@
             <form action="." method="post" enctype="multipart/form-data" class="form">
                 {% csrf_token %}
                 {% bootstrap_form developer_filling_details_form %}
-                {% buttons %}
+
+
                     <button class="btn btn-primary"  type="submit">Next</button>
-                {% endbuttons %}
+
             </form>
 
         </div>
