@@ -107,7 +107,7 @@ def sourcing(request):
         if form.is_valid():
             subject = 'Sourcing Request'
             from_email = form.cleaned_data['email_address']
-            data = [
+            data = {
                 form.cleaned_data['name'],
                 form.cleaned_data['phone_number'],
                 form.cleaned_data['company_name'],
@@ -119,9 +119,9 @@ def sourcing(request):
                 form.cleaned_data['renumeration'],
                 form.cleaned_data['tech_staff'],
                 form.cleaned_data['skills_test']
-            ]
+            }
             try:
-                send_mail(subject,data, from_email, ['sales@codeln.com'])
+                send_mail(subject, data, from_email, ['philisiah@codeln.com'])
             except BadHeaderError:
                 print('invalid error')
             return redirect('frontend:home')
