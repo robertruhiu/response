@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
+from django.contrib.auth.models import User
 from projects.models import Project
 from transactions.models import Transaction, Candidate
 from transactions.forms import CandidateForm, SourcingForm
@@ -86,10 +87,12 @@ def invitations(request, current_transaction):
     if request.method == 'POST':
         if candidates.count() != 0:
             for candidate in candidates:
-                invite = Invitation.create(candidate.email, inviter=request.user)
-                invite.send_invitation(request)
-            current_transaction.stage = 'complete'
-            current_transaction.save()
+                user = User.objects.get(email=candidate.email)
+                if not user:
+                    invite = Invitation.create(candidate.email, inviter=request.user)
+                    invite.send_invitation(request)
+                    current_transaction.stage = 'complete'
+                    current_transaction.save()
         return redirect(reverse('transactions:process_transaction', args=[current_transaction.id]))
     return render(request, 'transactions/invitations.html',
                   {'candidates': candidates, 'current_transaction': current_transaction})
