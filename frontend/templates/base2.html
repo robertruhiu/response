@@ -29,7 +29,7 @@
 <body>
 <div class="container">
 <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
-    <a class="brandhome codelnlogo" style="text-decoration: none" href="/">CODELN</a>
+    <a class="brandhome codelnlogo" style="text-decoration: none" href="/home">CODELN</a>
     <span class="badge badge-primary">BETA</span>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{% url 'account_login' %}" >Screening</a>
-                    <a class="dropdown-item" href="https://goo.gl/forms/33Ju1jpgsuQI4gKw2">Sourcing</a>
+                    <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Sourcing</a>
                     <a class="dropdown-item" href="/pricing">Pricing</a>
 
 

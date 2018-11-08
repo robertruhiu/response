@@ -64,16 +64,16 @@ report
 
                     <div class="card-body">
                         <div class="row" style="margin-left: 0;margin-right: 0">
-                            <div class="col-lg-2">
-                                <img src="">
+                            <div class="col-lg-4">
+                                <img style="width: 18rem" src="{{ user.profile.profile_photo.url }}">
                                 
                             </div>
                             
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="mt-3 ml-3">
-                                    <div><b>Candidate name:</b>Dennis Ruhiu</div>
-                                    <div><b>Email:</b>robertruhiu@gmail.com</div>
-                                    <div><a href="https://github.com/robertruhiu">Github profile</a></div>
+                                    <div><b>Candidate name:</b>{{ user.first_name }}</div>
+                                    <div><b>Email:</b>{{ user.email }}</div>
+                                    <div><a href="{{ user.profile.github_repo }}">Github profile</a></div>
 
                                 </div>
 
@@ -87,7 +87,7 @@ report
                                     <div class="card-body text-center">
                                         <div class="h5">Mean score</div>
                                         <h1>67% <span class="badge badge-primary">B</span></h1>
-                                        <a class="btn theme--dark primary1 mt-3 " style="border-radius: 0;color: white" href="http://cryptoprize.herokuapp.com/">View Code base</a>
+                                        <a class="btn theme--dark primary1 mt-3 " style="border-radius: 0;color: white" href="/">View Code base</a>
 
 
                                     </div>
@@ -106,7 +106,7 @@ report
             <section>
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="h4 text-center">Ilightup analytics</div>
+                        <div class="h4 text-center">{{ transaction.project.name}}</div>
 
 
                     </div>
@@ -118,12 +118,7 @@ report
 
                             <div class="card-body">
                                 <h5 class="card-title">Project description</h5>
-                                <p class="card-text">Ilightup analytics is set to create its own Api to
-                                    distribute sensitive data to its client.
-                                    They currently want a GET request only. Due to the nature of sensitivity the
-                                    data access restrictions have to be put into place.
-                                    They want you to automate a system that uniquely generates an Api key and
-                                    assigns it to each first time user.</p>
+                                <p class="card-text">{{ transaction.project.name}}</p>
 
                             </div>
                         </div>
@@ -135,7 +130,7 @@ report
                             <div class="card-body">
                                 <h5 class="card-title">Concept tested</h5>
                                 <p class="card-text">
-                                    <span class="badge badge-info">Api security</span>
+                                    <span class="badge badge-info">{{ transaction.project.concept}}</span>
                                 </p>
 
                             </div>
@@ -147,9 +142,10 @@ report
                         <div class="card" style="width: 100%;border: 0">
 
                             <div class="card-body">
-                                <h5 class="card-title">Framework</h5>
+                                <h5 class="card-title">Tech stack</h5>
                                 <p class="card-text">
-                                    <span class="badge badge-info">Django</span>
+                                    <span class="badge badge-info">{{ transaction.project.framework.name}}</span>
+                                    <span class="badge badge-info">{{ transaction.project.framework.language.name}}</span>
 
                                 </p>
 
@@ -327,26 +323,32 @@ report
                         <tbody>
                         <tr>
 
-                            <td>Fetch data from open weather map api</td>
+                            <td>{{ transaction.project.requirement1}}</td>
 
                             <td><span class="badge badge-success">Complete</span></td>
                         </tr>
                         <tr>
 
-                            <td>Configure a REST api to access the data
+                            <td>{{ transaction.project.requirement2}}
                             </td>
 
                             <td><span class="badge badge-success">Complete</span></td>
                         </tr>
                         <tr>
 
-                            <td>The dashboard should contain unique ID, Name of City, Visibility and Temperature
+                            <td>{{ transaction.project.requirement3}}
                             </td>
                             <td><span class="badge badge-warning">3/4 complete</span></td>
                         </tr>
                         <tr>
 
-                            <td>Search Feature and error handling .</td>
+                            <td>{{ transaction.project.requirement4}}</td>
+                            <td><span class="badge badge-warning">1/2 Complete</span></td>
+                        </tr>
+
+                        <tr>
+
+                            <td>{{ transaction.project.requirement5}}</td>
                             <td><span class="badge badge-warning">1/2 Complete</span></td>
                         </tr>
 
@@ -360,22 +362,7 @@ report
 
             </section>
 
-            <section class="jumbotron jumbo2">
-                <div class="row" style="margin-left: 0;margin-right: 0;margin-top: 2%">
-                    <div class="col-md-6 col-lg-6 col-xl-6 text-center" style="margin-left: auto;margin-right: auto">
-                        <p class="h3">Fraud detection and mitigation
-                            <br>
-                        <p>Access a repo of session imagery of candidate.Use it to ascertain identity during physical
-                            interview</p>
 
-                        <a class="btn theme--dark primary1  " style="border-radius: 0;color: white;width: 20%" href="">Access</a>
-
-                        </p>
-
-                    </div>
-
-                </div>
-            </section>
 
 
         </div>
@@ -513,6 +500,32 @@ report
                         </div>
                     </div>
                 </div>
+            </div>
+
+
+        </div>
+
+        <!---fraud detection-->
+        <div class="tab-pane fade " id="fraud" role="tabpanel" aria-labelledby="fraud-tab">
+
+
+            <div class="container-fluid">
+               <section class="jumbotron jumbo2">
+                <div class="row" style="margin-left: 0;margin-right: 0;margin-top: 2%">
+                    <div class="col-md-6 col-lg-6 col-xl-6 text-center" style="margin-left: auto;margin-right: auto">
+                        <p class="h3">Fraud detection and mitigation
+                            <br>
+                        <p>Access a repo of session imagery of candidate.Use it to ascertain identity during physical
+                            interview</p>
+
+                        <a class="btn theme--dark primary1  " style="border-radius: 0;color: white;width: 20%" href="">Access</a>
+
+                        </p>
+
+                    </div>
+
+                </div>
+            </section>
             </div>
 
 

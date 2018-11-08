@@ -82,7 +82,11 @@ def index(request):
             elif request.user.profile.user_type == 'recruiter':
                 return render(request, 'frontend/recruiter/recruiter.html',{'transactions': transactions})
     else:
-        return render(request, 'frontend/landing.html')
+        return home(request)
+
+
+def home(request):
+    return render(request, 'frontend/landing.html')
 
 @login_required
 def activity(request):
@@ -136,11 +140,12 @@ def howitworks(request):
 
     return render(request, 'frontend/how.html')
 
-def report(request,id):
+def report(request,email,transaction_id):
+    user = User.objects.get(email=email)
+    transaction =Transaction.objects.get(id=transaction_id)
 
-    candidate = Candidate.objects.get(id=id)
-    user = User.objects.get(email=candidate.email)
-    return render(request, 'frontend/recruiter/report.html', {user})
+
+    return render(request, 'frontend/recruiter/report.html',{'user':user,'transaction':transaction})
 
 def credits(request):
 
@@ -154,3 +159,9 @@ def terms(request):
 
 
     return render(request, 'frontend/terms.html')
+
+def page_404(request):
+    return render(request, 'frontend/error_pages/404.html')
+
+def page_500(request):
+    return render(request, 'frontend/error_pages/500.html')

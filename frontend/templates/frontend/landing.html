@@ -100,7 +100,7 @@ index
                         <h5 class="card-title text-center">Sourcing</h5>
                         <p class="card-text">Get quick access to a pool of tested and certified Programmers
                             based on your job requirement.</p>
-                        <a target="_blank" href="https://goo.gl/forms/33Ju1jpgsuQI4gKw2" class="card-link">Start sourcing</a>
+                        <a target="_blank" href="{% url 'transactions:sourcing' %}" class="card-link">Start sourcing</a>
 
                     </div>
                 </div>
@@ -126,7 +126,7 @@ index
         <div class="col-md-6 col-lg-6 col-xl-6 text-center" style="margin-left: auto;margin-right: auto">
             <p class="h3">Curious About Our Screening Process?
                 <br>
-                <a class="btn theme--dark primary1 mt-3 pulse" style="border-radius: 0;color: white" href="/howitworks">See How It Works</a>
+                <a class="btn theme--dark primary1 mt-3 " style="border-radius: 0;color: white" href="/howitworks">See How It Works</a>
 
             </p>
 
@@ -389,13 +389,13 @@ index
 
 
             <div class="card lang ">
-                <img class="card-img-top " src="../../static/frontend/images/home/enpact1.png" alt="Card image enpact">
+                <img class="card-img-top " src="../../static/frontend/images/photo.JPG" alt="Card image enpact">
             </div>
         </div>
 
         <div class="col-lg-3 mel d-flex justify-content-center">
             <div class="card lang ">
-                <img class="card-img-top " src="../../static/frontend/images/home/fbk.png" alt="Card image facebook">
+                <img class="card-img-top " src="../../static/frontend/images/div.jpg" alt="Card image facebook">
             </div>
 
 
@@ -485,7 +485,7 @@ index
                 <ul class="directory-items list-unstyled">
                     <li><a class="colorlink" href="/pricing">Pricing</a></li>
                     <li><a class="colorlink" href="{% url 'account_login' %}">Testing</a></li>
-                    <li><a class="colorlink" href="https://goo.gl/forms/33Ju1jpgsuQI4gKw2">Sourcing</a></li>
+                    <li><a class="colorlink" target="_blank" href="{% url 'transactions:sourcing' %}">Sourcing</a></li>
 
                 </ul>
             </div>
