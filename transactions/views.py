@@ -107,19 +107,18 @@ def sourcing(request):
         if form.is_valid():
             subject = 'Sourcing Request'
             from_email = form.cleaned_data['email_address']
-            data = {
-                form.cleaned_data['name'],
-                form.cleaned_data['phone_number'],
-                form.cleaned_data['company_name'],
-                form.cleaned_data['job_role'],
-                form.cleaned_data['engagement_types'],
-                form.cleaned_data['tech_stack'],
-                form.cleaned_data['project_description'],
-                form.cleaned_data['devs_needed'],
-                form.cleaned_data['renumeration'],
-                form.cleaned_data['tech_staff'],
-                form.cleaned_data['skills_test']
-            }
+            data = ""
+            data += form.cleaned_data['name']
+            data += str(form.cleaned_data['phone_number'])
+            data += form.cleaned_data['company_name']
+            data += str(form.cleaned_data['job_role'])
+            data += form.cleaned_data['engagement_types']
+            data += form.cleaned_data['tech_stack']
+            data += form.cleaned_data['project_description']
+            data += str(form.cleaned_data['devs_needed'])
+            data += str(form.cleaned_data['renumeration'])
+            data += form.cleaned_data['tech_staff']
+            data += form.cleaned_data['skills_test']
             try:
                 send_mail(subject, data, from_email, ['philisiah@codeln.com'])
             except BadHeaderError:

@@ -3,11 +3,12 @@ from transactions.models import Candidate, Transaction
 
 from django.forms import ModelForm, Form
 
-class CandidateForm(ModelForm):
 
+class CandidateForm(ModelForm):
     class Meta:
         model = Candidate
         exclude = ('transaction',)
+
 
 class SourcingForm(Form):
     job_roles = (
@@ -40,4 +41,4 @@ class SourcingForm(Form):
     devs_needed = forms.IntegerField()
     renumeration = forms.IntegerField()
     tech_staff = forms.ChoiceField(choices=yes_no)
-    skills_test =  forms.ChoiceField(choices=yes_no)
+    skills_test = forms.ChoiceField(choices=yes_no)
