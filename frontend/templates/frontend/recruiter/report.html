@@ -31,12 +31,7 @@ report
 
                 <ul class="nav ">
                     <!-- Authentication Links -->
-                    <li class="nav-item">
-                        <span data-feather="user">
 
-                        </span>
-                        {{ user.first_name }} {{ user.last_name }}
-                    </li>
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
                         <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
