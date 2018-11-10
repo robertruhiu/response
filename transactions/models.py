@@ -42,7 +42,6 @@ class Candidate(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.EmailField()
     transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
-    invitation = models.ForeignKey(Invitation, on_delete=models.CASCADE)
 
     def generate_link(self):
         pass
