@@ -99,6 +99,7 @@ def activity(request):
 
 
 def tracker(request,id):
+
     candidates = Candidate.objects.filter(transaction_id=id)
 
 
@@ -170,3 +171,7 @@ def page_404(request):
 
 def page_500(request):
     return render(request, 'frontend/error_pages/500.html')
+
+def samplereport(request):
+
+    return render(request, 'frontend/recruiter/samplereport.html')
