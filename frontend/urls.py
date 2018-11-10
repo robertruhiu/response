@@ -17,7 +17,7 @@ Including another URLconf
 from django.urls import path
 
 from frontend.views import index
-from frontend.views import home,activity,tracker,inprogress,invites,projectdetails,pendingproject,terms,dev,pricing,howitworks,privacy,report,credits
+from frontend.views import home,activity,tracker,sample,inprogress,invites,projectdetails,pendingproject,terms,dev,pricing,howitworks,privacy,report,credits
 from accounts.views import update_profile
 
 app_name = 'frontend'
@@ -31,6 +31,7 @@ urlpatterns = [
     path('report/<str:email>/<int:transaction_id>', report, name='report'),
     path('privacy', privacy, name='privacy'),
     path('terms', terms, name='terms'),
+    path('sample', sample, name='sample'),
     path('credits', credits, name='credits'),
     path('inprogress/', inprogress, name='inprogress'),
     path('invites/', invites, name='invites'),

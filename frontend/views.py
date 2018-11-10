@@ -160,6 +160,11 @@ def terms(request):
 
     return render(request, 'frontend/terms.html')
 
+def sample(request):
+
+
+    return render(request, 'frontend/sample.html')
+
 def page_404(request):
     return render(request, 'frontend/error_pages/404.html')
 
