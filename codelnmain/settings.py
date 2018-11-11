@@ -22,6 +22,11 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
+SECRET_KEY = config('SECRET_KEY', default='SECRET_KEY')
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = config('DEBUG', default='DEBUG')
+
 # SECURITY WARNING: keep the secret key used in production secret!
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -52,11 +57,10 @@ INSTALLED_APPS = [
     'invitations',
     'allauth.socialaccount.providers.linkedin',
     'storages',
-]
-SECRET_KEY = config('SECRET_KEY', default='SECRET_KEY')
+    'bootstrap4',
+    'django_forms_bootstrap',
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default='DEBUG')
+]
 
 # Application definition
 SITE_ID = 1
