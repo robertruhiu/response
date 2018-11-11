@@ -1,49 +1,80 @@
-{% extends 'base.html' %}
+{% extends 'recruiterbase.html' %}
 {% block script %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 {% endblock %}
+{%load static %}
 {% block content %}
-    <div class="modal modal--is-active w3-padding-64">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-            {#            <header class="modal-card-head">#}
-            {#                <p class="modal-card-title">Make Payment</p>#}
-            <header class=" modal-card-head tabs is-centered w3-light-gray">
-                <ul>
-                    <li class="modal-card-title"><a>Use Flutterwave</a></li>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
+        <div class="navbar fixed-top fine border-bottom">
+
+            <h5>Payment</h5>
+
+            <nav>
+
+                <ul class="nav ">
+                    <!-- Authentication Links -->
+                    <li><a class="nav-item" href="/pricing">Pricing</a></li>
+                    <li class="nav-item">
+                        <span data-feather="user">
+
+                        </span>
+                        {{ user.username }}
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                        </li>
+                    {% endif %}
+
+
                 </ul>
-            </header>
-            {#            </header>#}
-{#            <section id="paypal" class="modal-card-body letab" style="display: block">#}
-{#                <h1>pay using PayPal</h1>#}
-{#                {{ form.render }}#}
-{#            </section>#}
-            <section class="modal-card-body ">
-                <h1>Use Flutterwave</h1>
-                <form>
-                    <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
-                    <script src="https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
-                    <button type="button" onClick="payWithRave('{{ amount }}')">Pay Now
-                    </button>
-                </form>
-            </section>
+
+            </nav>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+    <div class="col-lg-6" style="margin: auto">
+    <div class="card" style="width: 28em;box-shadow:0 20px 50px rgba(0,0,0,.1);">
+        <img class="card-img-top" style="width: 75%;margin: auto" src="/static/frontend/images/ill/card.svg" alt="Card image cap">
+
+        <div class="card-body">
+            <div class=" text-center h5" style="padding-top: 10%">Payment methods</div>
+            <hr>
+            <div class="row" style="margin: auto">
+                <div class="col-lg-4">
+                    <h6 style="margin-top:10% ">Flutterwave</h6>
+                </div>
+                <div class="col-lg-3">
+                    <form style="text-align: -webkit-center;">
+                        <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+                        <script src="https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+                        <a onClick="payWithRave('{{amount}}')"><img style="width: 10rem" src="/static/frontend/images/flutter.svg"></a>
+
+                    </form>
+
+
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        {#function openTab(tabName) {#}
-        {#    var i;#}
-        {#    var x = document.getElementsByClassName('letab');#}
-        {#    for (i = 0; i < x.length; i++) {#}
-        {#        x[i].style.display = "none"#}
-        {#    }#}
-        {#    document.getElementById(tabName).style.display = "block";#}
-        {#}#}
+
 
         const API_publicKey = "FLWPUBK-37320275f784b16ec1e30b1342c0a223-X";
         const SuccessUrl = '{% url 'payments:flutter-done' transaction.id %}';
-        const CancelledUrl = '{% url 'payments:canceled' transaction.id%}';
-        const ReturnUrl = '{% url 'transactions:process_transaction' transaction.id %}';
+        {#const CancelledUrl = window.location.origin + '{% url 'payments:canceled' transaction.id%}'#}
 
         function payWithRave(amnt) {
             console.log(amnt);
@@ -52,7 +83,7 @@
                 customer_email: '{{ transaction.user.email }}',
                 amount: amnt,
                 customer_phone: "234099940409",
-                {#currency: "NGN",#}
+                currency: "USD",
                 payment_method: "both",
                 txref: {{ transaction.id }},
                 meta: [{
@@ -60,9 +91,8 @@
                     metavalue: "AP1234"
                 }],
                 onclose: function () {
-                    {#console.log('closed');#}
-                    {#console.log(ReturnUrl);#}
-                    window.location.href = ReturnUrl;
+                    console.log('closed');
+                    console.log(SuccessUrl);
                 },
                 callback: function (response) {
                     var txref = response.tx.txRef; // collect txRef returned and pass to a 					server page to complete status check.

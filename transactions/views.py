@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
 from django.contrib.auth.models import User
@@ -73,12 +73,11 @@ def upload_candidates(request, current_transaction):
 
 
 def all_candidates(request, current_transaction):
-    # candidates = current_transaction.allcandidates()
+    #candidates = current_transaction.allcandidates()
     candidates = Candidate.objects.filter(transaction=current_transaction)
-    count = candidates.count()
-    total_amount = count * 20
+    total_amount = current_transaction.amount()
     return render(request, 'transactions/all_candidates.html',
-                  {'candidates': candidates, 'count': count, 'total_amount': total_amount,
+                  {'candidates': candidates,'total_amount': total_amount,
                    'current_transaction': current_transaction})
 
 
@@ -87,12 +86,10 @@ def invitations(request, current_transaction):
     if request.method == 'POST':
         if candidates.count() != 0:
             for candidate in candidates:
-                user = User.objects.get(email=candidate.email)
-                if not user:
-                    invite = Invitation.create(candidate.email, inviter=request.user)
-                    invite.send_invitation(request)
-                    current_transaction.stage = 'complete'
-                    current_transaction.save()
+                invite = Invitation.create(candidate.email, inviter=request.user)
+                invite.send_invitation(request)
+            current_transaction.stage = 'complete'
+            current_transaction.save()
         return redirect(reverse('transactions:process_transaction', args=[current_transaction.id]))
     return render(request, 'transactions/invitations.html',
                   {'candidates': candidates, 'current_transaction': current_transaction})

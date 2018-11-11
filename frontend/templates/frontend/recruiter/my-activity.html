@@ -1,7 +1,90 @@
-{% extends 'base.html' %}
-
-{% block content %}
-    {% for transaction in transactions %}
-        {{ transaction.stage}}
-    {% endfor %}
+{% extends 'recruiterbase.html' %}
+{% block title %}
+my projects
 {% endblock %}
+{%load static %}
+{% block content %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
+        <div class="navbar fixed-top fine border-bottom">
+
+            <h5>My Projects</h5>
+
+            <nav>
+
+                <ul class="nav ">
+                    <!-- Authentication Links -->
+                    <li class="nav-item">
+                        <span data-feather="user">
+
+                        </span>
+                        {{ user.first_name }} {{ user.last_name }}
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                    </li>
+                    {% endif %}
+
+
+                </ul>
+
+            </nav>
+        </div>
+    </div>
+
+
+    <div class="row">
+        {% for transaction in transactions %}
+            {% if transaction.stage == "complete" %}
+                <div class="col-lg-3 mb-2" style="margin-left: 2%;">
+                    <a href="{% url 'frontend:tracker' transaction.id %}" style="text-decoration: none">
+                        <div class="card" style="width: 18rem;border-radius: 0;height: 100%">
+                            <img class="card-img-top" src="{{ transaction.project.projectimage1}}" alt="Card image cap">
+
+                            <div class="card-body">
+                                <h5 class="card-title">{{ transaction.project.name}}</h5>
+
+
+
+                            </div>
+                            <div class="card-footer text-muted">
+                                <p>{{ transaction.created}}</p>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+
+            {% else %}
+
+            {% endif %}
+
+
+        {% endfor %}
+        <div class="col-lg-3" style="margin-left: 2%">
+            <a href="{% url 'projects:categories' %}" style="text-decoration: none">
+                <div class="card" style="width: 18rem;border-radius: 0;">
+                    <img class="card-img-top" src="{%static 'frontend/images/add.svg' %}" style="width: 45%;margin-right: auto;margin-left: auto" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center" style="margin-top: 1em">Create a new test</h5>
+
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    </main>
+    {% endblock %}

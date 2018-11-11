@@ -1,94 +1,127 @@
-{% extends 'base.html' %}
+{% extends 'recruiterbase.html' %}
+{% block title %}
+recruiter dashboard
+{% endblock %}
 {% load static %}
 {% block content %}
-    <section class="container">
-        <div class="hero is-primary" style="height: 25%">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">Hello {{ user.username }} <br>Welcome To Codeln</h1>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 ">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
+        <div class="navbar fixed-top fine border-bottom">
+
+
+            <h5>Home</h5>
+
+            <nav>
+
+                <ul class="nav ">
+                    <!-- Authentication Links -->
+                    <li class="nav-item">
+                        <span data-feather="user">
+
+                        </span>
+                        {{ user.first_name }} {{ user.last_name }}
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                    </li>
+                    {% endif %}
+
+
+                </ul>
+
+            </nav>
+        </div>
+    </div>
+    <div class="alert alert-primary " role="alert">
+        Welcome {{ user.first_name }} {{ user.last_name }} to Codeln.Choose one of the paths below to start
+
+    </div>
+
+
+    <div class="row">
+
+        {% if transactions %}
+
+            <div class="col-lg-4" style="width: 100%;">
+                <div class="card recruithomecard" style="margin: auto">
+
+
+                    <a   href="{% url 'frontend:my-activity' %}">
+                        <div style="text-align: -webkit-center;">
+                            <img class="card-img-top "  src="../../../static/frontend/images/management.svg" style="width: 50%;margin-left: 25%;margin-right: 25%" alt="Card image cap">
+                        </div>
+
+                        <div class="card" style="border: 0 ">
+
+
+                            <div class="card-body">
+
+                                <h6 class="card-title text-center" style="text-align: -webkit-center;">Ongoing tests</h6>
+
+                            </div>
+
+                        </div>
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="container w3-padding-64">
-        <a href="{% url 'frontend:my-activity' %}"> My Activity</a>
-        <div class="container">
-            <div class="columns is-multiline">
-                <div class="column is-4">
-                    <div class="card">
-                        <header class="card-header">
-                            <a href="#" class="card-header-icon"><span class="icon">                                <i
-                                    class="fas fa-project-diagram"></i>
-</span></a>
-                            <p class="card-header-title">Projects</p>
-                        </header>
-                        <div class="card-image">
-                            <figure class="image is-4by3">
-                                <img src="{% static "img/projectsimage.jpg" %}" alt=""></figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="content" style="height: 96px">
-                                <p class="w3-text-black">
-                                    Codeln provides you a curated trove of projects to help you test to test your
-                                    developers.</p>
-                            </div>
-                        </div>
-                        <footer class="card-footer">
-                            <a href="{% url 'projects:all-projects' %}" class="card-footer-item">Browse projects &#8594;</a>
-                        </footer>
-                    </div>
+        {% else %}
+
+
+        {% endif %}
+
+
+
+        <div class="col-lg-4" style="width: 100%;">
+            <div class="card recruithomecard" style="margin: auto">
+            <a   href="{% url 'projects:categories' %}">
+                <div style="text-align: -webkit-center;">
+                <img class="card-img-top" src="../../../static/frontend/images/interview.svg" style="width: 50%;margin-left: 25%;margin-right: 25%" alt="Card image cap">
                 </div>
-                <div class="column is-4">
-                    <div class="card">
-                        <header class="card-header">
-                            <a href="#" class="card-header-icon">
-                                <span class="icon">
-                                    <i class="fas fa-star-half-alt"></i>
-                                </span>
-                            </a>
-                            <p class="card-header-title">Test Candidates</p>
-                        </header>
-                        <div class="card-image">
-                            <figure class="image is-4by3">
-                                <img src="{% static "img/testcandidates.jpg" %}" alt=""></figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="content" style="height: 96px">
-                                <p class="w3-text-black">You can test potential hires on Codeln. Our testing platform give you a
-                                    fraud proof way of vetting candidates software development skills.</p>
-                            </div>
-                        </div>
-                        <footer class="card-footer">
-                            <a href="#" class="card-footer-item">Start Testing &#8594;</a>
-                        </footer>
-                    </div>
+            <div class="card" style="border: 0 ">
+
+
+                <div class="card-body">
+
+                    <h6 class="card-title text-center" style="text-align: -webkit-center;">Create a new test</h6>
+
                 </div>
-                <div class="column is-4">
-                    <div class="card">
-                        <header class="card-header">
-                            <a href="#" class="card-header-icon">
-                                <span class="icon">
-                                    <i class="fas fa-search"></i>
-                                </span>
-                            </a>
-                            <p class="card-header-title">Find a Developer</p>
-                        </header>
-                        <div class="card-image">
-                            <figure class="image is-4by3">
-                                <img src="{% static "img/finddeveloper.jpg" %}" alt=""></figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="content" style="height: 96px">
-                                <p class="w3-text-black">Codeln has a database of vetted developers.
-                                    You can browse to find your ideal developer</p>
-                            </div>
-                        </div>
-                        <footer class="card-footer">
-                            <a href="#" class="card-footer-item">Find a developer &#8594;</a>
-                        </footer>
-                    </div>
-                </div>
+
+            </div>
+            </a>
             </div>
         </div>
-    </section>
+        <div class="col-lg-4" style="width: 100%;">
+            <div class="card recruithomecard" style="margin: auto">
+            <a target="_blank" href="{% url 'transactions:sourcing' %}">
+                <div style="text-align: -webkit-center;">
+                <img class="card-img-top" src="../../../static/frontend/images/search.svg" style="width: 50%;margin-left: 25%;margin-right: 25%" alt="Card image cap">
+                </div>
+                <div class="card" style="border: 0 ">
+
+
+                    <div class="card-body">
+
+                        <h6 class="card-title text-center" style="text-align: -webkit-center;">Source candidates</h6>
+
+                    </div>
+
+                </div>
+            </a>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+
+</div>
+
 {% endblock %}

@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'bulma',
-    'django_filters',
+    # 'django_filters',
     'invitations',
     'allauth.socialaccount.providers.linkedin',
     'storages',
