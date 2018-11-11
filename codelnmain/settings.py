@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from builtins import bool
 
 import dj_database_url
 import django_heroku
@@ -25,7 +26,8 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = config('SECRET_KEY', default='SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False)
+DEBUG = config('DEBUG', default=False, cast=bool)
+
 ENVIRONMENT = config('ENVIRONMENT', default='local')
 
 # SECURITY WARNING: keep the secret key used in production secret!
