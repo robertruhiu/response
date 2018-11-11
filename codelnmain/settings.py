@@ -53,10 +53,10 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.linkedin',
     'storages',
 ]
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY', default='SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG')
+DEBUG = config('DEBUG', default='DEBUG')
 
 # Application definition
 SITE_ID = 1
@@ -140,7 +140,8 @@ DATABASES['default'].update(dj_database_url.config(conn_max_age=500, ssl_require
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [
+    s.strip() for s in v.split(',')], default='*')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
@@ -157,19 +158,14 @@ STATICFILES_DIRS = [
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='EMAIL_HOST_PASSWORD')
 
 # allauth settings
 ACCOUNT_AUTHENTICATION_METHOD = ('email')
@@ -215,7 +211,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-PAYPAL_RECEIVER_EMAIL = config('PAYPAL_RECEIVER_EMAIL')
+PAYPAL_RECEIVER_EMAIL = config('PAYPAL_RECEIVER_EMAIL', default='PAYPAL_RECEIVER_EMAIL')
 PAYPAL_TEST = True
 
 ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
@@ -226,9 +222,9 @@ INVITATIONS_ADAPTER = ACCOUNT_ADAPTER
 INVITATIONS_EMAIL_SUBJECT_PREFIX = 'Codeln'
 
 
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', default='AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
@@ -238,6 +234,9 @@ DEFAULT_FILE_STORAGE = 'codelnmain.storage_backends.PublicMediaStorage'
 
 AWS_PRIVATE_MEDIA_LOCATION = 'media/private'
 PRIVATE_FILE_STORAGE = 'codelnmain.storage_backends.PrivateMediaStorage'
+AWS_DEFAULT_ACL = "public-read"
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN,
+                                AWS_PUBLIC_MEDIA_LOCATION)
 
-MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_PUBLIC_MEDIA_LOCATION)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
