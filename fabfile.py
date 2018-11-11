@@ -9,7 +9,7 @@ def prep():
         with open('requirements.txt', 'w+') as x:
             x.write(final_requirements)
     local('rm requirements-temp.txt')
-    # local('python manage.py collectstatic --no-input')
+    local('python manage.py collectstatic --no-input')
 
 
 def test():
@@ -41,7 +41,7 @@ def dev_logs():
 
 
 def all():
-    # prep()
+    prep()
     merge()
 
 

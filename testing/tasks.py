@@ -5,7 +5,7 @@ from decouple import config
 
 from codelnmain.celery import app
 
-DO_TOKEN = config('DO_TOKEN')
+DO_TOKEN = config('DO_TOKEN', default='DO_TOKEN')
 api_base = 'https://api.digitalocean.com/v2'
 
 
