@@ -1,86 +1,22 @@
-{% extends 'recruiterbase.html' %}
-{% block title %}
-Add candidates
-{% endblock %}
-{%load static %}
+{% extends 'base.html' %}
+{% load bulma_tags %}
 
 {% block content %}
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
-        <div class="navbar fixed-top fine border-bottom">
+    <div class="modal modal--is-active w3-padding-64">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Add Candidates</p>
+            </header>
 
-            <h5>Add candidates</h5>
-
-            <nav>
-
-                <ul class="nav ">
-                    <!-- Authentication Links -->
-                    <li class="nav-item">
-                        <span data-feather="user">
-
-                        </span>
-                        {{ user.first_name }} {{ user.last_name }}
-                    </li>
-                    {% if request.user.is_authenticated %}
-                    <li class="nav-item">
-                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
-                    </li>
-                    {% endif %}
-
-
-                </ul>
-
-            </nav>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-lg-6" style="margin-right: auto;margin-left: auto">
-            <div class="card" style="height: 100%">
-
-
-                <div class="card-body">
-
-                    <form action="." method="post">
-                        {% csrf_token %}
-                        <label class="label ">First name</label>
-                        <div >
-                            <input type="text" name="first_name" maxlength="255" class="form-control" required="" id="id_first_name">
-                        </div>
-                        <label class="label  ">Last name</label>
-                        <div >
-                            <input type="text" name="last_name" maxlength="255" class="form-control" required="" id="id_last_name">
-                        </div>
-                        <label class="label ">Email</label>
-                        <div >
-                            <input type="email" name="email" maxlength="254" class="form-control" required="" id="id_email">
-                        </div>
-                        <br>
-
-                        <button class="btn btn-success" name="add_another" value="addanother" type="submit">Save and
-                            Add Another
-                        </button>
-                        <button class="btn btn-warning " name="and_continue" value="continue" type="submit">Save and
-                            Continue
-                        </button>
-
-
-
+            <section class="modal-card-body">
+                <form action="." method="post">
+                    {% csrf_token %}
+                    {{ candidate_form |bulma }}
+                    <button class="button is-pulled-right" name="and_continue" value="continue" type="submit">Save and Continue</button>
+                    <button class="button is-pulled-left" name="add_another" value="addanother" type="submit">Save and Add Another</button>
                 </form>
-
-            </div>
+            </section>
         </div>
-
     </div>
-
-
-
-</main>
 {% endblock %}

@@ -33,6 +33,7 @@ urlpatterns = [
     path('paypal/', include('paypal.standard.ipn.urls')),
     path('', include('frontend.urls', namespace='frontend')),
     path('invitations/', include('invitations.urls', namespace='invitations')),
+    path('testing/', include('testing.urls', namespace='testing')),
 ]
 
 if settings.DEBUG:

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from projects.models import Project
+from invitations.models import Invitation
 
 
 # Create your models here.

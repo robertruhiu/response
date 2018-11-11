@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="is-8 is-offset-2">
+        <div class="w3-card">
+            <header class="w3-container">
+                Start Project
+            </header>
+            <div class="w3-container">
+                {% lorem 2%}
+            </div>
+            <footer class="w3-container w3-light-gray">
+                <a href="{% url 'testing:start-project' 1%}"> Start Project</a>
+            </footer>
+        </div>
+    </div>
+{% endblock %}

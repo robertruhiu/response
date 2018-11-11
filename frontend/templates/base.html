@@ -1,132 +1,116 @@
 {% load static %}
-{% load bootstrap4 %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <style>
+        @font-face {
+            font-family: 'CircularStd-Book';
+            src: url('{% static 'frontend/fonts/circularstd-book.woff2' %}') format('woff2'),
+            url('{% static 'frontend/fonts/circularstd-book.ttf' %}') format('truetype'),
+            url('{% static 'frontend/fonts/circularstd-book.woff' %}') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
 
+        @font-face {
+            font-family: 'Tiempos Headline';
+            src: url('{% static 'frontend/fonts/tiempos-headline/TiemposHeadline-Bold.ttf' %}') format('truetype'),
+            url('{% static 'frontend/fonts/tiempos-headline/TiemposHeadline-Bold.woff' %}') format('woff'),
+            url('{% static 'frontend/fonts/tiempos-headline/TiemposHeadline-Bold.woff2' %}') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Tiempos Text';
+            src: url('{% static 'frontend/fonts/tiempos-text/TiemposText-Regular.ttf' %}') format('truetype'),
+            url('{% static 'frontend/fonts/tiempos-text/TiemposText-Regular.woff' %}') format('woff'),
+            url('{% static 'frontend/fonts/tiempos-text/TiemposText-Regular.woff2' %}') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="../static/frontend/images/how/coding.png">
-    <meta name="theme-color" content="#272339">
     <title>{% block title %}
 
-        {% endblock %} | Codeln</title>
+    {% endblock %} | Codeln</title>
+    <link rel="stylesheet" href="{% static 'frontend/css/w3.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/bulma.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="{% static 'frontend/css/tradesbydesign.css' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    {% block script %}
 
-    {% bootstrap_css %}
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-
-
-
-    <link rel="stylesheet" href="{% static 'frontend/css/home.css' %}">
-    <link rel="stylesheet" href="{% static 'frontend/css/stay.css' %}">
-
-
-
+    {% endblock %}
     {% block css %}
 
     {% endblock %}
 </head>
 <body>
-<div class="container">
-<nav class="nav-container navbar navbar-expand-md navbar-light fixed-top ">
-    <a class="brandhome codelnlogo" style="text-decoration: none" href="/home">CODELN </a>
-    <span class="badge badge-primary">BETA</span>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar" style="padding: 10px 0;">
+    <div class="navbar-brand w3-margin-left w3-margin-right">
+        <a class="navbar-item w3-hover-none" href="{% url 'frontend:home' %}">
+            <span class="title">Code\n</span>
+        </a>
 
 
+        <button class="button navbar-burger is-white" data-target="navMenu" id="navBurger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+    <div class="navbar-menu" id="navMenu">
 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-
-
-        <ul class="nav">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Product
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'account_login' %}" >Screening</a>
-                    <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Sourcing</a>
-                    <a class="dropdown-item" href="/pricing">Pricing</a>
-
-
-                </div>
-            </li>
-
-
+        <div class="navbar-end w3-center w3-margin-right">
             {% if request.user.is_authenticated %}
-            <li class="nav-item">
-                <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
-            </li>
-
+                <a href="{% url 'frontend:update-profile' %}" class="navbar-item w3-opacity" title="Update profile">Update Profile</a>
+                <a href="{% url 'transactions:sourcing' %}" class="navbar-item w3-opacity" title="Sourcing">Sourcing</a>
+                <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
             {% else %}
-
-            <li class="nav-item">
-                <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
-            </li>
-            <li class="nav-item">
-                <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
-            </li>
+                <a href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                <a href="{% url 'account_signup' %}" class="navbar-item">Register</a>
             {% endif %}
-            <li class="nav-item">
-                <a  href="/dev" style="color: white" class="nav-link" >Developers</a>
-            </li>
+        </div>
 
-
-
-
-        </ul>
     </div>
 </nav>
-</div>
+<div class="block-content-offset">
     {% block content %}
 
     {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-
-{% bootstrap_javascript %}
-<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
-<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+</div>
 <script>
-    feather.replace()
-</script>
-<script>
-    $(document).ready(function() {
+    document.addEventListener('DOMContentLoaded', function () {
 
-        $(window).scroll(function() {
+        // Get all "navbar-burger" elements
+        var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-            var height = $('.nav-container').height();
-            var scrollTop = $(window).scrollTop();
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
 
-            if (scrollTop >= height - 38) {
-                $('.nav-container').addClass('solid-nav');
-            } else {
-                $('.nav-container').removeClass('solid-nav');
-            }
+            // Add a click event on each of them
+            $navbarBurgers.forEach(function ($el) {
+                $el.addEventListener('click', function () {
 
-        });
+                    // Get the target from the "data-target" attribute
+                    var target = $el.dataset.target;
+                    var $target = document.getElementById(target);
+
+                    // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+                    $el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+
+                });
+            });
+        }
+
     });
 </script>
 
-
-
-{% block script %}
-
-{% endblock %}
 </body>
 </html>

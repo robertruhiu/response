@@ -1,102 +1,14 @@
-{% extends 'recruiterbase.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
-            <div class="navbar fixed-top fine border-bottom">
-
-                <h5>Payment</h5>
-
-                <nav>
-
-                    <ul class="nav ">
-                        <!-- Authentication Links -->
-                        <li class="nav-item">
-                        <span data-feather="user">
-
-                        </span>
-                            {{ user.first_name }} {{ user.last_name }}
-                        </li>
-                        {% if request.user.is_authenticated %}
-                            <li class="nav-item">
-                                <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
-                            </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
-                            </li>
-                        {% endif %}
-
-
-                    </ul>
-
-                </nav>
-            </div>
-
-        </div>
-
-
-        <div class="row">
-            <div class="col-lg-4" style="margin-right: 5%;margin-left: 10%">
-        <div class="card" style="width: 28em;box-shadow:0 20px 50px rgba(0,0,0,.1);">
-            <img class="card-img-top" style="width: 50%;margin: auto" src="/static/frontend/images/checked.svg" alt="Card image cap">
-
-            <div class="card-body">
-                <div class=" text-center h5" style="padding-top: 10%">Payment verified</div>
-
-
-
-            </div>
-        </div>
-        </div>
-            <div class="col-lg-4" style="">
-                <div class="card" style="width: 28em;box-shadow:0 20px 50px rgba(0,0,0,.1);">
-
-
-                    <div class="card-body">
-
-                        <h6 style="text-align: center">Candidates</h6>
-                        <table class="table">
-                            <thead>
-                            <tr>
-
-                                <th scope="col">First name</th>
-                                <th scope="col">Last name</th>
-
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for foo in candidates %}
-
-                                <tr>
-
-                                    <td>{{ foo.first_name }}</td>
-                                    <td>{{ foo.last_name }}</td>
-
-                                </tr>
-                            {% endfor %}
-
-                            </tbody>
-                        </table>
-
-                        {% if current_transaction.stage == 'payment-verified' %}
-                            <form action="." method="post">
-                                {% csrf_token %}
-                                <button style="margin-left: 35%" class="btn btn-success" type="submit">Proceed</button>
-                            </form>
-                        {% endif %}
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </main>
-
+    {% for foo in candidates %}
+        {{ foo }}
+    {% endfor %}
+    {% if current_transaction.stage == 'payment-verified' %}
+        <form action="." method="post">
+            {% csrf_token %}
+            <button class="button is-pulled-right" type="submit">Proceed</button>
+        </form>
+    {% endif %}
 
 {% endblock %}
