@@ -25,7 +25,8 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = config('SECRET_KEY', default='SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default='DEBUG')
+DEBUG = config('DEBUG', default=False)
+ENVIRONMENT = config('ENVIRONMENT', default='local')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 INSTALLED_APPS = [
@@ -244,3 +245,5 @@ MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN,
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+if ENVIRONMENT != 'local':
+    pass
