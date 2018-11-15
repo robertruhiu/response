@@ -1,84 +1,640 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#76c5d6">
-    <title>{% block title %}
-
-        {% endblock %} | Codeln</title>
-
-    <link rel="stylesheet" href="{% static 'frontend/css/css/bootstrap.min.css' %}" >
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+{% extends 'base.html' %}
+{% block title %}
+Hire Skilled Software Developers
+{% endblock %}
+{%load static %}
+{% block content %}
 
 
 
-    <link rel="stylesheet" href="{% static 'frontend/css/home.css' %}">
-    <link rel="stylesheet" href="{% static 'frontend/css/stay.css' %}">
-    {% block css %}
 
-    {% endblock %}
-</head>
-<body>
-<div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light ">
-        <a class="brandhome codelnlogo" href="/">CODELN</a>
+    <div class="position-relative overflow-hidden text-center ">
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="nav">
-                {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                    <a href="{% url 'account_logout' %}" class="nav-link w3-opacity" title="Logout">Logout</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-item" href="{% url 'account_login' %}" class="nav-link">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-item" href="{% url 'account_signup' %}" class="nav-link">Register</a>
-                </li>
-                {% endif %}
+      <div class=" theme--dark d-none d-lg-block" style="height: 30vmax;">
+    <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/storm.jpg" class="jumbotron1__image">
+        <div class="jumbotron1__background"
+             style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
 
 
-            </ul>
-        </div>
-    </nav>
-    {% block content %}
-
-    {% endblock %}
-
+    </div>
 </div>
+    </div>
+
+    <div class="position-relative overflow-hidden text-center ">
+    <div class="jumbotron1 theme--dark d-lg-none" style="height: 46vmax;">
+    <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/storm.jpg" class="jumbotron1__image">
+        <div class="jumbotron1__background"
+             style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
+        <div class="hero-text">
+
+            <div class="display-2 h1 d-none d-lg-block" style="color: white" >Empower your workforce with better hires</div>
+
+            <div class="d-lg-none h5 " style="color: white;margin-top: 4em;" >Empower your workforce with better hires</div>
+
+
+
+            <div class="subheading d-none d-lg-block h4">We Validate and Verify Skills using Real World Projects</div>
+
+            <button type="button"  onclick="location.href='accounts/login';" value="Go to login" class="btn d-lg-none theme--dark primary  " style="border-radius: 0"><div class="btn__content"href="{% url 'account_login' %}">
+                Get started
+            </div></button>
+
+            <button type="button"  onclick="location.href='accounts/login';" value="Go to login" class="btn d-none d-lg-block theme--dark primary " style="border-radius: 0;margin: auto"><div class="btn__content"href="{% url 'account_login' %}">
+                Get started
+            </div></button>
+
+
+        </div>
+
+    </div>
+</div>
+    </div>
+    <!--products-->
+    <div class="position-relative overflow-hidden ">
+    <section>
+    <div class="row" style="margin-left: 0;margin-right: 0">
+        <div class="col-lg-12 text-center h3">
+            Products
+
+        </div>
+
+    </div>
+    <div class="row d-flex justify-content-center " style="margin-top: 2%;margin-left: 0;margin-right: 0">
+
+        <div class="col-lg-4 col-md" style="margin-bottom: 2%;">
+            <div class="row productcard" style="margin-right: 0;margin-left: 0">
+                <div class="col-4 d-none d-lg-block" >
+                    <img class="card-img-top product mt-5 " style="margin-right: auto;margin-left: auto" src="../../static/frontend/images/computer.svg" alt="Card image cap">
+
+
+                </div>
+                <div class="col-8">
+                    <h5 class="card-title" style="margin-top: 10%">Screening</h5>
+                    <p class="card-text">A testing platform that helps you validate the coding skills of Programmers</p>
+                    <a href="/accounts/login/" class="card-link">Start testing</a>
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md" style="margin-bottom: 2%;">
+            <div class="row productcard" style="margin-right: 0;margin-left: 0" >
+                <div class="col-4 d-none d-lg-block" >
+                    <img class="card-img-top product mt-5" style="margin-right: auto;margin-left: auto" src="../../static/frontend/images/pick.svg" alt="Card image cap">
+
+                </div>
+                <div class="col-8">
+                    <h5 class="card-title" style="margin-top: 10%">Sourcing</h5>
+                    <p class="card-text">Get quick access to a pool of tested and certified Programmers
+                            based on your job requirement.</p>
+                    <a target="_blank" href="/transactions/sourcing/" class="card-link">Start sourcing</a>
+                    <p></p>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+</section>
+    </div>
+    <!--call to action how it works-->
+    <div class="position-relative overflow-hidden text-center ">
+        <section class="jumbotron jumbo2" style="padding-bottom: 7%;padding-top: 2%;">
+    <div class="row" style="margin-left: 0;margin-right: 0;margin-top: 2%">
+        <div class="col-md-6 col-lg-6 col-xl-6 text-center" style="margin-left: auto;margin-right: auto">
+            <p class="h3">Curious About Our Screening Process?
+                <br>
+                <a class="btn theme--dark primary1 mt-3 " style="border-radius: 0;color: white" href="/howitworks">See How It Works</a>
+
+            </p>
+
+        </div>
+
+    </div>
+</section>
+    </div>
+
+    <!--benefits-->
+    <div class="position-relative overflow-hidden text-center ">
+    <section class="jumbotron jumbo1" >
+    <div class="row" style="margin-left: 0;margin-right: 0">
+        <div class="col-lg-12 text-center h3">
+            Why Codeln
+        </div>
+    </div>
+    <div class="row" style="margin-left: 0;margin-right: 0">
+        <div class="col-lg-5 d-none d-lg-block">
+            <div class="card noed">
+                <img class="card-img-top yum" src="../../static/frontend/images/ill/stats.svg" alt="Card image benefits">
+
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="row how2 ">
+                <div class="col-lg-6">
+                    <div class="card noed" style="width: 18rem;">
+                        <div class="card-body">
+                            <div>
+                                <img class="card-img-top benefit  " src="../../static/frontend/images/home/bank.svg" alt="Card image cost">
+                            </div>
+                            <h6 class="card-subtitle mb-2 ">Reduce Recruitment Cost</h6>
+                            <p class="card-text text-muted">
+                                Save money, reduce overall recruitment cost
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card noed" style="width: 18rem;">
+                        <div class="card-body">
+                            <div>
+                                <img class="card-img-top benefit" src="../../static/frontend/images/home/time.svg" alt="Card image time">
+                            </div>
+                            <h6 class="card-subtitle mb-2 ">Reduce Recruitment time </h6>
+                            <p class="card-text text-muted">Save time, reduce overall hiring time</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row how2">
+                <div class="col-lg-6">
+                    <div class="card noed" style="width: 18rem;">
+                        <div class="card-body">
+                            <div>
+                                <img class="card-img-top benefit" src="../../static/frontend/images/home/screen.svg" alt="Card image skills">
+                            </div>
+                            <h6 class="card-subtitle mb-2 ">Validate Candidate’s Skills</h6>
+                            <p class="card-text text-muted">Verify a Candidate’s ability to build real-world projects</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card noed" style="width: 18rem;">
+                        <div class="card-body">
+                            <div>
+                                <img class="card-img-top benefit" src="../../static/frontend/images/home/workplace.svg"
+                                     alt="Card image quality">
+                            </div>
+                            <h6 class="card-subtitle mb-2 ">Improve the quality of hire</h6>
+                            <p class="card-text text-muted">
+                                Hiring a skills-fit reduces Employee turnover rate.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+    </div>
+    <!--Languages and frameworks-->
+    <div class="position-relative overflow-hidden text-center ">
+    <section class="jumbotron jumbo8">
+    <div class="row">
+        <div class="col-lg-12 text-center ">
+            <h2>We support</h2>
+            <p class="h4 text-muted text-center">Programming Languages, Frameworks, and Libraries</p>
+        </div>
+
+    </div>
+    <div class="row" style="margin-bottom: 2% ">
+
+        <div class="col-lg-2 mt-3 mb-3" style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                    <div style="text-align: -webkit-center;">
+                        <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/icons8-javascript.svg"  alt="Card image cap">
+                    </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 mt-3 mb-3" style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/icons8-python.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 mt-3 mb-3" style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/icons8-php-logo.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 mt-3 mb-3" style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/java.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 mt-3 mb-3" style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/android.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 mt-3 mb-3" style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/react.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-2 mt-3 " style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/icons8-angularjs.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 mt-3 " style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/Django.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 mt-3" style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/Laravel.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 mt-3" style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/icons8-mysql-logo-filled.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 mt-3 " style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/icons8-postgresql.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 mt-3" style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/icons8-mongodb.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+</section>
+
+    </div>
+
+    <!-----trusted by----->
+    <div class="position-relative overflow-hidden text-center ">
+    <section class="jumbotron jumbo10" style="padding-bottom: 7%">
+    <div class="row" style="margin-left: 0;margin-right: 0">
+        <div class="col-lg-12 text-center ">
+            <h3>Trusted by</h3>
+
+        </div>
+
+    </div>
+
+    <div class="row" style="margin-top: 5%;margin-left: 0;margin-right: 0">
+        <div class="col-lg-3 mel d-flex justify-content-center">
+
+            <div class="card lang ">
+                <img class="card-img-top " src="../../static/frontend/images/home/meltwater.png" alt="Card image meltwater">
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-3 mel d-flex justify-content-center">
+
+
+            <div class="card lang ">
+                <img class="card-img-top " src="../../static/frontend/images/photo.JPG" alt="Card image enpact">
+            </div>
+        </div>
+
+        <div class="col-lg-3 mel d-flex justify-content-center">
+            <div class="card lang ">
+                <img class="card-img-top " src="../../static/frontend/images/div.jpg" alt="Card image facebook">
+            </div>
+
+
+        </div>
+
+
+        <div class="col-lg-3 mel d-flex justify-content-center">
+            <div class="card lang ">
+                <img class="card-img-top " src="../../static/frontend/images/home/mest.png" alt="Card image mest">
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+    <div class="row" style="margin-left: 0;margin-right: 0">
+        <div class="col-lg-12 text-center ">
+            <button class="btn btn-primary mt-5" onclick="location.href='https://goo.gl/forms/DqLs3ezL36KWbMoW2';">Become a partner</button>
+
+        </div>
+
+    </div>
 
 
 
 
 
+</section>
+
+    </div>
+    <!-----media buzz---->
+    <div class="position-relative overflow-hidden text-center ">
+    <section class="jumbotron jumbo7">
+    <div class="row">
+        <div class="col-lg-12 text-center ">
+            <h3>Media buzz</h3>
+
+        </div>
+
+    </div>
+    <div class="row" style="margin-top: 2%">
+        <div class="col-lg-6" style="margin-bottom: 2%;margin-left:auto;margin-right:auto;text-align: -webkit-center;">
+            <blockquote class="blockquote text-center">
+                <p class="mb-0">
+                    “CodeLn solves a problem everyone in the Tech Industry is keenly aware of:
+                    efficiently and consistently testing and hiring Software Developers”
+
+                </p>
+                <footer class="blockquote-footer">Forbes  </footer>
+            </blockquote>
+
+
+        </div>
+        <div class="col-lg-6" style="margin-bottom: 2%;margin-left:auto;margin-right:auto;text-align: -webkit-center;">
+            <blockquote class="blockquote text-center">
+                <p class="mb-0">
+                    “Working with CodeLn has significantly cut down the time used to source developers for the projects I work on. This makes me more efficient and I couldn’t be more delighted with their service”
+
+                </p>
+                <footer class="blockquote-footer">Kelvin Degbotse <cite title="Source Title">Business Strategist and Software consultant</cite> </footer>
+            </blockquote>
+
+
+        </div>
 
 
 
+    </div>
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
-<script  src="{% static 'frontend/css/js/popper.min.js' %}" ></script>
-<script  src="{% static 'frontend/css/js/bootstrap.min.js' %}" ></script>
-
-
-<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
-<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-<script>
-    feather.replace()
-</script>
+</section>
+    </div>
 
 
-{% block script %}
+    <footer class="container py-5">
+      <div class="row">
+
+        <div class="col-6 col-md">
+          <h5>Menu</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Cool stuff</a></li>
+            <li><a class="text-muted" href="#">Random feature</a></li>
+            <li><a class="text-muted" href="#">Team feature</a></li>
+
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Resource</a></li>
+            <li><a class="text-muted" href="#">Resource name</a></li>
+            <li><a class="text-muted" href="#">Another resource</a></li>
+
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Contact</h5>
+          <ul class="list-unstyled text-small">
+              <li>
+              <a href="mailto:info@codeln.com" target="_top">
+                  <i><span data-feather="mail"></span> info@codeLn.com</i>
+              </a>
+              <li>
+                <a class="text-muted" href="https://www.linkedin.com/company/codeln/" target="_blank">
+                <i><span data-feather="linkedin"></span></i>
+                </a>
+            </li>
+            <li>
+                <a class="text-muted" href="https://www.linkedin.com/company/codeln/" target="_blank">
+                <i><span data-feather="twitter"></span></i>
+                </a>
+            </li>
+            <li>
+                <a class="text-muted" href="https://www.facebook.com/CodelnSpaces/" target="_blank">
+                <i><span data-feather="facebook"></span></i>
+                </a>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </footer>
 
 {% endblock %}
-</body>
-</html>
+<div class="jumbotron jumbotrondev">
+        <div class="container">
+          <div class="mt-5">
+
+            <div class="display-2 h1 text-center d-none d-lg-block " style="color: white">Hire Skilled Software Developers — Faster</div>
+
+            <div class="subheading d-none d-lg-block text-center">Codeln Offers Monitored Workspaces To Verify Coding Skills Using Real World Projects.  </div>
+            <!----for md to sm---->
+              <div class="d-lg-none h5 text-center" style="color: white;margin-top: 4em;">Empower your workforce with better hires</div>
+
+            <!----for lg to xl---->
+              <p class="text-center mt-3">
+                  <button type="button" onclick="location.href='accounts/login';" value="Go to login" class="btn theme--dark primary " style="border-radius: 0;margin: auto">
+                <div class="btn__content" href="/accounts/login/">
+                Get started
+                </div>
+            </button>
+              </p>
+
+
+
+        </div>
+        </div>
+      </div>
+
+
+<ul style="margin-left: -15%;">
+                    <li class="nav-item" >
+                        <a class="nav-link " style="color:#FFFFFF;" href="{% url 'frontend:my-activity' %}">
+                            <span data-feather="home"></span>
+                            Ongoing tests
+                        </a>
+                    </li>
+                    <span></span>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:#FFFFFF;" href="{% url 'projects:categories' %}">
+                            <span data-feather="book"></span>
+                            Create new test
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link" style="color:#FFFFFF;" href="{% url 'transactions:sourcing' %}">
+                            <span data-feather="users"></span>
+                            Source Candidates
+                        </a>
+                    </li>
+
+                </ul>
+
+<nav class="navbar navbar-expand-md navbar-light fixed-top fine border-bottom"  >
+       <h5 >My Profile</h5>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span  class="navbar-toggler-icon">
+        <span style="color: white" data-feather="menu"></span>
+    </span>
+  </button>
+
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="nav ml-auto">
+
+
+
+            {% if request.user.is_authenticated %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+            </li>
+
+            {% else %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+            </li>
+            <li class="nav-item">
+                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+            </li>
+            {% endif %}
+
+
+    </ul>
+
+  </div>
+</nav>
+
+<div class=" col-lg-2 d-none d-lg-block sidebar " style="background-color: #332d40;;" >
+            <nav id="sidebar" class="">
+
+
+            <div class="sidebar-sticky">
+                <div class="row" style="width: 100%">
+                <div class="col-lg-12">
+
+                        <a class="brandhome codelnlogo1" style="text-decoration: none" href="/home">CODELN </a>
+
+                </div>
+            </div>
+
+            <ul class="nav  mb-2">
+              <li class="nav-item">
+                <a class="nav-link" style="color: white" href="{% url 'frontend:my-activity' %}">
+                    <span data-feather="home"></span>
+                            Ongoing tests
+
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color: white" href="{% url 'projects:categories' %}">
+                  <span data-feather="book"></span>
+                            Create new test
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color: white" href="{% url 'transactions:sourcing' %}">
+                     <span data-feather="users"></span>
+                            Source Candidates
+
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </nav>
+        </div>

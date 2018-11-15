@@ -5,41 +5,21 @@ index
 {%load static %}
 {% block content %}
 
-<!---- Hero image intro----->
-<div class="jumbotron1 theme--dark d-none d-lg-block" style="height: 8vmax;">
-    <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/home.jpg" class="jumbotron1__image">
-        <div class="jumbotron1__background"
-             style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
-        <div class="hero-text">
+<div class="jumbotron jumbotron2">
+        <div class="container">
+          <div class="">
 
-            <div class="display-6 h3 d-none d-lg-block" style="color: white" >Pricing</div>
+            <div class=" h3 text-center d-none d-lg-block " style="color: white">Pricing</div>
 
+              <div class="d-lg-none h5 text-center" style="color: white;margin-top: 4em;">Pricing</div>
         </div>
-
-
-    </div>
-</div>
-<!---for smaller devices-->
-<div class="jumbotron1 theme--dark d-lg-none" style="height: 20vmax;">
-    <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/home.jpg" class="jumbotron1__image">
-        <div class="jumbotron1__background"
-             style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
-        <div class="hero-text">
-
-
-
-            <div class="d-lg-none h5" style="color: white;margin-top: 2em;" >Pricing</div>
-
-
-
         </div>
+      </div>
 
 
-    </div>
-</div>
-<div class="row mt-3" style="margin: 0">
-    <div class="col-lg-3 text-center" style="margin-left: auto">
-        <div class="card mb-4 " style="height: 100%;width: 18rem">
+    <div class="row mt-1" style="margin: 0">
+    <div class=" col-lg-3 col-sm-6 col-md-6 col-12 text-center d-flex justify-content-center mb-2" >
+        <div class="card   " style="height: 100%;width: 18rem;border-radius: 0">
             <div class="card-header" style="background-color: #2b2773;color: white;height: 7rem">
                 <h4 class="font-weight-normal " style="padding-top: 10%">Testing Basic pack</h4>
             </div>
@@ -56,13 +36,13 @@ index
             </div>
             <div class="card-footer text-muted" style="background-color: white">
                 <button type="button" class="btn btn-lg btn-block btn-primary" style="border-radius: 0">
-                    <a href="{% url 'account_login' %}" style="color: white;text-decoration: none">Get started</a>
+                    <a href="/accounts/login/" style="color: white;text-decoration: none">Get started</a>
                 </button>
             </div>
         </div>
     </div>
-    <div class="col-lg-3 text-center">
-        <div class="card mb-4 " style="height: 100%;width: 18rem">
+    <div class=" col-lg-3 col-sm-6 col-md-6 col-12 text-center d-flex justify-content-center mb-2">
+        <div class="card  " style="height: 100%;width: 18rem;border-radius: 0">
             <div class="card-header" style="background-color: #2b2773;color: white;height: 7rem">
                 <h4 class="font-weight-normal " style="padding-top: 10%">Testing Value pack</h4>
                 <span class="badge badge-primary">Recommended</span>
@@ -81,13 +61,13 @@ index
             </div>
             <div class="card-footer text-muted" style="background-color: white">
                 <button type="button" class="btn btn-lg btn-block btn-primary" style="border-radius: 0">
-                    <a href="{% url 'account_login' %}" style="color: white;text-decoration: none">Get started</a>
+                    <a href="/accounts/login/" style="color: white;text-decoration: none">Get started</a>
                 </button>
             </div>
         </div>
     </div>
-    <div class="col-lg-3 text-center" style="margin-right: auto">
-        <div class="card mb-4 shadow-sm" style="height: 100%;width: 18rem">
+    <div class=" col-lg-3 col-sm-6 col-md-6 col-12 text-center d-flex justify-content-center mb-2">
+        <div class="card shadow-sm" style="height: 100%;width: 18rem;border-radius: 0">
             <div class="card-header" style="background-color: #2b2773;color: white;height: 7rem">
                 <h4 class=" font-weight-normal" style="padding-top: 10%">Enterprise</h4>
             </div>
@@ -106,8 +86,8 @@ index
             </div>
         </div>
     </div>
-    <div class="col-lg-3 text-center" style="margin-right: auto">
-        <div class="card mb-4 shadow-sm" style="height: 100%;width: 18rem">
+    <div class=" col-lg-3 col-sm-6 col-md-6 col-12 text-center d-flex justify-content-center mb-2">
+        <div class="card  shadow-sm" style="height: 100%;width: 18rem;border-radius: 0">
             <div class="card-header" style="background-color: #2b2773;color: white;height: 7rem">
                 <h4 class=" font-weight-normal" style="padding-top: 10%">Sourcing</h4>
             </div>
@@ -121,7 +101,7 @@ index
 
             </div>
             <div class="card-footer text-muted" style="background-color: white">
-                <a  target="_blank" href="{% url 'transactions:sourcing' %}">
+                <a target="_blank" href="/transactions/sourcing/">
                     <button type="button" class="btn btn-lg btn-block btn-primary" style="border-radius: 0">Developer request form</button>
                 </a>
 

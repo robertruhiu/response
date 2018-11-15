@@ -32,19 +32,15 @@
 
 <div class="container-fluid">
     <div class="row" style="height: 50vmax;margin: 0">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar" style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));">
-            <div class="row" style="width: 100%">
-                <div class="col-lg-12">
-                    <div>
-                        <a class="brandhome codelnlogo1" style="text-decoration: none" href="/home">CODELN</a>
+        <nav class="col-md-2 d-none d-lg-block col-lg-2 flex-column sidebar col-xl-2" style="background-color: #332d40">
+         <div class="row" style="width: 100%">
+             <div class="col-lg-12">
+                 <a class="brandhome codelnlogo1" style="text-decoration: none" href="/home">CODELN </a>
+             </div>
+         </div>
 
-                    </div>
 
-                </div>
-            </div>
-
-            <div class="sidebar-sticky">
-                <ul class="nav ">
+                <ul class="nav mb-2 ">
                     <li class="nav-item" >
                         <a class="nav-link disabled" style="color:#FFFFFF;" href="/">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
@@ -52,29 +48,23 @@
                         </a>
                     </li>
                     <li class="nav-item" >
-                        <a class="nav-link" style="color:#FFFFFF;" href="{% url 'frontend:invites' %}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
-                            Call to Apply
-                        </a>
-                    </li>
-
-                    <li class="nav-item" >
                         <a class="nav-link" style="color:#FFFFFF;" href="{% url 'frontend:inprogress' %}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
                             Ongoing projects
                         </a>
                     </li>
+
                     <li class="nav-item" >
-                        <a class="nav-link" style="color:#FFFFFF;" href="">
+                        <a class="nav-link" style="color:#FFFFFF;" href="/update_profile/">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+
                             My profile
-
-
-
                         </a>
                     </li>
 
+
                 </ul>
-            </div>
+
         </nav>
 
 
@@ -83,22 +73,35 @@
 
 
 {% block content %}
+    {% endblock %}
+
+</div>
+</div>
 
 
 
 
 
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        {% bootstrap_javascript %}
+        <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+        <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script>
+            feather.replace()
+        </script>
+
+        <script>
+            $(document).ready(function(e){
+                $(".img-check").click(function(){
+                    $(this).toggleClass("check");
+                });
+            });
+        </script>
 {% block script %}
-    {% bootstrap_javascript %}
-
-
-    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>
-        feather.replace()
-    </script>
-
 {% endblock %}
-{% endblock %}
+
 </body>
 </html>

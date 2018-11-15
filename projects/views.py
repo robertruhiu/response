@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from projects.models import Project,Projecttype,Devtype
+from projects.models import Project,Projecttype,Devtype,Framework
+
 
 
 # Create your views here.
@@ -40,5 +41,7 @@ def categories(request):
 
 
 def project(request, id):
+
+    frameworks =Framework.objects.all()
     project = Project.objects.get(id=id)
-    return render(request, 'projects/project.html', {'project': project})
+    return render(request, 'projects/project.html', {'project': project,'frameworks':frameworks,})

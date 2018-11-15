@@ -4,58 +4,96 @@
 {% endblock %}
 {%load static %}
 {% block content %}
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
-        <div class="navbar fixed-top fine border-bottom">
+    <main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+    <div class="d-none d-lg-block">
+        <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                    <h5 >Checkout</h5>
+                    <ul class="nav ml-auto">
 
-            <h5>Payment</h5>
 
-            <nav>
 
-                <ul class="nav ">
-                    <!-- Authentication Links -->
-                    <li><a class="nav-item" href="/pricing">Pricing</a></li>
-                    <li class="nav-item">
-                        <span data-feather="user">
+            {% if request.user.is_authenticated %}
 
-                        </span>
-                        {{ user.username }}
+            <li class="nav-item">
+                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+            </li>
+
+            {% else %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+            </li>
+            <li class="nav-item">
+                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+            </li>
+            {% endif %}
+
+
+    </ul>
+                </nav>
+    </div>
+
+    <!-----md devices adaptation------>
+    <div class="container d-lg-none">
+        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+            <h5 class="logoadapt h5" style="text-decoration: none" href="/home">Checkout</h5>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Menu
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'account_login' %}" >Ongoing tests</a>
+                            <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Create a test</a>
+                            <a class="dropdown-item" href="/pricing">Source candidates</a>
+                        </div>
                     </li>
                     {% if request.user.is_authenticated %}
                         <li class="nav-item">
-                            <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
+                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
+                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
+                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
                         </li>
                     {% endif %}
-
-
                 </ul>
-
-            </nav>
-        </div>
-
+            </div>
+        </nav>
     </div>
+    <div class="d-none d-lg-block" style="margin-top: 8%">
 
+</div >
+
+    <div class="d-lg-none"  style="margin-top: 7em">
+
+</div>
     <div class="row">
 
-    <div class="col-lg-6" style="margin: auto">
+    <div class="col-lg-6 col-md-12 d-flex justify-content-center " style="margin-left: auto;margin-right: auto">
     <div class="card" style="width: 28em;box-shadow:0 20px 50px rgba(0,0,0,.1);">
-        <img class="card-img-top" style="width: 75%;margin: auto" src="/static/frontend/images/ill/card.svg" alt="Card image cap">
+        <img class="card-img-top img-fluid" style="width: 69%;margin: auto" src="/static/frontend/images/ill/card.svg" alt="Card image cap">
 
         <div class="card-body">
             <div class=" text-center h5" style="padding-top: 10%">Payment methods</div>
             <hr>
             <div class="row" style="margin: auto">
-                <div class="col-lg-4">
-                    <h6 style="margin-top:10% ">Flutterwave</h6>
+                <div class="col-lg-6 col-md-12">
+                    <h6 class="text-center" style="margin-top:3% ">Flutterwave</h6>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-12">
                     <form style="text-align: -webkit-center;">
                         <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
                         <script src="https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
@@ -115,3 +153,7 @@
         }
     </script>
 {% endblock %}
+
+</div>
+</div>
+</main>

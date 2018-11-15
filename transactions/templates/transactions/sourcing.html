@@ -1,47 +1,44 @@
 {% extends 'recruiterbase.html' %}
 {% load bootstrap4 %}
 {% block content %}
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 ">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
-        <div class="navbar fixed-top fine border-bottom">
-
-
-            <h5>Source Developers</h5>
-
-            <nav>
-
-                <ul class="nav ">
-                    <!-- Authentication Links -->
-                    <li class="nav-item">
-                        <span data-feather="user">
-
-                        </span>
-                        {{ user.first_name }} {{ user.last_name }}
-                    </li>
-                    {% if request.user.is_authenticated %}
-                    <li class="nav-item">
-                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
-                    </li>
-                    {% endif %}
-
-
-                </ul>
-
-            </nav>
-        </div>
+<main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+    <div class="d-none d-lg-block">
+        <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                    <h5 >Source Developers</h5>
+        </nav>
     </div>
 
-    <form action="." method="post">
+    <!-----md devices adaptation------>
+    <div class="container d-lg-none">
+        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+            <h5 style="color: white">Source Developers</h5>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+
+            </div>
+        </nav>
+    </div>
+
+<div class="d-none d-lg-block" style="margin-top: 8%">
+
+</div >
+
+<div class="d-lg-none"  style="margin-top: 5em">
+
+</div>
+<div class="row">
+    <div class="col col-sm col-md col-lg-8">
+        <form action="." method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
         <button class="btn btn-primary" type="submit">Send</button>
     </form>
+
+    </div>
+</div>
+
+
     </main>
 {% endblock %}

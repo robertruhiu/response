@@ -4,50 +4,91 @@ my projects
 {% endblock %}
 {%load static %}
 {% block content %}
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
-        <div class="navbar fixed-top fine border-bottom">
-
-            <h5>My Projects</h5>
-
-            <nav>
-
-                <ul class="nav ">
-                    <!-- Authentication Links -->
-                    <li class="nav-item">
-                        <span data-feather="user">
-
-                        </span>
-                        {{ user.first_name }} {{ user.last_name }}
-                    </li>
-                    {% if request.user.is_authenticated %}
-                    <li class="nav-item">
-                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
-                    </li>
-                    {% endif %}
+<main role="main" class="col-md-10 col-lg-10 ml-lg-auto   px-4 ">
+    <div class="d-none d-lg-block">
+        <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                    <h5 >My projects</h5>
+                    <ul class="nav ml-auto">
 
 
-                </ul>
 
-            </nav>
-        </div>
+            {% if request.user.is_authenticated %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+            </li>
+
+            {% else %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+            </li>
+            <li class="nav-item">
+                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+            </li>
+            {% endif %}
+
+
+    </ul>
+                </nav>
     </div>
 
+    <!-----md devices adaptation------>
+    <div class="container d-lg-none">
+        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+            <a class="logoadapt h5" style="text-decoration: none" href="">My projects</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Menu
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'account_login' %}" >Ongoing tests</a>
+                            <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Create a test</a>
+                            <a class="dropdown-item" href="/pricing">Source candidates</a>
+                        </div>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+<div class="d-none d-lg-block" style="margin-top: 8%">
+
+</div >
+
+<div class="d-lg-none"  style="margin-top: 7em">
+
+</div>
 
     <div class="row">
         {% for transaction in transactions %}
             {% if transaction.stage == "complete" %}
-                <div class="col-lg-3 mb-2" style="margin-left: 2%;">
+                <div class="col-lg-4 col-md-4 col-sm-6 col mb-2 " >
                     <a href="{% url 'frontend:tracker' transaction.id %}" style="text-decoration: none">
-                        <div class="card" style="width: 18rem;border-radius: 0;height: 100%">
-                            <img class="card-img-top" src="{{ transaction.project.projectimage1}}" alt="Card image cap">
+                        <div class="card" style="height: 100%;border-radius: 0">
+                            <img class="img-fluid" src="{{ transaction.project.projectimage1}}" alt="Card image cap">
 
                             <div class="card-body">
                                 <h5 class="card-title">{{ transaction.project.name}}</h5>
@@ -55,9 +96,7 @@ my projects
 
 
                             </div>
-                            <div class="card-footer text-muted">
-                                <p>{{ transaction.created}}</p>
-                            </div>
+
                         </div>
                     </a>
 
@@ -69,10 +108,10 @@ my projects
 
 
         {% endfor %}
-        <div class="col-lg-3" style="margin-left: 2%">
+        <div class="col-lg-4 col-md-4 col-sm-6 col mb-2" >
             <a href="{% url 'projects:categories' %}" style="text-decoration: none">
-                <div class="card" style="width: 18rem;border-radius: 0;">
-                    <img class="card-img-top" src="{%static 'frontend/images/add.svg' %}" style="width: 45%;margin-right: auto;margin-left: auto" alt="Card image cap">
+                <div class="card " style="border-radius: 0;height: 100%">
+                    <img class="img-fluid " style="width: 50%;margin: auto" src="{%static 'frontend/images/add.svg' %}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title text-center" style="margin-top: 1em">Create a new test</h5>
 

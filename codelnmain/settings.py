@@ -26,7 +26,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = config('SECRET_KEY', default='SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ENVIRONMENT = config('ENVIRONMENT', default='local')
 
@@ -55,13 +55,15 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'bulma',
+
     # 'django_filters',
     'invitations',
     'allauth.socialaccount.providers.linkedin',
     'storages',
     'bootstrap4',
-    'django_forms_bootstrap',
+    'django_forms_bootstrap'
+
+
 
 ]
 

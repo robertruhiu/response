@@ -25,46 +25,47 @@
     {% endblock %}
 </head>
 <body>
-
 <div class="container-fluid">
-    <div class="row" style="height: 50vmax;margin: 0">
-        <nav id="sidebar" class="col-md-2 col-lg-2 col-xl-2 d-none d-md-block bg-light sidebar" style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));">
-            <div class="row" style="width: 100%">
-                <div class="col-lg-12">
+    <div class="row" style="height: 50vmax;margin-left: 0;margin-right: 0">
+    <nav class="col-md-2 d-none d-lg-block col-lg-2 flex-column sidebar col-xl-2" style="background-color: #332d40">
+         <div class="row" style="width: 100%">
+             <div class="col-lg-12">
+                 <a class="brandhome codelnlogo1" style="text-decoration: none" href="/home">CODELN </a>
+             </div>
+         </div>
 
-                        <a class="brandhome codelnlogo1" style="text-decoration: none" href="/home">CODELN </a>
 
 
-
-
-                </div>
-            </div>
-
-            <div class="sidebar-sticky">
-                <ul style="margin-left: -15%;">
-                    <li class="nav-item" >
-                        <a class="nav-link " style="color:#FFFFFF;" href="{% url 'frontend:my-activity' %}">
-                            <span data-feather="home"></span>
+            <ul class="nav  mb-2 ">
+              <li class="nav-item">
+                <a class="nav-link" style="color: white" href="{% url 'frontend:my-activity' %}">
+                    <span data-feather="home"></span>
                             Ongoing tests
-                        </a>
-                    </li>
-                    <span></span>
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:#FFFFFF;" href="{% url 'projects:categories' %}">
-                            <span data-feather="book"></span>
-                            Create new test
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a  class="nav-link" style="color:#FFFFFF;" href="{% url 'transactions:sourcing' %}">
-                            <span data-feather="users"></span>
-                            Source Candidates
-                        </a>
-                    </li>
 
-                </ul>
-            </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color: white" href="{% url 'projects:categories' %}">
+                  <span data-feather="book"></span>
+                            Create new test
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color: white" href="{% url 'transactions:sourcing' %}">
+                     <span data-feather="users"></span>
+                            Source Candidate
+
+                </a>
+              </li>
+
+            </ul>
+
+
         </nav>
+
+
+
+
 
 
 
@@ -76,7 +77,8 @@
         {% block content %}
 
         {% endblock %}
-
+    </div>
+</div>
 
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

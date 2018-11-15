@@ -4,15 +4,13 @@ report
 {% endblock %}
 {%load static %}
 {% block content %}
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
-        <div class="navbar fixed-top fine border-bottom">
-
-
-            <ul class="nav nav-tabs" style="border-bottom: 0" id="myTab" role="tablist">
+<main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+    <div class="d-none d-lg-block">
+        <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                    <ul class="nav nav-tabs" style="border-bottom: 0" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active " id="overview-tab" data-toggle="tab" href="#overview" role="tab"
-                       aria-controls="overview" aria-selected="true">Overview</a>
+                       aria-controls="overview" aria-selected="true">Report Overview</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " id="criteria-tab" data-toggle="tab" href="#criteria" role="tab"
@@ -26,35 +24,88 @@ report
 
             </ul>
 
-
-
-        </div>
+                </nav>
     </div>
+
+    <!-----md devices adaptation------>
+    <div class="container d-lg-none">
+        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+            <ul class="nav nav-tabs" style="border-bottom: 0" id="myTab" role="tablist">
+                <li class="nav-item" style="margin-bottom: 1em;margin-top: 1em">
+                    <a class="nav-link1 active " style="color: white;text-decoration: none" id="overview-tab" data-toggle="tab" href="#overview" role="tab"
+                       aria-controls="overview" aria-selected="true">Report Overview</a>
+                </li>
+                <li class="nav-item" style="margin-bottom: 1em;margin-top: 1em">
+                    <a class="nav-link1 " id="criteria-tab" style="color: white;text-decoration: none" data-toggle="tab" href="#criteria" role="tab"
+                       aria-controls="criteria" aria-selected="false">Grading criteria </a>
+                </li>
+                <li class="nav-item" style="margin-bottom: 1em;margin-top: 1em">
+                    <a class="nav-link1 " id="fraud-tab" style="color: white;text-decoration: none" data-toggle="tab" href="#fraud" role="tab"
+                       aria-controls="fraud" aria-selected="false">Fraud detection </a>
+                </li>
+
+
+            </ul>
+            <button class="navbar-toggler ml-auto" style="margin-top: -1em" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+
+                <ul class="nav">
+
+
+                        <li class="nav-item">
+                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                        </li>
+
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+<div class="d-none d-lg-block" style="margin-top: 8%">
+
+</div >
+
+<div class="d-lg-none"  style="margin-top: 8em">
+
+</div>
+
+
+
+
     <div class="tab-content" id="myTabContent">
-        <!---overivew details-->
+        <!---overview details-->
         <div class="tab-pane fade show active " id="overview" role="tabpanel" aria-labelledby="overview-tab">
             <section>
                 <div class="card" style="width: 100%;border-radius: 0">
 
                     <div class="card-body">
                         <div class="row" style="margin-left: 0;margin-right: 0">
-                            <div class="col-lg-4">
-                                <img style="width: 18rem" src="../../../media/users/2018/11/08/dennis.jpg">
+                            <div class="col-lg-3 d-none d-sm-block d-lg-block d-md-block col-md-3 col-sm-4 mb-3 col-xl-2 col-12 ">
+                                <img class="img-fluid" style="" src="../../../static/frontend/images/how/elohor.jpg" alt="profile picture">
 
                             </div>
+                            <div class="col-lg-3 d-sm-none d-md-none d-lg-none  col-md-3 col-sm-4 mb-3 col-xl-2 col-12 ">
 
-                            <div class="col-lg-4">
+                                <img class=" img-fluid" style="" src="../../../static/frontend/images/how/elohor.jpg" alt="profile picture">
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-8 mb-3 col">
                                 <div class="mt-3 ml-3">
-                                    <div><b>Candidate name:</b>dennis</div>
-                                    <div><b>Email:</b>dennis@codeln.com</div>
-                                    <div><a href="https://github.com/robertruhiu">Github profile</a></div>
+                                    <div><b>Candidate name:</b>elohor thomas</div>
+                                    <div><b>Email:</b>elohor@codeln.com</div>
+                                    <div><a href="None">Github profile</a></div>
 
                                 </div>
 
 
                             </div>
 
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="card" style="width: 100%;border-radius: 0;margin-right: auto;margin-left: auto">
 
                                     <div class="card-body text-center">
@@ -75,49 +126,36 @@ report
             </section>
 
             <br>
-
+            <!-----Project details------>
             <section>
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="h4 text-center">Ilightup</div>
+                        <div class="h5 text-center">Cryptoprize</div>
 
 
                     </div>
                 </div>
                 <div class="row">
 
-                    <div class="col-lg-6 text-center">
-                        <div class="card" style="width: 100%;border: 0">
+                    <div class="col-lg-6 col-md-6 col-sm-12 ">
+                        <div class="card" style="border: 0">
 
                             <div class="card-body">
-                                <h5 class="card-title">Project description</h5>
-                                <p class="card-text">Karaoke style video aggregator for your needs. User should fill in data for the song and on the dashboard the song should appear.Viewing a song should autoplay it and show its lyrics</p>
+                                <h5 class="card-title text-center">Project description</h5>
+                                <p class="card-text">You have been approached by a client who has a healthy interest in Cryptocurrency. He wants to know how the various coins are performing against US Dollars. His Company is mostly interested in Bitcoin. What his team needs is a dashboard that shows the price of Bitcoin at any point in time without having to refresh the browser. They need the pricing information in realtime because that'd influence their decision whether to buy or sell.</p>
 
                             </div>
                         </div>
 
                     </div>
-                    <div class="col-lg-3 text-center">
-                        <div class="card" style="width: 100%;border: 0">
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-center">
+                        <div class="card" style="border: 0">
 
                             <div class="card-body">
-                                <h5 class="card-title">Concept tested</h5>
+                                <h5 class="card-title">Tech stack used</h5>
                                 <p class="card-text">
-                                    <span class="badge badge-info">Crud operations</span>
-                                </p>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div class="col-lg-3 text-center">
-                        <div class="card" style="width: 100%;border: 0">
-
-                            <div class="card-body">
-                                <h5 class="card-title">Tech stack</h5>
-                                <p class="card-text">
-                                    <span class="badge badge-info">angular</span>
+                                    <span class="badge badge-info">express js</span>
                                     <span class="badge badge-info">javascript</span>
 
                                 </p>
@@ -132,10 +170,10 @@ report
 
             <br>
 
-
+            <!-----Key competencies------>
             <section>
                 <div class="row" style="margin-left: 0;margin-right: 0">
-                    <div class="col-lg-12 text-center h4">
+                    <div class="col-lg-12 col text-center h5">
                         Key competencies
                     </div>
                 </div>
@@ -143,7 +181,7 @@ report
                     <div class="card-body">
                         <div class="row text-center" style="margin-left: 0;margin-right: 0">
 
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col">
                                 <div class="h6"> Deliverables</div>
                                 <div class="card competencecard">
 
@@ -166,7 +204,7 @@ report
 
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col">
                                 <div class="h6">Error handling</div>
                                 <div class="card competencecard">
 
@@ -189,7 +227,7 @@ report
 
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col">
                                 <div class="h6"> Project security</div>
                                 <div class="card competencecard">
 
@@ -212,7 +250,7 @@ report
 
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col">
                                 <div class="h6"> Code readability</div>
                                 <div class="card competencecard">
 
@@ -235,7 +273,7 @@ report
 
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col">
                                 <div class="h6">Time used</div>
                                 <div class="card competencecard">
 
@@ -264,11 +302,11 @@ report
             </section>
 
             <br>
-
+            <!-----deliverables------>
             <section>
                 <div class="row" style="margin-left: 0;margin-right: 0">
 
-                    <div class="col-lg-12 text-center h4">
+                    <div class="col-lg-12 col text-center h5">
                         Project deliverables
                     </div>
                 </div>
@@ -286,32 +324,32 @@ report
                         <tbody>
                         <tr>
 
-                            <td>Create data models of (user and songs)</td>
+                            <td>sb</td>
 
                             <td><span class="badge badge-success">Complete</span></td>
                         </tr>
                         <tr>
 
-                            <td>View song page that play the song chosen from dashboard should contain a video panel and lyrics panel
+                            <td>g
                             </td>
 
                             <td><span class="badge badge-success">Complete</span></td>
                         </tr>
                         <tr>
 
-                            <td>Dashboard view to  show  videos in database.
+                            <td>fd
                             </td>
                             <td><span class="badge badge-warning">3/4 complete</span></td>
                         </tr>
                         <tr>
 
-                            <td>Song data form view that saves in the database.</td>
+                            <td>None</td>
                             <td><span class="badge badge-warning">1/2 Complete</span></td>
                         </tr>
 
                         <tr>
 
-                            <td>User management each user should have own saved videos</td>
+                            <td>None</td>
                             <td><span class="badge badge-warning">1/2 Complete</span></td>
                         </tr>
 
@@ -330,12 +368,12 @@ report
 
         </div>
         <!---metrics-->
-        <div class="tab-pane fade " id="criteria" role="tabpanel" aria-labelledby="criteria-tab">
+        <div class="tab-pane fade  " id="criteria" role="tabpanel" aria-labelledby="criteria-tab">
 
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
                         <div class="card metric">
                             <div class="card-body text-center">
                                 <div class="card-title h4"><strong>Tests Passed</strong></div>
@@ -345,7 +383,7 @@ report
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
                         <div class="card metric">
                             <div class="card-body text-center">
                                 <div class="card-title h4"><strong>Tests Failed</strong></div>
@@ -355,7 +393,7 @@ report
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
                         <div class="card metric">
                             <div class="card-body text-center">
                                 <div class="card-title h4"><strong>Warnings</strong></div>
@@ -365,7 +403,7 @@ report
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
                         <div class="card metric">
                             <div class="card-body text-center">
                                 <div class="card-title h4"><strong>Errors</strong></div>
@@ -374,11 +412,8 @@ report
                             </div>
                         </div>
                     </div>
-                </div>
 
-
-                <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
                         <div class="card metric">
                             <div class="card-body text-center">
                                 <div class="card-title h4"><strong>Lines of Code</strong></div>
@@ -388,7 +423,7 @@ report
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
                         <div class="card metric">
                             <div class="card-body text-center">
                                 <div class="card-title h4"><strong>Duplications</strong></div>
@@ -399,7 +434,7 @@ report
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
                         <div class="card metric">
                             <div class="card-body text-center">
                                 <div class="card-title h4"><strong>Classes</strong></div>
@@ -409,7 +444,7 @@ report
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
                         <div class="card metric">
                             <div class="card-body text-center">
                                 <div class="card-title h4"><strong>Comments</strong></div>
@@ -418,11 +453,9 @@ report
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
                         <div class="card metric">
                             <div class="card-body text-center">
                                 <div class="card-title h4"><strong>Dependencies</strong></div>
@@ -431,7 +464,7 @@ report
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
                         <div class="card metric">
                             <div class="card-body text-center">
                                 <div class="card-title h4"><strong>Run time</strong></div>
@@ -442,7 +475,7 @@ report
                     </div>
 
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
                         <div class="card metric">
                             <div class="card-body text-center">
                                 <div class="card-title h4"><strong>Technical Debt</strong></div>
@@ -452,7 +485,7 @@ report
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
                         <div class="card metric">
                             <div class="card-body text-center">
                                 <div class="card-title h4"><strong>Quality Gates</strong></div>
@@ -472,10 +505,10 @@ report
         <div class="tab-pane fade " id="fraud" role="tabpanel" aria-labelledby="fraud-tab">
 
 
-            <div class="container-fluid">
-               <section class="jumbotron jumbo2">
-                <div class="row" style="margin-left: 0;margin-right: 0;margin-top: 2%">
-                    <div class="col-md-6 col-lg-6 col-xl-6 text-center" style="margin-left: auto;margin-right: auto">
+
+
+                <div class="row " style="margin-left: 0;margin-right: 0;margin-bottom: 1em;background-color: aliceblue">
+                    <div class="col-md-12 col-lg-6 col-xl-6 text-center" style="margin-left: auto;margin-right: auto">
                         <p class="h3">Fraud detection and mitigation
                             <br>
                         </p><p>session imagery of candidate during coding on our monitored workspace</p>
@@ -487,46 +520,46 @@ report
                     </div>
 
                 </div>
-            </section>
-            </div>
+
+
             <div class="row">
-                <div class="col-lg-4">
-                    <img style="width: 18em" src="../../../static/frontend/images/fraud/1.jpg">
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3 ">
+                    <img class="img-fluid" src="../../../static/frontend/images/fraud/1.jpg">
 
                 </div>
-                <div class="col-lg-4">
-                    <img style="width: 18em" src="../../../static/frontend/images/fraud/2.jpg">
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/fraud/2.jpg">
 
                 </div>
-                <div class="col-lg-4">
-                    <img style="width: 18em" src="../../../static/frontend/images/fraud/3.jpg">
-                    
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/fraud/3.jpg">
+
 
                 </div>
-                <div class="col-lg-4">
-                    <img style="width: 18em" src="../../../static/frontend/images/fraud/4.jpg">
-                    
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/fraud/4.jpg">
+
 
                 </div>
-                <div class="col-lg-4">
-                    <img style="width: 18em" src="../../../static/frontend/images/fraud/5.jpg">
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/fraud/5.jpg">
 
                 </div>
-                <div class="col-lg-4">
-                    <img style="width: 18em" src="../../../static/frontend/images/fraud/6.jpg">
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/fraud/6.jpg">
 
                 </div>
-                <div class="col-lg-4">
-                    <img style="width: 18em" src="../../../static/frontend/images/fraud/7.jpg">
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/fraud/7.jpg">
 
                 </div>
-                <div class="col-lg-4">
-                    <img style="width: 18em" src="../../../static/frontend/images/fraud/8.jpg">
-                    
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/fraud/8.jpg">
+
 
                 </div>
-                <div class="col-lg-4">
-                    <img style="width: 18em" src="../../../static/frontend/images/fraud/9.jpg">
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/fraud/9.jpg">
 
                 </div>
 
@@ -538,7 +571,6 @@ report
 
 
     </div>
-
 
 </main>
 {% endblock %}

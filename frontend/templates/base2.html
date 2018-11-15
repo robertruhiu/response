@@ -12,12 +12,12 @@
 
         {% endblock %} | Codeln</title>
 
-    {% bootstrap_css %}
 
 
 
 
 
+    <link rel="stylesheet" href="{% static 'frontend/css/bootstrap.min.css' %}" >
     <link rel="stylesheet" href="{% static 'frontend/css/home.css' %}">
     <link rel="stylesheet" href="{% static 'frontend/css/stay.css' %}">
 
@@ -30,11 +30,13 @@
 <div class="container">
 <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
     <a class="brandhome codelnlogo" style="text-decoration: none" href="/home">CODELN</a>
-    <span class="badge badge-primary">BETA</span>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+
+   <button class="navbar-toggler"  data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+        <span style="color: white" data-feather="menu"></span>
+
+  </button>
 
 
 
@@ -44,7 +46,7 @@
         <ul class="nav">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Product
+                    Products
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{% url 'account_login' %}" >Screening</a>
@@ -82,10 +84,15 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-{% bootstrap_javascript %}
-
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        {% bootstrap_javascript %}
+        <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+        <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script>
+            feather.replace()
+        </script>
 
 
 

@@ -5,44 +5,21 @@ index
 {%load static %}
 {% block content %}
 
-<!---- Hero image intro----->
-<div class="jumbotron1 theme--dark d-none d-lg-block" style="height: 7vmax;">
-    <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/home.jpg" class="jumbotron1__image">
-        <div class="jumbotron1__background"
-             style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
-        <div class="hero-text">
+<div class="jumbotron jumbotron2">
+        <div class="container">
+          <div class="">
 
-            <div class="display-6 h1 d-none d-lg-block" style="color: white" >How It works
-            </div>
+            <div class=" h3 text-center d-none d-lg-block " style="color: white">How it works</div>
+
+              <div class="d-lg-none h5 text-center" style="color: white;margin-top: 4em;">How it works</div>
         </div>
-
-
-    </div>
-</div>
-<!---- Hero image intro sm to md----->
-<div class="jumbotron1 theme--dark d-lg-none" style="height: 20vmax;">
-    <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/home.jpg" class="jumbotron1__image">
-        <div class="jumbotron1__background"
-             style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
-        <div class="hero-text">
-
-
-
-            <div class="d-lg-none h5" style="color: white;margin-top: 2em;" >How it works</div>
-
-
-
         </div>
-
-
-    </div>
-</div>
-
+      </div>
 <div class="section">
-    <div class="row mt-2" style="margin: 0">
-        <div class="col-lg-6">
-            <div style="margin-left: 33%;margin-top: 10%">
-                <b class="display-7 h6">Pick a Test </b>
+    <div class="row " style="margin: 0">
+        <div class="col-lg-6 col-sm-12 col-md-6 col-xl-6 col-12">
+            <div >
+                <b class=" h5 text-center">Pick a Test </b>
                 <p>
                     We offer  project-based tests which represents real world tasks.
                     From research, these kinds of tests have proven to be a true test of a Programmers prowess.
@@ -55,9 +32,9 @@ index
 
 
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-sm-12 col-md-6 col-xl-6 col-12">
             <div class="card" style="border: 0" >
-                <img class="card-img-top" src="../../static/frontend/images/how/categories.PNG" alt="Card image cap">
+                <img class="img-fluid" src="../../static/frontend/images/how/categories.PNG" alt="Card image cap">
             </div>
 
         </div>
@@ -66,15 +43,15 @@ index
 
 
     <div class="row" style="margin: 0">
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-sm-12 col-md-6 col-xl-6 col-12 order-2 order-sm-2 order-md-1 order-lg-1 order-xl-1">
             <div class="card"  style="border: 0">
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="../../static/frontend/images/video/candidate.gif"></iframe>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
-            <div style="margin-right: 33%;margin-top: 10%">
+        <div class="col-lg-6 col-sm-12 col-xl-6 col-12 col-md-6 order-md-2 order-1 order-lg-2 order-xl-2 order-sm-1">
+            <div style="margin-top: 1em">
                 <b class="display-7 h6">Invite Candidates </b>
                 <p>
                     Easily add candidates list, candidates are automatically invited to an online
@@ -90,8 +67,8 @@ index
 
     <hr>
     <div class="row" style="margin: 0">
-        <div class="col-lg-6">
-            <div style="margin-left: 33%;margin-top: 10%">
+        <div class="col-lg-6 col-sm-12 col-md-6 col-xl-6">
+            <div style="">
                 <b class="display-7 h6">Receive Reports</b>
                 <p>
                     Once candidates are done with the test, we conduct code analysis and evaluate their coding skills
@@ -104,7 +81,7 @@ index
                 </p>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-sm-12 col-md-6 col-xl-6">
             <div class="card"  style="border: 0">
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="../../static/frontend/images/video/feed.gif"></iframe>
@@ -116,55 +93,57 @@ index
 </div>
 
     <!--footer-->
-    <footer class="jumbotron jumbofoot"  >
-        <div class="container">
-            <div class="row">
-                <div class="directory col-xs-6 col-sm-3" style="margin-left: auto">
-                    <h3 class="directory-title">Menu</h3>
-                    <ul class="directory-items list-unstyled">
-                        <li><a class="colorlink" href="/pricing">Pricing</a></li>
-                        <li><a class="colorlink" href="{% url 'account_login' %}">Testing</a></li>
-                        <li><a class="colorlink" target="_blank" href="{% url 'transactions:sourcing' %}">Sourcing</a></li>
+    <footer class="jumbotron jumbofoot">
+    <div class="container">
+        <div class="row">
 
-                    </ul>
-                </div>
+        <div class="col-6 col-md">
+          <h5>Menu</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="/pricing">Pricing</a></li>
+            <li><a class="text-muted" href="/accounts/login/">Testing</a></li>
+            <li><a class="text-muted" href="/transactions/sourcing/">Sourcing</a></li>
 
-                <div class="directory col-xs-6 col-sm-3">
-                    <h3 class="directory-title">Resources</h3>
-                    <ul class="directory-items list-unstyled">
-                        <li><a class="colorlink" href="/privacy">Privacy policy</a></li>
-                        <li><a class="colorlink" href="/terms">Terms</a></li>
-                        <li><a class="colorlink" href="/credits">Credits</a></li>
-
-                    </ul>
-                </div>
-                <div class="directory col-xs-6 col-sm-3" style="margin-right: auto">
-                    <h3 class="directory-title">Contact</h3>
-                    <ul class="directory-items list-unstyled">
-                        <li>
-
-                            <i><span data-feather="mail"></span>info@codeLn.com</i>
-                        </li>
-                        <li>
-                            <a href="https://twitter.com/Codeln_spaces" target="_blank">
-                                <i><span data-feather="twitter"></span></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/company/codeln/" target="_blank">
-                                <i><span data-feather="linkedin"></span></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.facebook.com/CodelnSpaces/" target="_blank">
-                                <i><span data-feather="facebook"></span></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+          </ul>
         </div>
-    </footer>
+        <div class="col-6 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="/privacy">Privacy</a></li>
+            <li><a class="text-muted" href="/terms">Terms</a></li>
+
+
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Contact</h5>
+          <ul class="list-unstyled text-small">
+              <li>
+              <a href="mailto:info@codeln.com" target="_top">
+                  <i><span data-feather="mail"></span> info@codeLn.com</i>
+              </a>
+              <li>
+                <a class="text-muted" href="https://www.linkedin.com/company/codeln/" target="_blank">
+                <i><span data-feather="linkedin"></span></i>
+                </a>
+            </li>
+            <li>
+                <a class="text-muted" href="https://www.linkedin.com/company/codeln/" target="_blank">
+                <i><span data-feather="twitter"></span></i>
+                </a>
+            </li>
+            <li>
+                <a class="text-muted" href="https://www.facebook.com/CodelnSpaces/" target="_blank">
+                <i><span data-feather="facebook"></span></i>
+                </a>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+</footer>
 
 
 

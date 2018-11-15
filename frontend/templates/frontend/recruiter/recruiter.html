@@ -4,59 +4,102 @@ recruiter dashboard
 {% endblock %}
 {% load static %}
 {% block content %}
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 ">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
-        <div class="navbar fixed-top fine border-bottom">
+<main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+    <div class="d-none d-lg-block">
+        <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                    <h5 >Home</h5>
+                    <ul class="nav ml-auto">
 
 
-            <h5>Home</h5>
 
-            <nav>
+            {% if request.user.is_authenticated %}
 
-                <ul class="nav ">
-                    <!-- Authentication Links -->
-                    <li class="nav-item">
-                        <span data-feather="user">
+            <li class="nav-item">
+                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+            </li>
 
-                        </span>
-                        {{ user.first_name }} {{ user.last_name }}
+            {% else %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+            </li>
+            <li class="nav-item">
+                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+            </li>
+            {% endif %}
+
+
+    </ul>
+                </nav>
+    </div>
+
+    <!-----md devices adaptation------>
+    <div class="container d-lg-none">
+        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+            <a class="logoadapt h5" style="text-decoration: none" href="/home">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Menu
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'account_login' %}" >Ongoing tests</a>
+                            <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Create a test</a>
+                            <a class="dropdown-item" href="/pricing">Source candidates</a>
+                        </div>
                     </li>
                     {% if request.user.is_authenticated %}
-                    <li class="nav-item">
-                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
-                    </li>
+                        <li class="nav-item">
+                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+                        </li>
                     {% else %}
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
-                    </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                        </li>
                     {% endif %}
-
-
                 </ul>
-
-            </nav>
-        </div>
+            </div>
+        </nav>
     </div>
-    <div class="alert alert-primary " role="alert">
+
+<div class="d-none d-lg-block" style="margin-top: 8%">
+    <div class="alert alert-primary "  role="alert">
         Welcome {{ user.first_name }} {{ user.last_name }} to Codeln.Choose one of the paths below to start
 
     </div>
+</div >
+
+<div class="d-lg-none"  style="margin-top: 7em">
+    <div class="alert alert-primary d-lg-none"  role="alert">
+        Welcome {{ user.first_name }} {{ user.last_name }} to Codeln.Choose one of the paths below to start
+
+    </div>
+</div>
 
 
     <div class="row">
 
         {% if transactions %}
 
-            <div class="col-lg-4" style="width: 100%;">
-                <div class="card recruithomecard" style="margin: auto">
+            <div class=" col-12 col-md-4 col-sm-6 col-lg-4 mb-5" >
+                <div class="card recruithomecard" >
 
 
                     <a   href="{% url 'frontend:my-activity' %}">
                         <div style="text-align: -webkit-center;">
-                            <img class="card-img-top "  src="../../../static/frontend/images/management.svg" style="width: 50%;margin-left: 25%;margin-right: 25%" alt="Card image cap">
+                            <img class="img-fluid "  src="../../../static/frontend/images/management.svg" style="width: 30%;margin-left: 25%;margin-right: 25%" alt="Card image cap">
                         </div>
 
                         <div class="card" style="border: 0 ">
@@ -77,13 +120,11 @@ recruiter dashboard
 
         {% endif %}
 
-
-
-        <div class="col-lg-4" style="width: 100%;">
-            <div class="card recruithomecard" style="margin: auto">
+        <div class=" col-12 col-md-4 col-sm-6 col-lg-4 mb-5" >
+            <div class="card recruithomecard" >
             <a   href="{% url 'projects:categories' %}">
                 <div style="text-align: -webkit-center;">
-                <img class="card-img-top" src="../../../static/frontend/images/interview.svg" style="width: 50%;margin-left: 25%;margin-right: 25%" alt="Card image cap">
+                <img class="img-fluid"  src="../../../static/frontend/images/interview.svg" style="width: 30%;margin-left: 25%;margin-right: 25%" alt="Card image cap">
                 </div>
             <div class="card" style="border: 0 ">
 
@@ -98,11 +139,11 @@ recruiter dashboard
             </a>
             </div>
         </div>
-        <div class="col-lg-4" style="width: 100%;">
-            <div class="card recruithomecard" style="margin: auto">
+        <div class=" col-12 col-md-4 col-sm-6 col-lg-4 mb-5" >
+            <div class="card recruithomecard" >
             <a target="_blank" href="{% url 'transactions:sourcing' %}">
                 <div style="text-align: -webkit-center;">
-                <img class="card-img-top" src="../../../static/frontend/images/search.svg" style="width: 50%;margin-left: 25%;margin-right: 25%" alt="Card image cap">
+                <img class="img-fluid" src="../../../static/frontend/images/search.svg" style="width: 30%;margin-left: 25%;margin-right: 25%" alt="Card image cap">
                 </div>
                 <div class="card" style="border: 0 ">
 
@@ -118,10 +159,11 @@ recruiter dashboard
             </div>
         </div>
 
+
     </div>
 
 </main>
 
-</div>
+
 
 {% endblock %}

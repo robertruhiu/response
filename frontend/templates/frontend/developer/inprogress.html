@@ -4,54 +4,93 @@ Project in progress
 {% endblock %}
 {%load static %}
 {% block content %}
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+<main role="main" class="col-md-10 col-lg-10 ml-lg-auto   px-4 ">
+    <div class="d-none d-lg-block">
+        <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                    <h5 >Projects in progress</h5>
+                    <ul class="nav ml-auto">
 
 
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
-        <div class="navbar fixed-top fine border-bottom">
 
-            <h5>Projects in progress</h5>
+            {% if request.user.is_authenticated %}
 
-            <nav>
+            <li class="nav-item">
+                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+            </li>
 
-                <ul class="nav ">
-                    <li class="nav-item">
-                        <span data-feather="user">
+            {% else %}
 
-                        </span>
-                        {{ user.first_name }} {{ user.last_name }}
-                    </li>
-                    <!-- Authentication Links -->
-                    {% if request.user.is_authenticated %}
-                    <li class="nav-item">
-                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
-                    </li>
-                    {% endif %}
+            <li class="nav-item">
+                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+            </li>
+            <li class="nav-item">
+                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+            </li>
+            {% endif %}
 
 
-                </ul>
-
-            </nav>
-        </div>
+    </ul>
+                </nav>
     </div>
 
+    <!-----md devices adaptation------>
+    <div class="container d-lg-none">
+        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+            <a class="logoadapt h5" style="text-decoration: none" href="">Projects in progress</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sidebar menu options
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'frontend:inprogress' %}">Ongoing Projects</a>
+                            <a class="dropdown-item" href="/update_profile/">My profile</a>
+                        </div>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+<div class="d-none d-lg-block" style="margin-top: 8%">
+
+</div >
+
+<div class="d-lg-none"  style="margin-top: 7em">
+
+</div>
     <div class="row">
         {% for foo in candidates %}
 
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-md-4 col-sm-4 col">
 
-            <a href="{% url 'frontend:projectdetails' foo.transaction.project.id %}">
+            <a href="{% url 'frontend:projectdetails' foo.transaction.project.id %}" style="text-decoration: none;color: black">
                 <div class="card" style="width: 18rem;height: 100%">
                     <img class="card-img-top" src="{{ foo.transaction.project.projectimage1 }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{ foo.transaction.project.name }}</h5>
+                        <p class="card-text">Company name : {{ foo.transaction.user.profile.company }}</p>
 
                     </div>
                 </div>

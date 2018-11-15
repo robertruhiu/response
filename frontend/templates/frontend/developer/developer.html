@@ -5,58 +5,100 @@ developers
 {% endblock %}
 {%load static %}
 {% block content %}
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+<main role="main" class="col-md-12 col-lg-10 ml-lg-auto   px-4 ">
+    <div class="d-none d-lg-block">
+        <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                    <h5 >Home</h5>
+                    <ul class="nav ml-auto">
 
 
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  fley">
-        <div class="navbar fixed-top fine border-bottom">
 
-            <h5>Home</h5>
+            {% if request.user.is_authenticated %}
 
-            <nav>
+            <li class="nav-item">
+                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+            </li>
 
-                <ul class="nav ">
-                    <li class="nav-item">
-                        <span data-feather="user">
+            {% else %}
 
-                        </span>
-                        <a href="/update_profile/">edit profile</a>
-                    </li>
-                    <!-- Authentication Links -->
-                    {% if request.user.is_authenticated %}
-                    <li class="nav-item">
-                        <a href="{% url 'account_logout' %}" class="navbar-item w3-opacity" title="Logout">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_login' %}" class="navbar-item">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-item" href="{% url 'account_signup' %}" class="navbar-item">Register</a>
-                    </li>
-                    {% endif %}
+            <li class="nav-item">
+                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+            </li>
+            <li class="nav-item">
+                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+            </li>
+            {% endif %}
 
 
-                </ul>
-
-            </nav>
-        </div>
+    </ul>
+                </nav>
     </div>
-    <div class="alert alert-primary " role="alert">
+
+    <!-----md devices adaptation------>
+    <div class="container d-lg-none">
+        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+            <a class="logoadapt h5" style="text-decoration: none" href="/home">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sidebar menu options
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'frontend:inprogress' %}">Ongoing Projects</a>
+                            <a class="dropdown-item" href="/update_profile/">My profile</a>
+                        </div>
+                    </li>
+                    {% if request.user.is_authenticated %}
+
+                        <li class="nav-item">
+                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+<div class="d-none d-lg-block" style="margin-top: 8%">
+     <div class="alert alert-primary " role="alert">
         Welcome {{ user.first_name }} {{ user.last_name }}   to Codeln.Choose one of the paths below to start
     </div>
+</div >
+
+<div class="d-lg-none"  style="margin-top: 7em">
+     <div class="alert alert-primary " role="alert">
+        Welcome {{ user.first_name }} {{ user.last_name }}   to Codeln.Choose one of the paths below to start
+    </div>
+</div>
+
+
+
+
 
 
     <div class="row">
 
 
-        <div class="col-lg-4" style="width: 100%;">
-            <div class="card recruithomecard" style="margin: auto">
+        <div class="col-lg-4 col-md-6 col-sm-6 mb-3 col-12">
+            <div class="card recruithomecard" style="margin: auto;width: 18em">
 
 
                 <a   href="{% url 'frontend:inprogress' %}">
                     <div style="text-align: -webkit-center;">
-                        <img class="card-img-top " src="../../../static/frontend/images/coding.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+                        <img class="img-fluid " src="../../../static/frontend/images/coding.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
                     </div>
 
                     <div class="card" style="border: 0 ">
@@ -72,18 +114,18 @@ developers
                 </a>
             </div>
         </div>
-        <div class="col-lg-4" style="width: 100%;">
-            <div class="card recruithomecard" style="margin: auto">
-                <a   href="{% url 'frontend:invites' %}">
+        <div class="col-lg-4 col-md-6 col-sm-6 col" style="width: 100%;">
+            <div class="card recruithomecard" style="width:18em;margin: auto">
+                <a   href="/update_profile/">
                     <div style="text-align: -webkit-center;">
-                        <img class="card-img-top" src="../../../static/frontend/images/invitation.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+                        <img class="img-fluid" src="../../../static/frontend/images/invitation.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
                     </div>
                     <div class="card" style="border: 0 ">
 
 
                         <div class="card-body">
 
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Project invites</h6>
+                            <h6 class="card-title text-center" style="text-align: -webkit-center;">My resume</h6>
 
                         </div>
 
