@@ -15,9 +15,14 @@ class ProfileTypeForm(forms.Form):
 
 
 class DeveloperFillingDetailsForm(forms.ModelForm):
+
     class Meta:
         model = Profile
-        fields = ['github_repo', 'years', 'language', 'framework', 'profile_photo']
+
+        fields = ['github_repo','gender','phone_number', 'linkedin_url',
+                  'portfolio','years','country','core', 'language', 'framework', 'profile_photo']
+
+
     # PROGRAMMING_LANGUAGE_CHOICES = (('python', 'Python'),)
     # FRAMEWORK_CHOICES = (('django', 'Django'),)
     # YEARS_ACTIVE_CHOICES = (

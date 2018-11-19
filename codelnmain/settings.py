@@ -61,7 +61,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.linkedin',
     'storages',
     'bootstrap4',
-    'django_forms_bootstrap'
+    'django_forms_bootstrap',
+    'django_countries',
+    'phonenumber_field'
 
 
 

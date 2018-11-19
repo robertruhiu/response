@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from django_countries.fields import CountryField
+from phonenumber_field.modelfields import PhoneNumberField
 from projects.models import Language, Framework
 
 # Create your models here.
@@ -19,23 +21,45 @@ class Profile(models.Model):
         ('developer_filling_details', 'developer_filling_details'),
         ('complete', 'complete'),
     )
+    GENDER_CHOICES = (
+        ('male', 'male'),
+        ('female', 'female'),
+    )
     YEARS_ACTIVE_CHOICES = (
         ('1-2', '1-2'),
         ('2-4', '2-4'),
         ('4-above', '4-above'),
     )
+    CORE_CHOICES=(
+        ('frontend','frontend'),
+        ('backend','backend'),
+        ('fullstack','fullstack'),
+        ('android','android'),
+        ('IOS','IOS'),
+        ('devops','devops'),
+        ('graphic design','graphic design')
+    )
+
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     user_type = models.CharField(choices=USER_TYPE_CHOICES, null=True, blank=True, max_length=30)
     stage = models.CharField(choices=STAGE_CHOICES, default='profile_type_selection', max_length=100)
     profile_photo = models.ImageField(upload_to='users/%Y/%m/%d', blank=True)
     date_of_birth = models.DateTimeField(null=True, blank=True)
-    phone_number = models.IntegerField(null=True, blank=True)
+    gender = models.CharField(choices=GENDER_CHOICES, null=True, blank=True, max_length=30)
+    phone_number = PhoneNumberField(null=True, max_length=30)
     # developer profile
+    linkedin_url =models.URLField(blank=True, null=True, )
+    portfolio=models.URLField(blank=True, null=True, )
     github_repo = models.URLField(blank=True, null=True, )
     language = models.ForeignKey(Language, on_delete=models.DO_NOTHING,
                                               related_name='languages', null=True)
     framework = models.ForeignKey(Framework, on_delete=models.DO_NOTHING, related_name='frameworks', null=True)
-    years = models.CharField(max_length=30, choices=YEARS_ACTIVE_CHOICES, null=True, blank=True)
+    years = models.CharField(choices=YEARS_ACTIVE_CHOICES, null=True , max_length=30)
+    core = models.CharField(choices=CORE_CHOICES, null=True , max_length=30)
+    country = CountryField(null=True, max_length=30)
+    
+    #years = models.CharField(max_length=30, choices=YEARS_ACTIVE_CHOICES, null=True, blank=True),
+
     # recruiter profile
     company = models.CharField(max_length=140, null=True, blank=True)
     job_role = models.CharField(max_length=140, null=True, blank=True)
