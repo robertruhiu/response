@@ -112,15 +112,12 @@ def sourcing(request):
             data += str(form.cleaned_data['phone_number'])
             data += form.cleaned_data['company_name']
             data += str(form.cleaned_data['job_role'])
-            data += form.cleaned_data['engagement_types']
             data += form.cleaned_data['tech_stack']
-            data += form.cleaned_data['project_description']
             data += str(form.cleaned_data['devs_needed'])
             data += str(form.cleaned_data['renumeration'])
-            data += form.cleaned_data['tech_staff']
-            data += form.cleaned_data['skills_test']
+
             try:
-                send_mail(subject, data, from_email, ['philisiah@codeln.com'])
+                send_mail(subject, data, from_email, ['dennis@codeln.com'])
             except BadHeaderError:
                 print('invalid error')
             return redirect('frontend:home')
