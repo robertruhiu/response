@@ -26,6 +26,7 @@ def developer_filling_details(request, current_profile):
             current_profile.years = developer_filling_details_form.cleaned_data['years'],
             current_profile.gender = developer_filling_details_form.cleaned_data['gender']
             current_profile.core = developer_filling_details_form.cleaned_data['core ']
+            current_profile.availabilty = developer_filling_details_form.cleaned_data['availabilty ']
             current_profile.country = developer_filling_details_form.cleaned_data['country']
             current_profile.phone_number = developer_filling_details_form.cleaned_data['phone_number']
             current_profile.stage = 'complete'

@@ -39,6 +39,13 @@ class Profile(models.Model):
         ('devops','devops'),
         ('graphic design','graphic design')
     )
+    CONTRACT_CHOICES = (
+        ('fulltime', 'fulltime'),
+        ('contract', 'contract'),
+        ('remote', 'remote'),
+        ('freelance', 'freelance'),
+        
+    )
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     user_type = models.CharField(choices=USER_TYPE_CHOICES, null=True, blank=True, max_length=30)
@@ -57,6 +64,7 @@ class Profile(models.Model):
     years = models.CharField(choices=YEARS_ACTIVE_CHOICES, null=True , max_length=30)
     core = models.CharField(choices=CORE_CHOICES, null=True , max_length=30)
     country = CountryField(null=True, max_length=30)
+    availabilty =models.CharField(choices=CONTRACT_CHOICES ,null=True , max_length=30)
     
     #years = models.CharField(max_length=30, choices=YEARS_ACTIVE_CHOICES, null=True, blank=True),
 
