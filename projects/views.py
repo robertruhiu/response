@@ -36,10 +36,9 @@ def devtypes(request,id):
     return render(request, 'projects/devtypes.html', {'devtypes':devtypes,'categoryname':categoryname})
 
 def categories(request):
-    projecttypes = Projecttype.objects.all()
-    devtypes = Devtype.objects.all()
 
-    return render(request, 'projects/categories.html',{'projecttypes':projecttypes, 'devtypes': devtypes})
+
+    return render(request, 'projects/categories.html',)
 
 
 def project(request, id):
