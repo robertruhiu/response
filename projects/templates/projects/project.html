@@ -1,4 +1,6 @@
 {% extends 'recruiterbase.html' %}
+{% load bootstrap4 %}
+{% load static %}
 {% block title %}
     project details
 {% endblock %}
@@ -164,21 +166,13 @@
                         <h6 class="card-title">Customize tech stack</h6>
                         <form action="{% url 'transactions:transaction' project.id %}" method="post">
                             {% csrf_token %}
-                                {{ framework_form.as_p }}
-{#                            <div class="form-group">#}
-{#                                <label for="exampleFormControlSelect1">Framework to be used</label>#}
-{#                                <select class="form-control" id="exampleFormControlSelect1">#}
-{#                                    {% for option in framework_form.name %}#}
-{#                                        {{ option}}#}
-{#                                    {% endfor %}#}
-{#                                </select>#}
-{#                            </div>#}
+                                {% bootstrap_form framework_form %}
 
 
                             <div style="text-align: right">
-{#                                <a class="btn btn-primary" href="{% url 'projects:categories'%}" >#}
-{#                                    Go back#}
-{#                                </a>#}
+                               <a class="btn btn-primary" href="{% url 'projects:categories'%}" >
+                                   Go back
+                              </a>
                                 <button type="submit" class="btn btn-success">Choose project</button>
                             </div>
                         </form>
