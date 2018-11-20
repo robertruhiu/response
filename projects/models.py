@@ -39,7 +39,7 @@ class Projecttype(models.Model):
 class Project(models.Model):
     name = models.CharField(max_length=140)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    description = models.CharField(max_length=200, blank=True, null=True, )
+    description = models.CharField(max_length=500, blank=True, null=True, )
     level = models.CharField(max_length=200, blank=True, null=True, )
     concept = models.CharField(max_length=200, blank=True, null=True, )
     projectimage1 = models.CharField(max_length=200, blank=True, null=True, )

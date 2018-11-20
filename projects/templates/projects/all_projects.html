@@ -88,9 +88,9 @@ all projects
 
         {% for foo in projecttypes %}
 
-        <div class="col-lg-4 col-sm-6 mb-3 col-md-4" style="height: 100%">
+        <div class="col-lg-4 col-sm-6 mb-3 col-md-4" >
             <a href="{% url 'projects:project' foo.id %}" style="text-decoration: none;">
-            <div class="card" style="width:100%">
+            <div class="card" style="width:100%;height: 100%">
                 <img class="img-fluid" src="{{foo.projectimage1}}" alt="Card image cap">
                 <div class="card-body">
                     <p class="card-text">Project name: {{ foo.name }}
