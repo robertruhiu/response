@@ -3,7 +3,7 @@
 .logoadapt{padding-left:0;padding: 16px 15px;letter-spacing:.1em;color:#ffffff;}
 
 .colorlink{color:black;}
-.brandhome{float:left;padding:16px 15px;font-size:20px;margin-left:7%;}
+.brandhome{float:left;padding:16px 15px;font-size:20px;}
 .rowalign{margin-right:0;margin-left:0;}
 .intro{margin-top:8%;}
 .jumbo{margin-bottom:0rem;background-color:#ffffff;border-radius:.0px;}
@@ -137,6 +137,12 @@ nav ul li a{color:black;padding:0 30px;}
 .trust1{
     width: 6em;
 
+
+}
+.navbar-brand1 {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
 
 }
 
