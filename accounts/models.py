@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django_countries.fields import CountryField
-from phonenumber_field.modelfields import PhoneNumberField
+
 from projects.models import Language, Framework
 
 # Create your models here.
@@ -30,15 +30,7 @@ class Profile(models.Model):
         ('2-4', '2-4'),
         ('4-above', '4-above'),
     )
-    CORE_CHOICES=(
-        ('frontend','frontend'),
-        ('backend','backend'),
-        ('fullstack','fullstack'),
-        ('android','android'),
-        ('IOS','IOS'),
-        ('devops','devops'),
-        ('graphic design','graphic design')
-    )
+    
     CONTRACT_CHOICES = (
         ('fulltime', 'fulltime'),
         ('contract', 'contract'),
@@ -50,10 +42,10 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     user_type = models.CharField(choices=USER_TYPE_CHOICES, null=True, blank=True, max_length=30)
     stage = models.CharField(choices=STAGE_CHOICES, default='profile_type_selection', max_length=100)
-    profile_photo = models.ImageField(upload_to='users/%Y/%m/%d', blank=True)
+   
     date_of_birth = models.DateTimeField(null=True, blank=True)
     gender = models.CharField(choices=GENDER_CHOICES, null=True, blank=True, max_length=30)
-    phone_number = PhoneNumberField(null=True, max_length=30)
+    phone_number = models.CharField(null=True, max_length=30)
     # developer profile
     linkedin_url =models.URLField(blank=True, null=True, )
     portfolio=models.URLField(blank=True, null=True, )
@@ -62,7 +54,7 @@ class Profile(models.Model):
                                               related_name='languages', null=True)
     framework = models.ForeignKey(Framework, on_delete=models.DO_NOTHING, related_name='frameworks', null=True)
     years = models.CharField(choices=YEARS_ACTIVE_CHOICES, null=True , max_length=30)
-    core = models.CharField(choices=CORE_CHOICES, null=True , max_length=30)
+   
     country = CountryField(null=True, max_length=30)
     availabilty =models.CharField(choices=CONTRACT_CHOICES ,null=True , max_length=30)
     
@@ -78,10 +70,7 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-    def photo(self, default_path="default_user_photo.png"):
-        if self.profile_photo:
-            return self.profile_photo
-        return default_path
+    
 
     def get_absolute_url(self):
         return '/accounts/profile/'

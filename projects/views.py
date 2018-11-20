@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+
+from projects.forms import FrameworkForm
 from projects.models import Project,Projecttype,Devtype,Framework
 
 
@@ -44,4 +46,5 @@ def project(request, id):
 
     frameworks =Framework.objects.all()
     project = Project.objects.get(id=id)
-    return render(request, 'projects/project.html', {'project': project,'frameworks':frameworks,})
+    framework_form = FrameworkForm()
+    return render(request, 'projects/project.html', {'project': project,'frameworks':frameworks,'framework_form':framework_form,})

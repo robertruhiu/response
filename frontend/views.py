@@ -17,7 +17,7 @@ def developer_filling_details(request, current_profile):
     if request.method == 'POST':
         developer_filling_details_form = DeveloperFillingDetailsForm(request.POST, request.FILES)
         if developer_filling_details_form.is_valid():
-            current_profile.profile_photo = developer_filling_details_form.cleaned_data['profile_photo']
+
             current_profile.github_repo = developer_filling_details_form.cleaned_data['github_repo']
             current_profile.linkedin_url = developer_filling_details_form.cleaned_data['linkedin_url']
             current_profile.portfolio = developer_filling_details_form.cleaned_data['portfolio']
@@ -25,8 +25,8 @@ def developer_filling_details(request, current_profile):
             current_profile.framework = developer_filling_details_form.cleaned_data['framework']
             current_profile.years = developer_filling_details_form.cleaned_data['years'],
             current_profile.gender = developer_filling_details_form.cleaned_data['gender']
-            current_profile.core = developer_filling_details_form.cleaned_data['core ']
-            current_profile.availabilty = developer_filling_details_form.cleaned_data['availabilty ']
+
+            current_profile.availabilty = developer_filling_details_form.cleaned_data['availabilty']
             current_profile.country = developer_filling_details_form.cleaned_data['country']
             current_profile.phone_number = developer_filling_details_form.cleaned_data['phone_number']
             current_profile.stage = 'complete'

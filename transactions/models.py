@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from projects.models import Project
-
+from projects.models import Project, Framework
 
 
 # Create your models here.
@@ -23,6 +22,7 @@ class Transaction(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     completed = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
+    framework = models.ForeignKey(Framework, on_delete=models.CASCADE)
 
     def allcandidates(self):
         candidates = Candidate.objects.filter(transaction=self.id)

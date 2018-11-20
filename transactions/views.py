@@ -1,8 +1,11 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
 from django.contrib.auth.models import User
-from projects.models import Project
+
+from projects.forms import FrameworkForm
+from projects.models import Project, Framework
 from transactions.models import Transaction, Candidate
 from transactions.forms import CandidateForm, SourcingForm
 from invitations.models import Invitation
@@ -14,11 +17,15 @@ from payments.views import process_payment
 
 
 # Create your views here.
-def transaction(request, id):
-    project = Project.objects.get(id=id)
-    user = request.user
-    new_transaction = Transaction.objects.create(user=user, project=project, stage='upload-candidates')
-    return redirect(reverse('transactions:process_transaction', args=[new_transaction.id]))
+def transaction_view(request, id):
+    if request.method == 'POST':
+        framework_form = FrameworkForm(request.POST)
+        if framework_form.is_valid():
+            name = framework_form.cleaned_data['name']
+            project = Project.objects.get(id=id)
+            user = request.user
+            new_transaction = Transaction.objects.create(user=user, project=project, stage='upload-candidates', framework=get_object_or_404(Framework, name=name))
+            return redirect(reverse('transactions:process_transaction', args=[new_transaction.id]))
 
 
 def process_transaction(request, id):
@@ -110,20 +117,20 @@ def sourcing(request):
             data = ""
             data += sourcing_form.cleaned_data['country']
             data += sourcing_form.cleaned_data['name']
-            data += str(sourcing_form.cleaned_data['phone_number'])
+            # data += str(sourcing_form.cleaned_data['phone_number'])
             data += sourcing_form.cleaned_data['company_name']
             data += str(sourcing_form.cleaned_data['job_role'])
             data += str(sourcing_form.cleaned_data['contract'])
             data += sourcing_form.cleaned_data['tech_stack']
-            data += str(sourcing_form.cleaned_data['devs_needed'])
-            data += str(sourcing_form.cleaned_data['renumeration'])
+            data += str(sourcing_form.cleaned_data['number_of_devs_needed'])
+            data += str(sourcing_form.cleaned_data['renumeration_in_dollars'])
 
 
             try:
-                send_mail(subject, data, from_email, ['sales@codeln.com'])
+                send_mail(subject, data, from_email, ['dennis@codeln.com'])
             except BadHeaderError:
                 print('invalid error')
-            return redirect('frontend:home')
+            return redirect(reverse('frontend:home'))
     else:
         sourcing_form = SourcingForm()
         return render(request, 'transactions/sourcing.html', {'sourcing_form':sourcing_form})

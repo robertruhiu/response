@@ -20,7 +20,7 @@ class DeveloperFillingDetailsForm(forms.ModelForm):
         model = Profile
 
         fields = ['github_repo','gender','phone_number', 'linkedin_url',
-                  'portfolio','years','country','core', 'language', 'framework', 'profile_photo','availabilty']
+                  'portfolio','years','country','language', 'framework','availabilty']
 
 
     # PROGRAMMING_LANGUAGE_CHOICES = (('python', 'Python'),)
@@ -85,7 +85,7 @@ class ProfileEditForm(forms.ModelForm):
 class DeveloperProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['github_repo', 'years', 'language', 'framework', 'profile_photo']
+        fields = ['github_repo', 'years', 'language', 'framework']
 
 class RecruiterProfileEditForm(forms.ModelForm):
     class Meta:
