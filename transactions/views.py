@@ -103,24 +103,27 @@ def my_invites(request):
 
 def sourcing(request):
     if request.method == 'POST':
-        form = SourcingForm(request.POST)
-        if form.is_valid():
+        sourcing_form = SourcingForm(request.POST)
+        if sourcing_form.is_valid():
             subject = 'Sourcing Request'
-            from_email = form.cleaned_data['email_address']
+            from_email = sourcing_form.cleaned_data['email_address']
             data = ""
-            data += form.cleaned_data['name']
-            data += str(form.cleaned_data['phone_number'])
-            data += form.cleaned_data['company_name']
-            data += str(form.cleaned_data['job_role'])
-            data += form.cleaned_data['tech_stack']
-            data += str(form.cleaned_data['devs_needed'])
-            data += str(form.cleaned_data['renumeration'])
+            data += sourcing_form.cleaned_data['country']
+            data += sourcing_form.cleaned_data['name']
+            data += str(sourcing_form.cleaned_data['phone_number'])
+            data += sourcing_form.cleaned_data['company_name']
+            data += str(sourcing_form.cleaned_data['job_role'])
+            data += str(sourcing_form.cleaned_data['contract'])
+            data += sourcing_form.cleaned_data['tech_stack']
+            data += str(sourcing_form.cleaned_data['devs_needed'])
+            data += str(sourcing_form.cleaned_data['renumeration'])
+
 
             try:
-                send_mail(subject, data, from_email, ['dennis@codeln.com'])
+                send_mail(subject, data, from_email, ['sales@codeln.com'])
             except BadHeaderError:
                 print('invalid error')
             return redirect('frontend:home')
     else:
-        form = SourcingForm()
-        return render(request, 'transactions/sourcing.html', {'form':form})
+        sourcing_form = SourcingForm()
+        return render(request, 'transactions/sourcing.html', {'sourcing_form':sourcing_form})

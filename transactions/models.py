@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from projects.models import Project
 
 
+
 # Create your models here.
 class Transaction(models.Model):
     # TODO: allow user to specify framework for test
@@ -30,8 +31,8 @@ class Transaction(models.Model):
     def amount(self):
         if self.allcandidates().count() <= 10:
             total_amount = 200
-        elif self.allcandidates().count() > 10 and self.allcandidates().count() <= 20:
-            total_amount = 350
+        elif self.allcandidates().count() > 10 and self.allcandidates().count() <= 50:
+            total_amount = 20 * self.allcandidates().count()
         return total_amount
 
     def __str__(self):
@@ -52,7 +53,3 @@ class Candidate(models.Model):
 
     def __str__(self):
         return "{}, {}".format(self.first_name, self.last_name)
-
-
-
-

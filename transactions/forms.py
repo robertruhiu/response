@@ -1,7 +1,8 @@
 from django import forms
 from transactions.models import Candidate, Transaction
-
+from django_countries.fields import CountryField
 from django.forms import ModelForm, Form
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class CandidateForm(ModelForm):
@@ -27,11 +28,13 @@ class SourcingForm(Form):
         ('Contract', 'Contract'),
         ('Freelance', 'Freelance'),
     )
+    contract = forms.ChoiceField(choices=engagement,required=True)
     email_address = forms.EmailField(required=True)
-    phone_number = forms.IntegerField()
-    name = forms.CharField(max_length=255)
-    company_name = forms.CharField(max_length=255)
-    tech_stack = forms.CharField(max_length=255)
-    Number_of_devs_needed = forms.IntegerField()
-    renumeration_in_dollars = forms.IntegerField()
+    phone_number = PhoneNumberField().formfield(required=True)
+    name = forms.CharField(max_length=255,required=True)
+    company_name = forms.CharField(max_length=255,required=True)
+    tech_stack = forms.CharField(max_length=255,required=True)
+    Number_of_devs_needed = forms.IntegerField(required=True)
+    renumeration_in_dollars = forms.CharField(required=True)
+    country = CountryField().formfield(required=True)
 
