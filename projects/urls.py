@@ -20,8 +20,8 @@ from projects.views import project_list, project,categories,devtypes
 app_name = 'projects'
 urlpatterns = [
     #path('', project_categories, name='categories'y),
-    path('all-projects/<int:id>/', project_list, name='all-projects'),
-    path('devtypes/<int:id>/', devtypes, name='devtypes'),
+    path('all-projects/<int:type_id>/', project_list, name='all-projects'),
+    path('devtypes/<int:dev_id>/', devtypes, name='devtypes'),
     path('categories/', categories, name='categories'),
     path('project/<int:id>/', project, name='project'),
 
