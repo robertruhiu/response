@@ -81,7 +81,7 @@ all projects
 <div class="d-lg-none"  style="margin-top: 7em">
 
 </div>
-    <h5 class="text-center">{{ categoryname.name }} projects</h5>
+
     <div class="row" style="margin-left: 0;margin-right: 0" >
 
 
@@ -90,7 +90,7 @@ all projects
 
         <div class="col-lg-4 col-sm-6 mb-3 col-md-4" style="height: 100%">
             <a href="{% url 'projects:project' foo.id %}" style="text-decoration: none;">
-            <div class="card" style="width:100%">
+            <div class="card" style="width:100%;height: 100%;">
                 <img class="img-fluid" src="{{foo.projectimage1}}" alt="Card image cap">
                 <div class="card-body">
                     <p class="card-text">Project name: {{ foo.name }}
