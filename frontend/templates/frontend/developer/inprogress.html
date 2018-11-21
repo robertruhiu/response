@@ -81,6 +81,7 @@ Project in progress
 
 </div>
     <div class="row">
+    {% if candidates %}
         {% for foo in candidates %}
 
         <div class="col-lg-4 col-md-4 col-sm-4 col">
@@ -98,6 +99,15 @@ Project in progress
             </a>
         </div>
         {% endfor %}
+    {% else %}
+        <div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">No Projects </h4>
+  <p>Invites from recruiters will pop up here</p>
+  <hr>
+  <p class="mb-0">CODELN will recommend all registered developers to recruiters for possible skill assessments</p>
+</div>
+    {% endif %}
+
     </div>
 
 </main>
