@@ -72,7 +72,7 @@ def profile_type_selection(request, current_profile):
         profile_type_form = ProfileTypeForm()
     return render(request, 'frontend/profile_type_selection.html', {'profile_type_form': profile_type_form})
 
-
+@login_required
 def index(request):
     if request.user.is_authenticated:
         current_profile = request.user.profile
@@ -111,24 +111,24 @@ def tracker(request,id):
 
 
     return render(request, 'frontend/recruiter/tracker.html',{'candidates': candidates})
-
+@login_required
 def inprogress(request):
     candidates = Candidate.objects.filter(email=request.user.email)
 
 
     return render(request, 'frontend/developer/inprogress.html',{'candidates': candidates})
-
+@login_required
 def invites(request):
     candidates = Candidate.objects.filter(email=request.user.email)
     return render(request, 'frontend/developer/invites.html', {'candidates': candidates})
 
 
-
+@login_required
 def projectdetails(request,id):
     project = Project.objects.get(id=id)
 
     return render(request, 'frontend/developer/projectdetails.html',{'project': project})
-
+@login_required
 def pendingproject(request,id):
     project = Project.objects.get(id=id)
     return render(request, 'frontend/developer/pendingproject.html',{'project': project})
