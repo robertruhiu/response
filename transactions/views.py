@@ -93,12 +93,8 @@ def invitations(request, current_transaction):
     if request.method == 'POST':
         if candidates.count() != 0:
             for candidate in candidates:
-
-                try:
-                    invite = Invitation.create(candidate.email, inviter=request.user)
-                    invite.send_invitation(request)
-                except:
-                    pass
+                invite = Invitation.create(candidate.email, inviter=request.user)
+                invite.send_invitation(request)
             current_transaction.stage = 'complete'
             current_transaction.save()
         return redirect(reverse('transactions:process_transaction', args=[current_transaction.id]))
