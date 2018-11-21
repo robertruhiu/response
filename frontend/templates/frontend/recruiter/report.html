@@ -229,36 +229,87 @@ report
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+
+                        {% if transaction.project.requirement1 %}
+                             <tr>
 
                             <td>{{ transaction.project.requirement1}}</td>
 
                             <td><span class="badge badge-success">Complete</span></td>
                         </tr>
-                        <tr>
+                        {% endif %}
+                        {% if transaction.project.requirement2 %}
+                             <tr>
 
-                            <td>{{ transaction.project.requirement2}}
-                            </td>
+                            <td>{{ transaction.project.requirement2}}</td>
 
                             <td><span class="badge badge-success">Complete</span></td>
                         </tr>
-                        <tr>
+                        {% endif %}
+                        {% if transaction.project.requirement3 %}
+                             <tr>
 
-                            <td>{{ transaction.project.requirement3}}
-                            </td>
-                            <td><span class="badge badge-warning">3/4 complete</span></td>
+                            <td>{{ transaction.project.requirement3}}</td>
+
+                            <td><span class="badge badge-success">Complete</span></td>
                         </tr>
-                        <tr>
+                        {% endif %}
+                        {% if transaction.project.requirement4 %}
+                             <tr>
 
                             <td>{{ transaction.project.requirement4}}</td>
-                            <td><span class="badge badge-warning">1/2 Complete</span></td>
-                        </tr>
 
-                        <tr>
+                            <td><span class="badge badge-success">Complete</span></td>
+                        </tr>
+                        {% endif %}
+                        {% if transaction.project.requirement5 %}
+                             <tr>
 
                             <td>{{ transaction.project.requirement5}}</td>
-                            <td><span class="badge badge-warning">1/2 Complete</span></td>
+
+                            <td><span class="badge badge-success">Complete</span></td>
                         </tr>
+                        {% endif %}
+                        {% if transaction.project.requirement6 %}
+                             <tr>
+
+                            <td>{{ transaction.project.requirement6}}</td>
+
+                            <td><span class="badge badge-success">Complete</span></td>
+                        </tr>
+                        {% endif %}
+                        {% if transaction.project.requirement7 %}
+                             <tr>
+
+                            <td>{{ transaction.project.requirement7}}</td>
+
+                            <td><span class="badge badge-success">Complete</span></td>
+                        </tr>
+                        {% endif %}
+                        {% if transaction.project.requirement8 %}
+                             <tr>
+
+                            <td>{{ transaction.project.requirement8}}</td>
+
+                            <td><span class="badge badge-success">Complete</span></td>
+                        </tr>
+                        {% endif %}
+                        {% if transaction.project.requirement9 %}
+                             <tr>
+
+                            <td>{{ transaction.project.requirement9}}</td>
+
+                            <td><span class="badge badge-success">Complete</span></td>
+                        </tr>
+                        {% endif %}
+                        {% if transaction.project.requirement10 %}
+                             <tr>
+
+                            <td>{{ transaction.project.requirement10}}</td>
+
+                            <td><span class="badge badge-success">Complete</span></td>
+                        </tr>
+                        {% endif %}
 
 
                         </tbody>
