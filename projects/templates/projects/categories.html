@@ -87,13 +87,15 @@
             <div class="row " style="margin-bottom: 2%; ">
 
 
-                    <div class="col-lg-6 col-12 col-md-6 mb-3 col-sm-6" style="width: 100%;">
+                   {% for projectype in projecttypes %}
+                {% if projectype.name == 'web' %}
+                    <div class="col-lg-6" style="width: 100%;">
                         <div class="card recruithomecard" style="margin: auto">
 
 
-                            <a href="{% url 'projects:all-projects'  1  %}">
+                            <a href="{% url 'projects:all-projects' projectype.id %}">
                                 <div style="text-align: -webkit-center;">
-                                    <img class="card-img-top categoriescard " src="{%static 'frontend/images/www.svg' %}"
+                                    <img class="card-img-top categoriescard " src="../../static/frontend/images/www.svg"
                                          style="margin-left: 25%;margin-right: 25%" alt="Card image cap">
                                 </div>
 
@@ -114,12 +116,12 @@
                             </a>
                         </div>
                     </div>
-
-                    <div class="col-lg-6 col-12 col-md-6 mb-3 col-sm-6" style="width: 100%;">
+                {% elif projectype.name == 'mobile'%}
+                    <div class="col-lg-6" style="width: 100%;">
                         <div class="card recruithomecard" style="margin: auto">
-                            <a href="{% url 'projects:all-projects'  2 %}">
+                            <a href="{% url 'projects:all-projects' projectype.id %}">
                                 <div style="text-align: -webkit-center;">
-                                    <img class="card-img-top categoriescard" src=" {%static 'frontend/images/smartphone.svg' %}"
+                                    <img class="card-img-top categoriescard" src="../../static/frontend/images/smartphone.svg"
                                          style="margin-left: 25%;margin-right: 25%" alt="Card image cap">
                                 </div>
                                 <div class="card" style="border: 0 ">
@@ -137,20 +139,21 @@
                         </div>
                     </div>
 
+                {% endif %}
+            {% endfor %}
+
 
             </div>
             <div class="row " style="margin-bottom: 2%; ">
-
-
-
-
-                    <div class="col-lg-6 col-12  col-md-6 col-sm-6" style="width: 100%;">
+                {% for devtype in devtypes %}
+                {% if devtype.name == 'frontend' %}
+                    <div class="col-lg-6" style="width: 100%;">
                 <div class="card recruithomecard" style="margin: auto">
 
 
-                    <a href="{% url 'projects:devtypes' 1 %}">
+                    <a href="{% url 'projects:devtypes' devtype.id %}">
                         <div style="text-align: -webkit-center;">
-                            <img class="card-img-top categoriescard " src="{%static 'frontend/images/web-design.svg' %}"
+                            <img class="card-img-top categoriescard " src="../../static/frontend/images/web-design.svg"
                                  style="margin-left: 25%;margin-right: 25%" alt="Card image cap">
                         </div>
 
@@ -168,12 +171,12 @@
                     </a>
                 </div>
             </div>
-
-                    <div class="col-lg-6 col-12  col-md-6 col-sm-6" style="width: 100%;">
+                {% elif devtype.name == 'backend'%}
+                    <div class="col-lg-6" style="width: 100%;">
                 <div class="card recruithomecard" style="margin: auto">
-                    <a href="{% url 'projects:devtypes' 2 %}">
+                    <a href="{% url 'projects:devtypes' devtype.id %}">
                         <div style="text-align: -webkit-center;">
-                            <img class="card-img-top categoriescard" src="{%static 'frontend/images/web.svg' %}"
+                            <img class="card-img-top categoriescard" src="../../static/frontend/images/web.svg"
                                  style="margin-left: 25%;margin-right: 25%" alt="Card image cap">
                         </div>
                         <div class="card" style="border: 0 ">
@@ -190,6 +193,10 @@
                     </a>
                 </div>
             </div>
+
+                {% endif %}
+            {% endfor %}
+
 
 
 
