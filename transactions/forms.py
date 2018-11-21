@@ -43,5 +43,5 @@ class SourcingForm(Form):
     tech_stack = forms.CharField(max_length=255, required=True)
     number_of_devs_needed = forms.IntegerField(required=True)
     renumeration_in_dollars = forms.CharField(required=True)
-    country = forms.ChoiceField(choices=(('ghana', 'Ghana'), ('nigeria', 'Nigeria the shit country')))
+    country = forms.ChoiceField(choices=(('ghana', 'Ghana'), ('nigeria', 'Nigeria')))
     
