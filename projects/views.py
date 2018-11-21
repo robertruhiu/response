@@ -43,5 +43,8 @@ def categories(request):
 
 
 def project(request, id):
+
+    frameworks =Framework.objects.all()
     project = Project.objects.get(id=id)
-    return render(request, 'projects/project.html', {'project': project})
+    framework_form = FrameworkForm()
+    return render(request, 'projects/project.html', {'project': project,'frameworks':frameworks,'framework_form':framework_form,})
