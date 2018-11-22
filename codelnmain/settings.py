@@ -171,7 +171,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 #email settings
-
+DEFAULT_FROM_EMAIL=config('DEFAULT_FROM_EMAIL',default='DEFAULT_FROM_EMAIL')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
