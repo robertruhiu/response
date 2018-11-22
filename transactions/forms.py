@@ -14,6 +14,7 @@ class CandidateForm(ModelForm):
 
 def job_roles():
     return (
+        
         ('Full Stack Developer', 'Full Stack Developer'),
         ('Frontend Developer', 'Frontend Developer'),
         ('Backend  Developer', 'Backend  Developer'),
@@ -43,5 +44,5 @@ class SourcingForm(Form):
     tech_stack = forms.CharField(max_length=255, required=True)
     number_of_devs_needed = forms.IntegerField(required=True)
     renumeration_in_dollars = forms.CharField(required=True)
-    country = forms.ChoiceField(choices=(('ghana', 'Ghana'), ('nigeria', 'Nigeria')))
+    country = forms.CharField(required=True)
     
