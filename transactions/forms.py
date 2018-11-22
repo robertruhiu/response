@@ -14,7 +14,7 @@ class CandidateForm(ModelForm):
 
 def job_roles():
     return (
-        
+        (' Choose...',' Choose...'),        
         ('Full Stack Developer', 'Full Stack Developer'),
         ('Frontend Developer', 'Frontend Developer'),
         ('Backend  Developer', 'Backend  Developer'),
@@ -27,7 +27,8 @@ def job_roles():
 def engagement():
     
     return (
-        ('Full-time', 'Full-time'),
+        ('Choose...','Choose...'),
+        ('Full-time', 'Full-time'),        
         ('Part-time', 'Part-time'),
         ('Contract', 'Contract'),
         ('Freelance', 'Freelance'),

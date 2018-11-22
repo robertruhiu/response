@@ -164,7 +164,7 @@
                         </ul>
                         <p>Recommended framework:<span class="badge badge-primary"> {{ project.framework.name }}</span></p>
                         <p></p>
-                        <h6 class="card-title">Customize tech stack</h6>
+                        <h6 class="card-title">Pick a tech stack</h6>
                         <form action="{% url 'transactions:transaction' project.id %}" method="post">
                             {% csrf_token %}
                                 {% bootstrap_form framework_form show_label=False%}
