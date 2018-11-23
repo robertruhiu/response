@@ -87,13 +87,14 @@ def index(request):
             if request.user.profile.user_type == 'developer':
                 return render(request, 'frontend/developer/developer.html')
             elif request.user.profile.user_type == 'recruiter':
-                return render(request, 'frontend/recruiter/recruiter.html',{'transactions': transactions})
+                return render(request, 'frontend/recruiter/recruiter.html', {'transactions': transactions})
     else:
         return home(request)
 
 
 def home(request):
     return render(request, 'frontend/landing.html')
+
 
 @login_required
 def activity(request):
@@ -105,12 +106,13 @@ def activity(request):
             return render(request, 'frontend/developer/my-activity.html', {'transactions': transactions})
 
 
-def tracker(request,id):
-
+def tracker(request, id):
+    project = Transaction.objects.get(id=id)
     candidates = Candidate.objects.filter(transaction_id=id)
 
+    return render(request, 'frontend/recruiter/tracker.html', {'candidates': candidates, 'project': project})
 
-    return render(request, 'frontend/recruiter/tracker.html',{'candidates': candidates})
+
 @login_required
 def inprogress(request):
     candidates = Candidate.objects.filter(email=request.user.email)
@@ -124,57 +126,56 @@ def invites(request):
 
 
 @login_required
-def projectdetails(request,id):
+def projectdetails(request, id):
     project = Project.objects.get(id=id)
 
-    return render(request, 'frontend/developer/projectdetails.html',{'project': project})
+    return render(request, 'frontend/developer/projectdetails.html', {'project': project})
+
+
 @login_required
-def pendingproject(request,id):
+def pendingproject(request, id):
     project = Project.objects.get(id=id)
-    return render(request, 'frontend/developer/pendingproject.html',{'project': project})
+    return render(request, 'frontend/developer/pendingproject.html', {'project': project})
+
 
 def pricing(request):
-
-
     return render(request, 'frontend/pricing.html')
 
+
 def dev(request):
-
-
     return render(request, 'frontend/dev.html')
 
+
 def howitworks(request):
-
-
     return render(request, 'frontend/how.html')
 
-def report(request,email,transaction_id):
+
+def report(request, email, transaction_id):
     user = User.objects.get(email=email)
-    transaction =Transaction.objects.get(id=transaction_id)
+    transaction = Transaction.objects.get(id=transaction_id)
+    return render(request, 'frontend/recruiter/report.html', {'user': user, 'transaction': transaction})
 
 
-    return render(request, 'frontend/recruiter/report.html',{'user':user,'transaction':transaction})
 
 def credits(request):
-
-
     return render(request, 'frontend/credits.html')
+
+
 def privacy(request):
-
-
     return render(request, 'frontend/privacy.html')
+
+
 def terms(request):
-
-
     return render(request, 'frontend/terms.html')
 
+
 def sample(request):
-
-
     return render(request, 'frontend/sample.html')
+
 
 def page_404(request):
     return render(request, 'frontend/error_pages/404.html')
+
 
 def page_500(request):
     return render(request, 'frontend/error_pages/500.html')

@@ -97,8 +97,8 @@ application tracker
 
             <div class="card trackercard ">
                 <div class="card-body">
-                    <h5 class="card-title">Projects in progress</h5>
-                    <p class="card-text">1</p>
+                    <h5 class="card-title">Project name</h5>
+                    <p class="card-text">{{ project.project.name }}</p>
 
                 </div>
             </div>
@@ -109,8 +109,8 @@ application tracker
 
             <div class="card trackercard ">
                 <div class="card-body">
-                    <h5 class="card-title">Projects finished</h5>
-                    <p class="card-text">1</p>
+                    <h5 class="card-title">Testing Framework</h5>
+                    <p class="card-text">{{ project.framework.name }}</p>
 
                 </div>
             </div>
@@ -125,7 +125,7 @@ application tracker
         <tr>
 
             <th scope="col">Name</th>
-            <th scope="col">Project status</th>
+            <th scope="col"></th>
             <th scope="col">Full report</th>
 
 
@@ -139,7 +139,7 @@ application tracker
 
             <td>
 
-                    <span class="badge badge-success">Complete</span>
+
 
             </td>
 
