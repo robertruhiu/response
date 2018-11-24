@@ -49,7 +49,7 @@ Project in progress
                             Sidebar menu options
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'frontend:inprogress' %}">Ongoing Projects</a>
+                            <a class="dropdown-item" href="{% url 'frontend:inprogress' user.id %}">Ongoing Projects</a>
                             <a class="dropdown-item" href="/update_profile/">My profile</a>
                         </div>
                     </li>
@@ -81,17 +81,19 @@ Project in progress
 
 </div>
     <div class="row">
-    {% if candidates %}
-        {% for foo in candidates %}
+    {% if projects %}
+        {% for project in projects %}
 
         <div class="col-lg-4 col-md-4 col-sm-4 col">
 
-            <a href="{% url 'frontend:projectdetails' foo.transaction.project.id %}" style="text-decoration: none;color: black">
+           <a href="{% url 'frontend:projectdetails' project.id %}" style="text-decoration: none;color: black">
                 <div class="card" style="width: 18rem;height: 100%">
-                    <img class="card-img-top" src="{{ foo.transaction.project.projectimage1 }}" alt="Card image cap">
+
+                    <img class="card-img-top" src="{{ project.transaction.project.projectimage1 }}" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">{{ foo.transaction.project.name }}</h5>
-                        <p class="card-text">Company name : {{ foo.transaction.user.profile.company }}</p>
+                        <h5 class="card-title">{{ project.transaction.project.name }}</h5>
+                        <p class="card-text">Company name : {{ project.transaction.user.profile.company }}</p>
+
 
                     </div>
                 </div>
@@ -101,8 +103,8 @@ Project in progress
         {% endfor %}
     {% else %}
         <div class="alert col text-center alert-success" role="alert">
-  <h4 class="alert-heading">No Projects </h4>
-  <p>Invites from recruiters will pop up here</p>
+  <h4 class="alert-heading">No Projects currently</h4>
+  <p>Accepted project invites will appear here</p>
   <hr>
   <p class="mb-0">CODELN will recommend all registered developers to recruiters for possible skill assessments</p>
 </div>

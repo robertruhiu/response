@@ -1,4 +1,5 @@
 {% extends 'candidatesbase.html' %}
+{% load bootstrap4 %}
 {% block title %}
 project details
 {% endblock %}
@@ -36,7 +37,7 @@ project details
     <!-----md devices adaptation------>
     <div class="container d-lg-none">
         <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
-            <a class="logoadapt h5" style="text-decoration: none" href="">Project prerequisites</a>
+            <a class="logoadapt h5" style="text-decoration: none" href="/home">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span  class="navbar-toggler-icon">
                     <span style="color: white" data-feather="menu"></span>
@@ -49,14 +50,12 @@ project details
                             Sidebar menu options
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'frontend:inprogress' %}">Ongoing Projects</a>
+                            <a class="dropdown-item" href="{% url 'frontend:inprogress' user.id %}">Ongoing Projects</a>
                             <a class="dropdown-item" href="/update_profile/">My profile</a>
                         </div>
                     </li>
                     {% if request.user.is_authenticated %}
-                        <li class="nav-item">
-                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
-                        </li>
+
                         <li class="nav-item">
                             <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
                         </li>
@@ -124,61 +123,61 @@ project details
                                     <div id="carouselExampleSlidesOnly" style="margin-left: auto;margin-right: auto" class="carousel slide" data-ride="carousel">
                                         <div class="carousel-inner">
                                             <div class="carousel-item active">
-                                                <img class="d-block w-100" src="{{project.projectimage1}}" alt="First slide">
+                                                <img class="d-block w-100" src="{{project.transaction.project.projectimage1}}" alt="First slide">
                                             </div>
-                                           {% if project.projectimage2 %}
+                                           {% if project.transaction.project.projectimage2 %}
                                                <div class="carousel-item">
-                                                   <img class=" img-fluid"  src="{{project.projectimage2}}" alt="Second slide">
+                                                   <img class=" img-fluid"  src="{{project.transaction.project.projectimage2}}" alt="Second slide">
                                                </div>
                                            {% endif %}
-                                            {% if project.projectimage3 %}
+                                            {% if project.transaction.project.projectimage3 %}
                                                 <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.projectimage3}}" alt="Third slide">
+                                                    <img class="img-fluid"  src="{{project.transaction.project.projectimage3}}" alt="Third slide">
                                                 </div>
                                             {% endif %}
-                                            {% if project.projectimage4 %}
+                                            {% if project.transaction.project.projectimage4 %}
                                                 <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.projectimage4}}" alt="Third slide">
+                                                    <img class="img-fluid"  src="{{project.transaction.project.projectimage4}}" alt="Third slide">
                                                 </div>
                                             {% endif %}
-                                            {% if project.projectimage5 %}
+                                            {% if project.transaction.project.projectimage5 %}
                                                 <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.projectimage5}}" alt="Third slide">
+                                                    <img class="img-fluid"  src="{{project.transaction.projectimage5}}" alt="Third slide">
                                                 </div>
                                             {% endif %}
-                                            {% if project.projectimage6 %}
+                                            {% if project.transaction.project.projectimage6 %}
                                                 <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.projectimage6}}" alt="Third slide">
+                                                    <img class="img-fluid"  src="{{project.transaction.project.projectimage6}}" alt="Third slide">
                                                 </div>
                                             {% endif %}
-                                            {% if project.projectimage7 %}
+                                            {% if project.transaction.project.projectimage7 %}
                                                 <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.projectimage7}}" alt="Third slide">
+                                                    <img class="img-fluid"  src="{{project.transaction.project.projectimage7}}" alt="Third slide">
                                                 </div>
                                             {% endif %}
-                                            {% if project.projectimage8 %}
+                                            {% if project.transaction.project.projectimage8 %}
                                                 <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.projectimage8}}" alt="Third slide">
+                                                    <img class="img-fluid"  src="{{project.transaction.project.projectimage8}}" alt="Third slide">
                                                 </div>
                                             {% endif %}
-                                            {% if project.projectimage9 %}
+                                            {% if project.transaction.project.projectimage9 %}
                                                 <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.projectimage9}}" alt="Third slide">
+                                                    <img class="img-fluid"  src="{{project.transaction.project.projectimage9}}" alt="Third slide">
                                                 </div>
                                             {% endif %}
-                                            {% if project.projectimage10 %}
+                                            {% if project.transaction.project.projectimage10 %}
                                                 <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.projectimage10}}" alt="Third slide">
+                                                    <img class="img-fluid"  src="{{project.transaction.project.projectimage10}}" alt="Third slide">
                                                 </div>
                                             {% endif %}
                                         </div>
                                     </div>
 
-                                    <h5 class="card-subtitle mb-2 ">{{ project.name }}</h5>
+                                    <h5 class="card-subtitle mb-2 ">{{ project.transaction.project.name }}</h5>
                                     <hr>
 
                                     <p class="card-text ">
-                                        {{ project.description }}
+                                        {{ project.transaction.project.description }}
 
                                     </p>
 
@@ -188,35 +187,37 @@ project details
                                     <p class="card-text ">
                                     </p>
                                     <ul>
-                            {% if project.requirement1 %}
-                                <li>{{ project.requirement1 }}</li>
+
+
+                            {% if project.transaction.project.requirement1 %}
+                                <li>{{ project.transaction.project.requirement1 }}</li>
                             {% endif %}
-                            {% if project.requirement2 %}
-                                <li>{{ project.requirement2 }}</li>
+                            {% if project.transaction.project.requirement2 %}
+                                <li>{{ project.transaction.project.requirement2 }}</li>
                             {% endif %}
-                            {% if project.requirement3 %}
-                                <li>{{ project.requirement3 }}</li>
+                            {% if project.transaction.project.requirement3 %}
+                                <li>{{ project.transaction.project.requirement3 }}</li>
                             {% endif %}
-                            {% if project.requirement4 %}
-                                <li>{{ project.requirement4 }}</li>
+                            {% if project.transaction.project.requirement4 %}
+                                <li>{{ project.transaction.project.requirement4 }}</li>
                             {% endif %}
-                            {% if project.requirement5 %}
-                                <li>{{ project.requirement5 }}</li>
+                            {% if project.transaction.project.requirement5 %}
+                                <li>{{ project.transaction.project.requirement5 }}</li>
                             {% endif %}
-                            {% if project.requirement6 %}
-                                <li>{{ project.requirement6 }}</li>
+                            {% if project.transaction.project.requirement6 %}
+                                <li>{{ project.transaction.project.requirement6 }}</li>
                             {% endif %}
-                            {% if project.requirement7 %}
-                                <li>{{ project.requirement7 }}</li>
+                            {% if project.transaction.project.requirement7 %}
+                                <li>{{ project.transaction.project.requirement7 }}</li>
                             {% endif %}
-                            {% if project.requirement8 %}
-                                <li>{{ project.requirement8 }}</li>
+                            {% if project.transaction.project.requirement8 %}
+                                <li>{{ project.transaction.project.requirement8 }}</li>
                             {% endif %}
-                            {% if project.requirement9 %}
-                                <li>{{ project.requirement9 }}</li>
+                            {% if project.transaction.project.requirement9 %}
+                                <li>{{ project.transaction.project.requirement9 }}</li>
                             {% endif %}
-                            {% if project.requirement10 %}
-                                <li>{{ project.requirement10 }}</li>
+                            {% if project.transaction.project.requirement10 %}
+                                <li>{{ project.transaction.project.requirement10 }}</li>
                             {% endif %}
 
 
@@ -232,7 +233,7 @@ project details
                                     <p class="card-text ">
                                     </p><ul>
 
-                                    <li>Framework to use :{{ project.framework.name }} </li>
+                                    <li>Framework to use :{{ project.transaction.framework.name }} </li>
 
 
                                 </ul>
@@ -247,12 +248,27 @@ project details
                             <div class="card5" style="width: 100%;">
                                 <div class="card-body">
 
-                                    <h5 class="card-subtitle mb-2 text-muted">IDE Login access</h5>
+                                    <h5 class="card-subtitle mb-2 text-muted">IDE access</h5>
+
                                     <hr>
-                                    <p>Username: kweku@gmail.com</p>
-                                    <p>password: ****************</p>
-                                        <a href="http://ide.codeln.com:8080/" target="_blank" class="btn btn-primary">Start
-                                            project</a>
+                                    {% if project.stage == 'project-in-progress' %}
+                                        <p>Coding area <a href="">ide link</a></p>
+
+                                        <h6>Have you completed project?</h6>
+                                        <a href="/update_finished/{{ project.id }}/{{ project.transaction.id }}">
+                                        <button class="btn btn-outline-success" style="border-radius: 0" type="submit">Finish Project</button>
+                                        </a>
+
+                                    {% elif project.stage == 'invite-accepted' %}
+                                        <a href="/update_candidateprojects/{{ project.id }}/{{ project.transaction.id }}">
+                                        <button class="btn btn-outline-primary" style="border-radius: 0" type="submit">Start project</button>
+                                        </a>
+                                    {% else %}
+                                        <h6 class="alert alert-primary">Project completed.Recruiter will now get a
+                                            report of how you performed.</h6>
+                                    {% endif %}
+
+
 
                                 </div>
                             </div>

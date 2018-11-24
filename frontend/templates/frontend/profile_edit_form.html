@@ -50,7 +50,7 @@
                             Sidebar menu options
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'frontend:inprogress' %}">Ongoing Projects</a>
+                            <a class="dropdown-item" href="{% url 'frontend:inprogress' user.id %}">Ongoing Projects</a>
                             <a class="dropdown-item" href="/update_profile/">My profile</a>
                         </div>
                     </li>
@@ -74,7 +74,7 @@
         </nav>
     </div>
 
-<div class="d-none d-lg-block" style="margin-top: 8%">
+<div class="d-none d-lg-block" style="margin-top: 5%">
 
 </div >
 

@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 
@@ -10,7 +10,8 @@ from accounts.forms import ProfileTypeForm, DeveloperFillingDetailsForm, Recruit
 from transactions.models import Transaction , Candidate
 from invitations.models import Invitation
 from projects.models import Project
-
+from frontend.form import Projectinvite
+from frontend.models import candidatesprojects
 
 @login_required
 def developer_filling_details(request, current_profile):
@@ -107,18 +108,18 @@ def activity(request):
 
 
 def tracker(request, id):
-    project = Transaction.objects.get(id=id)
-    candidates = Candidate.objects.filter(transaction_id=id)
+    project =Transaction.objects.get(id = id)
+    candidates = candidatesprojects.objects.filter(transaction=id)
 
-    return render(request, 'frontend/recruiter/tracker.html', {'candidates': candidates, 'project': project})
+
+    return render(request, 'frontend/recruiter/tracker.html', {'candidates': candidates,'project':project})
 
 
 @login_required
-def inprogress(request):
-    candidates = Candidate.objects.filter(email=request.user.email)
+def inprogress(request, user_id):
+    projects=candidatesprojects.objects.filter(candidate=user_id)
+    return render(request, 'frontend/developer/inprogress.html',{'projects':projects})
 
-
-    return render(request, 'frontend/developer/inprogress.html',{'candidates': candidates})
 @login_required
 def invites(request):
     candidates = Candidate.objects.filter(email=request.user.email)
@@ -127,15 +128,41 @@ def invites(request):
 
 @login_required
 def projectdetails(request, id):
-    project = Project.objects.get(id=id)
-
-    return render(request, 'frontend/developer/projectdetails.html', {'project': project})
+    projectinvite=Projectinvite()
+    project =candidatesprojects.objects.get(id=id)
+    return render(request, 'frontend/developer/projectdetails.html', {'project': project,'projectinvite':projectinvite})
 
 
 @login_required
-def pendingproject(request, id):
-    project = Project.objects.get(id=id)
-    return render(request, 'frontend/developer/pendingproject.html', {'project': project})
+def pendingproject(request,  transaction_id):
+
+        transaction = Transaction.objects.get(id=transaction_id)
+
+        return render(request, 'frontend/developer/pendingproject.html',
+                      { 'transaction': transaction,})
+
+
+def projectinvites(request,transaction_id,candidate_id):
+    trans_id =Transaction.objects.get(id=transaction_id)
+    currentcandidate =User.objects.get(id=candidate_id)
+    print(currentcandidate)
+    acceptedinvite = candidatesprojects(transaction=trans_id, candidate=currentcandidate,stage='invite-accepted')
+    acceptedinvite.save()
+    return render(request, 'frontend/developer/developer.html')
+
+def update_candidateprojects(request,candidateproject_id,transaction_id):
+        transaction =Transaction.objects.get(id=transaction_id)
+        candidatesproject =candidatesprojects.objects.get(id=candidateproject_id)
+        candidatesproject.stage ='project-in-progress'
+        candidatesproject.save()
+        return HttpResponseRedirect('/projectdetails/%s' % candidateproject_id)
+
+def update_finished(request,candidateproject_id,transaction_id):
+    transaction = Transaction.objects.get(id=transaction_id)
+    candidatesproject = candidatesprojects.objects.get(id=candidateproject_id)
+    candidatesproject.stage = 'project-completed'
+    candidatesproject.save()
+    return HttpResponseRedirect('/projectdetails/%s' % candidateproject_id)
 
 
 def pricing(request):

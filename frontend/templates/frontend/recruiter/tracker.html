@@ -85,7 +85,7 @@ application tracker
 
             <div class="card trackercard" >
                 <div class="card-body">
-                    <h5 class="card-title">Applicants</h5>
+                    <h5 class="card-title">Accepted invites</h5>
                     <p class="card-text">{{ candidates.count}}</p>
 
                 </div>
@@ -119,13 +119,32 @@ application tracker
 
 
     </div>
+<br>
+
+
     <br>
-    <table class="table" style="width: 100%">
+{% if candidates.count  == 0  %}
+    <div class="alert col text-center alert-success" role="alert">
+        <h4 class="alert-heading">No Invites accepted yet</h4>
+        <p>Email invites have been sent to the candidates.Candidates who accept your invite will appear here</p>
+        <hr>
+        <p class="mb-0">CODELN may also source candidates for you for this project.Email us at :
+            <a href="mailto:info@codeln.com?Subject=Source%20candidates%20for%20project%20{{ project.project.name }}%20{{ project.id }}"  target="_top">
+                  info@codeLn.com
+              </a>
+        </p>
+
+    </div>
+{% else %}
+    <div class="alert alert-primary" role="alert">
+  Report links will appear for candidates who have finished taking the test.
+</div>
+   <table class="table" style="width: 100%">
         <thead>
         <tr>
 
             <th scope="col">Name</th>
-            <th scope="col"></th>
+            <th scope="col">Project status</th>
             <th scope="col">Full report</th>
 
 
@@ -135,19 +154,39 @@ application tracker
         {% for candidate in candidates %}
         <tr>
 
-            <td>{{ candidate.first_name}} {{ candidate.last_name}}  </td>
+            <td>{{ candidate.candidate.first_name}} {{ candidate.candidate.last_name}}  </td>
 
             <td>
-
-
+                {% if candidate.stage == 'invite-accepted' %}
+                    <span class="badge badge-info">Invite accepted</span>
+                {% endif %}
+            {% if candidate.stage == ' project-in-progress'%}
+                    <span class="badge badge-primary">Project in progress</span>
+                {% endif %}
+            {% if candidate.stage == 'project-completed' %}
+                    <span class="badge badge-success">Project completed</span>
+                {% endif %}
 
             </td>
 
-            <td>
-                <a href="/report/{{ candidate.email}}/{{ candidate.transaction_id }}">
-                    Report
-                </a>
-            </td>
+
+            {% if candidate.stage == 'project-completed'    %}
+
+                <td>
+                    <a href="/report/{{ candidate.candidate.email}}/{{ candidate.transaction_id }}">
+                        Report
+                    </a>
+                </td>
+            {% else %}
+                <td>
+                <p class="text-muted">not available yet</p>
+                </td>
+
+
+            {% endif %}
+
+
+
 
 
         </tr>
@@ -159,6 +198,8 @@ application tracker
 
         </tbody>
     </table>
+{% endif %}
+
 </main>
 
 {% endblock %}
