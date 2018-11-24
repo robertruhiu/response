@@ -98,7 +98,7 @@ def invitations(request, current_transaction):
                     send_mail(
                         'Test invitation',
                         'Hello' + ' '+ existinguser.first_name + ' ' + existinguser.last_name + ' ' + 'you have been invited by a Recruiter to partake in a test. '
-                        'Use this link to login and access the test invite under Ongoing Projects: http://beta.codeln.com/accounts/login/',
+                        'Use this link to login and access the test invite under Invites: http://beta.codeln.com/accounts/login/',
                         'codeln@codeln.com',
                         [existinguser.email],
                         fail_silently=False,
