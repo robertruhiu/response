@@ -128,6 +128,7 @@ def sourcing(request):
             from_email = sourcing_form.cleaned_data['email_address']
             data = ""
             data += sourcing_form.cleaned_data['country']
+            data += sourcing_form.cleaned_data['email_address']
             data += sourcing_form.cleaned_data['name']
             # data += str(sourcing_form.cleaned_data['phone_number'])
             data += sourcing_form.cleaned_data['company_name']
