@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
 from django.contrib.auth.models import User
-
+from django.contrib import messages
 from projects.forms import FrameworkForm
 from projects.models import Project, Framework
 from transactions.models import Transaction, Candidate
@@ -141,9 +141,10 @@ def sourcing(request):
 
             try:
                 send_mail(subject, data, from_email, ['elohor@codeln.com'])
+                messages.success(request, 'Your request has been submitted.Thank you')
             except BadHeaderError:
                 print('invalid error')
-            return redirect(reverse('frontend:home'))
+            return redirect(reverse('transactions:sourcing'))
     else:
         sourcing_form = SourcingForm()
         return render(request, 'transactions/sourcing.html', {'sourcing_form':sourcing_form})
