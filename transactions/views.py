@@ -118,6 +118,9 @@ def invitations(request, current_transaction):
 def my_invites(request):
     candidates = Candidate.objects.filter(email=request.user.email)
     return  render(request, 'transactions/send_credentials.html', {'candidates': candidates})
+def success(request):
+
+    return  render(request, 'transactions/success.html')
 
 
 def sourcing(request):
@@ -141,10 +144,9 @@ def sourcing(request):
 
             try:
                 send_mail(subject, data, from_email, ['elohor@codeln.com'])
-                messages.success(request, 'Your request has been submitted.Thank you')
             except BadHeaderError:
                 print('invalid error')
-            return redirect(reverse('transactions:sourcing'))
+            return redirect(reverse('transactions:success'))
     else:
         sourcing_form = SourcingForm()
         return render(request, 'transactions/sourcing.html', {'sourcing_form':sourcing_form})

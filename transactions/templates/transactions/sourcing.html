@@ -6,6 +6,26 @@
         <div class="d-none d-lg-block">
             <nav class="navbar  navbar-light fixed-top fine border-bottom">
                 <h5>Source for Developers</h5>
+                 <ul class="nav ml-auto">
+                     {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                <a  href="/pricing" style="color: black" class="nav-link" >Pricing</a>
+            </li>
+
+            <li class="nav-item">
+                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+            </li>
+
+            {% else %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+            </li>
+            <li class="nav-item">
+                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+            </li>
+            {% endif %}
+                 </ul>
             </nav>
         </div>
 
@@ -13,14 +33,40 @@
         <div class="container d-lg-none">
             <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
                 <h5 style="color: white">Source for Developers</h5>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-
-                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Menu
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'account_login' %}" >Ongoing tests</a>
+                            <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Create a test</a>
+                            <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
+                        </div>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
             </nav>
         </div>
 
@@ -31,19 +77,7 @@
         <div class="d-lg-none" style="margin-top: 5em">
 
         </div>
-        {% if messages %}
 
-        {% for message in messages %}
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-
-        {% endfor %}
-    {% endif %}
         <form action="." method="post" class="form">
             {% csrf_token %}
 
