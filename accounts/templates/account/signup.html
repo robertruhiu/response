@@ -29,12 +29,28 @@
             </div>
             <div class="col-lg-4" style="margin-top: 5em">
             <h5>Sign up</h5>
-
-
-
-                <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-                    {% csrf_token %}
-                    {% bootstrap_form form %}
+            <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                {% csrf_token %}
+                {% bootstrap_form_errors form %}
+                <div class="form-group">
+                    <label for="id_first_name">First name</label>
+                    <input type="text" name="first_name" placeholder="" maxlength="30" class="form-control" title="" required="" id="id_first_name">
+                </div>
+                <div class="form-group">
+                    <label for="id_last_name">Last name</label>
+                    <input type="text" name="last_name" placeholder="" maxlength="30" class="form-control" title="" required="" id="id_last_name">
+                </div>
+                <div class="form-group">
+                    <label for="id_email">E-mail</label>
+                    <input type="email" name="email"  class="form-control" title="" required="" id="id_email">
+                </div>
+                <div class="form-group">
+                    <label for="id_password1">Password</label>
+                    <input type="password" name="password1"  class="form-control" title="" required="" id="id_password1">
+                    <small id="passwordHelpBlock" class="form-text text-muted">
+                        Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                    </small>
+                </div>
 
                     {% if redirect_field_value %}
                         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
@@ -46,6 +62,10 @@
                             </button>
 
                 </form>
+
+
+
+
 
 
 
