@@ -14,6 +14,9 @@ Candidates
 
 
             {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                <a  href="/pricing" style="color: black" class="nav-link" >Pricing</a>
+            </li>
 
             <li class="nav-item">
                 <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
@@ -52,7 +55,7 @@ Candidates
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{% url 'account_login' %}" >Ongoing tests</a>
                             <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Create a test</a>
-                            <a class="dropdown-item" href="/pricing">Source candidates</a>
+                            <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
                         </div>
                     </li>
                     {% if request.user.is_authenticated %}
@@ -75,10 +78,20 @@ Candidates
         </nav>
     </div>
     <div class="d-none d-lg-block" style="margin-top: 8%">
+        <div class="alert alert-primary" role="alert">
+            Pricing is based on a 10 candidate package.
+
+
+</div>
 
 </div >
 
     <div class="d-lg-none"  style="margin-top: 7em">
+        <div class="alert alert-primary" role="alert">
+            Pricing is based on a 10 candidate package.
+
+
+</div>
 
 </div>
 <div class="row">

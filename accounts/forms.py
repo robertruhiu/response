@@ -40,7 +40,7 @@ class RecruiterFillingDetailsForm(forms.Form):
     job_role = forms.CharField(max_length=140)
     industry = forms.CharField(max_length=80)
     staff_size = forms.IntegerField()
-    company_url = forms.URLField()
+    company_url = forms.CharField(max_length=400)
 
 class SignUpForm(forms.Form):
     first_name = forms.CharField(max_length=30, required=True,
