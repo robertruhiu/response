@@ -88,7 +88,7 @@
 
 
                    {% for projectype in projecttypes %}
-                {% if projectype.name == 'web' %}
+                {% if projectype.name == 'Web' %}
                     <div class="col-lg-6" style="width: 100%;">
                         <div class="card recruithomecard" style="margin: auto">
 
@@ -113,7 +113,7 @@
                             </a>
                         </div>
                     </div>
-                {% elif projectype.name == 'mobile'%}
+                {% elif projectype.name == 'Mobile'%}
                     <div class="col-lg-6" style="width: 100%;">
                         <div class="card recruithomecard" style="margin: auto">
                             <a href="{% url 'projects:all-projects' projectype.id %}">
@@ -143,7 +143,7 @@
             </div>
             <div class="row " style="margin-bottom: 2%; ">
                 {% for devtype in devtypes %}
-                {% if devtype.name == 'frontend' %}
+                {% if devtype.name == 'Frontend' %}
                     <div class="col-lg-6" style="width: 100%;">
                 <div class="card recruithomecard" style="margin: auto">
 
@@ -168,7 +168,7 @@
                     </a>
                 </div>
             </div>
-                {% elif devtype.name == 'backend'%}
+                {% elif devtype.name == 'Backend'%}
                     <div class="col-lg-6" style="width: 100%;">
                 <div class="card recruithomecard" style="margin: auto">
                     <a href="{% url 'projects:devtypes' devtype.id %}">
