@@ -113,6 +113,14 @@ nav ul li a{color:black;padding:0 30px;}
     color:white !important;
     background-size: cover;
 }
+.jumb{
+    border-radius: 0;
+    background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));
+    background-position: center;
+
+    color:white !important;
+    background-size: cover;
+}
 .jumbotrondev{
     border-radius: 0;
     background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85)),
