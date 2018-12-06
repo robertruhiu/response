@@ -90,7 +90,8 @@
 
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-6">
-            {% bootstrap_field developer_filling_details_form.github_repo placeholder=False %}
+            <label>Github account </label>
+            {% bootstrap_field developer_filling_details_form.github_repo placeholder=False show_label=False %}
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6">
             {% bootstrap_field developer_filling_details_form.linkedin_url placeholder=False %}

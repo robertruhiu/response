@@ -60,3 +60,4 @@ six==1.11.0
 urllib3==1.23
 vine==1.1.4
 whitenoise==3.3.1
+django-crispy-forms==1.7.0

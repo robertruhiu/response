@@ -111,12 +111,19 @@ pendingproject
 
 
                 </ul>
+                    {% if acceptedinvites %}
+                        already accepted
+                    {% else %}
 
-                    <a href="/projectinvites/{{ transaction.id }}/{{ user.id }}">
+
+                        <a href="/projectinvites/{{ transaction.id }}/{{ user.id }}">
 
                         <button type="submit" class="btn btn-primary">Accept project</button>
 
                     </a>
+                    {% endif %}
+
+
 
 
 

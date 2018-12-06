@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django_countries.fields import CountryField
 
+from projects.models import Language, Framework
 
 # Create your models here.
 from django.db.models.signals import post_save
@@ -46,11 +47,12 @@ class Profile(models.Model):
     gender = models.CharField(choices=GENDER_CHOICES, null=True, blank=True, max_length=30)
     phone_number = models.CharField(null=True, max_length=30)
     # developer profile
-    linkedin_url =models.CharField(max_length=500,blank=True, null=True, )
-    portfolio=models.CharField(max_length=500,blank=True, null=True, )
-    github_repo = models.CharField(max_length=500,blank=True, null=True, )
-    language = models.CharField(max_length=140, null=True, blank=True)
-    framework = models.CharField(max_length=140, null=True, blank=True)
+    linkedin_url =models.URLField(blank=True, null=True, )
+    portfolio=models.URLField(blank=True, null=True, )
+    github_repo = models.URLField(blank=True, null=True, )
+    language = models.ForeignKey(Language, on_delete=models.DO_NOTHING,
+                                              related_name='languages', null=True)
+    framework = models.ForeignKey(Framework, on_delete=models.DO_NOTHING, related_name='frameworks', null=True)
     years = models.CharField(choices=YEARS_ACTIVE_CHOICES, null=True , max_length=30)
    
     country = CountryField(null=True, max_length=30)
