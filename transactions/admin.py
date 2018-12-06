@@ -1,6 +1,7 @@
 from django.contrib import admin
 from transactions.models import Candidate, Transaction
 
+from frontend.models import candidatesprojects
 
 # Register your models here.
 
@@ -22,3 +23,4 @@ class TransactionAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Transaction, TransactionAdmin)
+admin.site.register(candidatesprojects)
