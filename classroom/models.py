@@ -6,7 +6,7 @@ from django.utils.html import escape, mark_safe
 
 class Subject(models.Model):
     name = models.CharField(max_length=30)
-    color = models.CharField(max_length=7, default='#007bff')
+
 
     def __str__(self):
         return self.name
