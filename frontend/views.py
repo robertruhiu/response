@@ -66,8 +66,8 @@ def profile_type_selection(request, current_profile):
             current_profile.user_type = profile_type
             if profile_type == 'developer':
                 current_profile.stage = 'developer_filling_details'
-                test_registration = Student(user=request.user)
-                test_registration.save()
+                # test_registration = Student(user=request.user)
+                # test_registration.save()
             elif profile_type == 'recruiter':
                 current_profile.stage = 'recruiter_filling_details'
             current_profile.save()
