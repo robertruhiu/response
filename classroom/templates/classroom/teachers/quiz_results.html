@@ -1,12 +1,12 @@
 {% extends 'candidatesbase.html' %}
-{% load bootstrap4 %}
-{% load static %}
-{% block content %}
 
-<main role="main" class="col-md-12 col-lg-10 ml-lg-auto   px-4 ">
+{% load crispy_forms_tags  %}
+
+{% block content %}
+    <main role="main" class="col-md-10 col-lg-10 ml-lg-auto   px-4 ">
     <div class="d-none d-lg-block">
         <nav class="navbar  navbar-light fixed-top fine border-bottom">
-                    <h5 >My Profile</h5>
+                    <h5 >Projects in progress</h5>
                     <ul class="nav ml-auto">
 
 
@@ -35,7 +35,7 @@
     <!-----md devices adaptation------>
     <div class="container d-lg-none">
         <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
-            <a class="logoadapt h5" style="text-decoration: none" href="">My Profile</a>
+            <a class="logoadapt h5" style="text-decoration: none" href="">Projects in progress</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span  class="navbar-toggler-icon">
                     <span style="color: white" data-feather="menu"></span>
@@ -73,78 +73,47 @@
     </div>
 
 <div class="d-none d-lg-block" style="margin-top: 8%">
-     <div class="alert alert-info" role="alert">
-            You are highly encouraged to fill all details.It will enable better job matching
-        </div>
+
 </div >
 
 <div class="d-lg-none"  style="margin-top: 7em">
-     <div class="alert alert-info" role="alert">
-            You are highly encouraged to fill all details.It will enable better job matching
-        </div>
+
 </div>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'teachers:quiz_change_list' %}">My Quizzes</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'teachers:quiz_change' quiz.pk %}">{{ quiz.name }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Results</li>
+    </ol>
+  </nav>
+  <h2 class="mb-3">{{ quiz.name }} Results</h2>
 
-
-<form action="." method="post" enctype="multipart/form-data" class="form">
-                {% csrf_token %}
-
-    <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-6">
-            <label>Github account </label>
-            {% bootstrap_field developer_filling_details_form.github_repo placeholder=False show_label=False %}
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6">
-            {% bootstrap_field developer_filling_details_form.linkedin_url placeholder=False %}
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6">
-            <label>Portfolio website</label>
-            {% bootstrap_field developer_filling_details_form.portfolio show_label=False placeholder=False %}
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6">
-            {% bootstrap_field developer_filling_details_form.phone_number placeholder=False %}
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6">
-            <label>Country of origin</label>
-            {% bootstrap_field developer_filling_details_form.country show_label=False %}
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 ">
-            {% bootstrap_field developer_filling_details_form.gender %}
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-sm-6">
-            <label>Years of experience</label>
-            {% bootstrap_field developer_filling_details_form.years show_label=False  %}
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 ">
-            <label>Preferred programming language</label>
-            {% bootstrap_field developer_filling_details_form.language show_label=False placeholder=False  %}
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 ">
-            <label>Preferred framework</label>
-            {% bootstrap_field developer_filling_details_form.framework show_label=False placeholder=False %}
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 ">
-            <label>I am available to work?</label>
-            {% bootstrap_field developer_filling_details_form.availabilty show_label=False %}
-        </div>
-
-
-
-        </div>
-    <div class="d-flex justify-content-center">
-        <button class="btn primary1  col-3" style="color: white"  type="submit">Next</button>
+  <div class="card">
+    <div class="card-header">
+      <strong>Taken Quizzes</strong>
+      <span class="badge badge-pill badge-primary float-right">Average Score: {{ quiz_score.average_score|default_if_none:0.0 }}</span>
     </div>
-
-    </form>
-
-
-
-<br>
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Date</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for taken_quiz in taken_quizzes %}
+          <tr>
+            <td>{{ taken_quiz.student.user.username }}</td>
+            <td>{{ taken_quiz.date }}</td>
+            <td>{{ taken_quiz.score }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="card-footer text-muted">
+      Total respondents: <strong>{{ total_taken_quizzes }}</strong>
+    </div>
+  </div>
     </main>
-    </div>
-    </div>
-
-
-
-
 {% endblock %}

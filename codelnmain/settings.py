@@ -46,10 +46,13 @@ INSTALLED_APPS = [
     'accounts',
     'projects',
     'frontend',
+    'classroom',
+
     'paypal.standard.ipn',
     'transactions',
     'payments',
     'testing',
+    'crispy_forms',
 
     # third party libs
     'allauth',
@@ -169,6 +172,7 @@ STATICFILES_DIRS = [
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 #email settings
 DEFAULT_FROM_EMAIL=config('DEFAULT_FROM_EMAIL',default='DEFAULT_FROM_EMAIL')

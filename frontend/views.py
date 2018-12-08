@@ -12,6 +12,7 @@ from invitations.models import Invitation
 from projects.models import Project
 from frontend.form import Projectinvite
 from frontend.models import candidatesprojects
+from classroom.models import Student
 
 @login_required
 def developer_filling_details(request, current_profile):
@@ -65,6 +66,8 @@ def profile_type_selection(request, current_profile):
             current_profile.user_type = profile_type
             if profile_type == 'developer':
                 current_profile.stage = 'developer_filling_details'
+                test_registration = Student(user=request.user)
+                test_registration.save()
             elif profile_type == 'recruiter':
                 current_profile.stage = 'recruiter_filling_details'
             current_profile.save()
@@ -135,17 +138,17 @@ def projectdetails(request, id):
 
 @login_required
 def pendingproject(request,  transaction_id):
-
+        acceptedinvites=candidatesprojects.objects.filter(transaction_id=transaction_id,candidate=request.user)
         transaction = Transaction.objects.get(id=transaction_id)
 
         return render(request, 'frontend/developer/pendingproject.html',
-                      { 'transaction': transaction,})
+                      { 'transaction': transaction,'acceptedinvites':acceptedinvites})
 
 
 def projectinvites(request,transaction_id,candidate_id):
     trans_id =Transaction.objects.get(id=transaction_id)
     currentcandidate =User.objects.get(id=candidate_id)
-    print(currentcandidate)
+
     acceptedinvite = candidatesprojects(transaction=trans_id, candidate=currentcandidate,stage='invite-accepted')
     acceptedinvite.save()
     return render(request, 'frontend/developer/developer.html')
