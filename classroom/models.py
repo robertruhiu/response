@@ -38,8 +38,10 @@ class Answer(models.Model):
 
 
 class Student(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     quizzes = models.ManyToManyField(Quiz, through='TakenQuiz')
+
+
 
     def get_unanswered_questions(self, quiz):
         answered_questions = self.quiz_answers \
@@ -62,3 +64,4 @@ class TakenQuiz(models.Model):
 class StudentAnswer(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='quiz_answers')
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name='+')
+    quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)

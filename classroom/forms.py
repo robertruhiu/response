@@ -68,6 +68,7 @@ class TakeQuizForm(forms.ModelForm):
         required=True,
         empty_label=None)
 
+
     class Meta:
         model = StudentAnswer
         fields = ('answer', )

@@ -86,6 +86,7 @@
           <th>Quiz</th>
           <th>Subject</th>
           <th>Score</th>
+            <th>Retake</th>
         </tr>
       </thead>
       <tbody>
@@ -93,7 +94,9 @@
           <tr>
             <td>{{ taken_quiz.quiz.name }}</td>
             <td>{{ taken_quiz.quiz.subject }}</td>
-            <td>{{ taken_quiz.score }}</td>
+            <td>{{ taken_quiz.score }} </td>
+            <td><a href="{% url 'students:retake' taken_quiz.quiz_id taken_quiz.student.id%}">Retake</a></td>
+
           </tr>
         {% empty %}
           <tr>

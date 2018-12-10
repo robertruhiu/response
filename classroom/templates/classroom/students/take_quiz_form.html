@@ -1,12 +1,12 @@
 {% extends 'candidatesbase.html' %}
-
+{% load bootstrap4 %}
 {% load crispy_forms_tags %}
 
 {% block content %}
     <main role="main" class="col-md-10 col-lg-10 ml-lg-auto   px-4 ">
     <div class="d-none d-lg-block">
         <nav class="navbar  navbar-light fixed-top fine border-bottom">
-                    <h5 >Projects in progress</h5>
+                    <h5 >{{ quiz.name }}</h5>
                     <ul class="nav ml-auto">
 
 
@@ -35,7 +35,7 @@
     <!-----md devices adaptation------>
     <div class="container d-lg-none">
         <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
-            <a class="logoadapt h5" style="text-decoration: none" href="">Projects in progress</a>
+            <a class="logoadapt h5" style="text-decoration: none" href="">{{ quiz.name }}</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span  class="navbar-toggler-icon">
                     <span style="color: white" data-feather="menu"></span>
@@ -79,15 +79,44 @@
 <div class="d-lg-none"  style="margin-top: 7em">
 
 </div>
-  <div class="progress mb-3">
+        <div class="shadow-sm p-3 mb-5 bg-white">
+            <div class="d-flex justify-content-end">
+                Time:<span id="timer"></span>
+            </div>
+        </div>
+   <div class="shadow-sm p-3 mb-5 bg-white">
+       <div class="progress mb-3">
     <div class="progress-bar" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%"></div>
   </div>
-  <h2 class="mb-3">{{ quiz.name }}</h2>
+
   <p class="lead">{{ question.text }}</p>
   <form method="post" novalidate>
     {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-primary">Next →</button>
+      {{ form|crispy }}
+
+
+
+    <button type="submit" id="submit" class="btn btn-primary btn-sm btn-block">Next →</button>
   </form>
+   </div>
+
     </main>
+    <script>
+    var sec = 10;
+var time = setInterval(myTimer, 1000);
+
+function myTimer() {
+
+    document.getElementById('timer').innerHTML = sec + "sec left";
+    sec--;
+    if (sec == -1) {
+        clearInterval(time);
+
+
+
+    }
+}
+
+    </script>
+
 {% endblock %}

@@ -43,6 +43,15 @@ class TakenQuizListView(ListView):
         return queryset
 
 
+def student_registration(request):
+    if Student.objects.filter(user=request.user).exists():
+        return redirect('students:quiz_list')
+    else:
+        registration = Student(user=request.user)
+        registration.save()
+        return redirect('students:quiz_list')
+
+
 @login_required
 @student_required
 def take_quiz(request, pk):
@@ -56,6 +65,7 @@ def take_quiz(request, pk):
     total_unanswered_questions = unanswered_questions.count()
     progress = 100 - round(((total_unanswered_questions - 1) / total_questions) * 100)
     question = unanswered_questions.first()
+    defaultanswer = Answer.objects.get(id=3)
 
     if request.method == 'POST':
         form = TakeQuizForm(question=question, data=request.POST)
@@ -63,6 +73,7 @@ def take_quiz(request, pk):
             with transaction.atomic():
                 student_answer = form.save(commit=False)
                 student_answer.student = student
+                student_answer.quiz = quiz
                 student_answer.save()
                 if student.get_unanswered_questions(quiz).exists():
                     return redirect('students:take_quiz', pk)
@@ -84,4 +95,11 @@ def take_quiz(request, pk):
         'form': form,
         'progress': progress
     })
+
+def retake(request,quiz_id,student_id):
+
+    TakenQuiz.objects.filter(quiz_id=quiz_id,student_id=student_id).delete()
+    StudentAnswer.objects.filter(quiz_id=quiz_id,student_id=student_id).delete()
+    return redirect('students:take_quiz', quiz_id)
+
 
