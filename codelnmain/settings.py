@@ -32,7 +32,7 @@ ENVIRONMENT = config('ENVIRONMENT', default='local')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

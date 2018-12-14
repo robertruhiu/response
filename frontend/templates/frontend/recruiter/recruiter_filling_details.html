@@ -72,33 +72,49 @@
 
 
  <div class="row mt-5">
+     <div class="d-none d-lg-block" style="margin-top: 4%">
+
+</div >
+
+<div class="d-lg-none"  style="margin-top: 7em">
+
+</div>
+     <div class="shadow-sm p-3 mb-5 bg-white">
 
 
-        <div class="card" style="width: 100%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);border-radius: 0;margin-left: auto;margin-right: auto">
-            <div class="card-header" style="background: 0/30% no-repeat,linear-gradient(61deg,#6e1a52,#76c5d6 42%);border-radius: 0;height: 4em">
-            </div>
-            <div class="card-body">
+     <form action=".." method="post">
+         {% csrf_token %}
+         <div class="row">
+
+             <div class="col-lg-6 col-md-6 col-sm-6">
+                 <label>Company name </label>
+                 {% bootstrap_field recruiter_filling_details_form.company placeholder=False show_label=False %}
+             </div>
+             <div class="col-lg-6 col-md-6 col-sm-6">
+                 <label>Job role </label>
+                 {% bootstrap_field recruiter_filling_details_form.job_role placeholder=False show_label=False %}
+             </div>
+             <div class="col-lg-6 col-md-6 col-sm-6">
+                 <label>Industry </label>
+                 {% bootstrap_field recruiter_filling_details_form.industry placeholder=False show_label=False %}
+             </div>
+             <div class="col-lg-6 col-md-6 col-sm-6">
+                 <label>Staff size </label>
+                 {% bootstrap_field recruiter_filling_details_form.staff_size placeholder=False show_label=False %}
+             </div>
+             <div class="col-lg-6 col-md-6 col-sm-6">
+                 <label>Company url </label>
+                 {% bootstrap_field recruiter_filling_details_form.company_url placeholder=False show_label=False %}
+             </div>
+         </div>
+         <button class="btn btn-primary btn-block btn-sm" type="submit">Next</button>
+     </form>
+         </div>
 
 
 
-                <form action=".." method="post">
-                    {% csrf_token %}
-                    {% bootstrap_form   recruiter_filling_details_form  %}
-                    {% buttons %}
-                        <button class="btn btn-primary"  type="submit">Next</button>
-                    {% endbuttons %}
 
-
-
-                </form>
-
-
-            </div>
-        </div>
-
-
-    </div>
-
+</div>
 
 </main>
 

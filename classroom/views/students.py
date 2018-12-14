@@ -10,12 +10,12 @@ from django.views.generic import CreateView, ListView, UpdateView
 
 from ..decorators import student_required
 from ..forms import  StudentSignUpForm, TakeQuizForm
-from ..models import Quiz, Student, TakenQuiz, User,StudentAnswer,Answer
+from ..models import Quiz, Student, TakenQuiz, User,StudentAnswer,Answer,Subject
 
 
 @method_decorator([login_required, student_required], name='dispatch')
 class QuizListView(ListView):
-    model = Quiz
+    model = Quiz,Subject
     ordering = ('name', )
     context_object_name = 'quizzes'
     template_name = 'classroom/students/quiz_list.html'
@@ -27,7 +27,15 @@ class QuizListView(ListView):
             .exclude(pk__in=taken_quizzes) \
             .annotate(questions_count=Count('questions')) \
             .filter(questions_count__gt=0)
+
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(QuizListView, self).get_context_data(**kwargs)
+        context['subjects'] = Subject.objects.all()
+        return context
+
+
 
 
 @method_decorator([login_required, student_required], name='dispatch')
@@ -65,7 +73,7 @@ def take_quiz(request, pk):
     total_unanswered_questions = unanswered_questions.count()
     progress = 100 - round(((total_unanswered_questions - 1) / total_questions) * 100)
     question = unanswered_questions.first()
-    defaultanswer = Answer.objects.get(id=3)
+
 
     if request.method == 'POST':
         form = TakeQuizForm(question=question, data=request.POST)
