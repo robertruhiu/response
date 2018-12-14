@@ -6,7 +6,7 @@ from django.utils.html import escape, mark_safe
 
 class Subject(models.Model):
     name = models.CharField(max_length=30)
-    image =models.CharField(max_length=300,blank=True, null=True)
+    image = models.CharField(max_length=300,blank=True, null=True)
     def __str__(self):
         return self.name
 
@@ -39,7 +39,7 @@ class Answer(models.Model):
 
 
 class Student(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE,null=False,default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     quizzes = models.ManyToManyField(Quiz, through='TakenQuiz')
 
     def get_unanswered_questions(self, quiz):
