@@ -6,8 +6,8 @@ urlpatterns = [
 
 
     path('students/', include(([
-        path('', students.QuizListView.as_view(), name='quiz_list'),
-        path('taken/', students.TakenQuizListView.as_view(), name='taken_quiz_list'),
+        path('', students.quizzeslist, name='quiz_list'),
+        path('taken/', students.taken_quizlist, name='taken_quiz_list'),
         path('quiz/<int:pk>/', students.take_quiz, name='take_quiz'),
         path('tests/', students.student_registration, name='tests'),
         path('retake/<int:quiz_id>/<int:student_id>',students.retake, name='retake')

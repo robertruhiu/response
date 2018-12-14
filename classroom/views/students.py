@@ -3,6 +3,8 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.db.models import Count
+from django.db.models import Q
+from django.http import request
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -13,46 +15,24 @@ from ..forms import  StudentSignUpForm, TakeQuizForm
 from ..models import Quiz, Student, TakenQuiz, User,StudentAnswer,Answer,Subject
 
 
-@method_decorator([login_required, student_required], name='dispatch')
-class QuizListView(ListView):
-    model = Quiz,Subject
-    ordering = ('name', )
-    context_object_name = 'quizzes'
-    template_name = 'classroom/students/quiz_list.html'
-
-    def get_queryset(self):
-        student = self.request.user.student
-        taken_quizzes = student.quizzes.values_list('pk', flat=True)
-        queryset = Quiz.objects.all() \
-            .exclude(pk__in=taken_quizzes) \
-            .annotate(questions_count=Count('questions')) \
-            .filter(questions_count__gt=0)
-
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super(QuizListView, self).get_context_data(**kwargs)
-        context['subjects'] = Subject.objects.all()
-        return context
+@login_required
+@student_required
+def quizzeslist(request):
+    subjects = Subject.objects.all()
+    quizzes = Quiz.objects.all()
 
 
+    return render(request, 'classroom/students/quiz_list.html',{'quizzes':quizzes,'subjects':subjects,})
 
 
-@method_decorator([login_required, student_required], name='dispatch')
-class TakenQuizListView(ListView):
-    model = TakenQuiz
-    context_object_name = 'taken_quizzes'
-    template_name = 'classroom/students/taken_quiz_list.html'
+def taken_quizlist(request):
+    taken_quizzes =TakenQuiz.objects.filter(student_id=request.user.id)
 
-    def get_queryset(self):
-        queryset = self.request.user.student.taken_quizzes \
-            .select_related('quiz', 'quiz__subject') \
-            .order_by('quiz__name')
-        return queryset
+    return render(request, 'classroom/students/taken_quiz_list.html',{'taken_quizzes':taken_quizzes})
 
 
 def student_registration(request):
-    if Student.objects.filter(user=request.user).exists():
+    if Student.objects.filter(user_id=request.user.id).exists():
         return redirect('students:quiz_list')
     else:
         registration = Student(user=request.user)
@@ -64,7 +44,7 @@ def student_registration(request):
 @student_required
 def take_quiz(request, pk):
     quiz = get_object_or_404(Quiz, pk=pk)
-    student = request.user.student
+    student = Student.objects.get(user_id=request.user.id)
     if student.quizzes.filter(pk=pk).exists():
         return render(request, 'classroom/students/taken_quiz.html')
 
