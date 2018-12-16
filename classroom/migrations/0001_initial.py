@@ -40,6 +40,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Student',
             fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('user',models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL,primary_key=True,)),
                 ('quizzes',models.ManyToManyField(blank=True, null=True, through='classroom.TakenQuiz', to='classroom.Quiz'))
             ],
