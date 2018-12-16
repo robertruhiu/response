@@ -3,7 +3,7 @@
 {% block content %}
 
 
-    <main role="main" class="col-md-10 col-lg-10 ml-lg-auto   px-4 ">
+    <main role="main" class="col-md-10 col-lg-10 ml-lg-auto   px-4 " >
     <div class="d-none d-lg-block">
         <nav class="navbar  navbar-light fixed-top fine border-bottom">
                     <h5 >Tests library</h5>
@@ -88,11 +88,11 @@
 </div>
 
 <div class="accordion" id="accordionExample">
-    <div class="row">
+    <div class="row" >
         {% for subject in subjects %}
 
         <div class="col-lg-4">
-            <div class="shadow p-3 mb-5 bg-white" data-toggle="collapse" data-target="#{{ subject.id }}" aria-expanded="true" aria-controls="collapseOne" id="headingOne">
+            <div class="shadow p-3 mb-5 bg-white"   data-toggle="collapse" data-target="#{{ subject.id }}" aria-expanded="true" aria-controls="collapseOne" id="headingOne">
                 <div class="" >
                     <div class="media">
                         <img class="mr-3" src="{{ subject.image }}" width=64 height="64"  alt="Language image">
@@ -124,14 +124,12 @@
     </div>
 </div>
 
-
-
-
-
 <br>
     <br>
     <br>
     <br>
 
+
     </main>
+
 {% endblock %}
