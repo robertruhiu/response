@@ -39,6 +39,7 @@ class Answer(models.Model):
 
 
 class Student(models.Model):
+    id = models.BigIntegerField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
     quizzes = models.ManyToManyField(Quiz, through='TakenQuiz',null=True,blank=True)
 
