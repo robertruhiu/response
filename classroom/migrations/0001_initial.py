@@ -40,7 +40,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Student',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('user',models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL,primary_key=True,)),
+                ('quizzes',models.ManyToManyField(blank=True, null=True, through='classroom.TakenQuiz', to='classroom.Quiz'))
             ],
         ),
         migrations.CreateModel(
@@ -69,16 +70,6 @@ class Migration(migrations.Migration):
                 ('quiz', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='taken_quizzes', to='classroom.Quiz')),
                 ('student', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='taken_quizzes', to='classroom.Student')),
             ],
-        ),
-        migrations.AddField(
-            model_name='student',
-            name='quizzes',
-            field=models.ManyToManyField(blank=True, null=True, through='classroom.TakenQuiz', to='classroom.Quiz'),
-        ),
-        migrations.AddField(
-            model_name='student',
-            name='user',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='quiz',
