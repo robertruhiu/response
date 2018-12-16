@@ -39,7 +39,8 @@ class Answer(models.Model):
 
 
 class Student(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,default=1,primary_key=True)
+    id = models.BigIntegerField(auto_created=True,  serialize=False, verbose_name='ID')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,default=1,primary_key=True,)
     quizzes = models.ManyToManyField(Quiz, through='TakenQuiz',blank=True)
 
     def get_unanswered_questions(self, quiz):
