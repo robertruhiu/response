@@ -198,7 +198,7 @@ def onboarddevs(request):
                 dev.country = alluser.profile.country
                 dev.save()
 
-    return redirect(reverse('frontend:index'))
+    return redirect(reverse('frontend:seedevs'))
 
 def onboardrecruiters(request):
     for alluser in User.objects.all():
@@ -213,7 +213,7 @@ def onboardrecruiters(request):
                 recruiter.country = alluser.profile.country
                 recruiter.save()
 
-    return redirect(reverse('frontend:index'))
+    return redirect(reverse('frontend:seerecruiters'))
 
 
 def credits(request):

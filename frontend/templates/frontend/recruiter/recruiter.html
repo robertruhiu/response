@@ -13,20 +13,7 @@ recruiter dashboard
 
 
             {% if request.user.is_authenticated %}
-                {% if request.user.is_staff %}
-                    <div class="dropdown">
-                        <button class="btn  dropdown-toggle"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Onboard actions
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" id="devs" href="{% url 'frontend:onboarddevs' %}">devs</a>
-                            <a class="dropdown-item" href="{% url 'frontend:onboardrecruiters' %}">recruiters</a>
 
-                        </div>
-                    </div>
-
-                    {% endif %}
 
 
             <li class="nav-item">
