@@ -8,11 +8,12 @@ from django.http import request
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import ListView
 
 from ..decorators import student_required
-from ..forms import  StudentSignUpForm, TakeQuizForm
+from ..forms import TakeQuizForm
 from ..models import Quiz, Student, TakenQuiz, User,StudentAnswer,Answer,Subject
+
 
 @method_decorator([login_required, student_required], name='dispatch')
 class QuizListView(ListView):
@@ -72,7 +73,6 @@ def student_registration(request):
 
 
 @login_required
-@student_required
 def take_quiz(request, pk):
     quiz = get_object_or_404(Quiz, pk=pk)
     student = Student.objects.get(user_id=request.user.id)
@@ -115,7 +115,7 @@ def take_quiz(request, pk):
         'progress': progress
     })
 
-def retake(request,quiz_id,student_id):
+def retake(quiz_id,student_id):
 
     TakenQuiz.objects.filter(quiz_id=quiz_id,student_id=student_id).delete()
     StudentAnswer.objects.filter(quiz_id=quiz_id,student_id=student_id).delete()

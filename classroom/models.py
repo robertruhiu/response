@@ -1,15 +1,14 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.conf import settings
-from django.utils.html import escape, mark_safe
 
 
 class Subject(models.Model):
     name = models.CharField(max_length=30)
     image = models.CharField(max_length=300,blank=True, null=True)
+
     def __str__(self):
         return self.name
-
 
 
 class Quiz(models.Model):

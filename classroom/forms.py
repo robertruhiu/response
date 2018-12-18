@@ -8,43 +8,11 @@ from classroom.models import (Answer, Question, Student, StudentAnswer,
                               Subject, User,Quiz)
 
 
-class TeacherSignUpForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
-        model = User
-
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.is_teacher = True
-        if commit:
-            user.save()
-        return user
-
-
-class StudentSignUpForm(UserCreationForm):
-    interests = forms.ModelMultipleChoiceField(
-        queryset=Subject.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=True
-    )
-
-    class Meta(UserCreationForm.Meta):
-        model = User
-
-    @transaction.atomic
-    def save(self):
-        user = super().save(commit=False)
-        user.is_student = True
-        user.save()
-        student = Student.objects.create(user=user)
-        student.interests.add(*self.cleaned_data.get('interests'))
-        return user
-
-
 
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ('text', )
+        fields = ('text',)
 
 
 class BaseAnswerInlineFormSet(forms.BaseInlineFormSet):
@@ -71,16 +39,14 @@ class TakeQuizForm(forms.ModelForm):
 
     class Meta:
         model = StudentAnswer
-        fields = ('answer', )
+        fields = ('answer',)
 
     def __init__(self, *args, **kwargs):
         question = kwargs.pop('question')
         super().__init__(*args, **kwargs)
         self.fields['answer'].queryset = question.answers.order_by('text')
+
 class Addquiz(forms.ModelForm):
-
-
-
 
     class Meta:
         model = Quiz

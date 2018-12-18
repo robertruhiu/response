@@ -10,8 +10,8 @@ from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
-from ..decorators import teacher_required
-from ..forms import BaseAnswerInlineFormSet, QuestionForm, TeacherSignUpForm
+
+from ..forms import BaseAnswerInlineFormSet, QuestionForm
 from ..models import Answer, Question, Quiz, User
 
 
