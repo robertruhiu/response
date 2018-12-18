@@ -11,6 +11,7 @@ class Subject(models.Model):
         return self.name
 
 
+
 class Quiz(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='quizzes')
     name = models.CharField(max_length=255)
