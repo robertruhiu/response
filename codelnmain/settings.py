@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'accounts',
     'projects',
     'frontend',
-    'classroom',
+
+
 
     'paypal.standard.ipn',
     'transactions',

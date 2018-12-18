@@ -2,7 +2,7 @@ from django.urls import path
 
 from frontend.views import index
 from frontend.views import home,activity,tracker,update_candidateprojects,sample,inprogress,projectinvites,update_finished,invites,\
-    projectdetails,pendingproject,terms,dev,pricing,howitworks,privacy,report,credits
+    projectdetails,pendingproject,terms,dev,pricing,howitworks,privacy,report,credits,onboarddevs,onboardrecruiters
 from accounts.views import update_profile
 
 app_name = 'frontend'
@@ -29,4 +29,6 @@ urlpatterns = [
          name='update_finished'),
     path('update_candidateprojects/<int:candidateproject_id>/<int:transaction_id>', update_candidateprojects,
          name='update_candidateprojects'),
+    path('onboarddevs',onboarddevs,name='onboarddevs'),
+    path('onboardrecruiters',onboardrecruiters,name='onboardrecruiters')
 ]

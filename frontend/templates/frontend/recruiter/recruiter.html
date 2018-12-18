@@ -13,6 +13,21 @@ recruiter dashboard
 
 
             {% if request.user.is_authenticated %}
+                {% if request.user.is_staff %}
+                    <div class="dropdown">
+                        <button class="btn  dropdown-toggle"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Onboard actions
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{% url 'frontend:onboarddevs' %}">devs</a>
+                            <a class="dropdown-item" href="{% url 'frontend:onboardrecruiters' %}">recruiters</a>
+
+                        </div>
+                    </div>
+
+                    {% endif %}
+
 
             <li class="nav-item">
                 <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
@@ -52,6 +67,10 @@ recruiter dashboard
                             <a class="dropdown-item" href="{% url 'frontend:my-activity' %}" >Ongoing tests</a>
                             <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
                             <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
+                            {% if request.user.is_staff %}
+                                <a class="dropdown-item" href="{% url 'frontend:onboarddevs' %}">devs</a>
+                                <a class="dropdown-item" href="{% url 'frontend:onboardrecruiters' %}">recruiters</a>
+                            {% endif %}
                         </div>
                     </li>
                     {% if request.user.is_authenticated %}
@@ -161,40 +180,8 @@ recruiter dashboard
 
 
     </div>
-{#{% if request.user.is_staff %}#}
-{##}
-{#    <h5>Monitor quizzes</h5>#}
-{#<hr>#}
-{#<div class="row" style="margin-right: 0;margin-left: 0">#}
-{#    <div class="col-lg-4 col-md-6 col-sm-6 col" style="width: 100%;">#}
-{#            <div class="card recruithomecard" style="width:18em;margin: auto">#}
-{#                <a href="{% url 'teachers:quiz_change_list' %}">#}
-{#                    <div style="text-align: -webkit-center;">#}
-{##}
-{#                            <img class="img-fluid" src="../../../static/frontend/images/rank.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">#}
-{##}
-{##}
-{##}
-{#                    </div>#}
-{#                    <div class="card" style="border: 0 ">#}
-{##}
-{##}
-{#                        <div class="card-body">#}
-{##}
-{#                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Skill assessment</h6>#}
-{##}
-{##}
-{#                        </div>#}
-{##}
-{#                    </div>#}
-{#                </a>#}
-{#            </div>#}
-{#        </div>#}
-{##}
-{##}
-{#</div>#}
-{#{% endif %}#}
-{##}
+
+
 
 </main>
 

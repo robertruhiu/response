@@ -13,3 +13,18 @@ class candidatesprojects(models.Model):
     transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
 
 
+class devs(models.Model):
+    email=models.EmailField(max_length=50)
+    language=models.CharField(max_length=500)
+    framework=models.CharField(max_length=500)
+    country =models.CharField(max_length=30)
+    firstname=models.CharField(max_length=30)
+    lastname=models.CharField(max_length=30)
+
+class recruiters(models.Model):
+    email = models.EmailField(max_length=50)
+    country = models.CharField(max_length=30)
+    firstname = models.CharField(max_length=30)
+    lastname = models.CharField(max_length=30)
+    company = models.CharField(max_length=200)
+    companyurl = models.CharField(max_length=200)

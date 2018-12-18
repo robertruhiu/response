@@ -32,7 +32,6 @@ urlpatterns = [
     path('payments/', include('payments.urls', namespace='payments')),
     path('paypal/', include('paypal.standard.ipn.urls')),
     path('', include('frontend.urls', namespace='frontend')),
-    path('', include('classroom.urls')),
     path('invitations/', include('invitations.urls', namespace='invitations')),
     path('testing/', include('testing.urls', namespace='testing')),
 ]

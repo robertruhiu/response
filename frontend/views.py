@@ -11,8 +11,8 @@ from transactions.models import Transaction , Candidate
 from invitations.models import Invitation
 from projects.models import Project
 from frontend.form import Projectinvite
-from frontend.models import candidatesprojects
-from classroom.models import Student
+from frontend.models import candidatesprojects,devs,recruiters
+
 
 @login_required
 def developer_filling_details(request, current_profile):
@@ -185,6 +185,35 @@ def report(request, email, transaction_id):
     transaction = Transaction.objects.get(id=transaction_id)
     return render(request, 'frontend/recruiter/report.html', {'user': user, 'transaction': transaction})
 
+def onboarddevs(request):
+    for alluser in User.objects.all():
+        if alluser.profile.user_type == 'developer':
+            if not devs.objects.filter(email=alluser.email).exists():
+                dev = devs()
+                dev.email=alluser.email
+                dev.firstname = alluser.first_name
+                dev.lastname = alluser.last_name
+                dev.language = alluser.profile.language
+                dev.framework = alluser.profile.framework
+                dev.country = alluser.profile.country
+                dev.save()
+
+    return redirect(reverse('frontend:index'))
+
+def onboardrecruiters(request):
+    for alluser in User.objects.all():
+        if alluser.profile.user_type == 'recruiter':
+            if not recruiters.objects.filter(email=alluser.email).exists():
+                recruiter = recruiters()
+                recruiter.email=alluser.email
+                recruiter.firstname = alluser.first_name
+                recruiter.lastname = alluser.last_name
+                recruiter.company = alluser.profile.company
+                recruiter.companyurl = alluser.profile.company_url
+                recruiter.country = alluser.profile.country
+                recruiter.save()
+
+    return redirect(reverse('frontend:index'))
 
 
 def credits(request):
