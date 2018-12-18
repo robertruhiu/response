@@ -239,4 +239,7 @@ def page_404(request):
 def page_500(request):
     return render(request, 'frontend/error_pages/500.html')
 
+def seedevs(request):
+    developers =devs.objects.all()
+    return render(request, 'frontend/recruiter/devlist.html',{'developers':developers})
 
