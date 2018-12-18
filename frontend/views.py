@@ -243,3 +243,8 @@ def seedevs(request):
     developers =devs.objects.all()
     return render(request, 'frontend/recruiter/devlist.html',{'developers':developers})
 
+def seerecruiters(request):
+    payers =recruiters.objects.all()
+    return render(request, 'frontend/recruiter/recruiterslist.html',{'payers':payers})
+
+
