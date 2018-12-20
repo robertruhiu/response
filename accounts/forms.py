@@ -35,12 +35,11 @@ class DeveloperFillingDetailsForm(forms.ModelForm):
     # frameworks = forms.MultipleChoiceField(choices=FRAMEWORK_CHOICES)
     # years = forms.ChoiceField(choices=YEARS_ACTIVE_CHOICES)
 
-class RecruiterFillingDetailsForm(forms.Form):
-    company = forms.CharField(max_length=140)
-    job_role = forms.CharField(max_length=140)
-    industry = forms.CharField(max_length=80)
-    staff_size = forms.IntegerField()
-    company_url = forms.CharField(max_length=400)
+class RecruiterFillingDetailsForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+
+        fields = ['company', 'job_role', 'industry', 'country','company_url']
 
 class SignUpForm(forms.Form):
     first_name = forms.CharField(max_length=30, required=True,
@@ -90,4 +89,4 @@ class DeveloperProfileEditForm(forms.ModelForm):
 class RecruiterProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['company', 'job_role', 'industry', 'staff_size', 'company_url']
+        fields = ['company', 'job_role', 'industry', 'company_url','country']

@@ -10,6 +10,9 @@ class Subject(models.Model):
     def __str__(self):
         return self.name
 
+    def subjectimage(self):
+        return self.image
+
 
 
 class Quiz(models.Model):

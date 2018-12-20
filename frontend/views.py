@@ -27,7 +27,6 @@ def developer_filling_details(request, current_profile):
             current_profile.framework = developer_filling_details_form.cleaned_data['framework']
             current_profile.years = developer_filling_details_form.cleaned_data['years'],
             current_profile.gender = developer_filling_details_form.cleaned_data['gender']
-
             current_profile.availabilty = developer_filling_details_form.cleaned_data['availabilty']
             current_profile.country = developer_filling_details_form.cleaned_data['country']
             current_profile.phone_number = developer_filling_details_form.cleaned_data['phone_number']
@@ -47,7 +46,7 @@ def recruiter_filling_details(request, current_profile):
             current_profile.company = recruiter_filling_details_form.cleaned_data['company']
             current_profile.job_role = recruiter_filling_details_form.cleaned_data['job_role']
             current_profile.industry = recruiter_filling_details_form.cleaned_data['industry']
-            current_profile.staff_size = recruiter_filling_details_form.cleaned_data['staff_size']
+            current_profile.country = recruiter_filling_details_form.cleaned_data['country']
             current_profile.company_url = recruiter_filling_details_form.cleaned_data['company_url']
             current_profile.stage = 'complete'
             current_profile.save()
@@ -188,30 +187,35 @@ def report(request, email, transaction_id):
 def onboarddevs(request):
     for alluser in User.objects.all():
         if alluser.profile.user_type == 'developer':
-            if not devs.objects.filter(email=alluser.email).exists():
-                dev = devs()
-                dev.email=alluser.email
-                dev.firstname = alluser.first_name
-                dev.lastname = alluser.last_name
-                dev.language = alluser.profile.language
-                dev.framework = alluser.profile.framework
-                dev.country = alluser.profile.country
-                dev.save()
+            if alluser.profile.stage == 'complete':
+                if not devs.objects.filter(email=alluser.email).exists():
+                    dev = devs()
+                    dev.email=alluser.email
+                    dev.firstname = alluser.first_name
+                    dev.lastname = alluser.last_name
+                    dev.language = alluser.profile.language
+                    dev.framework = alluser.profile.framework
+                    dev.country = alluser.profile.country
+                    dev.github =alluser.profile.github_repo
+                    dev.linkedin = alluser.profile.linkedin_url
+                    dev.portfolio = alluser.profile.portfolio
+                    dev.save()
 
     return redirect(reverse('frontend:seedevs'))
 
 def onboardrecruiters(request):
     for alluser in User.objects.all():
         if alluser.profile.user_type == 'recruiter':
-            if not recruiters.objects.filter(email=alluser.email).exists():
-                recruiter = recruiters()
-                recruiter.email=alluser.email
-                recruiter.firstname = alluser.first_name
-                recruiter.lastname = alluser.last_name
-                recruiter.company = alluser.profile.company
-                recruiter.companyurl = alluser.profile.company_url
-                recruiter.country = alluser.profile.country
-                recruiter.save()
+            if alluser.profile.stage == 'complete':
+                if not recruiters.objects.filter(email=alluser.email).exists():
+                    recruiter = recruiters()
+                    recruiter.email=alluser.email
+                    recruiter.firstname = alluser.first_name
+                    recruiter.lastname = alluser.last_name
+                    recruiter.company = alluser.profile.company
+                    recruiter.companyurl = alluser.profile.company_url
+                    recruiter.country = alluser.profile.country
+                    recruiter.save()
 
     return redirect(reverse('frontend:seerecruiters'))
 

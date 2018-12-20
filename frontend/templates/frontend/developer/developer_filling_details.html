@@ -90,7 +90,7 @@
 
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-6">
-            <label>Github account </label>
+            <label>Github account url</label>
             {% bootstrap_field developer_filling_details_form.github_repo placeholder=False show_label=False %}
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6">
@@ -117,11 +117,11 @@
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6 ">
             <label>Preferred programming language</label>
-            {% bootstrap_field developer_filling_details_form.language show_label=False placeholder=False  %}
+            {% bootstrap_field developer_filling_details_form.language show_label=False placeholder='eg javascript python'  %}
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6 ">
             <label>Preferred framework</label>
-            {% bootstrap_field developer_filling_details_form.framework show_label=False placeholder=False %}
+            {% bootstrap_field developer_filling_details_form.framework show_label=False placeholder='eg django,react' %}
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6 ">
             <label>I am available to work?</label>

@@ -93,8 +93,11 @@ recruiter dashboard
       <th scope="col">Name</th>
       <th scope="col">email</th>
 
+
         <th scope="col">Company</th>
         <th scope="col">Company url</th>
+        <th scope="col">Country</th>
+
     </tr>
   </thead>
   <tbody>
@@ -103,7 +106,9 @@ recruiter dashboard
       <td>{{ pay.firstname }} {{ pay.lastname }}</td>
       <td>{{ pay.email }}</td>
        <td>{{ pay.company }}</td>
-       <td>{{ pay.companyurl }}</td>
+       <td><a href="{{ pay.companyurl }}" target="_blank">company site</a></td>
+       <td>{{ pay.country }}</td>
+
     </tr>
 
   {% endfor %}

@@ -62,7 +62,6 @@ class Profile(models.Model):
     company = models.CharField(max_length=140, null=True, blank=True)
     job_role = models.CharField(max_length=140, null=True, blank=True)
     industry = models.CharField(max_length=80, null=True, blank=True)
-    staff_size = models.IntegerField(null=True, blank=True)
     company_url = models.CharField(max_length=500,null=True, blank=True)
 
 
