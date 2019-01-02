@@ -33,7 +33,7 @@ class TakeQuizForm(forms.ModelForm):
     answer = forms.ModelChoiceField(
         queryset=Answer.objects.none(),
         widget=forms.RadioSelect(),
-        required=True,
+        required=False,
         empty_label=None)
 
 

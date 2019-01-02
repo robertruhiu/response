@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.conf import settings
+import random
 
 
 class Subject(models.Model):
@@ -49,6 +50,7 @@ class Student(models.Model):
         answered_questions = self.quiz_answers \
             .filter(answer__question__quiz=quiz) \
             .values_list('answer__question__pk', flat=True)
+
         questions = quiz.questions.exclude(pk__in=answered_questions).order_by('text')
         return questions
 
@@ -64,6 +66,7 @@ class TakenQuiz(models.Model):
 
 
 class StudentAnswer(models.Model):
+    m = Answer.objects.first()
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='quiz_answers')
-    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name='+')
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name='+',default=m.id)
     quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)

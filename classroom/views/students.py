@@ -10,11 +10,10 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView
-
 from ..decorators import student_required
 from ..forms import TakeQuizForm
 from ..models import Quiz, Student, TakenQuiz, User,StudentAnswer,Answer,Subject
-
+from random import randint
 
 @method_decorator([login_required, student_required], name='dispatch')
 class QuizListView(ListView):
@@ -45,6 +44,11 @@ class QuizListView(ListView):
 #
 #
 #     return render(request, 'classroom/students/quiz_list.html',{'quizzes':quizzes,'subjects':subjects,})
+def retake(request,quizid,studentid):
+    TakenQuiz.objects.filter(quiz_id=quizid,student_id=studentid).delete()
+    StudentAnswer.objects.filter(quiz_id=quizid,student_id=studentid).delete()
+    return redirect('students:quiz')
+
 
 @method_decorator([login_required, student_required], name='dispatch')
 class TakenQuizListView(ListView):
@@ -82,8 +86,9 @@ def take_quiz(request, pk):
 
     total_questions = quiz.questions.count()
     unanswered_questions = student.get_unanswered_questions(quiz)
+    number = unanswered_questions.count()
     total_unanswered_questions = unanswered_questions.count()
-    progress = 100 - round(((total_unanswered_questions - 1) / total_questions) * 100)
+    progress = 100 - round(((total_unanswered_questions - 1) / number) * 100)
     question = unanswered_questions.first()
 
 
@@ -91,7 +96,14 @@ def take_quiz(request, pk):
         form = TakeQuizForm(question=question, data=request.POST)
         if form.is_valid():
             with transaction.atomic():
-                student_answer = form.save(commit=False)
+                if 'answer' in form.data:
+                    mel = form.data['answer']
+                    answer = Answer.objects.get(id=mel)
+                else:
+                    answer = Answer.objects.first()
+                student_answer = StudentAnswer()
+                # student_answer = form.save(commit=False)
+                student_answer.answer =answer
                 student_answer.student = student
                 student_answer.quiz = quiz
                 student_answer.save()
@@ -116,9 +128,9 @@ def take_quiz(request, pk):
         'progress': progress
     })
 
-def retake(quiz_id,student_id):
+def retake(request,quizid,studentid):
 
-    TakenQuiz.objects.filter(quiz_id=quiz_id,student_id=student_id).delete()
-    StudentAnswer.objects.filter(quiz_id=quiz_id,student_id=student_id).delete()
-    return redirect('students:take_quiz', quiz_id)
+    TakenQuiz.objects.filter(quiz_id=quizid,student_id=studentid).delete()
+    StudentAnswer.objects.filter(quiz_id=quizid,student_id=studentid).delete()
+    return redirect('students:take_quiz', quizid)
 

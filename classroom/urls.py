@@ -10,7 +10,7 @@ urlpatterns = [
         path('taken/', students.TakenQuizListView.as_view(), name='taken_quiz_list'),
         path('quiz/<int:pk>/', students.take_quiz, name='take_quiz'),
         path('tests/', students.student_registration, name='tests'),
-        path('retake/<int:quiz_id>/<int:student_id>',students.retake, name='retake')
+        path('retake/<int:quizid>/<int:studentid>',students.retake, name='retake')
     ], 'classroom'), namespace='students')),
 
     path('teachers/', include(([

@@ -101,22 +101,35 @@
    </div>
 
     </main>
+{#    <script>#}
+{#    var sec = 15;#}
+{#var time = setInterval(myTimer, 1000);#}
+{##}
+{#function myTimer() {#}
+{##}
+{#    document.getElementById('timer').innerHTML = sec + "sec left";#}
+{#    sec--;#}
+{#    if (sec == -1) {#}
+{#        clearInterval(time);#}
+{#        document.getElementById('submit').click();#}
+{##}
+{#    }#}
+{#}#}
+{##}
+{#    </script>#}
+
     <script>
-    var sec = 10;
-var time = setInterval(myTimer, 1000);
-
-function myTimer() {
-
-    document.getElementById('timer').innerHTML = sec + "sec left";
-    sec--;
-    if (sec == -1) {
-        clearInterval(time);
-
-
-
+    time = 10;
+interval = setInterval(function() {
+    time--;
+    document.getElementById('timer').innerHTML = "" + time + " seconds"
+    if (time == 0) {
+        // stop timer
+        clearInterval(interval);
+        // click
+        document.getElementById('submit').click();
     }
-}
-
+}, 1000)
     </script>
 
 {% endblock %}
