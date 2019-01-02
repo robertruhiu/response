@@ -20,7 +20,7 @@ class devs(models.Model):
     country =models.CharField(null=True,max_length=30)
     firstname=models.CharField(null=True,max_length=30)
     lastname=models.CharField(null=True,max_length=30)
-    github=models.CharField(null=True,max_length=500)
+    github = models.CharField(null=True,max_length=500)
     linkedin = models.CharField(null=True, max_length=500)
     portfolio = models.CharField(null=True, max_length=500)
 
