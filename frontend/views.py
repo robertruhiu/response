@@ -251,4 +251,12 @@ def seerecruiters(request):
     payers =recruiters.objects.all()
     return render(request, 'frontend/recruiter/recruiterslist.html',{'payers':payers})
 
+def manageprojects(request):
+    projects =Project.objects.all()
+    return render(request, 'frontend/recruiter/projects.html',{'projects':projects})
+
+def managetransactions(request):
+    transactions =Transaction.objects.all()
+    return render(request,'frontend/recruiter/transactions.html',{'transactions':transactions})
+
 
