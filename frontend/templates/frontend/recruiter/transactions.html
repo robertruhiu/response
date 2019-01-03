@@ -102,11 +102,11 @@ recruiter dashboard
   <tbody>
   {% for transaction in transactions %}
        <tr>
-      <td>{{ transaction.user }}</td>
+      <td>{{ transaction.user.email }}</td>
       <td>{{ transaction.stage }}</td>
-       <td>{{ transactions.project.name }}</td>
-       <td>{{ transactions.framework.name }}</td>
-       <td><a><span class="badge badge-warning">edit</span></a> </td>
+       <td>{{ transaction.project }}</td>
+       <td>{{ transaction.framework}}</td>
+       <td><a href="{% url 'frontend:edittransactions' transaction.id %}"><span class="badge badge-warning">edit</span></a> </td>
 
     </tr>
 

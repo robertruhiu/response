@@ -7,7 +7,7 @@ recruiter dashboard
 <main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
     <div class="d-none d-lg-block">
         <nav class="navbar  navbar-light fixed-top fine border-bottom">
-                    <h5 >Manage projects</h5>
+                    <h5 >Edit transaction</h5>
                     <ul class="nav ml-auto">
 
 
@@ -38,7 +38,7 @@ recruiter dashboard
     <!-----md devices adaptation------>
     <div class="container d-lg-none">
         <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
-            <a class="logoadapt h5" style="text-decoration: none" href="/home">Manage projects</a>
+            <a class="logoadapt h5" style="text-decoration: none" href="/home">Edit transaction</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span  class="navbar-toggler-icon">
                     <span style="color: white" data-feather="menu"></span>
@@ -80,68 +80,63 @@ recruiter dashboard
         </nav>
     </div>
 
-<div class="d-none d-lg-block" style="margin-top: 8%">
-    <div class="row">
-        <div class="col-lg-10 col-sm-6 col-md-8 col-8">
-            <div class="alert alert-primary "  role="alert">
-        Manage the various projects here
-
-    </div>
-
-        </div>
-        <div class="col-lg-2 col-sm-6 col-md-4 col-4">
-            <a href="{% url 'frontend:addproject' %}"><button class="btn btn-warning">Add Project</button></a>
-
-        </div>
-    </div>
-
-
+<div class="d-none d-lg-block" style="margin-top: 6%">
 
 </div >
 
 <div class="d-lg-none"  style="margin-top: 7em">
-    <div class="row">
-        <div class="col-lg-10 col-sm-8 col-md-8 col-8">
-            <div class="alert alert-primary "  role="alert">
-        Manage the various projects here
+
+</div>
+<div class="row">
+    <div class="col-6">
+
+        <div class="card" style="width: 100%;">
+  <img class="card-img-top" src="{{ transaction.project.projectimage1 }}" alt="Card image cap">
+  <div class="card-body">
+    <h6 class="card-title">{{ transaction.project }}</h6>
+      <p class="card-text"><strong>Recruiter name: </strong>{{ transaction.user.first_name }}  {{ transaction.user.last_name }}</p>
+      <p class="card-text"><strong>Recruiter email:</strong> {{ transaction.user.email }}</p>
+      <p class="card-text"><strong>Recruiter company:</strong> {{ transaction.user.profile.company }}</p>
+    <a href="{% url 'frontend:deletetransaction' transaction.id %}" class="btn btn-warning">Delete transaction</a>
+  </div>
+</div>
+    </div>
+    <div class="col-6">
+        <h6>Candidates list</h6>
+    <div class="card">
+        <table class="table">
+  <thead class="thead-light">
+    <tr>
+
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for candidate in candidates %}
+    <tr>
+
+      <td>{{ candidate.first_name }}  {{ candidate.last_name }}</td>
+      <td>{{ candidate.email }}</td>
+
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
 
     </div>
 
-        </div>
-        <div class="col col-sm-4 col-md-4 col-4">
-            <a href="{% url 'frontend:addproject' %}"><button class="btn btn-warning">Add Project</button></a>
-
-        </div>
     </div>
-
 </div>
 
 
 
-<div class="row" style="margin-left: 0;margin-right: 0" >
 
 
 
-        {% for foo in projects %}
 
-        <div class="col-lg-4 col-sm-6 mb-3 col-md-4" >
-            <a href="{% url 'frontend:editproject' foo.id %}" style="text-decoration: none;">
-            <div class="card" style="width:100%;height: 100%">
-                <img class="img-fluid" src="{{foo.projectimage1}}" alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text">Project name: {{ foo.name }}
-                    </p>
-                    <p><span class="badge badge-primary">Level : {{ foo.level }} </span></p>
-
-                </div>
-
-
-            </div>
-            </a>
-
-        </div>
-        {% endfor %}
-    </div>
 
 </main>
 
