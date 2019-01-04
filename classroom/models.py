@@ -66,7 +66,6 @@ class TakenQuiz(models.Model):
 
 
 class StudentAnswer(models.Model):
-    m = Answer.objects.first()
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='quiz_answers')
-    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name='+',default=m.id)
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name='+')
     quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
