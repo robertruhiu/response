@@ -1,8 +1,8 @@
 from django import forms
 from django.forms import ModelForm, Form
-from django_countries.fields import CountryField
+from django_countries import Countries
 from phonenumber_field.formfields import PhoneNumberField
-
+from accounts.models import Profile
 from transactions.models import Candidate
 
 
@@ -46,4 +46,5 @@ class SourcingForm(Form):
     number_of_devs_needed = forms.IntegerField(required=True)
     renumeration_in_dollars = forms.CharField(required=True)
     country = forms.CharField(required=True)
-    
+
+

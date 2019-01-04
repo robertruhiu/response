@@ -87,7 +87,7 @@ recruiter dashboard
 <a id="recruiters" href="{% url 'frontend:onboardrecruiters' %}"><span data-feather="rotate-cw"></span> Refresh list</a>
 
     <table class="table">
-  <thead class="thead-dark">
+  <thead class="thead-light">
     <tr>
 
       <th scope="col">Name</th>
@@ -106,7 +106,7 @@ recruiter dashboard
       <td>{{ pay.firstname }} {{ pay.lastname }}</td>
       <td>{{ pay.email }}</td>
        <td>{{ pay.company }}</td>
-       <td><a href="{{ pay.companyurl }}" target="_blank">company site</a></td>
+       <td>{{ pay.companyurl }}</td>
        <td>{{ pay.country }}</td>
 
     </tr>
