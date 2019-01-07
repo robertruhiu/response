@@ -92,6 +92,7 @@
   <p class="lead">{{ question.text }}</p>
   <form method="post" novalidate>
     {% csrf_token %}
+      {% bootstrap_form_errors form %}
       {{ form|crispy }}
 
 
@@ -119,7 +120,7 @@
 {#    </script>#}
 
     <script>
-    time = 10;
+    time = 50;
 interval = setInterval(function() {
     time--;
     document.getElementById('timer').innerHTML = "" + time + " seconds"
@@ -129,6 +130,7 @@ interval = setInterval(function() {
         // click
         document.getElementById('submit').click();
     }
+
 }, 1000)
     </script>
 

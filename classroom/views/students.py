@@ -78,7 +78,7 @@ def student_registration(request):
 
 
 @login_required
-def take_quiz(request, pk):
+def take_quiz(request, pk,):
     quiz = get_object_or_404(Quiz, pk=pk)
     student = Student.objects.get(user_id=request.user.id)
     if student.quizzes.filter(pk=pk).exists():
@@ -96,17 +96,15 @@ def take_quiz(request, pk):
         form = TakeQuizForm(question=question, data=request.POST)
         if form.is_valid():
             with transaction.atomic():
-                if 'answer' in form.data:
-                    mel = form.data['answer']
-                    answer = Answer.objects.get(id=mel)
+                if 'answer' in request.POST:
+                    student_answer = form.save(commit=False)
+                    student_answer.student = student
+                    student_answer.quiz = quiz
+                    student_answer.save()
                 else:
-                    answer = Answer.objects.first()
-                student_answer = StudentAnswer()
-                # student_answer = form.save(commit=False)
-                student_answer.answer =answer
-                student_answer.student = student
-                student_answer.quiz = quiz
-                student_answer.save()
+                    default_answer = StudentAnswer(quiz=quiz,student=student,answer=Answer.objects.filter(question_id = question.id).last())
+                    default_answer.save()
+
                 if student.get_unanswered_questions(quiz).exists():
                     return redirect('students:take_quiz', pk)
                 else:
