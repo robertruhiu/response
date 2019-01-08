@@ -80,7 +80,7 @@ developers
 {% if request.user.is_staff %}
 
      <div class="alert alert-warning " role="alert">
-        Complete a skill assessment to enable you to build real world projects and get job referral's.This is mandatory
+        Complete a skill assessment to enable you to build real world projects and get job referral's.These steps are mandatory to ensure a job referal
     </div>
 
 
@@ -90,7 +90,7 @@ developers
                 <a href="{% url 'students:tests' %}">
                     <div style="text-align: -webkit-center;">
 
-                            <img class="img-fluid" src="../../../static/frontend/images/test.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+                            <img class="img-fluid" src="../../../static/frontend/images/test.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
 
 
 
@@ -115,7 +115,7 @@ developers
 
                     <div style="text-align: -webkit-center;">
 
-                            <img class="img-fluid" src="../../../static/frontend/images/code.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+                            <img class="img-fluid" src="../../../static/frontend/images/code.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
 
 
 
@@ -136,11 +136,11 @@ developers
             </div>
         </div>
     <div class="col-lg-4 col-md-6 col-sm-6 col" style="width: 100%;">
-            <div class="card recruithomecard grey" style="width:18em;margin: auto">
+            <div class="card recruithomecard grey" style="width:18em;margin: auto;height: 100%">
 
                     <div style="text-align: -webkit-center;">
 
-                            <img class="img-fluid" src="../../../static/frontend/images/rank.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+                            <img class="img-fluid" src="../../../static/frontend/images/rank.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
 
 
 
@@ -151,7 +151,7 @@ developers
                         <div class="card-body">
 
                             <h6 class="card-title text-center" style="text-align: -webkit-center;">Job referral's</h6>
-                            <p class="text-center">Step 3</p>
+
 
 
                         </div>
@@ -182,7 +182,7 @@ developers
 
                 <a   href="{% url 'frontend:inprogress' user.id %}">
                     <div style="text-align: -webkit-center;">
-                        <img class="img-fluid " src="../../../static/frontend/images/coding.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+                        <img class="img-fluid " src="../../../static/frontend/images/coding.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
                     </div>
 
                     <div class="card" style="border: 0 ">
@@ -204,7 +204,7 @@ developers
 
                 <a   href="{% url 'frontend:invites' %}">
                     <div style="text-align: -webkit-center;">
-                        <img class="img-fluid " src="../../../static/frontend/images/invitation.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+                        <img class="img-fluid " src="../../../static/frontend/images/invitation.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
                     </div>
 
                     <div class="card" style="border: 0 ">
@@ -226,9 +226,9 @@ developers
                 <a   href="/update_profile/">
                     <div style="text-align: -webkit-center;">
                         {% if user.profile.gender == 'male' %}
-                            <img class="img-fluid" src="../../../static/frontend/images/boy.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+                            <img class="img-fluid" src="../../../static/frontend/images/boy.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
                             {% else %}
-                            <img class="img-fluid" src="../../../static/frontend/images/girl.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+                            <img class="img-fluid" src="../../../static/frontend/images/girl.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
                         {% endif %}
 
                     </div>
