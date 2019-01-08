@@ -85,16 +85,16 @@ all projects
     <h5>{{ categoryname.name }} projects</h5>
 </div>
 
-    <div class="row" style="margin-left: 0;margin-right: 0" >
+    <div class="row"  >
 
 
 
         {% for foo in projecttypes %}
 
-        <div class="col-lg-4 col-sm-6 mb-3 col-md-4" >
+        <div class="col-lg-4 col-sm-6 mb-3 col-md-6 col-12" >
         <div class="showhim">
             <a href="{% url 'projects:project' foo.id %}" style="text-decoration: none;">
-            <div class="projectcard " style="width:21.5rem;height: 12rem;background: url({{ foo.projectimage1 }});background-repeat: no-repeat; background-size: cover;padding: .8rem 1.5rem;">
+            <div class="projectcard " style="width:20.5rem;height: 12rem;background: url({{ foo.projectimage1 }});background-repeat: no-repeat; background-size: cover;padding: .8rem 1.5rem;">
                 <div class="projectcardoverlay"></div>
                 <div  class="bodycard">
 
