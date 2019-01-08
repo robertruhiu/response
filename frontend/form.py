@@ -16,6 +16,7 @@ class Projectinvite(forms.ModelForm):
 
 class EditProjectForm(forms.ModelForm):
     name = forms.CharField()
+    brief = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}), )
     description = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}), )
     projectimage1 = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}), )
     projectimage2 = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}), )
@@ -44,4 +45,4 @@ class EditProjectForm(forms.ModelForm):
         fields = ['name', 'description', 'level', 'projectimage1', 'projectimage2', 'projectimage3', 'projectimage4',
                   'projectimage5', 'projectimage6', 'projectimage7', 'projectimage8', 'projectimage9', 'projectimage10',
                   'requirement1', 'requirement2', 'requirement3', 'requirement4', 'requirement5', 'requirement6',
-                  'requirement7', 'requirement8', 'requirement9', 'requirement10', 'framework','devtype','projecttype','owner']
+                  'requirement7', 'requirement8', 'requirement9', 'requirement10', 'framework','devtype','projecttype','owner','brief']

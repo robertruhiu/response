@@ -71,18 +71,106 @@ developers
             </div>
         </nav>
     </div>
+<div class="d-none d-lg-block" style="margin-top: 6%">
 
-<div class="d-none d-lg-block" style="margin-top: 8%">
-     <div class="alert alert-primary " role="alert">
-        Welcome {{ user.first_name }} {{ user.last_name }}   to Codeln.Choose one of the paths below to start.
-    </div>
 </div >
-
 <div class="d-lg-none"  style="margin-top: 7em">
-     <div class="alert alert-primary " role="alert">
-        Welcome {{ user.first_name }} {{ user.last_name }}   to Codeln.Choose one of the paths below to start.
-    </div>
+
 </div>
+{% if request.user.is_staff %}
+
+     <div class="alert alert-warning " role="alert">
+        Complete a skill assessment to enable you to build real world projects and get job referral's.This is mandatory
+    </div>
+
+
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-6 col" style="width: 100%;">
+            <div class="card recruithomecard" style="width:18em;margin: auto">
+                <a href="{% url 'students:tests' %}">
+                    <div style="text-align: -webkit-center;">
+
+                            <img class="img-fluid" src="../../../static/frontend/images/test.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+
+
+
+                    </div>
+                    <div class="card" style="border: 0 ">
+
+
+                        <div class="card-body">
+
+                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Skill assessment</h6>
+                            <p class="text-center">Step 1</p>
+
+
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+        </div>
+    <div class="col-lg-4 col-md-6 col-sm-6 col" style="width: 100%;">
+            <div class="card recruithomecard grey" style="width:18em;margin: auto">
+
+                    <div style="text-align: -webkit-center;">
+
+                            <img class="img-fluid" src="../../../static/frontend/images/code.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+
+
+
+                    </div>
+                    <div class="card" style="border: 0 ">
+
+
+                        <div class="card-body">
+
+                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Build a world project</h6>
+                            <p class="text-center">Step 2</p>
+
+
+                        </div>
+
+                    </div>
+
+            </div>
+        </div>
+    <div class="col-lg-4 col-md-6 col-sm-6 col" style="width: 100%;">
+            <div class="card recruithomecard grey" style="width:18em;margin: auto">
+
+                    <div style="text-align: -webkit-center;">
+
+                            <img class="img-fluid" src="../../../static/frontend/images/rank.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+
+
+
+                    </div>
+                    <div class="card" style="border: 0 ">
+
+
+                        <div class="card-body">
+
+                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Job referral's</h6>
+                            <p class="text-center">Step 3</p>
+
+
+                        </div>
+
+                    </div>
+
+            </div>
+        </div>
+</div>
+
+
+{% endif %}
+
+
+
+
+<div class="alert alert-primary mt-5  "  role="alert">Received a project invite.Please accept it here under project invites
+    and start building it under ongoing.</div>
+
 
 
     <div class="row">
@@ -161,39 +249,7 @@ developers
 
 
     </div>
-{% if request.user.is_staff %}
 
-<h5>Take an  assessment to see how you stack up.</h5>
-<hr>
-<div class="row" style="margin-right: 0;margin-left: 0">
-    <div class="col-lg-4 col-md-6 col-sm-6 col" style="width: 100%;">
-            <div class="card recruithomecard" style="width:18em;margin: auto">
-                <a href="{% url 'students:tests' %}">
-                    <div style="text-align: -webkit-center;">
-
-                            <img class="img-fluid" src="../../../static/frontend/images/rank.svg" style="width: 50%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
-
-
-
-                    </div>
-                    <div class="card" style="border: 0 ">
-
-
-                        <div class="card-body">
-
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Skill assessment</h6>
-
-
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
-</div>
-
-
-{% endif %}
 
 
 

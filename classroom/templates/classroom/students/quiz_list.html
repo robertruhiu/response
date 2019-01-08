@@ -80,10 +80,16 @@
 
 </div>
 {% include 'classroom/students/_header.html' with active='new' %}
-
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Click on</strong> prefered Language or framework to showcase quizzes under each.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <div class="accordion" id="accordionExample">
     <div class="row" >
         {% for subject in subjects %}
+
 
         <div class="col-lg-4">
             <div class="shadow p-3 mb-5 bg-white"   data-toggle="collapse" data-target="#{{ subject.id }}" aria-expanded="true" aria-controls="collapseOne" id="headingOne">
@@ -95,33 +101,54 @@
                         </div>
                     </div>
                 </div>
-                <div id="{{ subject.id }}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="card-body">
-                        {% for quiz in quizzes %}
 
-                            {% if quiz.subject.name == subject.name %}
-
-                                <ul class="list-group" >
-                                    <li class="list-group-item" style="border-radius: 0">{{ quiz.name }}
-                                        <a href="{% url 'students:take_quiz' quiz.pk %}" class="card-link ">Start</a>
-                                    </li>
-
-                                </ul>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
             </div>
         </div>
-        {% endfor %}
 
+         <div  id="{{ subject.id }}" class="collapse col-lg-12 " aria-labelledby="headingOne" data-parent="#accordionExample">
+         <div class="jumbotron removed" style="background: #dfdfe3;border-radius: 0">
+         <h5>{{ subject.name }} quizzes</h5>
+             {% for quiz in quizzes %}
+
+                 {% if quiz.subject.name == subject.name %}
+                     <div class="row">
+                     <div class="col-8">
+                         <strong>{{ quiz.name }}</strong>
+
+                     </div>
+                     <div class="col-4">
+                         <a href="{% url 'students:take_quiz' quiz.pk %}" class="card-link ">Start Quiz</a>
+
+                     </div>
+                     </div>
+                     {% else %}
+                     *
+
+
+
+
+                 {% endif %}
+
+             {% endfor %}
+
+         </div>
+         </div>
+    {% endfor %}
     </div>
+
+
+
 </div>
+
 
 <br>
     <br>
     <br>
     <br>
+    <!-- Button trigger modal -->
+
+
+<!-- Modal -->
 
 
     </main>

@@ -114,6 +114,10 @@ nav ul li a{color:black;padding:0 30px;}
     color:white !important;
     background-size: cover;
 }
+.projectsoverlay{
+    background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));
+
+}
 .jumbotronmobile{
     border-radius: 0;
     background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85)),
@@ -168,9 +172,94 @@ nav ul li a{color:black;padding:0 30px;}
     filter: grayscale(100%);
     opacity: .7;
 }
+.grey{
+
+    filter: grayscale(100%);
+    opacity: .7;
+}
 
 
 .centerimage{
     margin-left: 33%;
     margin-right: 33%;
+}
+.module {
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.6)
+    ),
+    url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/skyscrapers.jpg);
+  background-size: cover;
+  width: 300px;
+  height: 200px;
+  margin: 10px 0 0 10px;
+  position: relative;
+  float: left;
+}
+
+.top h2 {
+  color: white;
+  margin: 0;
+  padding: 20px;
+}
+.projectcardoverlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #2e3d49;
+    opacity: .9;
+}
+.bodycard{
+    flex-grow: 1;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+.titlecard{
+    margin: .2rem 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+}
+.brief{
+    z-index: 1;
+}
+.projectcard{
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    background: #2e3d49;
+    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+    /* border-radius: .375rem; */
+    transition: .3s;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 10rem;
+    width: 100%;
+    padding: .4rem 1rem .6rem;
+}
+.showme{
+   display: none;
+    font-size: .8rem;
+    font-weight: 300;
+    line-height: 1.4em;
+    color: white;
+    font-family: "Open Sans",sans-serif;
+ }
+ .showhim:hover .showme{
+   display : block;
+ }
+ .showhim:hover .ok{
+   display : none;
+ }
+.removed{
+    padding-top: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 4rem;
+    padding-left: 2rem;
 }
