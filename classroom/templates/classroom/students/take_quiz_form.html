@@ -90,6 +90,9 @@
   </div>
 
   <p class="lead">{{ question.text }}</p>
+       {% if question.codesample %}
+           <img  class="card-img-top " src="{{ question.codesample }}">
+       {% endif %}
   <form method="post" novalidate>
     {% csrf_token %}
       {% bootstrap_form_errors form %}

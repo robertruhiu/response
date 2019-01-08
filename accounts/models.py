@@ -47,7 +47,7 @@ class Profile(models.Model):
     phone_number = models.CharField(null=True, max_length=30)
     # developer profile
     linkedin_url =models.CharField(max_length=500, null=True, )
-    portfolio=models.CharField(max_length=500,blank=True, null=True, )
+    portfolio=models.CharField(max_length=500,blank=True, null=True )
     github_repo = models.CharField(max_length=500, null=True, )
     language = models.CharField(max_length=140, null=True, blank=True)
     framework = models.CharField(max_length=140, null=True, blank=True)

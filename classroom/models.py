@@ -28,6 +28,7 @@ class Quiz(models.Model):
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')
     text = models.CharField('Question', max_length=250)
+    codesample = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return self.text
