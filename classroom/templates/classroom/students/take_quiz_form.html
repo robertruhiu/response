@@ -79,21 +79,21 @@
 <div class="d-lg-none"  style="margin-top: 7em">
 
 </div>
-        <div class="shadow-sm p-3 mb-5 bg-white">
+        <div class="shadow-sm p-3 mb-5  bg-white"  >
             <div class="d-flex justify-content-end">
                 Time:<span id="timer"></span>
             </div>
         </div>
-   <div class="shadow-sm p-3 mb-5 bg-white">
+   <div class="shadow-sm p-3 mb-5 bg-white" >
        <div class="progress mb-3">
     <div class="progress-bar" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%"></div>
   </div>
 
   <p class="lead">{{ question.text }}</p>
+   <div class="row">
        {% if question.codesample %}
-           <img  class="card-img-top " src="{{ question.codesample }}">
-       {% endif %}
-  <form method="post" novalidate>
+       <div class="col-5 mt-5">
+       <form method="post" novalidate>
     {% csrf_token %}
       {% bootstrap_form_errors form %}
       {{ form|crispy }}
@@ -102,25 +102,31 @@
 
     <button type="submit" id="submit" class="btn btn-primary btn-sm btn-block">Next →</button>
   </form>
+
+       </div>
+       <div class="col-7">
+           <img  class=" " src="{{ question.codesample }}">
+       </div>
+           {% else %}
+           <div class="col-12">
+           <form method="post" novalidate>
+    {% csrf_token %}
+      {% bootstrap_form_errors form %}
+      {{ form|crispy }}
+
+
+
+    <button type="submit" id="submit" class="btn btn-primary btn-sm btn-block">Next →</button>
+  </form>
+           </div>
+       {% endif %}
+   </div>
+
+
    </div>
 
     </main>
-{#    <script>#}
-{#    var sec = 15;#}
-{#var time = setInterval(myTimer, 1000);#}
-{##}
-{#function myTimer() {#}
-{##}
-{#    document.getElementById('timer').innerHTML = sec + "sec left";#}
-{#    sec--;#}
-{#    if (sec == -1) {#}
-{#        clearInterval(time);#}
-{#        document.getElementById('submit').click();#}
-{##}
-{#    }#}
-{#}#}
-{##}
-{#    </script>#}
+
 
     <script>
     time = 50;
