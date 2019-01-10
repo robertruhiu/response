@@ -6,7 +6,7 @@
     <main role="main" class="col-md-10 col-lg-10 ml-lg-auto   px-4 " >
     <div class="d-none d-lg-block">
         <nav class="navbar  navbar-light fixed-top fine border-bottom">
-                    <h5 >Tests library</h5>
+                    <h5 >Open calls to apply</h5>
                     <ul class="nav ml-auto">
 
 
@@ -35,7 +35,7 @@
     <!-----md devices adaptation------>
     <div class="container d-lg-none">
         <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
-            <a class="logoadapt h5" style="text-decoration: none" href="">Test library</a>
+            <a class="logoadapt h5" style="text-decoration: none" href="">Open calls to apply</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span  class="navbar-toggler-icon">
                     <span style="color: white" data-feather="menu"></span>
@@ -79,72 +79,93 @@
 <div class="d-lg-none"  style="margin-top: 7em">
 
 </div>
-{% include 'classroom/students/_header.html' with active='new' %}
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Click on</strong> prefered Language or framework to showcase quizzes under each.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="accordion" id="accordionExample">
-    <div class="row" >
-        {% for subject in subjects %}
-
-
-        <div class="col-lg-4">
-            <div class="shadow p-3 mb-5 bg-white"   data-toggle="collapse" data-target="#{{ subject.id }}" aria-expanded="true" aria-controls="collapseOne" id="headingOne">
-                <div class="" >
-                    <div class="media">
-                        <img class="mr-3" src="{{ subject.image }}" width=64 height="64"  alt="Language image">
-                        <div class="media-body">
-                            <h6 class="mt-3 ml-5">{{ subject }}</h6>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-         <div  id="{{ subject.id }}" class="collapse col-lg-12 " aria-labelledby="headingOne" data-parent="#accordionExample">
-         <div class="jumbotron removed" style="background: #dfdfe3;border-radius: 0">
-         <h5>{{ subject.name }} quizzes</h5>
-             {% for quiz in quizzes %}
-
-                 {% if quiz.subject.name == subject.name %}
-                     <div class="row">
-                     <div class="col-8">
-                         <strong>{{ quiz.name }}</strong>
-
-                     </div>
-                     <div class="col-4">
-                         <a href="{% url 'students:take_quiz' quiz.pk %}" class="card-link ">Start Quiz</a>
-
-                     </div>
-                     </div>
-
-
-
-
-
-                 {% endif %}
-
-             {% endfor %}
-
-         </div>
-         </div>
-    {% endfor %}
+    <div class="alert alert-primary " role="alert">
+        Complete the companies requirements to enable you to apply for their position.
+        <p><strong>You have to have done the language and framework quiz (and met passmark) as stated by the company to be eligible</strong></p>
+        <p><strong>Apply first to validate if your profile matches requirements</strong></p>
     </div>
 
+    {% if opportunities %}
+        <table class="table">
+  <thead class="thead-dark">
+    <tr>
+
+      <th scope="col">Company </th>
+      <th scope="col">language</th>
+        <th scope="col">Framework</th>
+        <th>Requirement status</th>
+        <th>Application stage</th>
 
 
-</div>
 
-<div id="demoLightbox" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
-	<div class='lightbox-content'>
-		<img src="https://i.ibb.co/2tHd2X1/sample1.png">
-		<div class="lightbox-caption"><p>Your caption here</p></div>
-	</div>
-</div>
+    </tr>
+  </thead>
+  <tbody>
+  {% if taken  %}
+      {% for x in taken %}
+          {% for  opportunity in opportunities %}
+              {% if opportunity.id == x %}
+                  <tr>
+          <td>{{ opportunity.recruiter.profile.company }}</td>
+          <td>{{ opportunity.project.framework.language }}</td>
+          <td>{{ opportunity.project.framework }}</td>
+                      <td>
+                           <span class="badge badge-success">requirements met</span>
+                       </td>
+                       <td>
+
+                               <span class="btn-sm btn-success"> Application sent </span>
+                       <td>
+
+
+      </tr>
+              {% endif %}
+          {% endfor %}
+      {% endfor %}
+  {% endif %}
+
+
+
+
+
+  {% if untaken  %}
+      {% for y in untaken %}
+          {% for  opportunity in opportunities %}
+              {% if opportunity.id == y %}
+                  <tr>
+          <td>{{ opportunity.recruiter.profile.company }}</td>
+          <td>{{ opportunity.project.framework.language }}</td>
+          <td>{{ opportunity.project.framework }}</td>
+
+          <td>
+                            <span class="badge badge-danger">requirements not met</span>
+                        </td>
+                        <td>
+                            <a href="{% url 'frontend:apply' opportunity.id %}" style="text-decoration: none">
+                           <span class="btn-sm btn-primary"> Apply </span>
+
+                       </a>
+                        </td>
+                  <td></td>
+
+
+      </tr>
+              {% endif %}
+          {% endfor %}
+      {% endfor %}
+  {% endif %}
+
+
+
+
+
+  </tbody>
+</table>
+    {% else %}
+    No opens calls from companies at the moment
+    {% endif %}
+
+
 
 <br>
     <br>

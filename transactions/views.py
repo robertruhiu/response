@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from projects.forms import FrameworkForm
 from projects.models import Project, Framework
-from transactions.models import Transaction, Candidate
+from transactions.models import Transaction, Candidate,OpenCall
 from transactions.forms import CandidateForm, SourcingForm
 from invitations.models import Invitation
 
@@ -150,3 +150,8 @@ def sourcing(request):
     else:
         sourcing_form = SourcingForm()
         return render(request, 'transactions/sourcing.html', {'sourcing_form':sourcing_form})
+def opencall(request,transaction_id):
+    transaction = Transaction.objects.get(id=transaction_id)
+    newopencall =OpenCall(recruiter=request.user,project=transaction.project)
+    newopencall.save()
+    return redirect(reverse('frontend:index'))

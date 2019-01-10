@@ -14,6 +14,7 @@ from ..decorators import student_required
 from ..forms import TakeQuizForm
 from ..models import Quiz, Student, TakenQuiz, User,StudentAnswer,Answer,Subject
 from random import randint
+from transactions.models import OpenCall
 
 @method_decorator([login_required, student_required], name='dispatch')
 class QuizListView(ListView):

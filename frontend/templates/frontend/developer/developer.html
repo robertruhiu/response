@@ -77,16 +77,17 @@ developers
 <div class="d-lg-none"  style="margin-top: 7em">
 
 </div>
-{% if request.user.is_staff %}
 
-     <div class="alert alert-warning " role="alert">
-        Complete a skill assessment to enable you to build real world projects and get job referral's.These steps are mandatory to ensure a job referal
+
+     <div class="alert alert-primary " role="alert">
+         <p>Welcome to Codeln.
+        Complete  a skill assessment to enable you to build real world projects and get job referral's.These steps are mandatory to ensure a job referal</p>
     </div>
 
 
 <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-6 col" style="width: 100%;">
-            <div class="card recruithomecard" style="width:18em;margin: auto">
+            <div class="card recruithomecard mb-3" style="width:18em;margin: auto">
                 <a href="{% url 'students:tests' %}">
                     <div style="text-align: -webkit-center;">
 
@@ -110,9 +111,11 @@ developers
                 </a>
             </div>
         </div>
-    <div class="col-lg-4 col-md-6 col-sm-6 col" style="width: 100%;">
-            <div class="card recruithomecard grey" style="width:18em;margin: auto">
 
+        {% if passedquizz %}
+        <div class="col-lg-4 col-md-6 col-sm-6 col" style="width: 100%;">
+            <div class="card recruithomecard  mb-3" style="width:18em;margin: auto">
+                <a href="{% url 'frontend:buildproject' %}">
                     <div style="text-align: -webkit-center;">
 
                             <img class="img-fluid" src="../../../static/frontend/images/code.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
@@ -133,10 +136,40 @@ developers
 
                     </div>
 
+                </a>
             </div>
         </div>
+        {% else %}
+        <div class="col-lg-4 col-md-6 col-sm-6 col" style="width: 100%;">
+            <div class="card recruithomecard grey mb-3" style="width:18em;margin: auto">
+
+                    <div style="text-align: -webkit-center;">
+
+                            <img class="img-fluid" src="../../../static/frontend/images/code.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+
+
+
+                    </div>
+                    <div class="card" style="border: 0 ">
+
+
+                        <div class="card-body">
+
+                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Build a real world project</h6>
+                            <p class="text-center">Step 2</p>
+
+
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+
     <div class="col-lg-4 col-md-6 col-sm-6 col" style="width: 100%;">
-            <div class="card recruithomecard grey" style="width:18em;margin: auto;height: 100%">
+            <div class="card recruithomecard grey mb-3" style="width:18em;margin: auto;">
 
                     <div style="text-align: -webkit-center;">
 
@@ -151,104 +184,52 @@ developers
                         <div class="card-body">
 
                             <h6 class="card-title text-center" style="text-align: -webkit-center;">Job referral's</h6>
+                            <br>
+                            <br>
 
 
 
                         </div>
 
                     </div>
+
+            </div>
+        </div>
+    <div class="col-lg-4 col-md-6 col-sm-6 col" style="width: 100%;">
+            <div class="card recruithomecard  mb-3" style="width:18em;margin: auto;height: 100%">
+                <a href="{% url 'frontend:calltoapply' %}">
+                    <div style="text-align: -webkit-center;">
+
+                            <img class="img-fluid" src="../../../static/frontend/images/rank.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+
+                    </div>
+                    <div class="card" style="border: 0 ">
+
+
+                        <div class="card-body">
+
+                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Companies recruiting</h6>
+
+
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+
 
             </div>
         </div>
 </div>
 
 
-{% endif %}
 
 
 
 
-<div class="alert alert-primary mt-5  "  role="alert">Received a project invite.Please accept it here under project invites
-    and start building it under ongoing.</div>
 
-
-
-    <div class="row">
-
-
-        <div class="col-lg-4 col-md-6 col-sm-6 mb-3 col-12">
-            <div class="card recruithomecard" style="margin: auto;width: 18em">
-
-
-                <a   href="{% url 'frontend:inprogress' user.id %}">
-                    <div style="text-align: -webkit-center;">
-                        <img class="img-fluid " src="../../../static/frontend/images/coding.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
-                    </div>
-
-                    <div class="card" style="border: 0 ">
-
-
-                        <div class="card-body">
-
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Ongoing projects</h6>
-
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 mb-3 col-12">
-            <div class="card recruithomecard" style="margin: auto;width: 18em">
-
-
-                <a   href="{% url 'frontend:invites' %}">
-                    <div style="text-align: -webkit-center;">
-                        <img class="img-fluid " src="../../../static/frontend/images/invitation.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
-                    </div>
-
-                    <div class="card" style="border: 0 ">
-
-
-                        <div class="card-body">
-
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Project invites</h6>
-
-
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col" style="width: 100%;">
-            <div class="card recruithomecard" style="width:18em;margin: auto">
-                <a   href="/update_profile/">
-                    <div style="text-align: -webkit-center;">
-                        {% if user.profile.gender == 'male' %}
-                            <img class="img-fluid" src="../../../static/frontend/images/boy.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
-                            {% else %}
-                            <img class="img-fluid" src="../../../static/frontend/images/girl.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
-                        {% endif %}
-
-                    </div>
-                    <div class="card" style="border: 0 ">
-
-
-                        <div class="card-body">
-
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">My profile</h6>
-
-
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
-
-
-    </div>
 
 
 

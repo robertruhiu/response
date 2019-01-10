@@ -16,7 +16,7 @@ Including another URLconf
 
 from django.urls import path
 
-from transactions.views import process_transaction, my_invites, sourcing, transaction_view,success
+from transactions.views import process_transaction, my_invites, sourcing, transaction_view,success,opencall
 
 app_name = 'transactions'
 
@@ -27,4 +27,5 @@ urlpatterns = [
     path('my-invites/', my_invites, name='my-invites'),
     path('sourcing/', sourcing, name='sourcing'),
     path('success/', success, name='success'),
+    path('opencall/<int:transaction_id>/', opencall, name='opencall'),
 ]

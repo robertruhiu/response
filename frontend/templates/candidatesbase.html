@@ -24,6 +24,7 @@
 
     <link rel="stylesheet" href="{% static 'frontend/css/home.css' %}">
     <link rel="stylesheet" href="{% static 'frontend/css/stay.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/bootstrap-lightbox.min.css' %}">
     {% block css %}
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130019198-1"></script>
 <script>
@@ -65,7 +66,7 @@
                             Ongoing projects
                         </a>
                     </li>
-                    {% if request.user.is_staff %}
+
 
                     <li class="nav-item" >
                         <a class="nav-link" style="color:#FFFFFF;" href="{% url 'students:tests' %}">
@@ -75,7 +76,7 @@
                             Skill assessment
                         </a>
                     </li>
-                    {% endif %}
+
                     <li class="nav-item" >
                         <a class="nav-link" style="color:#FFFFFF;" href="/update_profile/">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
@@ -105,7 +106,7 @@
 
 
 
-
+        <script src="{% static 'frontend/css/bootstrap-lightbox.min.js' %}"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         {% bootstrap_javascript %}

@@ -5,13 +5,16 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 from django.urls import reverse
+from django.contrib import messages
+
 
 from accounts.forms import ProfileTypeForm, DeveloperFillingDetailsForm, RecruiterFillingDetailsForm
-from transactions.models import Transaction, Candidate
+from transactions.models import Transaction, Candidate,OpenCall,Applications
 from invitations.models import Invitation
 from projects.models import Project, Framework
 from frontend.form import Projectinvite, EditProjectForm
 from frontend.models import candidatesprojects, devs, recruiters
+from classroom.models import TakenQuiz,Student
 
 
 @login_required
@@ -89,7 +92,13 @@ def index(request):
             return recruiter_filling_details(request, current_profile)
         elif request.user.profile.stage == 'complete':
             if request.user.profile.user_type == 'developer':
-                return render(request, 'frontend/developer/developer.html')
+                try:
+                    student = Student.objects.get(user_id=request.user.id)
+                    passedquizz = TakenQuiz.objects.filter(score__gt=50).filter(student_id=student)
+                except Student.DoesNotExist:
+                    obj = Student(user=request.user)
+                    obj.save()
+                return render(request, 'frontend/developer/developer.html',{'passedquizz':passedquizz})
             elif request.user.profile.user_type == 'recruiter':
                 return render(request, 'frontend/recruiter/recruiter.html', {'transactions': transactions})
     else:
@@ -297,7 +306,46 @@ def edittransactions(request, transaction_id):
     transaction = Transaction.objects.get(id=transaction_id)
     candidates =Candidate.objects.filter(transaction_id=transaction_id)
     return render(request, 'frontend/recruiter/edittransaction.html',{'transaction':transaction,'candidates':candidates})
+
 def deletetransaction(request,transaction_id):
     Transaction.objects.filter(id=transaction_id).delete()
     Candidate.objects.filter(transaction_id=transaction_id).delete()
     return redirect('frontend:managetransactions')
+
+def buildproject(request):
+    return render(request, 'classroom/students/worldprojects.html')
+
+def calltoapply(request):
+    opportunities =OpenCall.objects.all()
+    qualifys =Applications.objects.filter(candidate=request.user)
+    original =[]
+    taken = []
+
+    for oppo in opportunities:
+        original.append(oppo.id)
+    for qualify in qualifys:
+        taken.append(qualify.transaction.id)
+
+    untaken=[]
+    untaken = set(original) - set(taken)
+
+    return render(request, 'classroom/students/opencalls.html',{'opportunities':opportunities,'qualifys':qualifys,'a':original,'taken':taken,'untaken':untaken})
+
+def apply(request,opportunity_id):
+    language =OpenCall.objects.get(id=opportunity_id)
+    student = Student.objects.get(user_id=request.user.id)
+    passedquizz = TakenQuiz.objects.filter(score__gt=50).filter(student_id=student)
+    allsubjectspassed = []
+    for d in passedquizz:
+        allsubjectspassed.append(d.quiz.subject)
+    uniquesubjects = list(set(allsubjectspassed))
+
+    for pa in uniquesubjects:
+        if pa.name == language.project.framework.language.name or \
+                pa.quiz.subject.name == language.project.framework.name:  #TODO: rivert to and statement for production
+            qualifiedcandidate = Applications(recruiter=language.recruiter,transaction=language,
+                                              project=language.project,candidate=request.user,stage='application sent')
+            qualifiedcandidate.save()
+
+
+    return redirect('frontend:calltoapply')

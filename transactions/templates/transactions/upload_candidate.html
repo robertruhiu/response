@@ -83,7 +83,7 @@ Add candidates
 </div>
 
     <div class="row">
-        <div class="col-lg-8 col-md-8 col-sm-12 " style="margin-right: auto;margin-left: auto">
+        <div class="col-lg-6 col-md-6 col-sm-12 " style="margin-right: auto;margin-left: auto">
             <div class="card" style="height: 100%">
 
 
@@ -117,6 +117,21 @@ Add candidates
                 </form>
 
             </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 " style="margin-right: auto;margin-left: auto">
+            <div class="shadow-sm p-3 mb-5">
+                <img src="{% static 'frontend/images/community.svg' %}" style="width: 50%;margin-left: 25%;margin-right: 25%">
+                <h5 class="text-center">Dont have your own candidates?</h5>
+                <h6 class="text-center">Allow the Codeln community developers to apply.
+                </h6>
+                <div class="d-flex justify-content-center">
+                    <a href="{% url 'transactions:opencall' current_transaction.id %}">
+                        <button class="btn btn-primary ">Allow Open call</button></a>
+                </div>
+
+
+
             </div>
         </div>
 
