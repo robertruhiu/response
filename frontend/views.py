@@ -95,10 +95,11 @@ def index(request):
                 try:
                     student = Student.objects.get(user_id=request.user.id)
                     passedquizz = TakenQuiz.objects.filter(score__gt=50).filter(student_id=student)
+                    return render(request, 'frontend/developer/developer.html', {'passedquizz': passedquizz})
                 except Student.DoesNotExist:
                     obj = Student(user=request.user)
                     obj.save()
-                return render(request, 'frontend/developer/developer.html',{'passedquizz':passedquizz})
+                    return render(request, 'frontend/developer/developer.html')
             elif request.user.profile.user_type == 'recruiter':
                 return render(request, 'frontend/recruiter/recruiter.html', {'transactions': transactions})
     else:
