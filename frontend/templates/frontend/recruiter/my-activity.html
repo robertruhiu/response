@@ -7,8 +7,24 @@ my projects
 <main role="main" class="col-md-10 col-lg-10 ml-lg-auto   px-4 ">
     <div class="d-none d-lg-block">
         <nav class="navbar  navbar-light fixed-top fine border-bottom">
-                    <h5 >My projects</h5>
-                    <ul class="nav ml-auto">
+            <ul class="nav nav-tabs" style="border-bottom: 0" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active " id="overview-tab" data-toggle="tab" href="#overview" role="tab"
+                       aria-controls="overview" aria-selected="true">All projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="criteria-tab" data-toggle="tab" href="#criteria" role="tab"
+                       aria-controls="criteria" aria-selected="false">Closed group projects </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="fraud-tab" data-toggle="tab" href="#fraud" role="tab"
+                       aria-controls="fraud" aria-selected="false">Open call </a>
+                </li>
+
+
+            </ul>
+
+            <ul class="nav ml-auto">
 
 
 
@@ -36,7 +52,22 @@ my projects
     <!-----md devices adaptation------>
     <div class="container d-lg-none">
         <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
-            <a class="logoadapt h5" style="text-decoration: none" href="">My projects</a>
+            <ul class="nav nav-tabs" style="border-bottom: 0" id="myTab" role="tablist">
+                <li class="nav-item" style="margin-bottom: 1em;margin-top: 1em">
+                    <a class="nav-link1 active " style="color: white;text-decoration: none" id="overview-tab" data-toggle="tab" href="#overview" role="tab"
+                       aria-controls="overview" aria-selected="true">All</a>
+                </li>
+                <li class="nav-item" style="margin-bottom: 1em;margin-top: 1em">
+                    <a class="nav-link1 " id="criteria-tab" style="color: white;text-decoration: none" data-toggle="tab" href="#criteria" role="tab"
+                       aria-controls="criteria" aria-selected="false">Closed group </a>
+                </li>
+                <li class="nav-item" style="margin-bottom: 1em;margin-top: 1em">
+                    <a class="nav-link1 " id="fraud-tab" style="color: white;text-decoration: none" data-toggle="tab" href="#fraud" role="tab"
+                       aria-controls="fraud" aria-selected="false">Open call</a>
+                </li>
+
+
+            </ul>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span  class="navbar-toggler-icon">
                     <span style="color: white" data-feather="menu"></span>
@@ -81,11 +112,20 @@ my projects
 <div class="d-lg-none"  style="margin-top: 7em">
 
 </div>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active " id="overview" role="tabpanel" aria-labelledby="overview-tab">
+        {% if transactions %}
 
     <div class="row">
+
+    {% for closed in closedprojects %}
+
+
         {% for transaction in transactions %}
+            {% if transaction.id == closed %}
             {% if transaction.stage == "complete" %}
-                <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-2 " >
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-2 " >
                     <a href="{% url 'frontend:tracker' transaction.id %}" style="text-decoration: none">
                         <div class="card" style="height: 100%;border-radius: 0">
                             <img class="img-fluid" src="{{ transaction.project.projectimage1}}" alt="Card image cap">
@@ -101,13 +141,50 @@ my projects
                     </a>
 
                 </div>
+                {% endif %}
 
-            {% else %}
 
             {% endif %}
 
 
         {% endfor %}
+    {% endfor %}
+    {% for open in allopencalls %}
+        {% for transaction in transactions %}
+            {% if transaction.id == open %}
+            {% if transaction.stage == "complete" %}
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-2 " >
+                    <a href="{% url 'frontend:opencalltracker' transaction.id %}" style="text-decoration: none">
+                        <div class="card" style="height: 100%;border-radius: 0">
+                            <img class="img-fluid" src="{{ transaction.project.projectimage1}}" alt="Card image cap">
+
+                            <div class="card-body">
+                                <h5 class="card-title">{{ transaction.project.name}}</h5>
+
+
+
+                            </div>
+
+                        </div>
+                    </a>
+
+                </div>
+                {% endif %}
+
+
+            {% endif %}
+
+
+        {% endfor %}
+    {% endfor %}
+    </div>
+
+
+
+
+{% else %}
+    <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-2" >
             <a href="{% url 'projects:categories' %}" style="text-decoration: none">
                 <div class="card " style="border-radius: 0;">
@@ -120,8 +197,137 @@ my projects
             </a>
 
         </div>
+    </div>
+
+{% endif %}
+    </div>
+    <div class="tab-pane fade  " id="criteria" role="tabpanel" aria-labelledby="criteria-tab">
+        {% if transactions %}
+
+    {% if closedprojects %}
+
+    <div class="row">
+
+    {% for closed in closedprojects %}
+
+
+        {% for transaction in transactions %}
+            {% if transaction.id == closed %}
+            {% if transaction.stage == "complete" %}
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-2 " >
+                    <a href="{% url 'frontend:tracker' transaction.id %}" style="text-decoration: none">
+                        <div class="card" style="height: 100%;border-radius: 0">
+                            <img class="img-fluid" src="{{ transaction.project.projectimage1}}" alt="Card image cap">
+
+                            <div class="card-body">
+                                <h5 class="card-title">{{ transaction.project.name}}</h5>
+
+
+
+                            </div>
+
+                        </div>
+                    </a>
+
+                </div>
+                {% endif %}
+
+
+            {% endif %}
+
+
+        {% endfor %}
+    {% endfor %}
+    </div>
+    {% endif %}
+
+
+
+
+{% else %}
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-2" >
+            <a href="{% url 'projects:categories' %}" style="text-decoration: none">
+                <div class="card " style="border-radius: 0;">
+                    <img class="img-fluid " style="width: 50%;margin: auto" src="{%static 'frontend/images/add.svg' %}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center" style="margin-top: 1em">Create a new test</h5>
+
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+{% endif %}
+    </div>
+    <div class="tab-pane fade  " id="fraud" role="tabpanel" aria-labelledby="fraud-tab">
+        {% if transactions %}
+
+
+
+
+    {% if allopencalls %}
+
+    <div class="row">
+
+        {% for open in allopencalls %}
+        {% for transaction in transactions %}
+            {% if transaction.id == open %}
+            {% if transaction.stage == "complete" %}
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-2 " >
+                    <a href="{% url 'frontend:opencalltracker' transaction.id %}" style="text-decoration: none">
+                        <div class="card" style="height: 100%;border-radius: 0">
+                            <img class="img-fluid" src="{{ transaction.project.projectimage1}}" alt="Card image cap">
+
+                            <div class="card-body">
+                                <h5 class="card-title">{{ transaction.project.name}}</h5>
+
+
+
+                            </div>
+
+                        </div>
+                    </a>
+
+                </div>
+                {% endif %}
+
+
+            {% endif %}
+
+
+        {% endfor %}
+    {% endfor %}
 
     </div>
+    {% endif %}
+
+{% else %}
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-2" >
+            <a href="{% url 'projects:categories' %}" style="text-decoration: none">
+                <div class="card " style="border-radius: 0;">
+                    <img class="img-fluid " style="width: 50%;margin: auto" src="{%static 'frontend/images/add.svg' %}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center" style="margin-top: 1em">Create a new test</h5>
+
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+{% endif %}
+    </div>
+
+</div>
+
+
 
 
 

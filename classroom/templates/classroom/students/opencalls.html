@@ -89,26 +89,24 @@
         <table class="table">
   <thead class="thead-dark">
     <tr>
-
-      <th scope="col">Company </th>
-      <th scope="col">language</th>
+        <th scope="col">Company </th>
+        <th scope="col">Country </th>
+        <th scope="col">language</th>
         <th scope="col">Framework</th>
         <th>Requirement status</th>
         <th>Application stage</th>
-
-
-
     </tr>
   </thead>
   <tbody>
   {% if taken  %}
       {% for x in taken %}
           {% for  opportunity in opportunities %}
-              {% if opportunity.id == x %}
+              {% if opportunity.transaction == x %}
                   <tr>
-          <td>{{ opportunity.recruiter.profile.company }}</td>
-          <td>{{ opportunity.project.framework.language }}</td>
-          <td>{{ opportunity.project.framework }}</td>
+                      <td>{{ opportunity.recruiter.profile.company }}</td>
+                      <td>{{ opportunity.recruiter.profile.country }}</td>
+                      <td>{{ opportunity.project.framework.language }}</td>
+                      <td>{{ opportunity.project.framework }}</td>
                       <td>
                            <span class="badge badge-success">requirements met</span>
                        </td>
@@ -131,17 +129,17 @@
   {% if untaken  %}
       {% for y in untaken %}
           {% for  opportunity in opportunities %}
-              {% if opportunity.id == y %}
+              {% if opportunity.transaction == y %}
                   <tr>
-          <td>{{ opportunity.recruiter.profile.company }}</td>
-          <td>{{ opportunity.project.framework.language }}</td>
-          <td>{{ opportunity.project.framework }}</td>
-
-          <td>
+                      <td>{{ opportunity.recruiter.profile.company }}</td>
+                      <td>{{ opportunity.recruiter.profile.country }}</td>
+                      <td>{{ opportunity.project.framework.language }}</td>
+                      <td>{{ opportunity.project.framework }}</td>
+                      <td>
                             <span class="badge badge-danger">requirements not met</span>
                         </td>
                         <td>
-                            <a href="{% url 'frontend:apply' opportunity.id %}" style="text-decoration: none">
+                            <a href="{% url 'frontend:apply' opportunity.transaction %}" style="text-decoration: none">
                            <span class="btn-sm btn-primary"> Apply </span>
 
                        </a>

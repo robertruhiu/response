@@ -5,7 +5,7 @@ from frontend.views import home,activity,tracker,update_candidateprojects,\
     sample,inprogress,projectinvites,update_finished,invites,\
     projectdetails,pendingproject,terms,dev,pricing,howitworks,privacy,\
     report,credits,onboarddevs,onboardrecruiters,seedevs,seerecruiters,manageprojects,managetransactions,\
-    editproject,deleteproject,addproject,edittransactions,deletetransaction,buildproject,calltoapply,apply
+    editproject,deleteproject,addproject,edittransactions,deletetransaction,buildproject,calltoapply,apply,opencalltracker
 
 from accounts.views import update_profile
 
@@ -46,6 +46,8 @@ urlpatterns = [
     path('addproject',addproject,name='addproject'),
     path('calltoapply',calltoapply,name='calltoapply'),
     path('buildproject',buildproject,name='buildproject'),
-    path('apply/<int:opportunity_id>',apply,name='apply')
+    path('apply/<int:opportunity_id>',apply,name='apply'),
+    path('opencalltracker/<int:trans_id>',opencalltracker,name='opencalltracker')
+
 
 ]

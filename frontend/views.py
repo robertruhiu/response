@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-
+from django.db.models.aggregates import Max
 # Create your views here.
 from django.urls import reverse
 from django.contrib import messages
@@ -113,8 +113,22 @@ def home(request):
 def activity(request):
     if request.user.is_authenticated:
         transactions = Transaction.objects.filter(user=request.user)
+        opencalls =OpenCall.objects.filter(recruiter=request.user)
+        alltransactions =[]
+        allopencalls =[]
+        for transaction in transactions:
+            alltransactions.append(transaction)
+        for opencall in opencalls:
+            allopencalls.append(opencall.transaction)
+
+        res=set(alltransactions)-set(allopencalls)
+        print(allopencalls)
+        print(alltransactions)
+        closedprojects =list(res)
+        print(closedprojects)
+
         if request.user.profile.user_type == 'recruiter':
-            return render(request, 'frontend/recruiter/my-activity.html', {'transactions': transactions})
+            return render(request, 'frontend/recruiter/my-activity.html', {'transactions': transactions,'closedprojects':closedprojects,'allopencalls':allopencalls})
         elif request.user.profile.user_type == 'developer':
             return render(request, 'frontend/developer/my-activity.html', {'transactions': transactions})
 
@@ -316,36 +330,52 @@ def buildproject(request):
     return render(request, 'classroom/students/worldprojects.html')
 
 def calltoapply(request):
-    opportunities =OpenCall.objects.all()
-    qualifys =Applications.objects.filter(candidate=request.user)
+    opportunities = OpenCall.objects.all()
+    qualifys = Applications.objects.filter(candidate=request.user)
+
     original =[]
     taken = []
 
     for oppo in opportunities:
-        original.append(oppo.id)
+        original.append(oppo.transaction)
     for qualify in qualifys:
-        taken.append(qualify.transaction.id)
-
+        taken.append(qualify.transaction)
+    print(original)
+    print(taken)
     untaken=[]
-    untaken = set(original) - set(taken)
+    non = set(original) - set(taken)
+    untaken=list(non)
+    print(untaken)
 
     return render(request, 'classroom/students/opencalls.html',{'opportunities':opportunities,'qualifys':qualifys,'a':original,'taken':taken,'untaken':untaken})
 
 def apply(request,opportunity_id):
-    language =OpenCall.objects.get(id=opportunity_id)
+    language =OpenCall.objects.get(transaction=opportunity_id)
     student = Student.objects.get(user_id=request.user.id)
     passedquizz = TakenQuiz.objects.filter(score__gt=50).filter(student_id=student)
+
     allsubjectspassed = []
     for d in passedquizz:
         allsubjectspassed.append(d.quiz.subject)
+
     uniquesubjects = list(set(allsubjectspassed))
 
     for pa in uniquesubjects:
+        blu=TakenQuiz.objects.filter(quiz__subject=pa).filter(student_id=student)
+        doublequizzes =[]
+        for paz in blu:
+            doublequizzes.append(paz.score)
+
         if pa.name == language.project.framework.language.name or \
-                pa.quiz.subject.name == language.project.framework.name:  #TODO: rivert to and statement for production
-            qualifiedcandidate = Applications(recruiter=language.recruiter,transaction=language,
-                                              project=language.project,candidate=request.user,stage='application sent')
+                pa.name == language.project.framework.name:  #TODO: let it be explcitly for framework if pa.name==language.project.framework
+            qualifiedcandidate = Applications(recruiter=language.recruiter,transaction=language.transaction,
+                                              project=language.project,candidate=request.user,stage='application sent',score=max(doublequizzes))
             qualifiedcandidate.save()
 
 
     return redirect('frontend:calltoapply')
+
+def opencalltracker(request,trans_id):
+    print(trans_id)
+    candidates = Applications.objects.filter(transaction=trans_id).order_by('-score')
+    return render(request,'frontend/recruiter/opencall.html',{'candidates':candidates})

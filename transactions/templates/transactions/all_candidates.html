@@ -98,7 +98,7 @@ Candidates
     <div class="col-lg-8 col-md-8">
         <div style="margin-top: 3%;">
             <div class="card" style="box-shadow: 5px 5px 25px 0px rgba(46,61,73,0.2);">
-
+            {% if candidates %}
                 <div class="card-body">
                     <h5>list of candidates</h5>
                     <table class="table table-hover">
@@ -136,6 +136,20 @@ Candidates
                             Proceed to make Payment.</a>
                     </div>
                 </div>
+                {% else %}
+                <div class="card-body">
+                    <img src="{% static 'frontend/images/community.svg' %}" style="width: 50%;margin-left: 25%;margin-right: 25%">
+                        <h6 class="text-center">Open call</h6>
+                    <div style="text-align: -webkit-center;">
+                        <button disabled="" class="btn btn-info">Total Cost = ${{ total_amount }}</button>
+
+                        <a href="{% url 'payments:pay' current_transaction.id  total_amount %}" class="btn btn-success">
+                            Proceed to make Payment.</a>
+                    </div>
+                </div>
+            {% endif %}
+
+
             </div>
         </div>
 

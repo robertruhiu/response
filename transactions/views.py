@@ -43,8 +43,10 @@ def process_transaction(request, id):
     elif current_transaction.stage == 'complete':
         return redirect(reverse('frontend:index'))
 
+
 def upload_candidates(request, current_transaction):
     # id is transaction id
+    mule = current_transaction.id
     # TODO: add capapility to upload text document or csv file of Candidates
     if request.method == 'POST':
         candidate_form = CandidateForm(request.POST)
@@ -76,7 +78,7 @@ def upload_candidates(request, current_transaction):
 
     else:
         candidate_form = CandidateForm()
-        return render(request, 'transactions/upload_candidate.html', {'candidate_form': candidate_form, 'current_transaction': current_transaction})
+        return render(request, 'transactions/upload_candidate.html', {'candidate_form': candidate_form, 'current_transaction': current_transaction,'mule':mule})
 
 
 def all_candidates(request, current_transaction):
@@ -109,9 +111,13 @@ def invitations(request, current_transaction):
 
                 current_transaction.stage = 'complete'
                 current_transaction.save()
+        elif candidates.count() == 0:
+            current_transaction.stage = 'complete'
+            current_transaction.save()
         return redirect(reverse('transactions:process_transaction', args=[current_transaction.id]))
     return render(request, 'transactions/invitations.html',
                   {'candidates': candidates, 'current_transaction': current_transaction})
+
 
 
 
@@ -150,8 +156,12 @@ def sourcing(request):
     else:
         sourcing_form = SourcingForm()
         return render(request, 'transactions/sourcing.html', {'sourcing_form':sourcing_form})
-def opencall(request,transaction_id):
-    transaction = Transaction.objects.get(id=transaction_id)
-    newopencall =OpenCall(recruiter=request.user,project=transaction.project)
+def opencall(request,id):
+    transaction = Transaction.objects.get(id=id)
+    newopencall =OpenCall(recruiter=request.user,project=transaction.project,transaction=id)
     newopencall.save()
-    return redirect(reverse('frontend:index'))
+    transaction.stage = 'make-payment'
+    transaction.save()
+    amount = 200
+    return redirect('transactions:process_transaction' ,transaction.id)
+
