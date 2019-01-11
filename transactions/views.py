@@ -158,7 +158,7 @@ def sourcing(request):
         return render(request, 'transactions/sourcing.html', {'sourcing_form':sourcing_form})
 def opencall(request,id):
     transaction = Transaction.objects.get(id=id)
-    newopencall =OpenCall(recruiter=request.user,project=transaction.project,transaction=id)
+    newopencall =OpenCall(recruiter=request.user,project=transaction.project,transaction=transaction)
     newopencall.save()
     transaction.stage = 'make-payment'
     transaction.save()

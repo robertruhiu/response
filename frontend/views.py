@@ -118,9 +118,9 @@ def activity(request):
         alltransactions =[]
         allopencalls =[]
         for transaction in transactions:
-            alltransactions.append(transaction)
+            alltransactions.append(transaction.id)
         for opencall in opencalls:
-            allopencalls.append(opencall.transaction)
+            allopencalls.append(opencall.transaction.id)
 
         res=set(alltransactions)-set(allopencalls)
         print(allopencalls)
@@ -338,15 +338,20 @@ def calltoapply(request):
     taken = []
 
     for oppo in opportunities:
-        original.append(oppo.transaction)
+        original.append(oppo.transaction.id)
     for qualify in qualifys:
-        taken.append(qualify.transaction)
+        taken.append(qualify.transaction.id)
     print(original)
     print(taken)
     untaken=[]
     non = set(original) - set(taken)
     untaken=list(non)
+    untakenopportunities =[]
+    for untake in untaken:
+        untakentrans =Transaction.objects.get(id=untake)
+        untakenopportunities.append(untakentrans.id)
     print(untaken)
+    print(untakenopportunities)
 
     return render(request, 'classroom/students/opencalls.html',{'opportunities':opportunities,'qualifys':qualifys,'a':original,'taken':taken,'untaken':untaken})
 
@@ -367,8 +372,8 @@ def apply(request,opportunity_id):
         for paz in blu:
             doublequizzes.append(paz.score)
 
-        if pa.name == language.project.framework.language.name or \
-                pa.name == language.project.framework.name:  #TODO: let it be explcitly for framework if pa.name==language.project.framework
+        if pa.name == language.transaction.framework.language.name or \
+                pa.name == language.transaction.framework.name:  #TODO: let it be explcitly for framework if pa.name==language.project.framework
             qualifiedcandidate = Applications(recruiter=language.recruiter,transaction=language.transaction,
                                               project=language.project,candidate=request.user,stage='application sent',score=max(doublequizzes))
             qualifiedcandidate.save()

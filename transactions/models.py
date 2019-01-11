@@ -56,7 +56,7 @@ class Candidate(models.Model):
 class OpenCall(models.Model):
     recruiter =models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project,on_delete=models.CASCADE)
-    transaction =models.IntegerField()
+    transaction =models.ForeignKey(Transaction, on_delete=models.CASCADE)
 
 
 class Applications(models.Model):
@@ -64,5 +64,5 @@ class Applications(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     candidate = models.ForeignKey(User, on_delete=models.CASCADE,related_name='developer')
     stage = models.CharField(default='requirements met', max_length=100)
-    transaction = models.IntegerField()
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
     score = models.IntegerField()
