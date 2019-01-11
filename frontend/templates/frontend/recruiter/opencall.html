@@ -99,7 +99,7 @@ application tracker
             <div class="card trackercard ">
                 <div class="card-body">
                     <h5 class="card-title">Project stage</h5>
-                    <p class="card-text">{{ candidate.project.name }}</p>
+                    <p class="card-text">0/10 picked</p>
 
                 </div>
             </div>
@@ -134,15 +134,15 @@ application tracker
         <tr>
             <td> {{ forloop.counter }} </td>
             <td> {{ candidate.candidate.last_name}}  </td>
-
-            <td>
-                {{ candidate.candidate.profile.availabilty }}
-
-            </td>
             <td>
                 {{ candidate.candidate.profile.country }}
 
             </td>
+            <td>
+                {{ candidate.candidate.profile.availabilty }}
+
+            </td>
+
             <td>
                 {{ candidate.score }}
             </td>
