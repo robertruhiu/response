@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-
+from django_countries.fields import CountryField
 from projects.models import Language, Framework ,Project
 from transactions.models import Transaction
 
@@ -17,7 +17,7 @@ class devs(models.Model):
     email=models.EmailField(null=True,max_length=50)
     language=models.CharField(null=True,max_length=500)
     framework=models.CharField(null=True,max_length=500)
-    country =models.CharField(null=True,max_length=30)
+    country =CountryField(null=True, max_length=30)
     firstname=models.CharField(null=True,max_length=30)
     lastname=models.CharField(null=True,max_length=30)
     github = models.CharField(null=True,max_length=500)
@@ -26,7 +26,7 @@ class devs(models.Model):
 
 class recruiters(models.Model):
     email = models.EmailField(null=True,max_length=50)
-    country = models.CharField(null=True,max_length=30)
+    country = CountryField(null=True, max_length=30)
     firstname = models.CharField(null=True,max_length=30)
     lastname = models.CharField(null=True,max_length=30)
     company = models.CharField(null=True,max_length=200)

@@ -104,7 +104,7 @@
               {% if opportunity.transaction.id == x %}
                   <tr>
                       <th scope="row">{{ opportunity.recruiter.profile.company }}</th>
-                      <td>{{ opportunity.recruiter.profile.country }}</td>
+                      <td>{{ opportunity.recruiter.profile.country.name }}</td>
                       <td>{{ opportunity.project.framework.language }}</td>
                       <td>{{ opportunity.project.framework }}</td>
                       <td>
