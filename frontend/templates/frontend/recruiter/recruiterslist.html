@@ -89,7 +89,7 @@ recruiter dashboard
     <table class="table">
   <thead class="thead-light">
     <tr>
-
+        <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">email</th>
         <th scope="col">Company</th>
@@ -101,6 +101,7 @@ recruiter dashboard
   <tbody>
   {% for pay in payers %}
        <tr>
+       <td> {{ forloop.counter }} </td>
       <td>{{ pay.firstname }} {{ pay.lastname }}</td>
       <td>{{ pay.email }}</td>
        <td>{{ pay.company }}</td>
