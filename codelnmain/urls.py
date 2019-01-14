@@ -23,6 +23,7 @@ from django.conf.urls import handler404, handler500
 from accounts.views import profile
 
 urlpatterns = [
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('accounts/profile/', profile, name='profile'),
