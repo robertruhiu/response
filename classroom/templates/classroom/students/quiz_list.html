@@ -113,7 +113,16 @@
                  {% if quiz.subject.name == subject.name %}
                      <div class="row">
                      <div class="col-8">
-                         <strong>{{ quiz.name }}</strong>
+                         <div class="row">
+                             <div class="col-8">
+                                 <strong>{{ quiz.name }}</strong>
+                             </div>
+                             <div class="col-4">
+                                 {{ quiz.questions_count }} questions
+                             </div>
+                         </div>
+
+
 
                      </div>
                      <div class="col-4">
