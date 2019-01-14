@@ -93,8 +93,8 @@
         <th scope="col">Country </th>
         <th scope="col">language</th>
         <th scope="col">Framework</th>
-        <th>Requirement status</th>
-        <th>Application stage</th>
+        <th scope="col">Requirement status</th>
+        <th scope="col">Application stage</th>
     </tr>
   </thead>
   <tbody>
@@ -103,7 +103,7 @@
           {% for  opportunity in opportunities %}
               {% if opportunity.transaction.id == x %}
                   <tr>
-                      <td>{{ opportunity.recruiter.profile.company }}</td>
+                      <th scope="row">{{ opportunity.recruiter.profile.company }}</th>
                       <td>{{ opportunity.recruiter.profile.country }}</td>
                       <td>{{ opportunity.project.framework.language }}</td>
                       <td>{{ opportunity.project.framework }}</td>
@@ -131,7 +131,7 @@
           {% for  opportunity in opportunities %}
               {% if opportunity.transaction.id == y %}
                   <tr>
-                      <td>{{ opportunity.recruiter.profile.company }}</td>
+                      <th scope="row">{{ opportunity.recruiter.profile.company }}</th>
                       <td>{{ opportunity.recruiter.profile.country }}</td>
                       <td>{{ opportunity.transaction.framework.language }}</td>
                       <td>{{ opportunity.transaction.framework }}</td>
