@@ -341,8 +341,6 @@ def calltoapply(request):
         original.append(oppo.transaction.id)
     for qualify in qualifys:
         taken.append(qualify.transaction.id)
-    print(original)
-    print(taken)
     untaken=[]
     non = set(original) - set(taken)
     untaken=list(non)
@@ -350,8 +348,7 @@ def calltoapply(request):
     for untake in untaken:
         untakentrans =Transaction.objects.get(id=untake)
         untakenopportunities.append(untakentrans.id)
-    print(untaken)
-    print(untakenopportunities)
+
 
     return render(request, 'classroom/students/opencalls.html',{'opportunities':opportunities,'qualifys':qualifys,'a':original,'taken':taken,'untaken':untaken})
 
@@ -382,6 +379,6 @@ def apply(request,opportunity_id):
     return redirect('frontend:calltoapply')
 
 def opencalltracker(request,trans_id):
-    print(trans_id)
+
     candidates = Applications.objects.filter(transaction=trans_id).order_by('-score')
     return render(request,'frontend/recruiter/opencall.html',{'candidates':candidates})
