@@ -1,4 +1,4 @@
-{% extends 'candidatesbase.html' %}
+{% extends 'recruiterbase.html' %}
 
 {% load crispy_forms_tags  %}
 
@@ -104,7 +104,7 @@
       <tbody>
         {% for taken_quiz in taken_quizzes %}
           <tr>
-            <td>{{ taken_quiz.student.user.username }}</td>
+            <td>{{ taken_quiz.student.user.first_name }} {{ taken_quiz.student.user.last_name }}</td>
             <td>{{ taken_quiz.date }}</td>
             <td>{{ taken_quiz.score }}</td>
           </tr>
