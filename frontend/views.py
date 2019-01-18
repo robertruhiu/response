@@ -133,7 +133,7 @@ def activity(request):
         elif request.user.profile.user_type == 'developer':
             return render(request, 'frontend/developer/my-activity.html', {'transactions': transactions})
 
-
+@login_required
 def tracker(request, id):
     project = Transaction.objects.get(id=id)
     candidates = candidatesprojects.objects.filter(transaction=id)
@@ -169,7 +169,7 @@ def pendingproject(request, transaction_id):
     return render(request, 'frontend/developer/pendingproject.html',
                   {'transaction': transaction, 'acceptedinvites': acceptedinvites})
 
-
+@login_required
 def projectinvites(request, transaction_id, candidate_id):
     trans_id = Transaction.objects.get(id=transaction_id)
     currentcandidate = User.objects.get(id=candidate_id)
@@ -178,7 +178,7 @@ def projectinvites(request, transaction_id, candidate_id):
     acceptedinvite.save()
     return render(request, 'frontend/developer/developer.html')
 
-
+@login_required
 def update_candidateprojects(request, candidateproject_id, transaction_id):
     transaction = Transaction.objects.get(id=transaction_id)
     candidatesproject = candidatesprojects.objects.get(id=candidateproject_id)
@@ -186,7 +186,7 @@ def update_candidateprojects(request, candidateproject_id, transaction_id):
     candidatesproject.save()
     return HttpResponseRedirect('/projectdetails/%s' % candidateproject_id)
 
-
+@login_required
 def update_finished(request, candidateproject_id, transaction_id):
     transaction = Transaction.objects.get(id=transaction_id)
     candidatesproject = candidatesprojects.objects.get(id=candidateproject_id)
@@ -333,6 +333,7 @@ def buildproject(request):
 def calltoapply(request):
     opportunities = OpenCall.objects.all()
     qualifys = Applications.objects.filter(candidate=request.user)
+    student = Student.objects.get(user_id=request.user.id)
 
     original =[]
     taken = []
@@ -342,6 +343,7 @@ def calltoapply(request):
     for qualify in qualifys:
         taken.append(qualify.transaction.id)
     untaken=[]
+   
     non = set(original) - set(taken)
     untaken=list(non)
     untakenopportunities =[]
@@ -362,6 +364,7 @@ def apply(request,opportunity_id):
         allsubjectspassed.append(d.quiz.subject)
 
     uniquesubjects = list(set(allsubjectspassed))
+
 
     for pa in uniquesubjects:
         blu=TakenQuiz.objects.filter(quiz__subject=pa).filter(student_id=student)

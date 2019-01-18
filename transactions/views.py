@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from projects.forms import FrameworkForm
@@ -128,7 +128,7 @@ def success(request):
 
     return  render(request, 'transactions/success.html')
 
-
+@login_required
 def sourcing(request):
     if request.method == 'POST':
         sourcing_form = SourcingForm(request.POST)
@@ -153,9 +153,11 @@ def sourcing(request):
             except BadHeaderError:
                 print('invalid error')
             return redirect(reverse('transactions:success'))
-    else:
+    elif request.user.profile.user_type == 'recruiter':
         sourcing_form = SourcingForm()
         return render(request, 'transactions/sourcing.html', {'sourcing_form':sourcing_form})
+    else:
+        return render(request, 'frontend/landing.html')
 def opencall(request,id):
     transaction = Transaction.objects.get(id=id)
     newopencall =OpenCall(recruiter=request.user,project=transaction.project,transaction=transaction)

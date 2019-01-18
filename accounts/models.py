@@ -25,6 +25,7 @@ class Profile(models.Model):
         ('female', 'female'),
     )
     YEARS_ACTIVE_CHOICES = (
+        ('0-1', '0-1'),
         ('1-2', '1-2'),
         ('2-4', '2-4'),
         ('4-above', '4-above'),

@@ -80,9 +80,10 @@
 
 </div>
     <div class="alert alert-primary " role="alert">
-        Complete the companies requirements to enable you to apply for their position.
-        <p><strong>You have to have done the language quiz (and met passmark) as stated by the company to be eligible</strong></p>
-        <p><strong>Apply first to validate if your profile matches requirements</strong></p>
+        <strong>
+            To apply for any of the positions below, please take the specified Skill Assessment Test,
+            note that you must exceed the passmark (50%) to be considered for the next stage.
+        </strong>
     </div>
 
     {% if opportunities %}
@@ -91,10 +92,10 @@
     <tr>
 
         <th scope="col">Company </th>
-        <th scope="col">Country </th>
-        <th scope="col">language</th>
-        <th scope="col">Requirement status</th>
-        <th scope="col">Application stage</th>
+        <th class="text-center" scope="col">Company url </th>
+        <th class="text-center" scope="col">Country </th>
+        <th class="text-center" scope="col">language</th>
+        <th class="text-center" scope="col">Application stage</th>
     </tr>
   </thead>
   <tbody>
@@ -104,20 +105,19 @@
               {% if opportunity.transaction.id == x %}
                   <tr>
 
-                      <th scope="row">{{ opportunity.recruiter.profile.company }}</th>
-                      <td>{{ opportunity.recruiter.profile.country.name }}</td>
-                      <td>{{ opportunity.project.framework.language }}</td>
+                      <th scope="row">{{ opportunity.recruiter.profile.company|capfirst }}</th>
+                      <td class="text-center">
+                          {{ opportunity.recruiter.profile.company_url }}
 
+                      </td>
+                      <td class="text-center">{{ opportunity.recruiter.profile.country.name }}</td>
+                      <td class="text-center">{{ opportunity.transaction.framework.language|capfirst }}</td>
+
+
+                      <td class="text-center">
+                          <span class="btn-sm btn-success"> Application sent </span>
                       <td>
-                           <span class="badge badge-success">requirements met</span>
-                       </td>
-                       <td>
-
-                               <span class="btn-sm btn-success"> Application sent </span>
-                       <td>
-
-
-      </tr>
+                  </tr>
               {% endif %}
           {% endfor %}
       {% endfor %}
@@ -133,23 +133,26 @@
               {% if opportunity.transaction.id == y %}
                   <tr>
 
-                      <th scope="row">{{ opportunity.recruiter.profile.company }}</th>
-                      <td>{{ opportunity.recruiter.profile.country.name }}</td>
-                      <td>{{ opportunity.transaction.framework.language }}</td>
+                      <th scope="row">{{ opportunity.recruiter.profile.company|capfirst  }}</th>
+                      <td class="text-center">
+                          {{ opportunity.recruiter.profile.company_url }}
 
-                      <td>
-                            <span class="badge badge-danger">requirements not met</span>
-                        </td>
-                        <td>
-                            <a href="{% url 'frontend:apply' opportunity.transaction.id %}" style="text-decoration: none">
-                           <span class="btn-sm btn-primary"> Apply </span>
+                      </td>
+                      <td class="text-center">{{ opportunity.recruiter.profile.country.name }}</td>
+                      <td class="text-center">
+                          <a style="text-decoration: none" href="{% url 'students:tests' %}">
+                              {{ opportunity.transaction.framework.language }}
+                          </a>
 
-                       </a>
-                        </td>
-                  <td></td>
+                      </td>
 
 
-      </tr>
+                      <td class="text-center">
+                          <a href="{% url 'frontend:apply' opportunity.transaction.id %}" style="text-decoration: none">
+                              <span class="btn-sm btn-primary"> Apply </span>
+                          </a>
+                      </td>
+                  </tr>
               {% endif %}
           {% endfor %}
       {% endfor %}
