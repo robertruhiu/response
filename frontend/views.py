@@ -6,7 +6,9 @@ from django.db.models.aggregates import Max
 # Create your views here.
 from django.urls import reverse
 from django.contrib import messages
-
+from django.core import mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 from accounts.forms import ProfileTypeForm, DeveloperFillingDetailsForm, RecruiterFillingDetailsForm
 from transactions.models import Transaction, Candidate,OpenCall,Applications
@@ -343,7 +345,7 @@ def calltoapply(request):
     for qualify in qualifys:
         taken.append(qualify.transaction.id)
     untaken=[]
-   
+
     non = set(original) - set(taken)
     untaken=list(non)
     untakenopportunities =[]
@@ -385,3 +387,16 @@ def opencalltracker(request,trans_id):
 
     candidates = Applications.objects.filter(transaction=trans_id).order_by('-score')
     return render(request,'frontend/recruiter/opencall.html',{'candidates':candidates})
+
+def reminderforprofiledevs(request):
+    allusers = User.objects.all()
+    for dev in allusers:
+        if dev.profile.user_type =='developer' and dev.profile.stage == 'complete':
+            subject = 'Complete your profile'
+            html_message = render_to_string('invitations/email/reminder.html' ,{'dev':dev})
+            plain_message = strip_tags(html_message)
+            from_email = 'codeln@codeln.com'
+            to = dev.email
+
+            mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+    return redirect('frontend:index')
