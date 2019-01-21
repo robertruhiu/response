@@ -391,7 +391,7 @@ def opencalltracker(request,trans_id):
 def reminderforprofiledevs(request):
     allusers = User.objects.all()
     for dev in allusers:
-        if dev.profile.user_type =='developer' and dev.profile.stage == 'complete':
+        if dev.profile.user_type =='developer' and dev.profile.stage == 'developer_filling_details':
             subject = 'Complete your profile'
             html_message = render_to_string('invitations/email/reminder.html' ,{'dev':dev})
             plain_message = strip_tags(html_message)
