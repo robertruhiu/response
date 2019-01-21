@@ -391,11 +391,11 @@ def opencalltracker(request,trans_id):
 def reminderforprofiledevs(request):
     allusers = User.objects.all()
     for dev in allusers:
-        if dev.profile.user_type =='developer' and dev.profile.stage == 'developer_filling_details':
-            subject = 'Complete your profile'
+        if dev.profile.user_type =='developer' and dev.profile.stage == 'complete' and dev.email == 'codeln@codeln.com':
+            subject = 'Reminder'
             html_message = render_to_string('invitations/email/reminder.html' ,{'dev':dev})
             plain_message = strip_tags(html_message)
-            from_email = 'codeln@codeln.com'
+            from_email = 'noreply@sandbox3921b04244fe414a8168eb9e0bc3e8ae.mailgun.org'
             to = dev.email
 
             mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)

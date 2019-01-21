@@ -169,6 +169,8 @@ recruiter dashboard
 
     </div>
 {% if request.user.is_staff %}
+        <a  href="{% url 'frontend:reminderforprofiledevs' %}" class="btn btn-primary mb-1" style="border-radius: 0">remind developers</a>
+
 
 
     <h5>Management</h5>
@@ -299,7 +301,6 @@ recruiter dashboard
 
 
 </div>
-    <a  href="{% url 'frontend:reminderforprofiledevs' %}" class="btn btn-primary mb-1" style="border-radius: 0">remind developers</a>
 
 {% endif %}
 

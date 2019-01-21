@@ -26,7 +26,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = config('SECRET_KEY', default='SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ENVIRONMENT = config('ENVIRONMENT', default='local')
 
@@ -180,7 +180,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #email settings
 DEFAULT_FROM_EMAIL=config('DEFAULT_FROM_EMAIL',default='DEFAULT_FROM_EMAIL')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+MAILGUN_ACCESS_KEY = 'fe828c111069fc7ec64547e277f67cd7-2d27312c-a2bea4ff'
+MAILGUN_SERVER_NAME = 'sandbox3921b04244fe414a8168eb9e0bc3e8ae.mailgun.org'
+EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='EMAIL_HOST_USER')
