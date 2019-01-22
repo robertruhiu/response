@@ -35,7 +35,7 @@ urlpatterns = [
     path('', include('frontend.urls', namespace='frontend')),
     path('', include('classroom.urls')),
     path('invitations/', include('invitations.urls', namespace='invitations')),
-    path('testing/', include('testing.urls', namespace='testing')),
+
 ]
 
 if settings.DEBUG:
