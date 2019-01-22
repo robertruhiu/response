@@ -92,32 +92,25 @@
   <p class="lead">{{ question.text }}</p>
    <div class="row">
        {% if question.codesample %}
-       <div class="col-5 mt-5">
-       <form method="post" novalidate>
-    {% csrf_token %}
-      {% bootstrap_form_errors form %}
-      {{ form|crispy }}
-
-
-
-    <button type="submit" id="submit" class="btn btn-primary btn-sm btn-block">Next →</button>
-  </form>
-
-       </div>
-       <div class="col-7">
-           <img  class=" " src="{{ question.codesample }}">
-       </div>
-           {% else %}
+           <div class="col-lg-5 col-sm-12 col-md-6 col-xl-5 col-12 order-2 order-sm-2 order-md-1 order-lg-1 order-xl-1">
+               <form method="post" novalidate>
+                   {% csrf_token %}
+                   {% bootstrap_form_errors form %}
+                   {{ form|crispy }}
+                   <button type="submit" id="submit" class="btn btn-primary btn-sm btn-block">Next →</button>
+               </form>
+           </div>
+           <div class="col-lg-7 col-sm-12 col-xl-7 col-8 col-md-6 order-md-2 order-1 order-lg-2 order-xl-2 order-sm-1">
+               <img  class=" " src="{{ question.codesample }}">
+           </div>
+       {% else %}
            <div class="col-12">
-           <form method="post" novalidate>
-    {% csrf_token %}
-      {% bootstrap_form_errors form %}
-      {{ form|crispy }}
-
-
-
-    <button type="submit" id="submit" class="btn btn-primary btn-sm btn-block">Next →</button>
-  </form>
+               <form method="post" novalidate>
+                   {% csrf_token %}
+                   {% bootstrap_form_errors form %}
+                   {{ form|crispy }}
+                   <button type="submit" id="submit" class="btn btn-primary btn-sm btn-block">Next →</button>
+               </form>
            </div>
        {% endif %}
    </div>
@@ -137,7 +130,7 @@ interval = setInterval(function() {
         // stop timer
         clearInterval(interval);
         // click
-        document.getElementById('submit').click();
+        {#document.getElementById('submit').click();#}
     }
 
 }, 1000)
