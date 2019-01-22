@@ -81,7 +81,7 @@ def profile_type_selection(request, current_profile):
         profile_type_form = ProfileTypeForm()
     return render(request, 'frontend/profile_type_selection.html', {'profile_type_form': profile_type_form})
 
-
+@login_required
 def index(request):
     if request.user.is_authenticated:
         current_profile = request.user.profile
@@ -285,17 +285,17 @@ def seerecruiters(request):
     payers = recruiters.objects.all()
     return render(request, 'frontend/recruiter/recruiterslist.html', {'payers': payers})
 
-
+@login_required
 def manageprojects(request):
     projects = Project.objects.all()
     return render(request, 'frontend/recruiter/projects.html', {'projects': projects})
 
-
+@login_required
 def managetransactions(request):
     transactions = Transaction.objects.all()
     return render(request, 'frontend/recruiter/transactions.html', {'transactions': transactions})
 
-
+@login_required
 def editproject(request, project_id):
     instance = get_object_or_404(Project, id=project_id)
     project = Project.objects.get(id=project_id)
@@ -307,11 +307,11 @@ def editproject(request, project_id):
     return render(request, 'frontend/recruiter/editproject.html',
                   {'project': project, 'form': form})
 
-
+@login_required
 def deleteproject(request, project_id):
     Project.objects.filter(id=project_id).delete()
     return redirect('frontend:manageprojects')
-
+@login_required
 def addproject(request):
     form = EditProjectForm(request.POST or None)
     if form.is_valid():
@@ -319,27 +319,41 @@ def addproject(request):
         return redirect('frontend:manageprojects')
     return render(request, 'frontend/recruiter/addproject.html',
                   { 'form': form})
+
+@login_required
 def edittransactions(request, transaction_id):
     transaction = Transaction.objects.get(id=transaction_id)
     candidates =Candidate.objects.filter(transaction_id=transaction_id)
     return render(request, 'frontend/recruiter/edittransaction.html',{'transaction':transaction,'candidates':candidates})
-
+@login_required
 def deletetransaction(request,transaction_id):
     Transaction.objects.filter(id=transaction_id).delete()
     Candidate.objects.filter(transaction_id=transaction_id).delete()
     return redirect('frontend:managetransactions')
-
+@login_required
 def buildproject(request):
     return render(request, 'classroom/students/worldprojects.html')
-
+@login_required
 def calltoapply(request):
     opportunities = OpenCall.objects.all()
     qualifys = Applications.objects.filter(candidate=request.user)
     student = Student.objects.get(user_id=request.user.id)
+    passedquizz = TakenQuiz.objects.filter(score__gte=50).filter(student_id=student)
 
+    allsubjectspassed = []
+    for d in passedquizz:
+        allsubjectspassed.append(d.quiz.subject)
+
+    uniquesubjects = list(set(allsubjectspassed))
+    uniquelangs=[]
+    langs = {}
+    for unique in uniquesubjects:
+        izzes = TakenQuiz.objects.filter(quiz__subject_id=unique.id).filter(student_id=student)
+
+        for i in izzes:
+            langs[i.quiz.subject.name] = i.quiz.subject.name
     original =[]
     taken = []
-
     for oppo in opportunities:
         original.append(oppo.transaction.id)
     for qualify in qualifys:
@@ -354,8 +368,9 @@ def calltoapply(request):
         untakenopportunities.append(untakentrans.id)
 
 
-    return render(request, 'classroom/students/opencalls.html',{'opportunities':opportunities,'qualifys':qualifys,'a':original,'taken':taken,'untaken':untaken})
-
+    return render(request, 'classroom/students/opencalls.html',{'opportunities':opportunities,
+                                                                'qualifys':qualifys,'a':original,'taken':taken,'untaken':untaken,'langs':langs})
+@login_required
 def apply(request,opportunity_id):
     language =OpenCall.objects.get(transaction=opportunity_id)
     student = Student.objects.get(user_id=request.user.id)
@@ -374,15 +389,20 @@ def apply(request,opportunity_id):
         for paz in blu:
             doublequizzes.append(paz.score)
 
-        if pa.name == language.transaction.framework.language.name or \
-                pa.name == language.transaction.framework.name:  #TODO: let it be explcitly for framework if pa.name==language.project.framework
-            qualifiedcandidate = Applications(recruiter=language.recruiter,transaction=language.transaction,
-                                              project=language.project,candidate=request.user,stage='application sent',score=max(doublequizzes))
+
+        if pa.name == language.transaction.framework.language.name or  pa.name == language.transaction.framework.name:  #TODO: let it be explcitly for framework if pa.name==language.project.framework
+            qualifiedcandidate = Applications(recruiter=language.recruiter,transaction=language.transaction,project=language.project,candidate=request.user,stage='application sent',score=max(doublequizzes))
+
             qualifiedcandidate.save()
+            messages.success(request, 'Profile details updated.')
+
+        else:
+            messages.warning(request, 'Your account expires in three days.')
+
 
 
     return redirect('frontend:calltoapply')
-
+@login_required
 def opencalltracker(request,trans_id):
 
     candidates = Applications.objects.filter(transaction=trans_id).order_by('-score')

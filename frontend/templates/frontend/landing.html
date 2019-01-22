@@ -93,8 +93,15 @@ Hire for skill
                 <div class="col">
                     <h5 class="card-title" style="margin-top: 1em">Screening</h5>
                     <p class="card-text ">Our testing platform helps you validate the coding skills and competency of Programmers.</p>
+                    {% if request.user.profile.user_type == 'developer' %}
+                        <a class="btn theme--dark primary mt-3 " style="border-radius: 0;color: white" onclick="alert('available only for recruiters')">Start testing</a>
+                    {% elif request.user.profile.user_type == 'recruiter' %}
+                        <a class="btn theme--dark primary mt-3 " style="border-radius: 0;color: white" href="{% url 'frontend:index' %}">Start testing</a>
+                    {% else %}
+                        <a class="btn theme--dark primary mt-3 " style="border-radius: 0;color: white" href="{% url 'account_login' %}">Start testing</a>
 
-                    <a class="btn theme--dark primary mt-3 " style="border-radius: 0;color: white" href="{% url 'account_login' %}">Start testing</a>
+                    {% endif %}
+
 
                     <p></p>
                 </div>
@@ -117,7 +124,14 @@ Hire for skill
                     <p class="card-text">Get quick access to a pool of tested and certified Programmers
                             based on your job requirement.</p>
 
-                    <a class="btn theme--dark primary  mt-3 " style="border-radius: 0;color: white" href="/transactions/sourcing/">Start sourcing</a>
+                    {% if request.user.profile.user_type == 'developer' %}
+                        <a class="btn theme--dark primary mt-3 " style="border-radius: 0;color: white" onclick="alert('available only for recruiters')">Start sourcing</a>
+                    {% elif request.user.profile.user_type == 'recruiter' %}
+                        <a class="btn theme--dark primary mt-3 " style="border-radius: 0;color: white" href="{% url 'transactions:sourcing' %}">Start sourcing</a>
+                    {% else %}
+                        <a class="btn theme--dark primary mt-3 " style="border-radius: 0;color: white" href="{% url 'account_login' %}">Start sourcing</a>
+
+                    {% endif %}
 
                     <p></p>
                 </div>
