@@ -9,7 +9,9 @@ from projects.models import Project, Framework
 from transactions.models import Transaction, Candidate,OpenCall
 from transactions.forms import CandidateForm, SourcingForm
 from invitations.models import Invitation
-
+from django.core import mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 from django.core.mail import send_mail, BadHeaderError
 # payments view
@@ -133,23 +135,21 @@ def sourcing(request):
     if request.method == 'POST':
         sourcing_form = SourcingForm(request.POST)
         if sourcing_form.is_valid():
+            user = request.user
             subject = 'Sourcing Request'
-            from_email = sourcing_form.cleaned_data['email_address']
-            data = ""
-            data += sourcing_form.cleaned_data['country']
-            data += sourcing_form.cleaned_data['email_address']
-            data += sourcing_form.cleaned_data['name']
-            # data += str(sourcing_form.cleaned_data['phone_number'])
-            data += sourcing_form.cleaned_data['company_name']
-            data += str(sourcing_form.cleaned_data['job_role'])
-            data += str(sourcing_form.cleaned_data['contract'])
-            data += sourcing_form.cleaned_data['tech_stack']
-            data += str(sourcing_form.cleaned_data['number_of_devs_needed'])
-            data += str(sourcing_form.cleaned_data['renumeration_in_dollars'])
-
+            from_email = 'codeln@codeln.com'
+            jobrole = str(sourcing_form.cleaned_data['job_role'])
+            contract = str(sourcing_form.cleaned_data['contract'])
+            techstack = sourcing_form.cleaned_data['tech_stack']
+            devsneeded = str(sourcing_form.cleaned_data['number_of_devs_needed'])
+            pay = str(sourcing_form.cleaned_data['renumeration_in_dollars'])
+            html_message = render_to_string('invitations/email/sourcing.html', {'jobrole': jobrole,'contract':contract,'techstack':techstack
+                                                                                ,'devsneeded':devsneeded,'pay':pay,'user':user})
+            plain_message = strip_tags(html_message)
+            from_email = 'noreply@sandbox3921b04244fe414a8168eb9e0bc3e8ae.mailgun.org'
 
             try:
-                send_mail(subject, data, from_email, ['elohor@codeln.com'])
+                mail.send_mail(subject, plain_message, from_email, ['elohor@codeln.com'], html_message=html_message)
             except BadHeaderError:
                 print('invalid error')
             return redirect(reverse('transactions:success'))

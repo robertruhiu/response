@@ -38,13 +38,9 @@ def engagement():
 class SourcingForm(Form):
     job_role = forms.ChoiceField(choices=job_roles)
     contract = forms.ChoiceField(choices=engagement, required=True)
-    email_address = forms.EmailField(required=True)
-    # phone_number = PhoneNumberField()
-    name = forms.CharField(max_length=255, required=True)
-    company_name = forms.CharField(max_length=255, required=True)
     tech_stack = forms.CharField(max_length=255, required=True)
     number_of_devs_needed = forms.IntegerField(required=True)
     renumeration_in_dollars = forms.CharField(required=True)
-    country = forms.CharField(required=True)
+
 
 

@@ -87,22 +87,44 @@
 
 
                 <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Name</label>
+                        <input class="form-control" type="text" placeholder="{{ request.user.first_name|capfirst }} {{ request.user.last_name|capfirst }}" readonly>
 
-                    {% bootstrap_field sourcing_form.name placeholder=False %}
+
+                    </div>
+
+
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6">
+                     <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
 
-                    {% bootstrap_field sourcing_form.email_address placeholder=False %}
+                        <input class="form-control" type="text" placeholder="{{ request.user.email }} " readonly>
+
+                    </div>
+
+
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6">
+                     <div class="form-group">
+                        <label for="exampleInputEmail1">Company name</label>
+                        <input class="form-control" type="text" placeholder="{{ request.user.profile.company|capfirst }} " readonly>
 
-                    {% bootstrap_field sourcing_form.company_name placeholder=False %}
+                    </div>
+
+
                 </div>
 
 
                 <div class="col-lg-4 col-md-6 col-sm-6">
+                     <div class="form-group">
+                        <label for="exampleInputEmail1">Country</label>
+                        <input class="form-control" type="text" placeholder="{{ request.user.profile.country.name|capfirst }}" readonly>
 
-                    {% bootstrap_field sourcing_form.country placeholder=False %}
+                    </div>
+
+
                 </div>
             </div>
 
