@@ -51,14 +51,17 @@ developers
                             Sidebar menu options
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/">Dashboard</a>
                             <a class="dropdown-item" href="{% url 'frontend:inprogress' user.id %}">Ongoing Projects</a>
+                            <a class="dropdown-item" href="{% url 'students:tests' user.id %}">Skill assessment</a>
+                            <a class="dropdown-item" href="{% url 'frontend:calltoapply' %}">Companies recruiting</a>
                             <a class="dropdown-item" href="/update_profile/">My profile</a>
                         </div>
                     </li>
                     {% if request.user.is_authenticated %}
 
                         <li class="nav-item">
-                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Log out</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
@@ -81,8 +84,8 @@ developers
 
 
      <div class="alert alert-primary " role="alert">
-         <p> Welcome to Codeln.
-        Complete  a skill assessment to enable you to build real world projects and get job referral's.These steps are mandatory to ensure a job referal</p>
+         <p>Welcome to CodeLn, please complete a Skills Assessment Test to enable you build Projects and get Job Referrals.
+             Please note that these steps are compulsory for proper job matching.</p>
     </div>
 
 
@@ -102,7 +105,7 @@ developers
 
                         <div class="card-body">
 
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Skill assessment</h6>
+                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Skills Assessment</h6>
                             <p class="text-center">Step 1</p>
 
 
@@ -129,7 +132,7 @@ developers
 
                         <div class="card-body">
 
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Build a real world project</h6>
+                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Build a Project</h6>
                             <p class="text-center">Step 2</p>
 
 
@@ -156,7 +159,7 @@ developers
 
                         <div class="card-body">
 
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Build a real world project</h6>
+                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Build a Project</h6>
                             <p class="text-center">Step 2</p>
 
 
@@ -184,7 +187,7 @@ developers
 
                         <div class="card-body">
 
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Job referral's</h6>
+                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Job Referrals</h6>
                             <br>
                             <br>
 
@@ -209,7 +212,7 @@ developers
 
                         <div class="card-body">
 
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Companies recruiting</h6>
+                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Companies Recruiting</h6>
 
 
 

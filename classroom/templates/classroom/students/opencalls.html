@@ -48,7 +48,10 @@
                             Sidebar menu options
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/">Dashboard</a>
                             <a class="dropdown-item" href="{% url 'frontend:inprogress' user.id %}">Ongoing Projects</a>
+                            <a class="dropdown-item" href="{% url 'students:tests' user.id %}">Skill assessment</a>
+                            <a class="dropdown-item" href="{% url 'frontend:calltoapply' %}">Companies recruiting</a>
                             <a class="dropdown-item" href="/update_profile/">My profile</a>
                         </div>
                     </li>
@@ -139,7 +142,7 @@
                       <td class="text-center">{{ opportunity.recruiter.profile.country.name }}</td>
                       <td class="text-center">
                           <a style="text-decoration: none" href="{% url 'students:tests' %}">
-                              {{ opportunity.transaction.framework.language }}
+                              {{ opportunity.transaction.framework.language|capfirst }}
                           </a>
 
                       </td>

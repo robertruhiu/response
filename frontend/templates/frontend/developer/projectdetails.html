@@ -49,8 +49,11 @@ project details
                         <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Sidebar menu options
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/">Dashboard</a>
                             <a class="dropdown-item" href="{% url 'frontend:inprogress' user.id %}">Ongoing Projects</a>
+                            <a class="dropdown-item" href="{% url 'students:tests' user.id %}">Skill assessment</a>
+                            <a class="dropdown-item" href="{% url 'frontend:calltoapply' %}">Companies recruiting</a>
                             <a class="dropdown-item" href="/update_profile/">My profile</a>
                         </div>
                     </li>
