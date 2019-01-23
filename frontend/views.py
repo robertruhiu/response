@@ -207,7 +207,10 @@ def dev(request):
 def competitions(request):
     return render(request, 'frontend/recruiter/competitions.html')
 
+def takenquizzes(request):
+    allquizzes = TakenQuiz.objects.all()
 
+    return render(request, 'frontend/recruiter/takenquizzes.html',{'allquizzes':allquizzes})
 
 def howitworks(request):
     return render(request, 'frontend/how.html')
