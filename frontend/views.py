@@ -81,7 +81,7 @@ def profile_type_selection(request, current_profile):
         profile_type_form = ProfileTypeForm()
     return render(request, 'frontend/profile_type_selection.html', {'profile_type_form': profile_type_form})
 
-@login_required
+
 def index(request):
     if request.user.is_authenticated:
         current_profile = request.user.profile
