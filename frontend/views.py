@@ -204,6 +204,10 @@ def pricing(request):
 def dev(request):
     return render(request, 'frontend/dev.html')
 
+def competitions(request):
+    return render(request, 'frontend/recruiter/competitions.html')
+
+
 
 def howitworks(request):
     return render(request, 'frontend/how.html')

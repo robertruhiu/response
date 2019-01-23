@@ -138,6 +138,7 @@ nav ul li a{color:black;padding:0 30px;}
     background-size: cover;
 }
 .jumbotrondev{
+
     border-radius: 0;
     background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85)),
     url(/static/frontend/images/dev.jpg);
@@ -146,7 +147,19 @@ nav ul li a{color:black;padding:0 30px;}
     color:white !important;
     background-size: cover;
 }
+.jumbotroncompetions{
+    display:block;
+    top:0;
+    transition:.3s cubic-bezier(.25,.8,.5,1);
 
+    border-radius: 0;
+    background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85)),
+    url(/static/frontend/images/how/mest.png);
+
+
+    color:white !important;
+    background-size: cover;
+}
 .jumbotron2{
     border-radius: 0;
     background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));
