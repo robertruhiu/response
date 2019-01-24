@@ -23,6 +23,7 @@ class Transaction(models.Model):
     completed = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
     framework = models.ForeignKey(Framework, on_delete=models.CASCADE)
+    deadline = models.CharField(blank=True, max_length=100)
 
     def allcandidates(self):
         candidates = Candidate.objects.filter(transaction=self.id)
@@ -57,7 +58,7 @@ class OpenCall(models.Model):
     recruiter =models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project,on_delete=models.CASCADE)
     transaction =models.ForeignKey(Transaction, on_delete=models.CASCADE)
-    deadline = models.CharField(blank=True,max_length=100)
+
 
 
 class Applications(models.Model):
@@ -68,4 +69,4 @@ class Applications(models.Model):
     stage = models.CharField(default='requirements met', max_length=100)
     transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
     score = models.IntegerField()
-    deadline=models.CharField(blank=True,max_length=100)
+
