@@ -23,7 +23,7 @@ class Transaction(models.Model):
     completed = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
     framework = models.ForeignKey(Framework, on_delete=models.CASCADE)
-    deadline = models.CharField(blank=True, max_length=100)
+
 
     def allcandidates(self):
         candidates = Candidate.objects.filter(transaction=self.id)
