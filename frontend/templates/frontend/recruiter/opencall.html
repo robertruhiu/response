@@ -92,18 +92,19 @@ application tracker
                 </div>
             </div>
 
+
         </div>
 
         <div class="col-4 d-none d-lg-block">
-
+            <a href="{% url 'frontend:tracker' trans_id %}">
             <div class="card trackercard ">
                 <div class="card-body">
                     <h5 class="card-title">Project stage</h5>
-                    <p class="card-text">0/10 picked</p>
+                    <p class="card-text">{{ picked.count }} picked</p>
 
                 </div>
             </div>
-
+            </a>
         </div>
 
 
@@ -146,10 +147,15 @@ application tracker
             <td>
                 {{ candidate.score }}
             </td>
+
             <td>
-                <a>
+                {% if candidate.stage == 'application sent' %}
+                <a style="text-decoration: none" href="{% url 'frontend:pickcandidates' trans_id candidate.candidate_id %}">
                     <span class="btn-sm btn-primary">Pick for next stage</span>
                 </a>
+                    {% elif candidate.stage == 'accepted' %}
+                    <span class="btn-sm btn-primary" style="background-color: #b627a1">Picked</span>
+                {% endif %}
             </td>
 
 

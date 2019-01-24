@@ -157,10 +157,12 @@ def invites(request):
 
 @login_required
 def projectdetails(request, id):
+
     projectinvite = Projectinvite()
+    opencall =Applications.objects.get(candidate_id=request.user.id)
     project = candidatesprojects.objects.get(id=id)
     return render(request, 'frontend/developer/projectdetails.html',
-                  {'project': project, 'projectinvite': projectinvite})
+                  {'project': project, 'projectinvite': projectinvite,'opencall':opencall})
 
 
 @login_required
@@ -178,7 +180,7 @@ def projectinvites(request, transaction_id, candidate_id):
 
     acceptedinvite = candidatesprojects(transaction=trans_id, candidate=currentcandidate, stage='invite-accepted')
     acceptedinvite.save()
-    return render(request, 'frontend/developer/developer.html')
+    return redirect('frontend:buildproject')
 
 @login_required
 def update_candidateprojects(request, candidateproject_id, transaction_id):
@@ -376,7 +378,7 @@ def calltoapply(request):
 
 
     return render(request, 'classroom/students/opencalls.html',{'opportunities':opportunities,
-                                                                'qualifys':qualifys,'a':original,'taken':taken,'untaken':untaken,'langs':langs})
+                                                                'qualifys':qualifys,'a':original,'taken':taken,'untaken':untaken,'langs':langs,'qualify':qualifys})
 @login_required
 def apply(request,opportunity_id):
     language =OpenCall.objects.get(transaction=opportunity_id)
@@ -398,21 +400,30 @@ def apply(request,opportunity_id):
 
 
         if pa.name == language.transaction.framework.language.name or  pa.name == language.transaction.framework.name:  #TODO: let it be explcitly for framework if pa.name==language.project.framework
-            qualifiedcandidate = Applications(recruiter=language.recruiter,transaction=language.transaction,project=language.project,candidate=request.user,stage='application sent',score=max(doublequizzes))
+            qualifiedcandidate = Applications(opencall=language,recruiter=language.recruiter,transaction=language.transaction,project=language.project,candidate=request.user,stage='application sent',score=max(doublequizzes))
 
             qualifiedcandidate.save()
-            messages.success(request, 'Profile details updated.')
 
-        else:
-            messages.warning(request, 'Your account expires in three days.')
 
 
 
     return redirect('frontend:calltoapply')
 @login_required
 def opencalltracker(request,trans_id):
+    candidatespicked = Candidate.objects.filter(transaction_id=trans_id)
 
     candidates = Applications.objects.filter(transaction=trans_id).order_by('-score')
-    return render(request,'frontend/recruiter/opencall.html',{'candidates':candidates})
+    return render(request,'frontend/recruiter/opencall.html',{'candidates':candidates,'trans_id':trans_id,'picked':candidatespicked})
+@login_required
+def pickcandidates(request,trans_id,candidate_id):
+    transaction =Transaction.objects.get(id=trans_id)
+    application= Applications.objects.filter(transaction = trans_id).filter(candidate_id=candidate_id).get()
+    application.stage = 'accepted'
+    newcandidate=Candidate(email=application.candidate.email,first_name=application.candidate.first_name,last_name=application.candidate.last_name,transaction=transaction)
+    newcandidate.save()
+    application.save()
+    return HttpResponseRedirect('/opencalltracker/%s' % trans_id)
+
+
 
 

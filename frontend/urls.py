@@ -6,7 +6,7 @@ from frontend.views import home,activity,tracker,update_candidateprojects,\
     projectdetails,pendingproject,terms,dev,pricing,howitworks,privacy,\
     report,credits,onboarddevs,onboardrecruiters,seedevs,seerecruiters,manageprojects,managetransactions,\
     editproject,deleteproject,addproject,edittransactions\
-    ,deletetransaction,buildproject,calltoapply,apply,opencalltracker,competitions,takenquizzes
+    ,deletetransaction,buildproject,calltoapply,apply,opencalltracker,competitions,takenquizzes,pickcandidates
 from frontend.tasks import reminderforprofiledevs
 from accounts.views import update_profile
 
@@ -51,5 +51,6 @@ urlpatterns = [
     path('competitions',competitions,name='competitions'),
     path('apply/<int:opportunity_id>',apply,name='apply'),
     path('opencalltracker/<int:trans_id>',opencalltracker,name='opencalltracker'),
+    path('pickcandidates/<int:trans_id>/<int:candidate_id>',pickcandidates,name='pickcandidates'),
     path('reminderforprofiledevs',reminderforprofiledevs,name='reminderforprofiledevs')
 ]

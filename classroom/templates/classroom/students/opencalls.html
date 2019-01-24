@@ -111,23 +111,29 @@
   <tbody>
   {% if taken  %}
       {% for x in taken %}
-          {% for  opportunity in opportunities %}
-              {% if opportunity.transaction.id == x %}
+
+              {% for qualify in qualifys %}
+              {% if qualify.transaction.id == x %}
                   <tr>
 
-                      <th scope="row">{{ opportunity.recruiter.profile.company|capfirst }}</th>
+                      <th scope="row">{{ qualify.recruiter.profile.company|capfirst }}</th>
 
-                      <td class="text-center">{{ opportunity.recruiter.profile.country.name }}</td>
-                      <td class="text-center">{{ opportunity.transaction.framework.language|capfirst }}</td>
-                      <td class="text-center">{{ opportunity.transaction.framework|capfirst }}</td>
-                      <td class="text-center"><span class="badge badge-success">requirements met</span></td>
+                      <td class="text-center">{{ qualify.recruiter.profile.country.name }}</td>
+                      <td class="text-center">{{ qualify.transaction.framework.language|capfirst }}</td>
+                      <td class="text-center">{{ qualify.transaction.framework|capfirst }}</td>
 
-                      <td class="text-center"><span class="btn-sm btn-success"> Application sent </span></td>
-
+                      {% if qualify.stage == 'application sent' %}
+                          <td class="text-center"><span class="badge badge-success">requirements met</span></td>
+                      <td class="text-center"><span class="btn-sm btn-success"> {{ qualify.stage }} </span></td>
+                          {% elif qualify.stage == 'accepted' %}
+                          <td class="text-center"><span class="badge badge-success" style="background-color: #b627a1">requirements met</span></td>
+                          <td class="text-center"><span class="btn-sm btn-success" style="background-color: #b627a1"> {{ qualify.stage }} </span></td>
+                          {% endif %}
                   </tr>
               {% endif %}
+                  {% endfor %}
           {% endfor %}
-      {% endfor %}
+
   {% endif %}
 
 
