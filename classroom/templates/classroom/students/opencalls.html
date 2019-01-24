@@ -86,7 +86,11 @@
         <strong>
             To apply for any of the positions below, please take the specified Skill Assessment Test,
             note that you must exceed the passmark (50%) for the application to be accepted.
+            <br>
+            PS. The project framework indicated is the one that will be used
+            to build assigned project if your application is successful
         </strong>
+
 
     </div>
 
@@ -98,7 +102,8 @@
 
         <th scope="col">Company </th>
         <th class="text-center" scope="col">Country </th>
-        <th class="text-center" scope="col">Test</th>
+        <th class="text-center" scope="col">Test to take</th>
+        <th class="text-center" scope="col">Project framework</th>
         <th class="text-center" scope="col">Requirements status </th>
         <th class="text-center" scope="col">Application stage</th>
     </tr>
@@ -114,10 +119,9 @@
 
                       <td class="text-center">{{ opportunity.recruiter.profile.country.name }}</td>
                       <td class="text-center">{{ opportunity.transaction.framework.language|capfirst }}</td>
-                      <td class="text-center">
-                          <span class="badge badge-success">Application sent</span>
+                      <td class="text-center">{{ opportunity.transaction.framework|capfirst }}</td>
+                      <td class="text-center"><span class="badge badge-success">requirements met</span></td>
 
-                      </td>
                       <td class="text-center"><span class="btn-sm btn-success"> Application sent </span></td>
 
                   </tr>
@@ -146,6 +150,7 @@
                           </a>
 
                       </td>
+                  <td class="text-center">{{ opportunity.transaction.framework|capfirst }}</td>
 
 
                           {% if langs %}
