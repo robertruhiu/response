@@ -19,12 +19,6 @@ python manage.py migrate frontend
 7.python manage.py runserver
 
 
-## Management links
-/admin to database
-/admin/doc to project documentation
 
-## Database snapshot
-
-<img src="https://i.ibb.co/DfFzwky/db.png" >
 
 
