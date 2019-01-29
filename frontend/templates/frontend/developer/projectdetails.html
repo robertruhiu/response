@@ -106,11 +106,15 @@ project details
         <div class="col-lg-12 col-sm-12 col-md-12 ">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" style="padding: 4px" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Project details</a>
+                    <a class="nav-link active"  id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Project details</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" style="padding: 4px" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">IDE guide(Must read) </a>
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Project resources</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab"  data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">IDE guide(Must read) </a>
+                </li>
+
 
             </ul>
         </div>
@@ -123,60 +127,20 @@ project details
 
                             <div class="card5" style="text-align: left">
                                 <div class="card-body">
-                                    <div id="carouselExampleSlidesOnly" style="margin-left: auto;margin-right: auto" class="carousel slide" data-ride="carousel">
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active">
-                                                <img class="d-block w-100" src="{{project.transaction.project.projectimage1}}" alt="First slide">
-                                            </div>
-                                           {% if project.transaction.project.projectimage2 %}
-                                               <div class="carousel-item">
-                                                   <img class=" img-fluid"  src="{{project.transaction.project.projectimage2}}" alt="Second slide">
-                                               </div>
-                                           {% endif %}
-                                            {% if project.transaction.project.projectimage3 %}
-                                                <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.transaction.project.projectimage3}}" alt="Third slide">
-                                                </div>
-                                            {% endif %}
-                                            {% if project.transaction.project.projectimage4 %}
-                                                <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.transaction.project.projectimage4}}" alt="Third slide">
-                                                </div>
-                                            {% endif %}
-                                            {% if project.transaction.project.projectimage5 %}
-                                                <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.transaction.projectimage5}}" alt="Third slide">
-                                                </div>
-                                            {% endif %}
-                                            {% if project.transaction.project.projectimage6 %}
-                                                <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.transaction.project.projectimage6}}" alt="Third slide">
-                                                </div>
-                                            {% endif %}
-                                            {% if project.transaction.project.projectimage7 %}
-                                                <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.transaction.project.projectimage7}}" alt="Third slide">
-                                                </div>
-                                            {% endif %}
-                                            {% if project.transaction.project.projectimage8 %}
-                                                <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.transaction.project.projectimage8}}" alt="Third slide">
-                                                </div>
-                                            {% endif %}
-                                            {% if project.transaction.project.projectimage9 %}
-                                                <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.transaction.project.projectimage9}}" alt="Third slide">
-                                                </div>
-                                            {% endif %}
-                                            {% if project.transaction.project.projectimage10 %}
-                                                <div class="carousel-item">
-                                                    <img class="img-fluid"  src="{{project.transaction.project.projectimage10}}" alt="Third slide">
-                                                </div>
-                                            {% endif %}
-                                        </div>
+                                {% if project.transaction.project.hasvideo  %}
+                                     <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item" src="{{ project.transaction.project.projectimage2 }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </div>
 
-                                    <h5 class="card-subtitle mb-2 ">{{ project.transaction.project.name }}</h5>
+
+                                    {% else %}
+                                    <img class="img-fluid" src="{{project.transaction.project.projectimage1}}">
+
+
+
+                                {% endif %}
+
+                                    <h5 class="card-subtitle mb-2 mt-2 ">{{ project.transaction.project.name }}</h5>
                                     <hr>
 
                                     <p class="card-text ">
@@ -289,6 +253,79 @@ project details
                     </div>
 
                 </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <div class="row">
+
+
+                {% if project.transaction.project.projectimage1 %}
+                    <div class="col-4">
+                        <img class=" img-fluid"  src="{{project.transaction.project.projectimage1}}">
+                    </div>
+
+
+                {% endif %}
+            {% if project.transaction.project.hasvideo == False %}
+                {% if project.transaction.project.projectimage2 %}
+                    <div class="col-4">
+                        <img class=" img-fluid"  src="{{project.transaction.project.projectimage2}}">
+                    </div>
+
+                {% endif %}
+
+            {% endif %}
+
+            {% if project.transaction.project.projectimage3 %}
+                <div class="col-4">
+                        <img class=" img-fluid"  src="{{project.transaction.project.projectimage3}}">
+                    </div>
+
+                {% endif %}
+            {% if project.transaction.project.projectimage4 %}
+                <div class="col-4">
+                        <img class=" img-fluid"  src="{{project.transaction.project.projectimage4}}">
+                    </div>
+
+                {% endif %}
+            {% if project.transaction.project.projectimage5 %}
+                <div class="col-4">
+                        <img class=" img-fluid"  src="{{project.transaction.project.projectimage5}}">
+                    </div>
+
+                {% endif %}
+            {% if project.transaction.project.projectimage6 %}
+                <div class="col-4">
+                        <img class=" img-fluid"  src="{{project.transaction.project.projectimage6}}">
+                    </div>
+
+                {% endif %}
+            {% if project.transaction.project.projectimage7 %}
+                <div class="col-4">
+                        <img class=" img-fluid"  src="{{project.transaction.project.projectimage7}}">
+                    </div>
+
+                {% endif %}
+            {% if project.transaction.project.projectimage8 %}
+                <div class="col-4">
+                       <img class=" img-fluid"  src="{{project.transaction.project.projectimage8}}">
+                    </div>
+
+                {% endif %}
+            {% if project.transaction.project.projectimage9 %}
+                <div class="col-4">
+                        <img class=" img-fluid"  src="{{project.transaction.project.projectimage9}}">
+                    </div>
+
+                {% endif %}
+            {% if project.transaction.project.projectimage10 %}
+                <div class="col-4">
+                        <img class=" img-fluid"  src="{{project.transaction.project.projectimage10}}">
+                    </div>
+
+                {% endif %}
+            </div>
+
+            </div>
+
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <div class="row" style="margin-top: 3%">
                         <div class="col-lg-3 " style="position: sticky" >

@@ -157,9 +157,9 @@ def invites(request):
 
 @login_required
 def projectdetails(request, id):
-
+    transaction=candidatesprojects.objects.get(id=id)
     projectinvite = Projectinvite()
-    opencall =Applications.objects.get(candidate_id=request.user.id)
+    opencall =Applications.objects.filter(candidate_id=request.user.id).filter(transaction_id=transaction.transaction_id).get()
     project = candidatesprojects.objects.get(id=id)
     return render(request, 'frontend/developer/projectdetails.html',
                   {'project': project, 'projectinvite': projectinvite,'opencall':opencall})

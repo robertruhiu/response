@@ -92,7 +92,7 @@ Project in progress
            <a href="{% url 'frontend:projectdetails' project.id %}" style="text-decoration: none;color: black">
                 <div class="card" style="width: 18rem;height: 100%">
 
-                    <img class="card-img-top" src="{{ project.transaction.project.projectimage1 }}" alt="Card image cap">
+                    <img class=" img-fluid" src="{{ project.transaction.project.projectimage1 }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{ project.transaction.project.name }}</h5>
                         <p class="card-text">Company name : {{ project.transaction.user.profile.company }}</p>

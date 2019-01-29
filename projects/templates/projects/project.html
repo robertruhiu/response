@@ -88,7 +88,8 @@
 
 
             <div class="col-lg-7 col-md-7" >
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            {% if project.hasvideo == False %}
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                     {% if project.projectimage2 %}
@@ -98,6 +99,7 @@
                         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                     {% endif %}
                 </ol>
+
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img class="d-block w-100" src="{{project.projectimage1}}" alt="First slide">
@@ -122,6 +124,14 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+                {% else %}
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="{{ project.projectimage2 }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            {% endif %}
+
+
+
                 <div class="card" style="border-radius: 0">
 
 
@@ -130,9 +140,6 @@
                             <span class="badge badge-primary">Level : {{ project.level }}</span>
                         </h6>
                         <p> {{ project.description }}</p>
-
-
-
                     </div>
                 </div>
 

@@ -39,10 +39,11 @@ class EditProjectForm(forms.ModelForm):
     requirement9 = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}), required=False)
     requirement10 = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}), required=False)
 
+
     class Meta:
         model = Project
 
         fields = ['name', 'description', 'level', 'projectimage1', 'projectimage2', 'projectimage3', 'projectimage4',
                   'projectimage5', 'projectimage6', 'projectimage7', 'projectimage8', 'projectimage9', 'projectimage10',
                   'requirement1', 'requirement2', 'requirement3', 'requirement4', 'requirement5', 'requirement6',
-                  'requirement7', 'requirement8', 'requirement9', 'requirement10', 'framework','devtype','projecttype','owner','brief']
+                  'requirement7', 'requirement8', 'requirement9', 'requirement10', 'framework','devtype','projecttype','owner','brief','hasvideo']
