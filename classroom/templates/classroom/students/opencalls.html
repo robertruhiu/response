@@ -49,7 +49,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/">Dashboard</a>
-                            <a class="dropdown-item" href="{% url 'frontend:inprogress' user.id %}">Ongoing Projects</a>
+                            <a class="dropdown-item" href="{% url 'frontend:buildproject' %}">Build a Project</a>
                             <a class="dropdown-item" href="{% url 'students:tests' %}">Skill assessment</a>
                             <a class="dropdown-item" href="{% url 'frontend:calltoapply' %}">Companies recruiting</a>
                             <a class="dropdown-item" href="/update_profile/">My profile</a>
@@ -126,7 +126,7 @@
                           <td class="text-center"><span class="badge badge-success">requirements met</span></td>
                       <td class="text-center"><span class="btn-sm btn-success"> {{ qualify.stage }} </span></td>
                           {% elif qualify.stage == 'accepted' %}
-                          <td class="text-center"><span class="badge badge-success" style="background-color: #b627a1">requirements met</span></td>
+                          <td class="text-center"><span class="badge badge-success" style="background-color: #b627a1">check invitations under build a project</span></td>
                           <td class="text-center"><span class="btn-sm btn-success" style="background-color: #b627a1"> {{ qualify.stage }} </span></td>
                           {% endif %}
                   </tr>

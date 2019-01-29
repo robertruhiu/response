@@ -50,7 +50,7 @@ invites
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/">Dashboard</a>
-                            <a class="dropdown-item" href="{% url 'frontend:inprogress' user.id %}">Ongoing Projects</a>
+                            <a class="dropdown-item" href="{% url 'frontend:buildproject' %}">Build a Project</a>
                             <a class="dropdown-item" href="{% url 'students:tests' %}">Skill assessment</a>
                             <a class="dropdown-item" href="{% url 'frontend:calltoapply' %}">Companies recruiting</a>
                             <a class="dropdown-item" href="/update_profile/">My profile</a>
@@ -93,7 +93,7 @@ invites
                 <div class="card-body">
                     <div class="card-title">Project name: {{ projectinvite.transaction.project.name }} </div>
 
-                    <p class="card-text">Framework : {{ projectinvite.transaction.project.framework.name }}</p>
+                    <p class="card-text">Framework : {{ projectinvite.transaction.framework }}</p>
                     <p class="card-text">Company name : {{ projectinvite.transaction.user.profile.company }}</p>
 
                 </div>

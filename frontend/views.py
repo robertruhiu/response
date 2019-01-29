@@ -416,12 +416,19 @@ def opencalltracker(request,trans_id):
     return render(request,'frontend/recruiter/opencall.html',{'candidates':candidates,'trans_id':trans_id,'picked':candidatespicked})
 @login_required
 def pickcandidates(request,trans_id,candidate_id):
+    candidate =User.objects.get(id=candidate_id)
     transaction =Transaction.objects.get(id=trans_id)
     application= Applications.objects.filter(transaction = trans_id).filter(candidate_id=candidate_id).get()
     application.stage = 'accepted'
     newcandidate=Candidate(email=application.candidate.email,first_name=application.candidate.first_name,last_name=application.candidate.last_name,transaction=transaction)
     newcandidate.save()
     application.save()
+    subject = 'Application Accepted'
+    html_message = render_to_string('invitations/email/opencallaccepted.html', {'dev': candidate,'company':application})
+    plain_message = strip_tags(html_message)
+    from_email = 'codeln@codeln.com'
+    to = candidate.email
+    mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
     return HttpResponseRedirect('/opencalltracker/%s' % trans_id)
 
 
