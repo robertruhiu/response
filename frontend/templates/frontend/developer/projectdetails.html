@@ -216,26 +216,35 @@ project details
                                 <div class="card-body">
 
                                     <h5 class="card-subtitle mb-2 text-muted">Project submission details</h5>
+                                <div class="alert alert-primary" role="alert">
+                                    Start project to see submission guidelines
+                                </div>
+
 
                                     <hr>
                                     {% if project.stage == 'project-in-progress' %}
-                                        <p>Deadline date</p>
 
                                         {% if opencall %}
-                                            email your repo link
+                                            <h6>Have you completed project?</h6>
+
+                                               <strong>Submit link of repository of your code.</strong>
+
+                                            <form action="{% url 'frontend:update_finishedopencall' project.id  project.transaction.id %}" method="post">
+                                                {% csrf_token %}
+                                                {% bootstrap_field form.repositorylink  show_label=False placeholder='repository link' %}
+                                                <div style="text-align: right">
+                                                    <button type="submit" class="btn btn-success">Submit</button>
+                                                </div>
+                                            </form>
 
                                             {% else %}
                                             <p>Coding area workspace or home</p>
-
-                                        {% endif %}
-
-
-
-                                        <h6>Have you completed project?</h6>
+                                            <h6>Have you completed project?</h6>
                                         <a href="/update_finished/{{ project.id }}/{{ project.transaction.id }}">
                                         <button class="btn btn-outline-success" style="border-radius: 0" type="submit">Finish Project</button>
                                         </a>
 
+                                        {% endif %}
                                     {% elif project.stage == 'invite-accepted' %}
                                         <a href="/update_candidateprojects/{{ project.id }}/{{ project.transaction.id }}">
                                         <button class="btn btn-outline-primary" style="border-radius: 0" type="submit">Start project</button>

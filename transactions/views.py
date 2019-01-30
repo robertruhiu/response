@@ -146,7 +146,7 @@ def sourcing(request):
             html_message = render_to_string('invitations/email/sourcing.html', {'jobrole': jobrole,'contract':contract,'techstack':techstack
                                                                                 ,'devsneeded':devsneeded,'pay':pay,'user':user})
             plain_message = strip_tags(html_message)
-            from_email = 'noreply@sandbox3921b04244fe414a8168eb9e0bc3e8ae.mailgun.org'
+            from_email = 'codeln@codeln.com'
 
             try:
                 mail.send_mail(subject, plain_message, from_email, ['elohor@codeln.com'], html_message=html_message)

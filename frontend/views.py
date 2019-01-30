@@ -14,7 +14,7 @@ from accounts.forms import ProfileTypeForm, DeveloperFillingDetailsForm, Recruit
 from transactions.models import Transaction, Candidate,OpenCall,Applications
 from invitations.models import Invitation
 from projects.models import Project, Framework
-from frontend.form import Projectinvite, EditProjectForm
+from frontend.form import Projectinvite, EditProjectForm,Submissions
 from frontend.models import candidatesprojects, devs, recruiters
 from classroom.models import TakenQuiz,Student
 
@@ -157,12 +157,13 @@ def invites(request):
 
 @login_required
 def projectdetails(request, id):
+    form=Submissions()
     transaction=candidatesprojects.objects.get(id=id)
     projectinvite = Projectinvite()
     opencall =Applications.objects.filter(candidate_id=request.user.id).filter(transaction_id=transaction.transaction_id).get()
     project = candidatesprojects.objects.get(id=id)
     return render(request, 'frontend/developer/projectdetails.html',
-                  {'project': project, 'projectinvite': projectinvite,'opencall':opencall})
+                  {'project': project, 'projectinvite': projectinvite,'opencall':opencall,'form':form})
 
 
 @login_required
@@ -197,7 +198,26 @@ def update_finished(request, candidateproject_id, transaction_id):
     candidatesproject.stage = 'project-completed'
     candidatesproject.save()
     return HttpResponseRedirect('/projectdetails/%s' % candidateproject_id)
+@login_required
+def update_finishedopencall(request, project_id, transaction_id):
+    if request.method == 'POST':
+        submission_form = Submissions(request.POST)
+        if submission_form.is_valid():
+            transaction = Transaction.objects.get(id=transaction_id)
 
+            subject = 'Project submission'
+            data=submission_form.cleaned_data['repositorylink']
+            html_message = render_to_string('invitations/email/submissions.html',
+                                            {'dev': request.user, 'transaction': transaction,'link':data})
+            plain_message = strip_tags(html_message)
+            from_email = 'codeln@codeln.com'
+            to = 'dennis@codeln.com'
+            mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+
+            candidatesproject = candidatesprojects.objects.get(id=project_id)
+            candidatesproject.stage = 'project-completed'
+            candidatesproject.save()
+    return HttpResponseRedirect('/projectdetails/%s' % project_id)
 
 def pricing(request):
     return render(request, 'frontend/pricing.html')

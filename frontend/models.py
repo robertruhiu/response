@@ -31,3 +31,4 @@ class recruiters(models.Model):
     lastname = models.CharField(null=True,max_length=30)
     company = models.CharField(null=True,max_length=200)
     companyurl = models.CharField(null=True,max_length=200)
+

@@ -12,6 +12,8 @@ class Projectinvite(forms.ModelForm):
     class Meta:
         model = candidatesprojects
         fields = ['stage', 'transaction', 'candidate']
+class Submissions(Form):
+    repositorylink=forms.CharField()
 
 
 class EditProjectForm(forms.ModelForm):
