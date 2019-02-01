@@ -7,7 +7,7 @@ from frontend.views import home,activity,tracker,update_candidateprojects,\
     report,credits,onboarddevs,onboardrecruiters,seedevs,seerecruiters,manageprojects,managetransactions,\
     editproject,deleteproject,addproject,edittransactions\
     ,deletetransaction,buildproject,calltoapply,apply,opencalltracker,competitions,takenquizzes,pickcandidates,update_finishedopencall
-from frontend.tasks import reminderforprofiledevs
+from frontend.tasks import reminderforprofiledevs,applyreminder,massmail
 from accounts.views import update_profile
 
 app_name = 'frontend'
@@ -54,5 +54,7 @@ urlpatterns = [
     path('apply/<int:opportunity_id>',apply,name='apply'),
     path('opencalltracker/<int:trans_id>',opencalltracker,name='opencalltracker'),
     path('pickcandidates/<int:trans_id>/<int:candidate_id>',pickcandidates,name='pickcandidates'),
-    path('reminderforprofiledevs',reminderforprofiledevs,name='reminderforprofiledevs')
+    path('reminderforprofiledevs',reminderforprofiledevs,name='reminderforprofiledevs'),
+    path('applyreminder', applyreminder, name='applyreminder'),
+    path('massmail', massmail, name='massmail')
 ]

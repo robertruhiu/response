@@ -231,6 +231,7 @@ project details
 
                                             <form action="{% url 'frontend:update_finishedopencall' project.id  project.transaction.id %}" method="post">
                                                 {% csrf_token %}
+                                                {% bootstrap_field form.demolink show_label=False placeholder='demo link' %}
                                                 {% bootstrap_field form.repositorylink  show_label=False placeholder='repository link' %}
                                                 <div style="text-align: right">
                                                     <button type="submit" class="btn btn-success">Submit</button>

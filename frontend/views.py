@@ -206,9 +206,10 @@ def update_finishedopencall(request, project_id, transaction_id):
             transaction = Transaction.objects.get(id=transaction_id)
 
             subject = 'Project submission'
-            data=submission_form.cleaned_data['repositorylink']
+            repo=submission_form.cleaned_data['repositorylink']
+            demo = submission_form.cleaned_data['demolink']
             html_message = render_to_string('invitations/email/submissions.html',
-                                            {'dev': request.user, 'transaction': transaction,'link':data})
+                                            {'dev': request.user, 'transaction': transaction,'demo':demo,'repo':repo})
             plain_message = strip_tags(html_message)
             from_email = 'codeln@codeln.com'
             to = 'dennis@codeln.com'

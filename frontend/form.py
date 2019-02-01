@@ -13,7 +13,8 @@ class Projectinvite(forms.ModelForm):
         model = candidatesprojects
         fields = ['stage', 'transaction', 'candidate']
 class Submissions(Form):
-    repositorylink=forms.CharField()
+    repositorylink=forms.CharField(required=True)
+    demolink=forms.CharField(required=True)
 
 
 class EditProjectForm(forms.ModelForm):
