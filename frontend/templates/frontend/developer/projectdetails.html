@@ -227,7 +227,7 @@ project details
                                         {% if opencall %}
                                             <h6>Have you completed project?</h6>
 
-                                               <strong>Submit link of repository of your code.</strong>
+                                               
 
                                             <form action="{% url 'frontend:update_finishedopencall' project.id  project.transaction.id %}" method="post">
                                                 {% csrf_token %}
