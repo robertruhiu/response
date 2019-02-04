@@ -209,8 +209,8 @@ window['_fs_namespace'] = 'FS';
 
 
 
-	var deadline = 7;
-     var totalTime = deadline*60*60*24;
+	var deadline = 1;
+     var totalTime = deadline*60;
 
    var halfTime = Math.floor(totalTime / 2);
 
@@ -218,11 +218,11 @@ window['_fs_namespace'] = 'FS';
       var now = $.now(); // First time on page
       Cookies.set('firstTime', now, {
          expires: 7,
-         path: '/'
+         path: '/projectdetails/{{project.transaction.project.id}}'
       });
       Cookies.set('cdTime', totalTime, {
          expires: 7,
-         path: '/'
+         path: '/projectdetails/{{project.transaction.project.id}}'
       });
       var runTimer = Cookies.get('cdTime');
    } else {
@@ -251,9 +251,11 @@ window['_fs_namespace'] = 'FS';
 
    function EndCountdown() {
       $('#cd').removeClass('halfway');
-      $('#cd').html('Submission links closed');
+      $('#cd').html('');
+      $('#cc').html('Submission links closed');
 
       document.getElementById('submission').hidden=true;
+
 
    }
 });
