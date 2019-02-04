@@ -100,3 +100,4 @@ db.sqlite3
 /frontend/templates/bak.html
 /codelnmain/settings.py
 /.scannerwork/
+/frontend/static/frontend/mail.csv

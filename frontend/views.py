@@ -198,6 +198,7 @@ def update_finished(request, candidateproject_id, transaction_id):
     candidatesproject.stage = 'project-completed'
     candidatesproject.save()
     return HttpResponseRedirect('/projectdetails/%s' % candidateproject_id)
+
 @login_required
 def update_finishedopencall(request, project_id, transaction_id):
     if request.method == 'POST':

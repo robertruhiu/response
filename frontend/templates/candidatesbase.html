@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
 
+<link rel="stylesheet" type="text/css" href="{% static 'frontend/css/jquery.countdown.css' %}">
+
 
     <link rel="stylesheet" href="{% static 'frontend/css/home.css' %}">
     <link rel="stylesheet" href="{% static 'frontend/css/stay.css' %}">
@@ -194,8 +196,69 @@ window['_fs_namespace'] = 'FS';
                 });
             });
         </script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'frontend/js/jquery.plugin.js' %}"></script>
+<script type="text/javascript" src="{% static 'frontend/js/jquery.countdown.js' %}"></script>
 <script src="https://livechat.aidahbot.com/static/plugin/index.js" type="text/javascript" page_id=5c2f57f2db87490015388f35></script>
 {% block script %}
+    <script>
+
+	$(document).ready(function() {
+
+
+
+
+	var deadline = 2;
+     var totalTime = deadline*60;
+
+   var halfTime = Math.floor(totalTime / 2);
+
+   if (!Cookies.get('cdTime')) {
+      var now = $.now(); // First time on page
+      Cookies.set('firstTime', now, {
+         expires: 7,
+         path: '/'
+      });
+      Cookies.set('cdTime', totalTime, {
+         expires: 7,
+         path: '/'
+      });
+      var runTimer = Cookies.get('cdTime');
+   } else {
+      var currentTime = $.now();
+      var usedTime = (currentTime - Cookies.get('firstTime')) / 1000; // Calculate and convert into seconds
+      var runTimer = Cookies.get('cdTime') - usedTime;
+   }
+   $('#cd').countdown({
+      until: runTimer,
+      compact: true,
+      onExpiry: EndCountdown,
+      onTick: Callbacks,
+
+      layout: '{dn}day:{hn}hrs:{mn}min:{sn}sec'
+   });
+
+   function Callbacks(periods) {
+      if ($.countdown.periodsToSeconds(periods) === halfTime) {
+         $('#cd').addClass('halfway');
+      }
+      else if ($.countdown.periodsToSeconds(periods) <= 0) {
+         EndCountdown();
+
+      }
+   }
+
+   function EndCountdown() {
+      $('#cd').removeClass('halfway');
+      $('#cd').html('Submission links closed');
+
+      document.getElementById('submission').hidden=true;
+
+   }
+});
+
+</script>
 {% endblock %}
 
 </body>

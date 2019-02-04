@@ -216,18 +216,20 @@ project details
                                 <div class="card-body">
 
                                     <h5 class="card-subtitle mb-2 text-muted">Project submission details</h5>
-                                <div class="alert alert-primary" role="alert">
-                                    Start project to see submission guidelines
-                                </div>
+                                <strong>Project deadline:No changes will be accepted when this timer runs out</strong>
+                                <div id="cd"></div>
+                                <a id="timeout" href="/timeout/{{ project.id }}/{{ project.transaction.id }}" class="btn btn-primary" hidden>Auto submit</a>
+                                <div id="submission">
 
 
-                                    <hr>
+
+
                                     {% if project.stage == 'project-in-progress' %}
 
                                         {% if opencall %}
                                             <h6>Have you completed project?</h6>
 
-                                               
+
 
                                             <form action="{% url 'frontend:update_finishedopencall' project.id  project.transaction.id %}" method="post">
                                                 {% csrf_token %}
@@ -247,6 +249,10 @@ project details
 
                                         {% endif %}
                                     {% elif project.stage == 'invite-accepted' %}
+                                        <div class="alert alert-primary" role="alert">
+                                            Start project to see submission guidelines
+                                        </div>
+                                        <hr>
                                         <a href="/update_candidateprojects/{{ project.id }}/{{ project.transaction.id }}">
                                         <button class="btn btn-outline-primary" style="border-radius: 0" type="submit">Start project</button>
                                         </a>
@@ -254,6 +260,8 @@ project details
                                         <h6 class="alert alert-primary">Project completed.Recruiter will now get a
                                             report of how you performed.</h6>
                                     {% endif %}
+                                </div>
+
 
 
 
@@ -378,5 +386,6 @@ project details
 
 
 </main>
+
 
 {% endblock %}
