@@ -139,6 +139,11 @@
                         <h6 >{{ project.name }}
                             <span class="badge badge-primary">Level : {{ project.level }}</span>
                         </h6>
+                        {% if project.concept %}
+                            <p><strong>Concepts tested:</strong> {{ project.concept }}</p>
+
+                        {% endif %}
+
                         <p> {{ project.description }}</p>
                     </div>
                 </div>
