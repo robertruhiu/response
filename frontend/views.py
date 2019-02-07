@@ -160,7 +160,10 @@ def projectdetails(request, id):
     form=Submissions()
     transaction=candidatesprojects.objects.get(id=id)
     projectinvite = Projectinvite()
-    opencall =Applications.objects.filter(candidate_id=request.user.id).filter(transaction_id=transaction.transaction_id).get()
+    if Applications.objects.filter(candidate_id=request.user.id).filter(transaction_id=transaction.transaction_id).exists():
+        opencall =Applications.objects.filter(candidate_id=request.user.id).filter(transaction_id=transaction.transaction_id).get()
+    else:
+        opencall=None
     project = candidatesprojects.objects.get(id=id)
     return render(request, 'frontend/developer/projectdetails.html',
                   {'project': project, 'projectinvite': projectinvite,'opencall':opencall,'form':form})
