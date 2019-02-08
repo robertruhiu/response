@@ -22,8 +22,8 @@ app_name = 'payments'
 urlpatterns = [
     path('pay/<int:id>/', process_payment, name='pay'),
     path('opencall1/<int:id>/', process_opencalloption1, name='payoption1'),
-    path('opencall2/<int:id>/', process_opencalloption1, name='payoption2'),
-    path('opencall3/<int:id>/', process_opencalloption1, name='payoption3'),
+    path('opencall2/<int:id>/', process_opencalloption2, name='payoption2'),
+    path('opencall3/<int:id>/', process_opencalloption3, name='payoption3'),
 
     path('canceled/<int:id>/', payment_canceled, name='canceled'),
     path('flutterdone/<int:id>/', flutterwavepayment_done, name='flutter-done'),
