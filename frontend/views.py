@@ -125,10 +125,9 @@ def activity(request):
             allopencalls.append(opencall.transaction.id)
 
         res=set(alltransactions)-set(allopencalls)
-        print(allopencalls)
-        print(alltransactions)
+
         closedprojects =list(res)
-        print(closedprojects)
+
 
         if request.user.profile.user_type == 'recruiter':
             return render(request, 'frontend/recruiter/my-activity.html', {'transactions': transactions,'closedprojects':closedprojects,'allopencalls':allopencalls})
@@ -369,7 +368,19 @@ def buildproject(request):
     return render(request, 'classroom/students/worldprojects.html')
 @login_required
 def calltoapply(request):
+    alltransactions=Transaction.objects.filter(stage='complete')
+    complete=[]
+    for i in alltransactions:
+        complete.append(i.id)
+
     opportunities = OpenCall.objects.all()
+    opencalls=[]
+    for io in opportunities:
+        opencalls.append(io.transaction.id)
+
+    payedopencalls = set(complete)&set(opencalls)
+    payed = list(payedopencalls)
+
     qualifys = Applications.objects.filter(candidate=request.user)
     student = Student.objects.get(user_id=request.user.id)
     passedquizz = TakenQuiz.objects.filter(score__gte=50).filter(student_id=student)
@@ -388,8 +399,8 @@ def calltoapply(request):
             langs[i.quiz.subject.name] = i.quiz.subject.name
     original =[]
     taken = []
-    for oppo in opportunities:
-        original.append(oppo.transaction.id)
+    for oppo in payed:
+        original.append(oppo)
     for qualify in qualifys:
         taken.append(qualify.transaction.id)
     untaken=[]
