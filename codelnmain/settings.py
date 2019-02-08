@@ -51,7 +51,6 @@ INSTALLED_APPS = [
 
 
 
-    'paypal.standard.ipn',
     'transactions',
     'payments',
 
@@ -126,6 +125,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -232,8 +232,6 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-PAYPAL_RECEIVER_EMAIL = config('PAYPAL_RECEIVER_EMAIL', default='PAYPAL_RECEIVER_EMAIL')
-PAYPAL_TEST = True
 
 ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
 INVITATIONS_INVITATION_EXPIRY = 7

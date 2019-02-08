@@ -30,7 +30,8 @@ class Transaction(models.Model):
         return candidates
 
     def amount(self):
-        if self.allcandidates().count() <= 10:
+        total_amount=0
+        if self.allcandidates().count() >= 1 and self.allcandidates().count() <= 10:
             total_amount = 200
         elif self.allcandidates().count() > 10 and self.allcandidates().count() <= 50:
             total_amount = 20 * self.allcandidates().count()

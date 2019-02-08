@@ -96,7 +96,6 @@
                 <div class="col-lg-3 col-md-12">
                     <form style="text-align: -webkit-center;">
                         <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
-                        <script src="https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
                         <a onClick="payWithRave('{{amount}}')"><img class="btn btn-outline-primary" style="width: 10rem" src="/static/frontend/images/flutter.svg"></a>
 
                     </form>
@@ -110,12 +109,11 @@
     <script>
 
 
-        const API_publicKey = "FLWPUBK-37320275f784b16ec1e30b1342c0a223-X";
+        const API_publicKey = "FLWPUBK-37536a50fc02bed5bddf5ebe89a18e7c-X";
         const SuccessUrl = '{% url 'payments:flutter-done' transaction.id %}';
-        {#const CancelledUrl = window.location.origin + '{% url 'payments:canceled' transaction.id%}'#}
+        const CancelledUrl = '{% url 'payments:canceled' transaction.id %}';
 
         function payWithRave(amnt) {
-            console.log(amnt);
             var x = getpaidSetup({
                 PBFPubKey: API_publicKey,
                 customer_email: '{{ transaction.user.email }}',
@@ -125,12 +123,10 @@
                 payment_method: "both",
                 txref: {{ transaction.id }},
                 meta: [{
-                    metaname: "flightID",
-                    metavalue: "AP1234"
+                    metaname: "transactionID",
+                    metavalue: "Codeln2019"
                 }],
                 onclose: function () {
-                    console.log('closed');
-                    console.log(SuccessUrl);
                 },
                 callback: function (response) {
                     var txref = response.tx.txRef; // collect txRef returned and pass to a 					server page to complete status check.
@@ -143,8 +139,7 @@
                         window.location.href = SuccessUrl;
                     } else {
                         // redirect to a failure page.
-                        console.log('failed');
-                        console.log(SuccessUrl);
+                        window.location.href = CancelledUrl;
                     }
 
                     x.close(); // use this to close the modal immediately after payment.

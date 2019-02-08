@@ -15,7 +15,6 @@ from django.utils.html import strip_tags
 
 from django.core.mail import send_mail, BadHeaderError
 # payments view
-from payments.views import process_payment
 
 
 # Create your views here.

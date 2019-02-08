@@ -98,6 +98,6 @@ db.sqlite3
 /frontend/templates/up.html
 /frontend/templates/trial.html
 /frontend/templates/bak.html
-/codelnmain/settings.py
+
 /.scannerwork/
 /frontend/static/frontend/mail.csv

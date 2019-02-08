@@ -10,34 +10,40 @@ from transactions.models import Transaction
 
 # Create your views here.
 
-def process_payment(request, id, amount):
+def process_payment(request, id):
     transaction = get_object_or_404(Transaction, id=id)
     transaction.stage = 'make-payment'
+    amount=int(transaction.amount())
+    print(transaction.allcandidates().count())
     transaction.save()
-    paypal_dict = {
-        'business': settings.PAYPAL_RECEIVER_EMAIL,
-        'amount': amount,
-        'item_name': transaction.user,
-        'invoice': str(transaction.project.id),
-        'currency_code': 'USD',
-        'notify_url': request.build_absolute_uri(reverse('paypal-ipn')),
-        'return_url': request.build_absolute_uri(reverse('payments:done')),
-        'cancel_return': request.build_absolute_uri(reverse('payments:canceled', args=[transaction.id])),
-    }
-    form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request, 'payments/process.html',
-                  {'form': form, 'amount': amount, 'transaction':transaction})
+                  {'amount':amount, 'transaction':transaction})
+def process_opencalloption1(request, id):
+    transaction = get_object_or_404(Transaction, id=id)
+    transaction.stage = 'make-payment'
+    amount= int(400)
+    print(transaction.allcandidates().count())
+    transaction.save()
+    return render(request, 'payments/process.html',
+                  {'amount':amount, 'transaction':transaction})
 
+def process_opencalloption2(request, id):
+    transaction = get_object_or_404(Transaction, id=id)
+    transaction.stage = 'make-payment'
+    amount=int(600)
+    print(transaction.allcandidates().count())
+    transaction.save()
+    return render(request, 'payments/process.html',
+                  {'amount':amount, 'transaction':transaction})
 
-@csrf_exempt
-def payment_done(request, id):
-    # transaction = Transaction.objects.get(id=id)
-    # transaction.stage = 'payment-confirmed'
-    # transaction.save()
-    # verifypaymentsuccess
-    return redirect(reverse('frontend:my-activity'))
-
-
+def process_opencalloption3(request, id):
+    transaction = get_object_or_404(Transaction, id=id)
+    transaction.stage = 'make-payment'
+    amount=int(800)
+    print(transaction.allcandidates().count())
+    transaction.save()
+    return render(request, 'payments/process.html',
+                  {'amount':amount, 'transaction':transaction})
 @csrf_exempt
 def payment_canceled(request, id):
     # redirect to add candidates
