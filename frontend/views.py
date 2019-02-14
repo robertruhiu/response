@@ -459,12 +459,13 @@ def pickcandidates(request,trans_id,candidate_id):
     newcandidate=Candidate(email=application.candidate.email,first_name=application.candidate.first_name,last_name=application.candidate.last_name,transaction=transaction)
     newcandidate.save()
     application.save()
-    subject = 'Application Accepted'
-    html_message = render_to_string('invitations/email/opencallaccepted.html', {'dev': candidate,'company':application})
-    plain_message = strip_tags(html_message)
+    subject = 'Accepted for next stage'
+    message ='Hello '+ candidate.first_name +'.\n You have been accepted to build a project by '+ \
+             transaction.user.profile.company + '\n \n  Use this link to accept the invite \n  https://beta.codeln.com/invites/ ' \
+            '\n After accepting invite proceed to ongoing projects and you will find all details for the project.''\n \n Criteria for grading \n 1.Deliverable \n 2.Deployment \n 3.Coding standards \n 4.Design'
     from_email = 'codeln@codeln.com'
     to = candidate.email
-    mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+    mail.send_mail(subject, message, from_email, [to])
     return HttpResponseRedirect('/opencalltracker/%s' % trans_id)
 
 
