@@ -218,11 +218,11 @@ window['_fs_namespace'] = 'FS';
       var now = $.now(); // First time on page
       Cookies.set('firstTime', now, {
          expires: 7,
-         path: '/projectdetails/{{project.transaction.project.id}}'
+         path: '/'
       });
       Cookies.set('cdTime', totalTime, {
          expires: 7,
-         path: '/projectdetails/{{project.transaction.project.id}}'
+         path: '/'
       });
       var runTimer = Cookies.get('cdTime');
    } else {
