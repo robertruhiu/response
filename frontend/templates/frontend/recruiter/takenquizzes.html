@@ -84,10 +84,15 @@ Taken quizzes
 <div class="d-lg-none"  style="margin-top: 7em">
 
 </div>
-
-
-
-    <table class="table">
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Passed Quizzes</a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">All Taken Quizzes</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <table class="table">
   <thead class="thead-dark">
     <tr>
         <th scope="col">#</th>
@@ -118,6 +123,45 @@ Taken quizzes
 
   </tbody>
 </table>
+
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <table class="table">
+  <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+      <th scope="col">email</th>
+      <th scope="col">Country</th>
+        <th scope="col">Quiz</th>
+        <th scope="col">Score</th>
+        <th scope="col">Date Taken</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for devs in taken %}
+       <tr>
+       <td> {{ forloop.counter }} </td>
+      <td>{{ devs.student.user.first_name }} {{ devs.student.user.last_name }}</td>
+      <td>{{ devs.student.user.email }}</td>
+      <td>{{ devs.student.user.profile.country.name}}</td>
+       <td>{{ devs.quiz }}</td>
+       <td>{{ devs.score }}</td>
+       <td>{{ devs.date }}</td>
+
+    </tr>
+
+  {% endfor %}
+
+
+  </tbody>
+</table>
+  </div>
+
+</div>
+
+
 
 
 
