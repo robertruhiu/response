@@ -122,7 +122,10 @@ application tracker
             <th scope="col">Rank</th>
             <th scope="col">Name</th>
             <th scope="col">Country</th>
+            {% if not request.user.is_staff %}
             <th scope="col">Availability</th>
+            {% endif %}
+
             <th scope="col">{{ candidate.project.framework }} score</th>
             <th scope="col">Action</th>
 
@@ -139,10 +142,12 @@ application tracker
                 {{ candidate.candidate.profile.country.name }}
 
             </td>
+        {% if not request.user.is_staff %}
             <td>
                 {{ candidate.candidate.profile.availabilty }}
 
             </td>
+        {% endif %}
 
             <td>
                 {{ candidate.score }}
