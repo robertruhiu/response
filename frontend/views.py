@@ -234,7 +234,8 @@ def competitions(request):
     return render(request, 'frontend/recruiter/competitions.html')
 
 def takenquizzes(request):
-    allquizzes = TakenQuiz.objects.all()
+
+    allquizzes = TakenQuiz.objects.filter(score__gte=50).all()
 
     return render(request, 'frontend/recruiter/takenquizzes.html',{'allquizzes':allquizzes})
 
