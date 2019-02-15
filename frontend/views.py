@@ -85,7 +85,7 @@ def profile_type_selection(request, current_profile):
 def index(request):
     if request.user.is_authenticated:
         current_profile = request.user.profile
-        transactions = Transaction.objects.filter(user=request.user)
+        transactions = Transaction.objects.filter(user=request.user).filter(stage='complete')
         if request.user.profile.stage == 'profile_type_selection':
             return profile_type_selection(request, current_profile)
         elif request.user.profile.stage == 'developer_filling_details':
