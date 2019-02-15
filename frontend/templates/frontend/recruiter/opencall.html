@@ -122,7 +122,7 @@ application tracker
             <th scope="col">Rank</th>
             <th scope="col">Name</th>
             <th scope="col">Country</th>
-            {% if request.user.id == 2 %}
+            {% if request.user.id == 492 %}
                 <th scope="col">Email</th>
                 <th scope="col">Linkedin profile</th>
 
@@ -132,7 +132,7 @@ application tracker
             {% endif %}
 
             <th scope="col">{{ candidate.project.framework }} score</th>
-        {% if not request.user.id == 2 %}
+        {% if not request.user.id == 492 %}
             <th scope="col">Action</th>
 
         {% endif %}
@@ -150,7 +150,7 @@ application tracker
                 {{ candidate.candidate.profile.country.name }}
 
             </td>
-        {% if  request.user.id == 2 %}
+        {% if  request.user.id == 492 %}
             <td>
                 {{ candidate.candidate.email }}
             </td>
@@ -169,7 +169,7 @@ application tracker
             <td>
                 {{ candidate.score }}
             </td>
-        {% if not request.user.id == 2 %}
+        {% if not request.user.id == 492 %}
 
             <td>
                 {% if candidate.stage == 'application sent' %}
