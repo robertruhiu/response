@@ -55,7 +55,6 @@ window['_fs_namespace'] = 'FS';
 </script>
 
 
-
     {% endblock %}
 </head>
 <body>
@@ -209,26 +208,26 @@ window['_fs_namespace'] = 'FS';
 
 
 
-	var deadline = 7;
+	var deadline = 14;
      var totalTime = deadline*60*60*24;
 
    var halfTime = Math.floor(totalTime / 2);
 
-   if (!Cookies.get('cdTime')) {
+   if (!Cookies.get('cdtime')) {
       var now = $.now(); // First time on page
-      Cookies.set('firstTime', now, {
+      Cookies.set('firsttime', now, {
          expires: 7,
          path: '/'
       });
-      Cookies.set('cdTime', totalTime, {
+      Cookies.set('cdtime', totalTime, {
          expires: 7,
          path: '/'
       });
-      var runTimer = Cookies.get('cdTime');
+      var runTimer = Cookies.get('cdtime');
    } else {
       var currentTime = $.now();
-      var usedTime = (currentTime - Cookies.get('firstTime')) / 1000; // Calculate and convert into seconds
-      var runTimer = Cookies.get('cdTime') - usedTime;
+      var usedTime = (currentTime - Cookies.get('firsttime')) / 1000; // Calculate and convert into seconds
+      var runTimer = Cookies.get('cdtime') - usedTime;
    }
    $('#cd').countdown({
       until: runTimer,

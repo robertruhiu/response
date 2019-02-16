@@ -132,10 +132,10 @@ application tracker
             {% endif %}
 
             <th scope="col">{{ candidate.project.framework }} score</th>
-        {% if not request.user.id == 492 %}
+
             <th scope="col">Action</th>
 
-        {% endif %}
+
 
 
         </tr>
@@ -169,7 +169,7 @@ application tracker
             <td>
                 {{ candidate.score }}
             </td>
-        {% if not request.user.id == 492 %}
+
 
             <td>
                 {% if candidate.stage == 'application sent' %}
@@ -180,7 +180,7 @@ application tracker
                     <span class="btn-sm btn-primary" style="background-color: #b627a1">Picked</span>
                 {% endif %}
             </td>
-        {% endif %}
+
 
 
 
