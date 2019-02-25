@@ -226,6 +226,40 @@ developers
 
             </div>
         </div>
+{% if request.user.email == 'freeman@testmail.com' %}
+    <div class="col-lg-4 col-md-6 col-sm-6 col" style="width: 100%;">
+            <div class="card recruithomecard  mb-3" style="width:18em;margin: auto;height: 100%">
+                <a href="{% url 'frontend:portfolio' %}" style="text-decoration: none">
+                    <div style="text-align: -webkit-center;">
+
+                            <img class="img-fluid " src="../../../static/frontend/images/rank.svg" style="width: 40%;margin-right: 30%;margin-left: 30%" alt="Card image cap">
+
+                    </div>
+                    <div class="card" style="border: 0 ">
+
+
+                        <div class="card-body">
+
+                            <h6 class="card-title text-center" style="text-align: -webkit-center;">My portfolio</h6>
+
+
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+
+
+            </div>
+        </div>
+
+{% endif %}
+
+
+
+
 </div>
 
 

@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'frontend/css/jquery.countdown.css' %}">
 
 
@@ -260,6 +260,59 @@ window['_fs_namespace'] = 'FS';
 });
 
 </script>
+    <script>
+{% block jquery %}
+var endpoint = '/api/data/'
+var defaultData = []
+var labels = [];
+$.ajax({
+    method: "GET",
+    url: endpoint,
+    success: function(data){
+        labels = data.labels
+        defaultData = data.data
+        setChart()
+    },
+    error: function(error_data){
+        console.log("error")
+        console.log(error_data)
+    }
+})
+function setChart(){
+    var ctx = document.getElementById("myChart");
+    var ctx2 = document.getElementById("myChart2");
+    Chart.defaults.scale.gridLines.display = false;
+    var myChart = new Chart(ctx2, {
+    type: 'doughnut',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: '# languages in use',
+            data: defaultData,
+            backgroundColor: [
+                '#FF1744',
+                '#D500F9',
+                '#651FFF',
+                '#DD2C00',
+                '#0be881',
+                '#4bcffa',
+                '#0091EA',
+                '#FF1744'
+            ],
+
+        }]
+    },
+    options: {
+
+    },
+
+});
+
+}
+// var ctx = document.getElementById("myChart");
+{% endblock %}
+</script>
+
 {% endblock %}
 
 </body>

@@ -31,4 +31,10 @@ class recruiters(models.Model):
     lastname = models.CharField(null=True,max_length=30)
     company = models.CharField(null=True,max_length=200)
     companyurl = models.CharField(null=True,max_length=200)
+class submissions(models.Model):
+    candidate = models.ForeignKey(User, on_delete=models.CASCADE)
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
+    demo = models.CharField(null=True, max_length=400)
+    repo = models.CharField(null=True, max_length=400)
+
 

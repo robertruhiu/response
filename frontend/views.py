@@ -1,10 +1,13 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.db.models.aggregates import Max
-# Create your views here.
+from django.core.paginator import Paginator
+from collections import Counter
 from django.urls import reverse
+import requests
+import urllib.parse
 from django.contrib import messages
 from django.core import mail
 from django.template.loader import render_to_string
@@ -15,7 +18,7 @@ from transactions.models import Transaction, Candidate,OpenCall,Applications
 from invitations.models import Invitation
 from projects.models import Project, Framework
 from frontend.form import Projectinvite, EditProjectForm,Submissions
-from frontend.models import candidatesprojects, devs, recruiters
+from frontend.models import candidatesprojects, devs, recruiters,submissions
 from classroom.models import TakenQuiz,Student
 
 
@@ -143,8 +146,9 @@ def tracker(request, id):
 
 
 @login_required
-def inprogress(request, user_id):
-    projects = candidatesprojects.objects.filter(candidate=user_id)
+def inprogress(request):
+    user = request.user.id
+    projects = candidatesprojects.objects.filter(candidate=user)
     return render(request, 'frontend/developer/inprogress.html', {'projects': projects})
 
 
@@ -177,9 +181,10 @@ def pendingproject(request, transaction_id):
                   {'transaction': transaction, 'acceptedinvites': acceptedinvites})
 
 @login_required
-def projectinvites(request, transaction_id, candidate_id):
+def projectinvites(request, transaction_id):
+    user = request.user.id
     trans_id = Transaction.objects.get(id=transaction_id)
-    currentcandidate = User.objects.get(id=candidate_id)
+    currentcandidate = User.objects.get(id=user)
 
     acceptedinvite = candidatesprojects(transaction=trans_id, candidate=currentcandidate, stage='invite-accepted')
     acceptedinvite.save()
@@ -221,6 +226,8 @@ def update_finishedopencall(request, project_id, transaction_id):
             candidatesproject = candidatesprojects.objects.get(id=project_id)
             candidatesproject.stage = 'project-completed'
             candidatesproject.save()
+            submit = submissions(candidate=request.user,transaction=transaction,demo=demo,repo=repo)
+            submit.save()
     return HttpResponseRedirect('/projectdetails/%s' % project_id)
 
 def pricing(request):
@@ -470,5 +477,95 @@ def pickcandidates(request,trans_id,candidate_id):
     return HttpResponseRedirect('/opencalltracker/%s' % trans_id)
 
 
+@login_required
+def portfolio(request):
+    user = 'robertruhiu'
+
+    mainapi='https://api.github.com/users/'+ user +'?access_token=749e4b5a14ad6130e6fcf3c775350daa6d18b5a4'
+    url = mainapi
+    json_data =requests.get(url).json()
+    repo = 'https://api.github.com/users/'+ user + '/repos'
+    repos=requests.get(repo).json()
+    paginator = Paginator(repos, 8)
+
+    page = request.GET.get('page')
+    repoz = paginator.get_page(page)
+    languages=[]
+    for i in repos:
+        for x in i:
+            languages.append(i['language'])
+    counter = Counter(languages)
+    labels=[]
+    c = {}
+    items=[]
+    for z in counter:
+        c[z]= counter[z]
+        labels.append(z)
+        items.append(counter[z])
+    data={
+        "labels": labels,
+        "data": items,
+
+    }
+    punch='https://api.github.com/repos/robertruhiu/response/stats/punch_card'
+    respon = requests.get(punch).json()
 
 
+
+
+    list1=[]
+    list2=[]
+    list0 = [0, 0, 0]
+    cun = [0,1,2,3,4,5,6]
+    total = []
+    our={}
+    bun = []
+    for by in respon:
+        for day in cun:
+            if by[0] == day:
+                bun.append(by[2])
+                our[by[0]]=by[2]
+
+    totals = sum(bun)
+    print(bun)
+    total.append(totals)
+    print(totals)
+    print(total)
+
+
+
+
+
+
+
+
+    return render(request,'frontend/developer/portfolio.html', {'json':json_data,'repos':repoz,'data':data,'c':c})
+
+def get_data(request, *args, **kwargs):
+    user = 'robertruhiu'
+
+    mainapi = 'https://api.github.com/users/' + user + '?access_token=749e4b5a14ad6130e6fcf3c775350daa6d18b5a4'
+    url = mainapi
+    json_data = requests.get(url).json()
+    repo = 'https://api.github.com/users/' + user + '/repos'
+    repos = requests.get(repo).json()
+    paginator = Paginator(repos, 8)
+
+    page = request.GET.get('page')
+    repoz = paginator.get_page(page)
+    languages = []
+    for i in repos:
+        for x in i:
+            languages.append(i['language'])
+    counter = Counter(languages)
+    labels = []
+    items = []
+    for z in counter:
+        labels.append(z)
+        items.append(counter[z])
+    data = {
+        "labels": labels,
+        "data": items,
+    }
+
+    return JsonResponse(data)

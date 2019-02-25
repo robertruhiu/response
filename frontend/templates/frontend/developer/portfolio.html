@@ -1,0 +1,229 @@
+{% extends 'candidatesbase.html' %}
+{% load bootstrap4 %}
+{% block title %}
+    My portolio
+{% endblock %}
+{% load static %}
+{% block content %}
+    <main role="main" class="col-md-12 col-lg-10 ml-lg-auto   px-4 ">
+        <div class="d-none d-lg-block">
+            <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                <h5>Portfolio</h5>
+                <ul class="nav ml-auto">
+
+
+                    {% if request.user.is_authenticated %}
+
+
+                        <li class="nav-item">
+                            <a href="{% url 'account_logout' %}" style="color: black" class="nav-link">Logout</a>
+                        </li>
+
+                    {% else %}
+
+                        <li class="nav-item">
+                            <a href="{% url 'account_login' %}" style="color: black" class="nav-link">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'account_signup' %}" style="color: black" class="nav-link">Register</a>
+                        </li>
+                    {% endif %}
+
+
+                </ul>
+            </nav>
+        </div>
+
+        <!-----md devices adaptation------>
+        <div class="container d-lg-none">
+            <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+                <a class="logoadapt h5" style="text-decoration: none" href="/home">Portfolio</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdown"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Sidebar menu options
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/">Dashboard</a>
+                                <a class="dropdown-item" href="{% url 'frontend:buildproject' %}">Build a Project</a>
+                                <a class="dropdown-item" href="{% url 'students:tests' %}">Skill assessment</a>
+                                <a class="dropdown-item" href="{% url 'frontend:calltoapply' %}">Companies
+                                    recruiting</a>
+                                <a class="dropdown-item" href="/update_profile/">My profile</a>
+                            </div>
+                        </li>
+                        {% if request.user.is_authenticated %}
+
+                            <li class="nav-item">
+                                <a href="{% url 'account_logout' %}" style="color: white" class="nav-link">Log out</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'account_login' %}" style="color: white" class="nav-link">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account_signup' %}" style="color: white" class="nav-link">Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="d-none d-lg-block" style="margin-top: 6%">
+
+        </div>
+        <div class="d-lg-none" style="margin-top: 7em">
+
+        </div>
+        <div class="card" style="border-radius: 0;height: 12%">
+            <div class="row">
+
+                <div class="col-lg-4">
+
+                        {% for key, value in json.items %}
+                        {% if key == 'avatar_url' %}
+                            <div style="width: 13rem;">
+                                <img class="card-img-top" style="margin-top: 5%;margin-left: 5%;border: 22px;padding: 8px;" src="{{ value }}" alt="Card image cap">
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+
+
+
+                </div>
+                <div class="col-lg-3">
+                    {% for key, value in json.items %}
+                        {% if key == 'html_url' %}
+                            {{ value }}
+                        {% endif %}
+                    {% endfor %}
+                    <p>{{ request.user.first_name }}</p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        <div class="shadow-sm p-3 mb-5  mt-5">
+            <h5 class="text-center">Repositories</h5>
+            <div class="row">
+                {% for repo in repos %}
+
+                    <div class="col-lg-3">
+                        <div class="card mt-2 ml-2" style="border-radius: 0;height: 5rem;">
+                            <div class="">
+                                {% for key, value in repo.items %}
+
+                                    {% if key == 'name' %}
+                                        <div style="background-color: #c0f1e2;padding: 1%">
+                                            <p class="ml-2 mt-1" ><span data-feather="github"></span> {{ value }}</p>
+                                        </div>
+                                    {% endif %}
+
+
+
+                                    {% if key == 'language' %}
+                                        <div style="padding: 1%;">
+                                            <p class="ml-2"><span data-feather="code"></span> {{ value }}</p>
+                                        </div>
+
+                                    {% endif %}
+
+
+
+
+
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <div class="d-flex justify-content-center mt-2">
+                <div class="pagination">
+    <span class="step-links">
+    <ul class="pagination">
+
+        {% if repos.has_previous %}
+            <li class="page-item">
+            <a class="page-link" href="?page=1">&laquo; first</a>
+            </li>
+            <li class="page-item">
+            <a class="page-link" href="?page={{ repos.previous_page_number }}">previous</a>
+            </li>
+        {% endif %}
+
+        <li class="page-link">
+        <span class="current">
+
+            Page {{ repos.number }} of {{ repos.paginator.num_pages }}.
+
+        </span>
+        </li>
+
+        {% if repos.has_next %}
+            <li class="page-item">
+            <a class="page-link" href="?page={{ repos.next_page_number }}">next</a>
+            </li>
+            <li class="page-item">
+            <a class="page-link" href="?page={{ repos.paginator.num_pages }}">last &raquo;</a>
+            </li>
+        {% endif %}
+        </li>
+    </ul>
+    </span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="shadow-sm p-3 " style="width: 80%;margin: auto;">
+            <h5 class="text-center">Languages used</h5>
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="row">
+                        {% for key,value in c.items %}
+                            <div class="col-lg-6">
+                                <div class="shadow p-3 mb-5 bg-white">
+                                    {{ key }}
+                                    <div>
+                                        <span data-feather="git-commit"></span> commits: {{ value }}
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+
+                    </div>
+
+
+                </div>
+                <div class="col-lg-6">
+                    <canvas id="myChart2"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+{% endblock %}

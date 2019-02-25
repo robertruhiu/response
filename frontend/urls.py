@@ -6,7 +6,7 @@ from frontend.views import home,activity,tracker,update_candidateprojects,\
     projectdetails,pendingproject,terms,dev,pricing,howitworks,privacy,\
     report,credits,onboarddevs,onboardrecruiters,seedevs,seerecruiters,manageprojects,managetransactions,\
     editproject,deleteproject,addproject,edittransactions\
-    ,deletetransaction,buildproject,calltoapply,apply,opencalltracker,competitions,takenquizzes,pickcandidates,update_finishedopencall
+    ,deletetransaction,buildproject,calltoapply,apply,opencalltracker,competitions,takenquizzes,get_data,pickcandidates,update_finishedopencall,portfolio
 from frontend.tasks import reminderforprofiledevs,applyreminder,massmail
 from accounts.views import update_profile
 
@@ -23,13 +23,13 @@ urlpatterns = [
     path('terms', terms, name='terms'),
     path('sample', sample, name='sample'),
     path('credits', credits, name='credits'),
-    path('inprogress/<int:user_id>', inprogress, name='inprogress'),
+    path('inprogress/', inprogress, name='inprogress'),
     path('invites/', invites, name='invites'),
     path('pendingproject/<int:transaction_id>', pendingproject, name='pendingproject'),
     path('projectdetails/<int:id>', projectdetails, name='projectdetails'),
     path('activity/', activity, name='my-activity'),
     path('update_profile/', update_profile, name='update-profile'),
-    path('projectinvites/<int:transaction_id>/<int:candidate_id>', projectinvites, name='update-profile'),
+    path('projectinvites/<int:transaction_id>/', projectinvites, name='update-profile'),
     path('update_finished/<int:candidateproject_id>/<int:transaction_id>', update_finished,
          name='update_finished'),
     path('update_finishedopencall/<int:project_id>/<int:transaction_id>', update_finishedopencall,
@@ -56,5 +56,8 @@ urlpatterns = [
     path('pickcandidates/<int:trans_id>/<int:candidate_id>',pickcandidates,name='pickcandidates'),
     path('reminderforprofiledevs',reminderforprofiledevs,name='reminderforprofiledevs'),
     path('applyreminder', applyreminder, name='applyreminder'),
-    path('massmail', massmail, name='massmail')
+    path('massmail', massmail, name='massmail'),
+    path('portfolio',portfolio,name='portfolio'),
+    path('api/data/',get_data,name='api-data'),
+
 ]
