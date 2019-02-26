@@ -28,7 +28,7 @@ class Experience_Form(forms.ModelForm):
 class Portfolio_form(forms.ModelForm):
     image = forms.CharField(required=True)
     title = forms.CharField(required=True)
-    description = forms.CharField(required=True)
+    description = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}),required=True)
     demo_link = forms.CharField(required=True)
     repository_link = forms.CharField(required=True)
     class Meta:
