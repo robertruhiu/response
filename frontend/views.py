@@ -7,6 +7,11 @@ from django.core.paginator import Paginator
 from collections import Counter
 from django.urls import reverse
 import requests
+from link_preview import link_preview
+import json
+from decouple import config
+
+import base64
 import urllib.parse
 from django.contrib import messages
 from django.core import mail
@@ -17,8 +22,8 @@ from accounts.forms import ProfileTypeForm, DeveloperFillingDetailsForm, Recruit
 from transactions.models import Transaction, Candidate,OpenCall,Applications
 from invitations.models import Invitation
 from projects.models import Project, Framework
-from frontend.form import Projectinvite, EditProjectForm,Submissions
-from frontend.models import candidatesprojects, devs, recruiters,submissions
+from frontend.form import Projectinvite, EditProjectForm,Submissions,Portfolio_form,Github_form,Experience_Form
+from frontend.models import candidatesprojects, devs, recruiters,submissions,Portfolio,Github,Experience
 from classroom.models import TakenQuiz,Student
 
 
@@ -479,93 +484,126 @@ def pickcandidates(request,trans_id,candidate_id):
 
 @login_required
 def portfolio(request):
-    user = 'robertruhiu'
+    try:
+        candidate = Github.objects.get(candidate=request.user)
+        user = candidate.github_username
+        username = "robertruhiu"
+        token = config('ACCESS_TOKEN',default='ACCESS_TOKEN')
+        json_data = requests.get('https://api.github.com/users/' + user, auth=(username, token)).json()
 
-    mainapi='https://api.github.com/users/'+ user +'?access_token=749e4b5a14ad6130e6fcf3c775350daa6d18b5a4'
-    url = mainapi
-    json_data =requests.get(url).json()
-    repo = 'https://api.github.com/users/'+ user + '/repos'
-    repos=requests.get(repo).json()
-    paginator = Paginator(repos, 8)
+        form = Portfolio_form()
+        experience_form = Experience_Form()
+        repo = 'https://api.github.com/users/' + user + '/repos'
+        repos = requests.get(repo, auth=(username, token)).json()
+        paginator = Paginator(repos, 8)
 
-    page = request.GET.get('page')
-    repoz = paginator.get_page(page)
-    languages=[]
-    for i in repos:
-        for x in i:
-            languages.append(i['language'])
-    counter = Counter(languages)
-    labels=[]
-    c = {}
-    items=[]
-    for z in counter:
-        c[z]= counter[z]
-        labels.append(z)
-        items.append(counter[z])
-    data={
-        "labels": labels,
-        "data": items,
+        page = request.GET.get('page')
+        repoz = paginator.get_page(page)
+        languages = []
 
-    }
-    punch='https://api.github.com/repos/robertruhiu/response/stats/punch_card'
-    respon = requests.get(punch).json()
+        for i in repos:
+            for x in i:
+                languages.append(i['language'])
 
+        counter = Counter(languages)
+        labels = []
+        c = {}
+        items = []
+        for z in counter:
+            c[z] = counter[z]
+            labels.append(z)
+            items.append(counter[z])
+        data = {
+            "labels": labels,
+            "data": items,
+        }
+        experiences=Experience.objects.filter(candidate=request.user).all()
+        verified_projects = Portfolio.objects.filter(candidate=request.user).filter(verified=True).all()
+        return render(request, 'frontend/developer/portfolio.html',
+                      {'json': json_data, 'repos': repoz, 'data': data, 'c': c, 'form': form,
+                       'verified_projects': verified_projects,'experience_form':experience_form,'experiences':experiences})
+    except Github.DoesNotExist:
+        form = Github_form()
 
-
-
-    list1=[]
-    list2=[]
-    list0 = [0, 0, 0]
-    cun = [0,1,2,3,4,5,6]
-    total = []
-    our={}
-    bun = []
-    for by in respon:
-        for day in cun:
-            if by[0] == day:
-                bun.append(by[2])
-                our[by[0]]=by[2]
-
-    totals = sum(bun)
-    print(bun)
-    total.append(totals)
-    print(totals)
-    print(total)
+        return render(request, 'frontend/developer/github.html',{'form':form})
 
 
-
-
-
-
-
-
-    return render(request,'frontend/developer/portfolio.html', {'json':json_data,'repos':repoz,'data':data,'c':c})
-
+@login_required
+def newproject(request):
+    if request.method == 'POST':
+        myprojects = Portfolio_form(request.POST)
+        if myprojects.is_valid():
+            title = myprojects.cleaned_data['title']
+            description = myprojects.cleaned_data['description']
+            image = myprojects.cleaned_data['image']
+            repo = myprojects.cleaned_data['repository_link']
+            demo = myprojects.cleaned_data['demo_link']
+            newprojo =Portfolio(candidate=request.user,demo_link=demo,repository_link=repo,title=title,image=image,description=description)
+            newprojo.save()
+    return redirect(reverse('frontend:portfolio'))
+@login_required
 def get_data(request, *args, **kwargs):
-    user = 'robertruhiu'
+    try:
+        candidate = Github.objects.get(candidate=request.user)
+        user = candidate.github_username
+        username = "robertruhiu"
+        token = config('ACCESS_TOKEN',default='ACCESS_TOKEN')
+        repo = 'https://api.github.com/users/' + user + '/repos'
+        repos = requests.get(repo, auth=(username, token)).json()
 
-    mainapi = 'https://api.github.com/users/' + user + '?access_token=749e4b5a14ad6130e6fcf3c775350daa6d18b5a4'
-    url = mainapi
-    json_data = requests.get(url).json()
-    repo = 'https://api.github.com/users/' + user + '/repos'
-    repos = requests.get(repo).json()
-    paginator = Paginator(repos, 8)
+        languages = []
+        for i in repos:
+            for x in i:
+                languages.append(i['language'])
+        counter = Counter(languages)
+        labels = []
+        items = []
+        for z in counter:
+            labels.append(z)
+            items.append(counter[z])
+        data = {
+            "labels": labels,
+            "data": items,
+        }
 
-    page = request.GET.get('page')
-    repoz = paginator.get_page(page)
-    languages = []
-    for i in repos:
-        for x in i:
-            languages.append(i['language'])
-    counter = Counter(languages)
-    labels = []
-    items = []
-    for z in counter:
-        labels.append(z)
-        items.append(counter[z])
-    data = {
-        "labels": labels,
-        "data": items,
-    }
+        return JsonResponse(data)
 
-    return JsonResponse(data)
+
+    except Github.DoesNotExist:
+        form = Github_form()
+
+        return render(request, 'frontend/developer/github.html',{'form':form})
+
+def github(request):
+    if request.method == 'POST':
+        newuser = Github_form(request.POST)
+        if newuser.is_valid():
+            user = newuser.cleaned_data['github_username']
+            username = "robertruhiu"
+            token = config('ACCESS_TOKEN', default='ACCESS_TOKEN')
+            if requests.get('https://api.github.com/users/' + user, auth=(username, token)):
+                newgithubprofile = Github(candidate=request.user, github_username=user)
+                newgithubprofile.save()
+                return redirect(reverse('frontend:portfolio'))
+            else:
+
+                return redirect(reverse('frontend:portfolio'))
+
+    return redirect(reverse('frontend:portfolio'))
+def experience(request):
+    if request.method == 'POST':
+        new_experience = Experience_Form(request.POST)
+        if new_experience.is_valid():
+            title = new_experience.cleaned_data['title']
+            company = new_experience.cleaned_data['company']
+            description = new_experience.cleaned_data['description']
+            location = new_experience.cleaned_data['location']
+            duration = new_experience.cleaned_data['duration']
+            experience = Experience(candidate=request.user,title=title,description=description,company=company,location=location,duration=duration)
+            experience.save()
+            return redirect(reverse('frontend:portfolio'))
+        else:
+            return redirect(reverse('frontend:portfolio'))
+
+
+    return redirect(reverse('frontend:portfolio'))

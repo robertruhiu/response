@@ -284,3 +284,17 @@ nav ul li a{color:black;padding:0 30px;}
 .halfway {
 	color: #0000ff;
 }
+.portfo{
+
+    top:0;
+
+
+    background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(60, 60, 77, 0.85)),
+    url(http://s1.1zoom.me/b5050/564/Masks_Painting_Art_African_masks_525450_1920x1080.jpg);
+    background-position: center;
+    color:white !important;
+
+
+
+
+}

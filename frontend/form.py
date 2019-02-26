@@ -1,7 +1,8 @@
 from django import forms
 from django.forms import ModelForm, Form
-from frontend.models import candidatesprojects
+from frontend.models import candidatesprojects,Portfolio,Github,Experience
 from projects.models import Framework, Project
+from django_countries.fields import CountryField
 
 
 class Projectinvite(forms.ModelForm):
@@ -15,7 +16,30 @@ class Projectinvite(forms.ModelForm):
 class Submissions(Form):
     repositorylink=forms.CharField(required=True)
     demolink=forms.CharField(required=True)
+class Experience_Form(forms.ModelForm):
+    title = forms.CharField(required=True)
+    description = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}),required=True)
+    duration = forms.IntegerField(required=True)
+    company = forms.CharField(required=True)
 
+    class Meta:
+        model = Experience
+        fields=['title','description','location','company','duration']
+class Portfolio_form(forms.ModelForm):
+    image = forms.CharField(required=True)
+    title = forms.CharField(required=True)
+    description = forms.CharField(required=True)
+    demo_link = forms.CharField(required=True)
+    repository_link = forms.CharField(required=True)
+    class Meta:
+        model = Portfolio
+        fields = ['image','title','description','demo_link','repository_link']
+
+class Github_form(forms.ModelForm):
+    github_username = forms.CharField(required=True)
+    class Meta:
+        model = Github
+        fields = ['github_username']
 
 class EditProjectForm(forms.ModelForm):
     name = forms.CharField()

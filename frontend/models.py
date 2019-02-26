@@ -37,4 +37,28 @@ class submissions(models.Model):
     demo = models.CharField(null=True, max_length=400)
     repo = models.CharField(null=True, max_length=400)
 
+class Portfolio(models.Model):
+    candidate = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(null=True, max_length=200)
+    description = models.CharField(null=True, max_length=400)
+    image = models.CharField(null=True, max_length=400)
+    repository_link = models.CharField(null=True, max_length=400)
+    demo_link = models.CharField(null=True, max_length=400)
+    verified = models.BooleanField(default=False)
+
+class Github(models.Model):
+    candidate = models.ForeignKey(User, on_delete=models.CASCADE)
+    github_username = models.CharField(null=True, max_length=100)
+class Experience(models.Model):
+    candidate = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(null=True, max_length=100)
+    company = models.CharField(null=True, max_length=100)
+    description = models.CharField(null=True, max_length=100)
+    location = CountryField(null=True, max_length=30)
+    duration = models.IntegerField(null=True)
+
+
+
+
+
 

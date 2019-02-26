@@ -5,7 +5,7 @@
 {% endblock %}
 {% load static %}
 {% block content %}
-    <main role="main" class="col-md-12 col-lg-10 ml-lg-auto   px-4 ">
+    <main role="main" class="col-md-12 col-lg-10 ml-lg-auto   px-4 " xmlns="http://www.w3.org/1999/html">
         <div class="d-none d-lg-block">
             <nav class="navbar  navbar-light fixed-top fine border-bottom">
                 <h5>Portfolio</h5>
@@ -84,41 +84,104 @@
         <div class="d-lg-none" style="margin-top: 7em">
 
         </div>
-        <div class="card" style="border-radius: 0;height: 12%">
-            <div class="row">
+        <div class="shadow-sm p-3 portfo" style="height: 10%">
+            <div class="row ">
 
                 <div class="col-lg-4">
 
-                        {% for key, value in json.items %}
+                    {% for key, value in json.items %}
                         {% if key == 'avatar_url' %}
                             <div style="width: 13rem;">
-                                <img class="card-img-top" style="margin-top: 5%;margin-left: 5%;border: 22px;padding: 8px;" src="{{ value }}" alt="Card image cap">
+                                <img class="card-img-top"
+                                     style="margin-top: 5%;margin-left: 5%;border: 22px;padding: 8px;" src="{{ value }}"
+                                     alt="Card image cap">
                             </div>
                         {% endif %}
                     {% endfor %}
-
-
-
-
-                </div>
-                <div class="col-lg-3">
-                    {% for key, value in json.items %}
-                        {% if key == 'html_url' %}
-                            {{ value }}
-                        {% endif %}
-                    {% endfor %}
-                    <p>{{ request.user.first_name }}</p>
-
                 </div>
 
+                <div class="col-lg-8" style="">
 
+                    <p>Name: {{ request.user.first_name }} {{ request.user.last_name }}</p>
+                    <p>email: {{ request.user.email }}</p>
+                    <p>Linkedin profile: {{ request.user.profile.linkedin_url }}</p>
+                    <p>Preffered work type: {{ request.user.profile.availabilty }}</p>
+
+                </div>
             </div>
 
 
         </div>
 
+
+        <div class="shadow-lg p-3 mb-5  mt-5">
+
+            <h5 class="text-center">My Projects
+                <button type="button" class="btn btn-primary " style="margin-left: 50%" data-toggle="modal"
+                        data-target="#exampleModal">
+                    Add project
+                </button>
+            </h5>
+            <hr>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add project</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{% url 'frontend:newproject' %}" method="post">
+                            {% csrf_token %}
+                            <div class="modal-body">
+
+                                {% bootstrap_field form.title placeholder=False %}
+                                {% bootstrap_field form.description placeholder=False %}
+                                {% bootstrap_field form.image placeholder=False %}
+                                {% bootstrap_field form.demo_link placeholder=False %}
+                                {% bootstrap_field form.repository_link placeholder=False %}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% if verified_projects %}
+                {% for verified_project in verified_projects %}
+                    <div class="col-lg-4">
+                        <a href="{{ verified_project.demo_link }}">
+                            <div class="card shadow-sm  bg-white"
+                                 style="border-bottom-left-radiu: 0;border-bottom-right-radius: 0">
+                                <img class="card-img-top" src="{{ verified_project.image }}" style="height: 10rem"
+                                     alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-title">{{ verified_project.title }}</p>
+                                    <p class="card-text">{{ verified_project.description }}</p>
+                                    <p>{{ verified_project.repository_link }}</p>
+                                </div>
+                            </div>
+
+                        </a>
+
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12 text-center">No projects onboarded or verified</div>
+            {% endif %}
+
+
+        </div>
+
+
         <div class="shadow-sm p-3 mb-5  mt-5">
-            <h5 class="text-center">Repositories</h5>
+            <h5 class="text-center">Github Repositories</h5>
+        <hr>
             <div class="row">
                 {% for repo in repos %}
 
@@ -129,7 +192,7 @@
 
                                     {% if key == 'name' %}
                                         <div style="background-color: #c0f1e2;padding: 1%">
-                                            <p class="ml-2 mt-1" ><span data-feather="github"></span> {{ value }}</p>
+                                            <p class="ml-2 mt-1"><span data-feather="github"></span> {{ value }}</p>
                                         </div>
                                     {% endif %}
 
@@ -197,7 +260,8 @@
 
 
         <div class="shadow-sm p-3 " style="width: 80%;margin: auto;">
-            <h5 class="text-center">Languages used</h5>
+            <h5 class="text-center">Technologies used</h5>
+        <hr>
             <div class="row">
 
                 <div class="col-lg-6">
@@ -223,6 +287,73 @@
                 </div>
             </div>
         </div>
+        <div class="shadow-sm p-3 mb-5  mt-5">
+            <h5 class="text-center">Work experience
+                <button type="button" class="btn btn-primary " style="margin-left: 50%" data-toggle="modal"
+                        data-target="#exampleModal1">
+                    Add work experience
+                </button>
+            </h5>
+        <hr>
+            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add work experience</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{% url 'frontend:experience' %}" method="post">
+                            {% csrf_token %}
+                            <div class="modal-body">
+
+                                {% bootstrap_field experience_form.title placeholder=False %}
+                                {% bootstrap_field experience_form.description placeholder=False %}
+                                {% bootstrap_field experience_form.company placeholder=False %}
+                                {% bootstrap_field experience_form.location placeholder=False %}
+                                <label>Duration in months</label>
+                                {% bootstrap_field experience_form.duration placeholder=False show_label=False %}
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                {% if experiences %}
+                    {% for experience in experiences %}
+                        <div class="col-lg-6  ">
+
+
+                            <div class="row shadow-lg " style="margin: auto">
+                                <div class="col-lg-5 p-3" style="background-color: #c0f1e2">
+                                    <p><strong>Title </strong> : {{ experience.title|capfirst }}</p>
+                                    <p><strong>Company</strong> :{{ experience.company|capfirst }}</p>
+                                    <p><strong>Duration</strong>:{{ experience.duration }}</p>
+                                    <p><strong>Location</strong>:{{ experience.location.name }}</p>
+                                </div>
+                                <div class="col-lg-7 p-3">
+                                    <h6>Work description</h6>
+                                    <p>{{ experience.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12 text-center">No experience added yet</div>
+                {% endif %}
+
+
+            </div>
 
 
     </main>

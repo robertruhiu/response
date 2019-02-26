@@ -6,7 +6,8 @@ from frontend.views import home,activity,tracker,update_candidateprojects,\
     projectdetails,pendingproject,terms,dev,pricing,howitworks,privacy,\
     report,credits,onboarddevs,onboardrecruiters,seedevs,seerecruiters,manageprojects,managetransactions,\
     editproject,deleteproject,addproject,edittransactions\
-    ,deletetransaction,buildproject,calltoapply,apply,opencalltracker,competitions,takenquizzes,get_data,pickcandidates,update_finishedopencall,portfolio
+    ,deletetransaction,buildproject,calltoapply,apply,opencalltracker,competitions,newproject,\
+    takenquizzes,get_data,pickcandidates,update_finishedopencall,portfolio,github,experience
 from frontend.tasks import reminderforprofiledevs,applyreminder,massmail
 from accounts.views import update_profile
 
@@ -58,6 +59,10 @@ urlpatterns = [
     path('applyreminder', applyreminder, name='applyreminder'),
     path('massmail', massmail, name='massmail'),
     path('portfolio',portfolio,name='portfolio'),
+    path('github',github,name='github'),
     path('api/data/',get_data,name='api-data'),
+    path('newproject',newproject,name='newproject'),
+    path('experience',experience,name='experience')
+
 
 ]
