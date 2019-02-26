@@ -578,14 +578,15 @@ def github(request):
     if request.method == 'POST':
         newuser = Github_form(request.POST)
         if newuser.is_valid():
-            user = newuser.cleaned_data['github_username']
-            username = "robertruhiu"
-            token = config('ACCESS_TOKEN', default='ACCESS_TOKEN')
-            if requests.get('https://api.github.com/users/' + user, auth=(username, token)):
-                newgithubprofile = Github(candidate=request.user, github_username=user)
+            username = newuser.cleaned_data['github_username']
+            password =newuser.cleaned_data['password']
+
+            if requests.get('https://api.github.com/users/' + username, auth=(username, password)):
+                newgithubprofile = Github(candidate=request.user, github_username=username)
                 newgithubprofile.save()
                 return redirect(reverse('frontend:portfolio'))
             else:
+
 
                 return redirect(reverse('frontend:portfolio'))
 

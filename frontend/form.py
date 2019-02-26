@@ -35,11 +35,10 @@ class Portfolio_form(forms.ModelForm):
         model = Portfolio
         fields = ['image','title','description','demo_link','repository_link']
 
-class Github_form(forms.ModelForm):
+class Github_form(Form):
     github_username = forms.CharField(required=True)
-    class Meta:
-        model = Github
-        fields = ['github_username']
+    password = forms.CharField(widget=forms.PasswordInput())
+
 
 class EditProjectForm(forms.ModelForm):
     name = forms.CharField()

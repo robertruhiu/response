@@ -49,6 +49,7 @@ class Portfolio(models.Model):
 class Github(models.Model):
     candidate = models.ForeignKey(User, on_delete=models.CASCADE)
     github_username = models.CharField(null=True, max_length=100)
+
 class Experience(models.Model):
     candidate = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(null=True, max_length=100)
