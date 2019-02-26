@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 from collections import Counter
 from django.urls import reverse
 import requests
-from link_preview import link_preview
+
 import json
 from decouple import config
 
