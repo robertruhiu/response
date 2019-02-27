@@ -517,11 +517,21 @@ def portfolio(request):
             "labels": labels,
             "data": items,
         }
+        student = Student.objects.get(user_id=request.user.id)
+        verified_skills = TakenQuiz.objects.filter(student=student).filter(score__gte=50).all()
+        skill=[]
+        for verified_skill in verified_skills:
+            skill.append(verified_skill.quiz.subject.name)
+        skillset=set(skill)
+        skills =list(skillset)
+
+
+
         experiences=Experience.objects.filter(candidate=request.user).all()
         verified_projects = Portfolio.objects.filter(candidate=request.user).filter(verified=True).all()
         return render(request, 'frontend/developer/portfolio.html',
                       {'json': json_data, 'repos': repoz, 'data': data, 'c': c, 'form': form,
-                       'verified_projects': verified_projects,'experience_form':experience_form,'experiences':experiences})
+                       'verified_projects': verified_projects,'experience_form':experience_form,'experiences':experiences,'skills':skills})
     except Github.DoesNotExist:
         form = Github_form()
 
