@@ -100,7 +100,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="col-lg-8" style="">
+                <div class="col-lg-4" style="">
 
                     <p>Name: {{ request.user.first_name }} {{ request.user.last_name }}</p>
                     <p>email: {{ request.user.email }}</p>
@@ -108,6 +108,18 @@
                     <p>Preffered work type: {{ request.user.profile.availabilty }}</p>
 
                 </div>
+            <div class="col-lg-4">
+            <div data-toggle="tooltip" data-placement="top" title="Based on Taken and passed quizzes">Verified Skills <span data-feather="help-circle"></span> </div>
+                {% if skills  %}
+                    {% for skill in skills %}
+                    <span class="badge btn-primary" style="background-color: #b627a1">{{ skill }}</span>
+                {% endfor %}
+                    {% else %}
+                    <span class="badge btn-primary" style="background-color: #28bbbb">Take an assessment quiz</span>
+                {% endif %}
+
+            </div>
+
             </div>
 
 
@@ -155,7 +167,7 @@
             {% if verified_projects %}
                 {% for verified_project in verified_projects %}
                     <div class="col-lg-4">
-                        <a href="{{ verified_project.demo_link }}">
+                        <a target="_blank" href="{{ verified_project.demo_link }}">
                             <div class="card shadow-sm  bg-white"
                                  style="border-bottom-left-radiu: 0;border-bottom-right-radius: 0">
                                 <img class="card-img-top" src="{{ verified_project.image }}" style="height: 10rem"
