@@ -23,6 +23,7 @@ class Transaction(models.Model):
     completed = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
     framework = models.ForeignKey(Framework, on_delete=models.CASCADE)
+    projecttitle = models.CharField(null=True, max_length=100)
 
 
     def allcandidates(self):
@@ -59,6 +60,7 @@ class OpenCall(models.Model):
     recruiter =models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project,on_delete=models.CASCADE)
     transaction =models.ForeignKey(Transaction, on_delete=models.CASCADE)
+
 
 
 

@@ -25,7 +25,7 @@ def transaction_view(request, id):
             name = framework_form.cleaned_data['name']
             project = Project.objects.get(id=id)
             user = request.user
-            new_transaction = Transaction.objects.create(user=user, project=project, stage='upload-candidates', framework=get_object_or_404(Framework, name=name))
+            new_transaction = Transaction.objects.create(user=user, project=project, stage='upload-candidates', framework=get_object_or_404(Framework, name=name),projecttitle=user.profile.company)
             return redirect(reverse('transactions:process_transaction', args=[new_transaction.id]))
 
 
