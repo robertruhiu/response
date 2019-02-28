@@ -123,7 +123,7 @@
               {% if qualify.transaction.id == x %}
                   <tr>
 
-                      <th scope="row">{{ qualify.recruiter.profile.company|capfirst }}</th>
+                      <th scope="row">{{ qualify.transaction.projecttitle }}</th>
 
                       <td class="text-center">{{ qualify.recruiter.profile.country.name }}</td>
                       <td class="text-center">{{ qualify.transaction.framework.language|capfirst }}</td>
@@ -154,7 +154,7 @@
               {% if opportunity.transaction.id == y %}
                   <tr>
 
-                      <th scope="row">{{ opportunity.recruiter.profile.company|capfirst  }}</th>
+                      <th scope="row">{{ opportunity.transaction.projecttitle  }}</th>
 
                       <td class="text-center">{{ opportunity.recruiter.profile.country.name }}</td>
                       <td class="text-center">
