@@ -396,7 +396,7 @@ def calltoapply(request):
 
     qualifys = Applications.objects.filter(candidate=request.user)
     student = Student.objects.get(user_id=request.user.id)
-    passedquizz = TakenQuiz.objects.filter(score__gte=50).filter(student_id=student)
+    passedquizz = TakenQuiz.objects.filter(score__gte=30).filter(student_id=student)
 
     allsubjectspassed = []
     for d in passedquizz:
@@ -432,7 +432,8 @@ def calltoapply(request):
 def apply(request,opportunity_id):
     language =OpenCall.objects.get(transaction=opportunity_id)
     student = Student.objects.get(user_id=request.user.id)
-    passedquizz = TakenQuiz.objects.filter(score__gte=50).filter(student_id=student)
+    passedquizz = TakenQuiz.objects.filter(score__gte=30).filter(student_id=student)
+
 
     allsubjectspassed = []
     for d in passedquizz:
