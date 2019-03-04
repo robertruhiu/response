@@ -137,7 +137,7 @@ application tracker
     </div>
 {% else %}
     <div class="alert alert-primary" role="alert">
-  Report links will appear for candidates who have finished taking the test.
+  Demo links will appear for candidates who have finished taking the test.
 </div>
    <table class="table" style="width: 100%">
         <thead>
@@ -145,7 +145,7 @@ application tracker
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Project status</th>
-            <th scope="col">Full report</th>
+            <th scope="col">Demo</th>
 
 
         </tr>
@@ -171,12 +171,18 @@ application tracker
 
 
             {% if candidate.stage == 'project-completed'    %}
-
-                <td>
-                    <a href="/sample">
-                        Report
+                {% for submit in submitted %}
+                    {% if candidate.candidate.id == submit.candidate.id %}
+                        <td>
+                    <a target="_blank" href="{{ submit.demo }}">
+                        Demo
                     </a>
                 </td>
+
+                    {% endif %}
+                {% endfor %}
+
+
             {% else %}
                 <td>
                 <p class="text-muted">not available yet</p>

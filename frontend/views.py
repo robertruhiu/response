@@ -146,8 +146,8 @@ def activity(request):
 def tracker(request, id):
     project = Transaction.objects.get(id=id)
     candidates = candidatesprojects.objects.filter(transaction=id)
-
-    return render(request, 'frontend/recruiter/tracker.html', {'candidates': candidates, 'project': project})
+    submitted = submissions.objects.filter(transaction=id).all()
+    return render(request, 'frontend/recruiter/tracker.html', {'candidates': candidates, 'project': project,'submitted':submitted})
 
 
 @login_required
@@ -381,7 +381,7 @@ def buildproject(request):
     return render(request, 'classroom/students/worldprojects.html')
 @login_required
 def calltoapply(request):
-    alltransactions=Transaction.objects.filter(stage='complete')
+    alltransactions=Transaction.objects.filter(stage='complete').filter(closed=False)
     complete=[]
     for i in alltransactions:
         complete.append(i.id)
