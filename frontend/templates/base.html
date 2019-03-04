@@ -10,14 +10,10 @@
     <meta name="theme-color" content="#272339">
     <title>{% block title %}
 
-        {% endblock %} | Codeln</title>
+    {% endblock %} | Codeln</title>
 
 
-
-
-
-
-    <link rel="stylesheet" href="{% static 'frontend/css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'frontend/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'frontend/css/home.css' %}">
     <link rel="stylesheet" href="{% static 'frontend/css/stay.css' %}">
 
@@ -25,43 +21,55 @@
 
     {% block css %}
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130019198-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130019198-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'UA-130019198-1');
-</script>
+            function gtag() {
+                dataLayer.push(arguments);
+            }
 
+            gtag('js', new Date());
 
+            gtag('config', 'UA-130019198-1');
+        </script>
+
+        <script async defer src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3">
+            new Crate({
+                server: '465900579097411595',
+                channel: '465900751487500308',
+                shard: 'https://cl3.widgetbot.io'
+            });
+
+        </script>
 
 
     {% endblock %}
 </head>
 <body>
 <nav class="navbar navbar-expand-md fixed-top  nav-container">
-<a class="navbar-brand1" href="/home">
-<img src="../static/frontend/images/logo/cd_ln_wo.png" class="img-fluid ml-4  mt-2" width="120" alt="">
-</a>
+    <a class="navbar-brand1" href="/home">
+        <img src="../static/frontend/images/logo/cd_ln_wo.png" class="img-fluid ml-4  mt-2" width="120" alt="">
+    </a>
 
-  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span  class="navbar-toggler-icon">
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon">
         <span style="color: white" data-feather="menu"></span>
     </span>
-  </button>
+    </button>
 
 
-  <div class="collapse navbar-collapse " id="navbarSupportedContent">
-    <ul class="nav ml-auto">
-        <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle d-none d-md-block" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle d-none d-md-block" style="color: white" href="#" id="navbarDropdown"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Products
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'account_login' %}" >Screening</a>
+                    <a class="dropdown-item" href="{% url 'account_login' %}">Screening</a>
                     <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Sourcing</a>
-
 
 
                 </div>
@@ -70,35 +78,33 @@
 
             {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                <a  href="{% url 'frontend:index' %}" style="color: white" class="nav-link" >My account</a>
-            </li>
-            <li class="nav-item">
-                <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
-            </li>
+                    <a href="{% url 'frontend:index' %}" style="color: white" class="nav-link">My account</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'account_logout' %}" style="color: white" class="nav-link">Logout</a>
+                </li>
 
             {% else %}
 
-            <li class="nav-item">
-                <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
-            </li>
-            <li class="nav-item d-none d-sm-block">
-                <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
-            </li>
+                <li class="nav-item">
+                    <a href="{% url 'account_login' %}" style="color: white" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item d-none d-sm-block">
+                    <a href="{% url 'account_signup' %}" style="color: white" class="nav-link">Register</a>
+                </li>
             {% endif %}
             <li class="nav-item">
-                <a  href="/dev" style="color: white" class="nav-link" >Developers</a>
+                <a href="/dev" style="color: white" class="nav-link">Developers</a>
             </li>
 
-    </ul>
+        </ul>
 
-  </div>
+    </div>
 </nav>
 
-    {% block content %}
+{% block content %}
 
-    {% endblock %}
-
-
+{% endblock %}
 
 
 
@@ -109,9 +115,17 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 
 <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
 <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
@@ -119,9 +133,9 @@
     feather.replace()
 </script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-        $(window).scroll(function() {
+        $(window).scroll(function () {
 
             var height = $('.nav-container').height();
             var scrollTop = $(window).scrollTop();
