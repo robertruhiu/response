@@ -97,7 +97,8 @@ recruiter dashboard
       <p class="card-text"><strong>Recruiter name: </strong>{{ transaction.user.first_name }}  {{ transaction.user.last_name }}</p>
       <p class="card-text"><strong>Recruiter email:</strong> {{ transaction.user.email }}</p>
       <p class="card-text"><strong>Recruiter company:</strong> {{ transaction.user.profile.company }}</p>
-    <a href="{% url 'frontend:deletetransaction' transaction.id %}" class="btn btn-warning">Delete transaction</a>
+    <a href="{% url 'frontend:deletetransaction' transaction.id %}" class="btn btn-warning">Delete Project</a>
+      <a href="{% url 'frontend:closetransaction' transaction.id %}" class="btn btn-primary">Close Project</a>
   </div>
 </div>
     </div>

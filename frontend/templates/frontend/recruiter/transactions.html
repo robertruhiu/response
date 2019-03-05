@@ -93,8 +93,8 @@ recruiter dashboard
     <tr>
         <th scope="col">User</th>
         <th scope="col">Stage</th>
-        <th scope="col">Project</th>
-        <th scope="col">Framework</th>
+        <th scope="col">Project title</th>
+        <th scope="col">Closed</th>
         <th scope="col">manage</th>
 
     </tr>
@@ -104,8 +104,8 @@ recruiter dashboard
        <tr>
       <td>{{ transaction.user.email }}</td>
       <td>{{ transaction.stage }}</td>
-       <td>{{ transaction.project }}</td>
-       <td>{{ transaction.framework}}</td>
+       <td>{{ transaction.projecttitle }}</td>
+       <td>{{ transaction.closed}}</td>
        <td><a href="{% url 'frontend:edittransactions' transaction.id %}"><span class="badge badge-warning">edit</span></a> </td>
 
     </tr>

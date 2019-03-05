@@ -7,8 +7,8 @@ from frontend.views import home,activity,tracker,update_candidateprojects,\
     report,credits,onboarddevs,onboardrecruiters,seedevs,seerecruiters,manageprojects,managetransactions,\
     editproject,deleteproject,addproject,edittransactions\
     ,deletetransaction,buildproject,calltoapply,apply,opencalltracker,competitions,newproject,\
-    takenquizzes,get_data,pickcandidates,update_finishedopencall,portfolio,github,experience
-from frontend.tasks import reminderforprofiledevs,applyreminder,massmail
+    takenquizzes,get_data,pickcandidates,update_finishedopencall,portfolio,github,experience,closetransaction
+from frontend.tasks import reminderforprofiledevs,applyreminder,massmail,submission
 from accounts.views import update_profile
 
 app_name = 'frontend'
@@ -47,6 +47,7 @@ urlpatterns = [
     path('deleteproject/<int:project_id>',deleteproject,name='deleteproject'),
     path('edittransactions/<int:transaction_id>',edittransactions,name='edittransactions'),
     path('deletetransaction/<int:transaction_id>',deletetransaction,name='deletetransaction'),
+    path('closetransaction/<int:transaction_id>',closetransaction,name='closetransaction'),
     path('addproject',addproject,name='addproject'),
     path('calltoapply',calltoapply,name='calltoapply'),
     path('buildproject',buildproject,name='buildproject'),
@@ -58,6 +59,7 @@ urlpatterns = [
     path('reminderforprofiledevs',reminderforprofiledevs,name='reminderforprofiledevs'),
     path('applyreminder', applyreminder, name='applyreminder'),
     path('massmail', massmail, name='massmail'),
+    path('submission', submission, name='submission'),
     path('portfolio',portfolio,name='portfolio'),
     path('github',github,name='github'),
     path('api/data/',get_data,name='api-data'),

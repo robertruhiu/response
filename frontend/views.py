@@ -373,8 +373,14 @@ def edittransactions(request, transaction_id):
     return render(request, 'frontend/recruiter/edittransaction.html',{'transaction':transaction,'candidates':candidates})
 @login_required
 def deletetransaction(request,transaction_id):
+    OpenCall.objects.filter(transaction_id=transaction_id).delete()
     Transaction.objects.filter(id=transaction_id).delete()
     Candidate.objects.filter(transaction_id=transaction_id).delete()
+    return redirect('frontend:managetransactions')
+def closetransaction(request,transaction_id):
+    project = Transaction.objects.get(id=transaction_id)
+    project.closed = True
+    project.save()
     return redirect('frontend:managetransactions')
 @login_required
 def buildproject(request):
