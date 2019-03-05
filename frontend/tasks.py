@@ -7,6 +7,7 @@ from django.utils.html import strip_tags
 from django.core import mail
 from classroom.models import TakenQuiz
 from transactions.models import Applications
+from frontend.models import candidatesprojects
 import csv
 
 @shared_task
@@ -64,5 +65,35 @@ def massmail(request):
     unregistered =set(cleanlist)-set(registerd)
     print(unregistered)
     return render(request, 'frontend/recruiter/recruiter.html')
+def submission(request):
+    invitations_mails=[]
+    submissions_mails =[]
+    emails = candidatesprojects.objects.all()
+    for email in emails:
+        if email.stage == 'invite-accepted':
+            invitations_mails.append(email)
+        elif email.stage == 'project-in-progress':
+            submissions_mails.append(email)
+    for candidate in invitations_mails:
+        subject = 'Mest Dev competition.'
+        message = 'Hello ' + candidate.candidate.first_name + '.\n We noticed you accepted an invitation for the competition.The deadline is creeping up for' + \
+              candidate.transaction.user.profile.company + '\n \n Use this link to see the project you were assigned and see details concerning deliverables and submission guidelines \n  https://beta.codeln.com/inprogress/ \n' \
+                                                           'Thank you'
+
+
+        from_email = 'codeln@codeln.com'
+        to = candidate.candidate.email
+        mail.send_mail(subject, message, from_email, [to])
+    for cand in submissions_mails:
+        subject = 'Mest Dev competition.'
+        message = 'Hello ' + cand.candidate.first_name + '.\n Thank you for being part of the competition.The deadline is creeping up for the ' + \
+                  cand.transaction.user.profile.company + '.We hope to recieve your demo and github repo of the project assigned before the submission portal closes.\n \n  Use this link to see the project you were assigned and see details concerning deliverables and submission guidelines \n  https://beta.codeln.com/inprogress/ \n' \
+                                                               'Thank you'
+
+        from_email = 'codeln@codeln.com'
+        to = cand.candidate.email
+        mail.send_mail(subject, message, from_email, [to])
+    return render(request, 'frontend/recruiter/recruiter.html')
+
 
 
