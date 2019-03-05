@@ -381,7 +381,7 @@ def buildproject(request):
     return render(request, 'classroom/students/worldprojects.html')
 @login_required
 def calltoapply(request):
-    alltransactions=Transaction.objects.filter(stage='complete')
+    alltransactions=Transaction.objects.filter(stage='complete').filter(closed=False)
     complete=[]
     for i in alltransactions:
         complete.append(i.id)
