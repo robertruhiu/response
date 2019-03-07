@@ -36,8 +36,9 @@
 
   gtag('config', 'UA-130019198-1');
 </script>
+{% if request.path == '/'  %}
 
-<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
+    <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
             const button = new Crate({
                 server: '465900579097411595',
                 channel: '465900751487500308',
@@ -46,6 +47,16 @@
 
             button.notify('Welcome back to Codeln.Join the conversation here with other developers.Questions and tips')
         </script>
+    {% else %}
+    <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
+  new Crate({
+      server: '465900579097411595',
+      channel: '465900751487500308',
+      shard: 'https://cl3.widgetbot.io'
+  })
+</script>
+        {% endif %}
+
 
     {% endblock %}
 </head>
