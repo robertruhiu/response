@@ -52,7 +52,7 @@ def post_job(request):
             new_job = job_form.save(commit=False)
             new_job.posted_by = recruiter
             new_job.save()
-            return HttpResponseRedirect("/marketplace/recruiter/manage_posted_jobs/")
+            return HttpResponseRedirect(reverse('marketplace:manage_posted_jobs'))
     else:
         job_form = JobForm()
         return render(request, 'marketplace/recruiter/jobs/create.html', {'job_form': job_form})
