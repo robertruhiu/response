@@ -167,21 +167,24 @@
             {% if verified_projects %}
                 {% for verified_project in verified_projects %}
                     <div class="col-lg-4">
-                        <a target="_blank" href="{{ verified_project.demo_link }}">
+                        <a target="_blank" href="{{ verified_project.demo_link }}" style="color: black">
                             <div class="card shadow-sm  bg-white"
-                                 style="border-bottom-left-radiu: 0;border-bottom-right-radius: 0">
-                                <img class="card-img-top" src="{{ verified_project.image }}" style="height: 10rem"
+                                 style="border-bottom-left-radius: 0;border-bottom-right-radius: 0">
+                                <img class="img-fluid" src="{{ verified_project.image }}" style=""
                                      alt="Card image cap">
                                 <div class="card-body">
-                                    <p class="card-title">{{ verified_project.title }}</p>
-                                    <p class="card-text">{{ verified_project.description }}</p>
-                                    <p>{{ verified_project.repository_link }}</p>
+                                    <p>Project title: {{ verified_project.title }}</p>
+                                    <p>Project description: {{ verified_project.description }}</p>
+                                    <p><a href="{{ verified_project.repository_link }}">Repository link</a></p>
                                 </div>
+
                             </div>
 
                         </a>
 
+
                     </div>
+
                 {% endfor %}
             {% else %}
                 <div class="col-12 text-center">No projects onboarded or verified</div>

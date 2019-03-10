@@ -1,119 +1,150 @@
 {% extends 'recruiterbase.html' %}
 {% block title %}
-recruiter dashboard
+    recruiter dashboard
 {% endblock %}
 {% load static %}
 {% block content %}
-<main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
-    <div class="d-none d-lg-block">
-        <nav class="navbar  navbar-light fixed-top fine border-bottom">
-                    <h5 >Home</h5>
-                    <ul class="nav ml-auto">
+    <main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+        <div class="d-none d-lg-block">
+            <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                <h5>Home</h5>
+                <ul class="nav ml-auto">
 
 
-
-            {% if request.user.is_authenticated %}
-
-
-
-            <li class="nav-item">
-                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
-            </li>
-
-            {% else %}
-
-            <li class="nav-item">
-                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
-            </li>
-            <li class="nav-item">
-                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
-            </li>
-            {% endif %}
-
-
-    </ul>
-                </nav>
-    </div>
-
-    <!-----md devices adaptation------>
-    <div class="container d-lg-none">
-        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
-            <a class="logoadapt h5" style="text-decoration: none" href="/home">Home</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span  class="navbar-toggler-icon">
-                    <span style="color: white" data-feather="menu"></span>
-                </span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Menu
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'frontend:my-activity' %}" >Ongoing tests</a>
-                            <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
-                            <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
-                            {% if request.user.is_staff %}
-                                <a class="dropdown-item" href="{% url 'frontend:onboarddevs' %}">devs</a>
-                                <a class="dropdown-item" href="{% url 'frontend:onboardrecruiters' %}">recruiters</a>
-                            {% endif %}
-                        </div>
-                    </li>
                     {% if request.user.is_authenticated %}
+
+
+
                         <li class="nav-item">
-                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                            <a href="{% url 'account_logout' %}" style="color: black" class="nav-link">Logout</a>
                         </li>
-                        <li class="nav-item">
-                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
-                        </li>
+
                     {% else %}
+
                         <li class="nav-item">
-                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                            <a href="{% url 'account_login' %}" style="color: black" class="nav-link">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                            <a href="{% url 'account_signup' %}" style="color: black" class="nav-link">Register</a>
                         </li>
                     {% endif %}
+
+
                 </ul>
+            </nav>
+        </div>
+
+        <!-----md devices adaptation------>
+        <div class="container d-lg-none">
+            <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+                <a class="logoadapt h5" style="text-decoration: none" href="/home">Home</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdown"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Menu
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'frontend:my-activity' %}">Ongoing tests</a>
+                                <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
+                                <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
+                                {% if request.user.is_staff %}
+                                    <a class="dropdown-item" href="{% url 'frontend:onboarddevs' %}">devs</a>
+                                    <a class="dropdown-item"
+                                       href="{% url 'frontend:onboardrecruiters' %}">recruiters</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a href="/home" style="color: white" class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account_logout' %}" style="color: white" class="nav-link">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'account_login' %}" style="color: white" class="nav-link">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account_signup' %}" style="color: white" class="nav-link">Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="d-none d-lg-block" style="margin-top: 8%">
+            <div class="alert alert-primary " role="alert">
+                Welcome {{ user.first_name }} {{ user.last_name }} to Codeln.Choose one of the paths below to start
+
             </div>
-        </nav>
-    </div>
+        </div>
 
-<div class="d-none d-lg-block" style="margin-top: 8%">
-    <div class="alert alert-primary "  role="alert">
-        Welcome {{ user.first_name }} {{ user.last_name }} to Codeln.Choose one of the paths below to start
+        <div class="d-lg-none" style="margin-top: 7em">
+            <div class="alert alert-primary d-lg-none" role="alert">
+                Welcome {{ user.first_name }} {{ user.last_name }} to Codeln.Choose one of the paths below to start
 
-    </div>
-</div >
-
-<div class="d-lg-none"  style="margin-top: 7em">
-    <div class="alert alert-primary d-lg-none"  role="alert">
-        Welcome {{ user.first_name }} {{ user.last_name }} to Codeln.Choose one of the paths below to start
-
-    </div>
-</div>
+            </div>
+        </div>
 
 
-    <div class="row">
+        <div class="row">
 
-        {% if transactions %}
+            {% if transactions %}
 
-            <div class=" col-12 col-md-4 col-sm-6 col-lg-4 mb-5" >
-                <div class="card recruithomecard" >
+                <div class=" col-12 col-md-4 col-sm-6 col-lg-4 mb-5">
+                    <div class="card recruithomecard">
 
 
-                    <a   href="{% url 'frontend:my-activity' %}">
+                        <a href="{% url 'frontend:my-activity' %}">
+                            <div style="text-align: -webkit-center;">
+                                <img class="img-fluid " src="../../../static/frontend/images/management.svg"
+                                     style="width: 30%;margin-left: 33%;margin-right: 33%" alt="Card image cap">
+                            </div>
+
+                            <div class="card" style="border: 0 ">
+
+
+                                <div class="card-body">
+
+                                    <h6 class="card-title text-center" style="text-align: -webkit-center;">Ongoing
+                                        tests</h6>
+
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+
+
+            {% endif %}
+
+            <div class=" col-12 col-md-4 col-sm-6 col-lg-4 mb-5">
+                <div class="card recruithomecard">
+                    <a href="{% url 'projects:categories' %}">
                         <div style="text-align: -webkit-center;">
-                            <img class="img-fluid "  src="../../../static/frontend/images/management.svg" style="width: 30%;margin-left: 33%;margin-right: 33%" alt="Card image cap">
+                            <img class="img-fluid" src="../../../static/frontend/images/interview.svg"
+                                 style="width: 30%;margin-left: 33%;margin-right: 33%" alt="Card image cap">
                         </div>
-
                         <div class="card" style="border: 0 ">
 
 
                             <div class="card-body">
 
-                                <h6 class="card-title text-center" style="text-align: -webkit-center;">Ongoing tests</h6>
+                                <h6 class="card-title text-center" style="text-align: -webkit-center;">Create a new
+                                    test</h6>
 
                             </div>
 
@@ -121,214 +152,259 @@ recruiter dashboard
                     </a>
                 </div>
             </div>
-        {% else %}
+            <div class=" col-12 col-md-4 col-sm-6 col-lg-4 mb-5">
+                <div class="card recruithomecard">
+                    <a target="_blank" href="{% url 'transactions:sourcing' %}">
+                        <div style="text-align: -webkit-center;">
+                            <img class="img-fluid" src="../../../static/frontend/images/search.svg"
+                                 style="width: 30%;margin-left: 33%;margin-right: 33%" alt="Card image cap">
+                        </div>
+                        <div class="card" style="border: 0 ">
 
+
+                            <div class="card-body">
+
+                                <h6 class="card-title text-center" style="text-align: -webkit-center;">Source
+                                    candidates</h6>
+
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+        {% if request.user.is_staff %}
+
+
+
+            <h5>Management</h5>
+            <hr>
+            <div class="row" style="margin-right: 0;margin-left: 0">
+                <div class="col-lg-3 col-md-6 col-sm-6 col mb-2" style="width: 100%;">
+                    <div class="card recruithomecard" style="width:15em;margin: auto">
+                        <a href="{% url 'frontend:seedevs' %}">
+                            <div style="text-align: -webkit-center;">
+
+                                <img class="img-fluid" src="../../../static/frontend/images/team.svg"
+                                     style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+
+
+                            </div>
+                            <div class="card" style="border: 0 ">
+
+
+                                <div class="card-body">
+
+                                    <h6 class="card-title text-center" style="text-align: -webkit-center;">See devs</h6>
+
+
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col mb-2" style="width: 100%;">
+                    <div class="card recruithomecard" style="width:15em;margin: auto">
+                        <a href="{% url 'frontend:seerecruiters' %}">
+                            <div style="text-align: -webkit-center;">
+
+                                <img class="img-fluid" src="../../../static/frontend/images/employee.svg"
+                                     style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+
+
+                            </div>
+                            <div class="card" style="border: 0 ">
+
+
+                                <div class="card-body">
+
+                                    <h6 class="card-title text-center" style="text-align: -webkit-center;">See
+                                        recruiters</h6>
+
+
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col mb-2" style="width: 100%;">
+                    <div class="card recruithomecard" style="width:15em;margin: auto">
+                        <a href="{% url 'classroom:quiz_change_list' %}">
+                            <div style="text-align: -webkit-center;">
+
+                                <img class="img-fluid" src="../../../static/frontend/images/quiz.svg"
+                                     style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+
+
+                            </div>
+                            <div class="card" style="border: 0 ">
+
+
+                                <div class="card-body">
+
+                                    <h6 class="card-title text-center" style="text-align: -webkit-center;">Quizzes</h6>
+
+
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col mb-2" style="width: 100%;">
+                    <div class="card recruithomecard" style="width:15em;margin: auto">
+                        <a href="{% url 'frontend:managetransactions' %}">
+                            <div style="text-align: -webkit-center;">
+
+                                <img class="img-fluid" src="../../../static/frontend/images/trans.svg"
+                                     style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+
+
+                            </div>
+                            <div class="card" style="border: 0 ">
+
+
+                                <div class="card-body">
+
+                                    <h6 class="card-title text-center" style="text-align: -webkit-center;">
+                                        Transactions</h6>
+
+
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col mb-2" style="width: 100%;">
+                    <div class="card recruithomecard" style="width:15em;margin: auto">
+                        <a href="{% url 'frontend:manageprojects' %}">
+                            <div style="text-align: -webkit-center;">
+
+                                <img class="img-fluid" src="../../../static/frontend/images/start-up.svg"
+                                     style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+
+
+                            </div>
+                            <div class="card" style="border: 0 ">
+
+
+                                <div class="card-body">
+
+                                    <h6 class="card-title text-center" style="text-align: -webkit-center;">Manage
+                                        Projects</h6>
+
+
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col mb-2" style="width: 100%;">
+                    <div class="card recruithomecard" style="width:15em;margin: auto">
+                        <a href="{% url 'frontend:takenquizzes' %}">
+                            <div style="text-align: -webkit-center;">
+
+                                <img class="img-fluid" src="../../../static/frontend/images/how/completed.svg"
+                                     style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+
+
+                            </div>
+                            <div class="card" style="border: 0 ">
+
+
+                                <div class="card-body">
+
+                                    <h6 class="card-title text-center" style="text-align: -webkit-center;">Taken
+                                        quizzes</h6>
+
+
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class=" col-lg-3 col-md-6 col-sm-6 col mb-2">
+                    <div class="card recruithomecard" style="width:15em;margin: auto">
+                        <a href="{% url 'marketplace:post_job' %}">
+                            <div style="text-align: -webkit-center;">
+                                <img style="width: 40%;margin-right: 25%;margin-left: 25%"
+                                     src="../../../static/frontend/images/pencil.svg"
+                                     alt="Card image cap">
+                            </div>
+                            <div class="card" style="border: 0 ">
+                                <div class="card-body">
+                                    <h6 class="card-title text-center" style="text-align: -webkit-center;">Create
+                                        Job</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% if jobs %}
+                    <div class=" col-lg-3 col-md-6 col-sm-6 col mb-2">
+                        <div class="card recruithomecard" style="width:15em;margin: auto">
+                            <a href="{% url 'marketplace:manage_posted_jobs' %}">
+                                <div style="text-align: -webkit-center;">
+                                    <img class="img-fluid" src="../../../static/frontend/images/search.svg"
+                                         style="width: 30%;margin-left: 33%;margin-right: 33%" alt="Card image cap">
+                                </div>
+                                <div class="card" style="border: 0 ">
+
+
+                                    <div class="card-body">
+
+                                        <h6 class="card-title text-center" style="text-align: -webkit-center;">Manage
+                                            Job
+                                            Applications</h6>
+
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-lg-3 col-md-6 col-sm-6 col mb-2">
+                        <div class="card recruithomecard grey" style="width:15em;margin: auto">
+
+                            <div style="text-align: -webkit-center;">
+
+                                <img class="img-fluid" src="../../../static/frontend/images/search.svg"
+                                     style="width: 30%;margin-right: 33%;margin-left: 33%" alt="Card image cap">
+
+
+                            </div>
+                            <div class="card" style="border: 0 ">
+
+
+                                <div class="card-body">
+
+                                    <h6 class="card-title text-center" style="text-align: -webkit-center;">No Job to
+                                        Manage. Click Source candidates</h6>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+
+            </div>
 
         {% endif %}
 
-        <div class=" col-12 col-md-4 col-sm-6 col-lg-4 mb-5" >
-            <div class="card recruithomecard" >
-            <a   href="{% url 'projects:categories' %}">
-                <div style="text-align: -webkit-center;">
-                <img class="img-fluid"  src="../../../static/frontend/images/interview.svg" style="width: 30%;margin-left: 33%;margin-right: 33%" alt="Card image cap">
-                </div>
-            <div class="card" style="border: 0 ">
 
-
-                <div class="card-body">
-
-                    <h6 class="card-title text-center" style="text-align: -webkit-center;">Create a new test</h6>
-
-                </div>
-
-            </div>
-            </a>
-            </div>
-        </div>
-        <div class=" col-12 col-md-4 col-sm-6 col-lg-4 mb-5" >
-            <div class="card recruithomecard" >
-            <a target="_blank" href="{% url 'transactions:sourcing' %}">
-                <div style="text-align: -webkit-center;">
-                <img class="img-fluid" src="../../../static/frontend/images/search.svg" style="width: 30%;margin-left: 33%;margin-right: 33%" alt="Card image cap">
-                </div>
-                <div class="card" style="border: 0 ">
-
-
-                    <div class="card-body">
-
-                        <h6 class="card-title text-center" style="text-align: -webkit-center;">Source candidates</h6>
-
-                    </div>
-
-                </div>
-            </a>
-            </div>
-        </div>
-
-
-
-    </div>
-{% if request.user.is_staff %}
-
-
-
-    <h5>Management</h5>
-<hr>
-<div class="row" style="margin-right: 0;margin-left: 0">
-    <div class="col-lg-3 col-md-6 col-sm-6 col mb-2" style="width: 100%;">
-            <div class="card recruithomecard" style="width:15em;margin: auto">
-                <a href="{% url 'frontend:seedevs' %}">
-                    <div style="text-align: -webkit-center;">
-
-                            <img class="img-fluid" src="../../../static/frontend/images/team.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
-
-
-
-                    </div>
-                    <div class="card" style="border: 0 ">
-
-
-                        <div class="card-body">
-
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">See devs</h6>
-
-
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
-    <div class="col-lg-3 col-md-6 col-sm-6 col mb-2" style="width: 100%;">
-            <div class="card recruithomecard" style="width:15em;margin: auto">
-                <a href="{% url 'frontend:seerecruiters' %}">
-                    <div style="text-align: -webkit-center;">
-
-                            <img class="img-fluid" src="../../../static/frontend/images/employee.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
-
-
-
-                    </div>
-                    <div class="card" style="border: 0 ">
-
-
-                        <div class="card-body">
-
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">See recruiters</h6>
-
-
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
-    <div class="col-lg-3 col-md-6 col-sm-6 col mb-2" style="width: 100%;">
-            <div class="card recruithomecard" style="width:15em;margin: auto">
-                <a href="{% url 'classroom:quiz_change_list' %}">
-                    <div style="text-align: -webkit-center;">
-
-                            <img class="img-fluid" src="../../../static/frontend/images/quiz.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
-
-
-
-                    </div>
-                    <div class="card" style="border: 0 ">
-
-
-                        <div class="card-body">
-
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Quizzes</h6>
-
-
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
-    <div class="col-lg-3 col-md-6 col-sm-6 col mb-2" style="width: 100%;">
-            <div class="card recruithomecard" style="width:15em;margin: auto">
-                <a href="{% url 'frontend:managetransactions' %}">
-                    <div style="text-align: -webkit-center;">
-
-                            <img class="img-fluid" src="../../../static/frontend/images/trans.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
-
-
-
-                    </div>
-                    <div class="card" style="border: 0 ">
-
-
-                        <div class="card-body">
-
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Transactions</h6>
-
-
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
-    <div class="col-lg-3 col-md-6 col-sm-6 col mb-2" style="width: 100%;">
-            <div class="card recruithomecard" style="width:15em;margin: auto">
-                <a href="{% url 'frontend:manageprojects' %}">
-                    <div style="text-align: -webkit-center;">
-
-                            <img class="img-fluid" src="../../../static/frontend/images/start-up.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
-
-
-
-                    </div>
-                    <div class="card" style="border: 0 ">
-
-
-                        <div class="card-body">
-
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Manage Projects</h6>
-
-
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
-    <div class="col-lg-3 col-md-6 col-sm-6 col mb-2" style="width: 100%;">
-            <div class="card recruithomecard" style="width:15em;margin: auto">
-                <a href="{% url 'frontend:takenquizzes' %}">
-                    <div style="text-align: -webkit-center;">
-
-                            <img class="img-fluid" src="../../../static/frontend/images/how/completed.svg" style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
-
-
-
-                    </div>
-                    <div class="card" style="border: 0 ">
-
-
-                        <div class="card-body">
-
-                            <h6 class="card-title text-center" style="text-align: -webkit-center;">Taken quizzes</h6>
-
-
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
-
-
-
-
-</div>
-
-{% endif %}
-
-
-</main>
+    </main>
     <br>
     <br>
 

@@ -299,7 +299,7 @@
           <div class="content">
 
             <!-- START CENTERED WHITE CONTAINER -->
-            <span class="preheader">You have been selected to build a project by {{ company.recruiter.profile.company }} .</span>
+            <span class="preheader">Job Application received</span>
             <table role="presentation" class="main">
 
               <!-- START MAIN CONTENT AREA -->
@@ -314,20 +314,16 @@
                       </tr>
                       <tr>
                           <td>
-                              <p>Hello {{ dev.first_name|capfirst}},</p>
-                              <p>Congratulations you have been picked to progress to the next stage of the {{ company.recruiter.profile.company|capfirst }} challenge.
-                              Accept the invitation by following the following link</p>
-
-                              <p>Grading criteria hierarchy for the project will be: </p>
-                              <ul>
-                                  <li>Deliverables/requirements</li>
-                                  <li>Deployment</li>
-                                  <li>Coding standards</li>
-                                  <li>Design</li>
-                              </ul>
+                              <p>Hello, {{ dev.first_name}}</p>
+                              <p>
+                                  We have received your application for the job.Your profile will be reviewed.
+                                  If it merits you will be picked for the
+                                  next stage of the application
+                              </p>
+                              <p>Having a great portfolio reflects greatly for your application.Create yours here</p>
 
 
-                          <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
                               <td align="left">
@@ -335,7 +331,7 @@
                                   <tbody>
                                     <tr>
                                       <td >
-                                          <a href="https://beta.codeln.com/invites/" target="_blank">See invites</a>
+                                          <a href="https://beta.codeln.com/portfolio" target="_blank">Portfolio</a>
                                       </td>
                                     </tr>
                                   </tbody>

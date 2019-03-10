@@ -50,7 +50,7 @@ INSTALLED_APPS = [
 
     'transactions',
     'payments',
-
+    'marketplace',
     'crispy_forms',
 
     # third party libs
@@ -118,6 +118,16 @@ WSGI_APPLICATION = 'codelnmain.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(
+#             os.path.dirname(os.path.dirname(PROJECT_ROOT)),
+#             'sandbox',
+#             'db.sqlite3'
+#         ),
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -190,7 +200,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #email settings
 DEFAULT_FROM_EMAIL=config('DEFAULT_FROM_EMAIL',default='DEFAULT_FROM_EMAIL')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='EMAIL_HOST_USER')

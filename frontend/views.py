@@ -25,7 +25,7 @@ from projects.models import Project, Framework
 from frontend.form import Projectinvite, EditProjectForm,Submissions,Portfolio_form,Github_form,Experience_Form
 from frontend.models import candidatesprojects, devs, recruiters,submissions,Portfolio,Github,Experience
 from classroom.models import TakenQuiz,Student
-
+from marketplace.models import Job
 
 @login_required
 def developer_filling_details(request, current_profile):
@@ -111,7 +111,8 @@ def index(request):
                     obj.save()
                     return render(request, 'frontend/developer/developer.html')
             elif request.user.profile.user_type == 'recruiter':
-                return render(request, 'frontend/recruiter/recruiter.html', {'transactions': transactions})
+                jobs = Job.objects.filter(posted_by=request.user)
+                return render(request, 'frontend/recruiter/recruiter.html', {'transactions': transactions,'jobs':jobs})
     else:
         return home(request)
 
@@ -479,12 +480,12 @@ def pickcandidates(request,trans_id,candidate_id):
     newcandidate.save()
     application.save()
     subject = 'Accepted for next stage'
-    message ='Hello '+ candidate.first_name +'.\n You have been accepted to build a project by '+ \
-             transaction.user.profile.company + '\n \n  Use this link to accept the invite \n  https://beta.codeln.com/invites/ ' \
-            '\n After accepting invite proceed to ongoing projects and you will find all details for the project.''\n \n Criteria for grading \n 1.Deliverable \n 2.Deployment \n 3.Coding standards \n 4.Design'
+    html_message = render_to_string('invitations/email/opencallaccepted.html',
+                                    {'dev': request.user,'company':transaction})
+    plain_message = strip_tags(html_message)
     from_email = 'codeln@codeln.com'
     to = candidate.email
-    mail.send_mail(subject, message, from_email, [to])
+    mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
     return HttpResponseRedirect('/opencalltracker/%s' % trans_id)
 
 

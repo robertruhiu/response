@@ -1,0 +1,153 @@
+{% extends 'base3.html' %}
+{% block title %}
+    Job board
+{% endblock %}
+{%load static %}
+{% block content %}
+
+    <div class="jumbotron jumbotron2">
+        <div class="container">
+          <div class="">
+
+            <div class=" h3 text-center d-none d-lg-block " style="color: white">Job board</div>
+
+              <div class="d-lg-none h5 text-center" style="color: white;margin-top: 4em;">Job board</div>
+        </div>
+        </div>
+      </div>
+
+    <div class="row" style="margin-right: 0;margin-left: 0">
+    <div class="col-lg-8" style="margin-right: auto;margin-left: auto">
+            {% if jobs  %}
+            {% for job in jobs %}
+                <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                    {{ job.title }} ({{ job.engagement_type }})
+                    <br>
+
+                    <span data-feather="map-pin"></span> {{ job.location.name }} |
+                    <span data-feather="codepen"></span> {{ job.tech_stack }}
+
+
+                <hr>
+                {{ job.description }}
+                <br>
+                {% if applied_jobs %}
+                        {% for app in applied_jobs %}
+
+                            {% if job.id == app.job_id and app.selected %}
+                                <span class="badge btn-primary mt-2" style="background-color: #b627a1">Picked for next stage</span>
+                                {% elif job.id == app.job_id and app.selected == False %}
+                                <span class="badge btn-primary mt-2" style="background-color: #28bbbb">Applied</span>
+                                {% else %}
+                                <form action="{% url 'marketplace:apply_for_job' job.id %}" method="post" class="form">
+                                    {% csrf_token %}
+                                    <a style="color:white" class="btn btn-primary mt-3">Apply</a >
+                                </form>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                    <form action="{% url 'marketplace:apply_for_job' job.id %}" method="post" class="form">
+                        {% csrf_token %}
+                        {% if request.user.is_authenticated %}
+                        {% if request.user.profile.user_type == 'developer' %}
+                            <input class="btn theme--dark primary mt-3 " style="border-radius: 0; margin: auto; color: white" type="submit" value="Apply">
+                        {% else %}
+                            <a style="color:white" onclick="alert('Only available to Developer profiles')" class="btn btn-primary mt-3" >
+                                Apply
+                            </a>
+                        {% endif %}
+                            {% else %}
+                            <a style="color:white" onclick="alert('Please login to continue')" class="btn btn-warning mt-3" >
+                                Apply
+                            </a>
+
+                            {% endif %}
+                    </form>
+
+                    {% endif %}
+
+                </div>
+
+
+            {% endfor %}
+            {% else %}
+
+                <h6 class="text-center mb-5 mt-5">No jobs available yet</h6>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+
+            {% endif %}
+
+
+
+    </div>
+    </div>
+
+ <footer class="jumbotron jumbofoot">
+    <div class="container">
+        <div class="row">
+
+        <div class="col-6 col-md">
+          <h5>Menu</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="/pricing">Pricing</a></li>
+            <li><a class="text-muted" href="/accounts/login/">Testing</a></li>
+            <li><a class="text-muted" href="{% url 'transactions:sourcing' %}">Sourcing</a></li>
+              <li><a class="text-muted" href="/dev">Developer</a></li>
+
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Company</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="/privacy">Privacy</a></li>
+            <li><a class="text-muted" href="/terms">Terms</a></li>
+
+
+          </ul>
+        </div>
+        <div class="col col-md">
+          <h5>Contact</h5>
+          <ul class="list-unstyled  text-small">
+              <li>
+              <a href="mailto:info@codeln.com" target="_top">
+                  <i><span data-feather="mail"></span></i>
+              </a>
+              <li>
+                <a class="text-muted" href="https://www.linkedin.com/company/codeln/" target="_blank">
+                <i><span data-feather="linkedin"></span></i>
+                </a>
+            </li>
+            <li>
+                <a class="text-muted" href="https://twitter.com/Codeln_spaces" target="_blank">
+                <i><span data-feather="twitter"></span></i>
+                </a>
+            </li>
+            <li>
+                <a class="text-muted" href="https://www.facebook.com/CodelnSpaces/" target="_blank">
+                <i><span data-feather="facebook"></span></i>
+                </a>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+{% endblock %}

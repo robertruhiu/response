@@ -34,6 +34,7 @@ urlpatterns = [
     path('', include('frontend.urls', namespace='frontend')),
     path('', include('classroom.urls')),
     path('invitations/', include('invitations.urls', namespace='invitations')),
+    path('marketplace/', include('marketplace.urls', namespace='marketplace')),
 
 ]
 
