@@ -535,7 +535,7 @@ def portfolio(request):
 
 
         experiences=Experience.objects.filter(candidate=request.user).all()
-        verified_projects = Portfolio.objects.filter(candidate=request.user).filter(verified=True).all()
+        verified_projects = Portfolio.objects.filter(candidate=request.user).all()
         return render(request, 'frontend/developer/portfolio.html',
                       {'json': json_data, 'repos': repoz, 'data': data, 'c': c, 'form': form,
                        'verified_projects': verified_projects,'experience_form':experience_form,'experiences':experiences,'skills':skills})

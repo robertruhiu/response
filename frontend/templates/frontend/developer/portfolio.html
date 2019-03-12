@@ -176,6 +176,22 @@
                                     <p>Project title: {{ verified_project.title }}</p>
                                     <p>Project description: {{ verified_project.description }}</p>
                                     <p><a href="{{ verified_project.repository_link }}">Repository link</a></p>
+                                    {% if verified_project.verified %}
+                                        <div data-toggle="tooltip" data-placement="top" title="Only visible to you">
+                                            <span class="badge btn-primary mt-2" style="background-color: #28bbbb">
+                                            Verified </span><span data-feather="help-circle"></span>
+                                        </div>
+
+
+                                        {% else %}
+
+                                            <span  class="badge btn-primary mt-2" style="background-color: #b627a1">
+                                            Unverified </span><span data-feather="help-circle">
+
+                                        </span>
+                                        </div>
+
+                                    {% endif %}
                                 </div>
 
                             </div>
