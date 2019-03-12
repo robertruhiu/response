@@ -1,0 +1,90 @@
+{% load blog_tags %}
+{% load static %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="/static/frontend/images/how/coding.png">
+    <meta name="theme-color" content="#272339">
+    <title>{% block title %}
+
+    {% endblock %} | Codeln</title>
+
+    <link rel="stylesheet" href="{% static 'frontend/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/stay.css' %}">
+    <link href="{% static "css/blog.css" %}" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-md fixed-top  nav-container">
+    <a class="navbar-brand1" href="/home">
+        <img src="/static/frontend/images/logo/cd_ln_wo.png" class="img-fluid ml-4  mt-2" width="120" alt="">
+    </a>
+
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon">
+        <span style="color: white" data-feather="menu"></span>
+    </span>
+    </button>
+
+
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle d-none d-md-block" style="color: white" href="#" id="navbarDropdown"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Products
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'account_login' %}">Screening</a>
+                    <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Sourcing</a>
+
+
+                </div>
+            </li>
+
+
+            {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'frontend:index' %}" style="color: white" class="nav-link">My account</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'account_logout' %}" style="color: white" class="nav-link">Logout</a>
+                </li>
+
+            {% else %}
+
+                <li class="nav-item">
+                    <a href="{% url 'account_login' %}" style="color: white" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item d-none d-sm-block">
+                    <a href="{% url 'account_signup' %}" style="color: white" class="nav-link">Register</a>
+                </li>
+            {% endif %}
+            <li class="nav-item">
+                <a href="/dev" style="color: white" class="nav-link">Developers</a>
+            </li>
+
+        </ul>
+
+    </div>
+</nav>
+
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+<div id="sidebar">
+    <h5 style="color: #007bff;">Quick Menu</h5>
+    <p>{% total_posts %} blog post(s) published.</p>
+
+    <h6 style="color: black">Latest posts</h6>
+    {% show_latest_posts 3 %}
+</div>
+
+</body>
+</html>

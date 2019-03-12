@@ -35,6 +35,7 @@ urlpatterns = [
     path('', include('classroom.urls')),
     path('invitations/', include('invitations.urls', namespace='invitations')),
     path('marketplace/', include('marketplace.urls', namespace='marketplace')),
+    path('blog/',include('blog.urls',namespace='blog'))
 
 ]
 
