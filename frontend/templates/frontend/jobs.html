@@ -28,7 +28,10 @@
                     <br>
 
                     <span data-feather="map-pin"></span> {{ job.location.name }} |
-                    <span data-feather="codepen"></span> {{ job.tech_stack }}
+                    <span data-feather="codepen"></span> {{ job.tech_stack }} {% if job.remuneration %} |
+
+                        <span data-feather="dollar-sign"></span>  {{ job.remuneration }} /month
+                    {% endif %}
 
 
                 <hr>
