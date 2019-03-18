@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.conf import settings
 import random
+from separatedvaluesfield.models import SeparatedValuesField
 
 
 class Subject(models.Model):
@@ -14,8 +15,6 @@ class Subject(models.Model):
     def subjectimage(self):
         return self.image
 
-
-
 class Quiz(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='quizzes')
     name = models.CharField(max_length=255)
@@ -23,6 +22,9 @@ class Quiz(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
 
 
 class Question(models.Model):
@@ -70,3 +72,9 @@ class StudentAnswer(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='quiz_answers')
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name='+')
     quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
+
+
+class RandomQuiz(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='tempquiz')
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='tempanswers')
+    questions =SeparatedValuesField(null=True,max_length=150,token=',')

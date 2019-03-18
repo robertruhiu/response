@@ -494,7 +494,7 @@ def portfolio(request):
     try:
         candidate = Github.objects.get(candidate=request.user)
         user = candidate.github_username
-        username = "robertruhiu"
+        username = config('GITHUB_USERNAME',default='GITHUB_USERNAME')
         token = config('ACCESS_TOKEN',default='ACCESS_TOKEN')
         json_data = requests.get('https://api.github.com/users/' + user, auth=(username, token)).json()
 
@@ -563,7 +563,7 @@ def get_data(request, *args, **kwargs):
     try:
         candidate = Github.objects.get(candidate=request.user)
         user = candidate.github_username
-        username = "robertruhiu"
+        username = config('GITHUB_USERNAME',default='GITHUB_USERNAME')
         token = config('ACCESS_TOKEN',default='ACCESS_TOKEN')
         repo = 'https://api.github.com/users/' + user + '/repos'
         repos = requests.get(repo, auth=(username, token)).json()
