@@ -76,6 +76,9 @@
 
 
             {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'frontend:index' %}" style="color: white" class="nav-link">My account</a>
+                </li>
             <li class="nav-item">
                 <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
             </li>

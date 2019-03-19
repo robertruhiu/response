@@ -108,17 +108,18 @@
                     <p>Preffered work type: {{ request.user.profile.availabilty }}</p>
 
                 </div>
-            <div class="col-lg-4">
-            <div data-toggle="tooltip" data-placement="top" title="Based on Taken and passed quizzes">Verified Skills <span data-feather="help-circle"></span> </div>
-                {% if skills  %}
-                    {% for skill in skills %}
-                    <span class="badge btn-primary" style="background-color: #b627a1">{{ skill }}</span>
-                    {% endfor %}
-                {% else %}
-                    <span class="badge btn-primary" style="background-color: #28bbbb">Take an assessment quiz</span>
-                {% endif %}
+                <div class="col-lg-4">
+                    <div data-toggle="tooltip" data-placement="top" title="Based on Taken and passed quizzes">Verified
+                        Skills <span data-feather="help-circle"></span></div>
+                    {% if skills %}
+                        {% for skill in skills %}
+                            <span class="badge btn-primary" style="background-color: #b627a1">{{ skill }}</span>
+                        {% endfor %}
+                    {% else %}
+                        <span class="badge btn-primary" style="background-color: #28bbbb">Take an assessment quiz</span>
+                    {% endif %}
 
-            </div>
+                </div>
 
             </div>
 
@@ -167,38 +168,50 @@
             {% if verified_projects %}
                 {% for verified_project in verified_projects %}
                     <div class="col-lg-4">
-                        <a target="_blank" href="{{ verified_project.demo_link }}" style="color: black">
-                            <div class="card shadow-sm  bg-white"
-                                 style="border-bottom-left-radius: 0;border-bottom-right-radius: 0">
-                                <img class="img-fluid" src="{{ verified_project.image }}" style=""
-                                     alt="Card image cap">
-                                <div class="card-body">
-                                    <p>Project title: {{ verified_project.title }}</p>
-                                    <p>Project description: {{ verified_project.description }}</p>
-                                    <p><a href="{{ verified_project.repository_link }}">Repository link</a></p>
-                                    {% if verified_project.verified %}
+                        {% if verified_project.verified %}
+                            <a target="_blank" href="{{ verified_project.demo_link }}" style="color: black">
+                                <div class="card shadow-sm  bg-white"
+                                     style="border-bottom-left-radius: 0;border-bottom-right-radius: 0">
+                                    <img class="img-fluid" src="{{ verified_project.image }}" style=""
+                                         alt="Card image cap">
+                                    <div class="card-body">
+                                        <p>Project title: {{ verified_project.title }}</p>
+                                        <p>Project description: {{ verified_project.description }}</p>
+                                        <p><a href="{{ verified_project.repository_link }}">Repository link</a></p>
+
                                         <div data-toggle="tooltip" data-placement="top" title="Only visible to you">
                                             <span class="badge btn-primary mt-2" style="background-color: #28bbbb">
                                             Verified </span><span data-feather="help-circle"></span>
                                         </div>
 
 
-                                        {% else %}
+                                    </div>
+                                </div>
+                            </a>
+                        {% else %}
 
-                                            <span  class="badge btn-primary mt-2" style="background-color: #b627a1">
+                                <div class="card shadow-sm  bg-white"
+                                     style="border-bottom-left-radius: 0;border-bottom-right-radius: 0">
+                                    <img class="img-fluid" src="{{ verified_project.image }}" style=""
+                                         alt="Card image cap">
+                                    <div class="card-body">
+                                        <p>Project title: {{ verified_project.title }}</p>
+                                        <p>Project description: {{ verified_project.description }}</p>
+                                        <p><a href="{{ verified_project.repository_link }}">Repository link</a></p>
+
+                                        <span class="badge btn-primary mt-2" style="background-color: #b627a1">
                                             Unverified </span><span data-feather="help-circle">
 
-                                        </span>
-                                        </div>
 
-                                    {% endif %}
+                                        </span>
+                                         <a href="{% url 'frontend:editportfolioproject' verified_project.id %}"
+                                class="btn-sm btn-primary">Edit</a>
+
+                                    </div>
                                 </div>
 
-                            </div>
 
-                        </a>
-
-
+                        {% endif %}
                     </div>
 
                 {% endfor %}
@@ -208,11 +221,79 @@
 
 
         </div>
+        <div class="shadow-sm p-3 mb-5  mt-5">
+            <h5 class="text-center">Work experience
+                <button type="button" class="btn btn-primary " style="margin-left: 50%" data-toggle="modal"
+                        data-target="#exampleModal1">
+                    Add work experience
+                </button>
+            </h5>
+            <hr>
+            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add work experience</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{% url 'frontend:experience' %}" method="post">
+                            {% csrf_token %}
+                            <div class="modal-body">
+
+                                {% bootstrap_field experience_form.title placeholder=False %}
+                                {% bootstrap_field experience_form.description placeholder=False %}
+                                {% bootstrap_field experience_form.company placeholder=False %}
+                                {% bootstrap_field experience_form.location placeholder=False %}
+                                <label>Duration in months</label>
+                                {% bootstrap_field experience_form.duration placeholder=False show_label=False %}
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                {% if experiences %}
+                    {% for experience in experiences %}
+                        <div class="col-lg-6  ">
+
+
+                            <div class="row shadow-lg " style="margin: auto">
+                                <div class="col-lg-5 p-3" style="background-color: #c0f1e2">
+                                    <p><strong>Title </strong> : {{ experience.title|capfirst }}</p>
+                                    <p><strong>Company</strong> :{{ experience.company|capfirst }}</p>
+                                    <p><strong>Duration</strong>:{{ experience.duration }}</p>
+                                    <p><strong>Location</strong>:{{ experience.location.name }}</p>
+                                </div>
+                                <div class="col-lg-7 p-3">
+                                    <h6>Work description</h6>
+                                    <p>{{ experience.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12 text-center">No experience added yet</div>
+                {% endif %}
+
+
+            </div>
+        </div>
 
 
         <div class="shadow-sm p-3 mb-5  mt-5">
             <h5 class="text-center">Github Repositories</h5>
-        <hr>
+            <hr>
             <div class="row">
                 {% for repo in repos %}
 
@@ -292,7 +373,7 @@
 
         <div class="shadow-sm p-3 " style="width: 80%;margin: auto;">
             <h5 class="text-center">Technologies used</h5>
-        <hr>
+            <hr>
             <div class="row">
 
                 <div class="col-lg-6">
@@ -318,73 +399,6 @@
                 </div>
             </div>
         </div>
-        <div class="shadow-sm p-3 mb-5  mt-5">
-            <h5 class="text-center">Work experience
-                <button type="button" class="btn btn-primary " style="margin-left: 50%" data-toggle="modal"
-                        data-target="#exampleModal1">
-                    Add work experience
-                </button>
-            </h5>
-        <hr>
-            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add work experience</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="{% url 'frontend:experience' %}" method="post">
-                            {% csrf_token %}
-                            <div class="modal-body">
-
-                                {% bootstrap_field experience_form.title placeholder=False %}
-                                {% bootstrap_field experience_form.description placeholder=False %}
-                                {% bootstrap_field experience_form.company placeholder=False %}
-                                {% bootstrap_field experience_form.location placeholder=False %}
-                                <label>Duration in months</label>
-                                {% bootstrap_field experience_form.duration placeholder=False show_label=False %}
-
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="row">
-                {% if experiences %}
-                    {% for experience in experiences %}
-                        <div class="col-lg-6  ">
-
-
-                            <div class="row shadow-lg " style="margin: auto">
-                                <div class="col-lg-5 p-3" style="background-color: #c0f1e2">
-                                    <p><strong>Title </strong> : {{ experience.title|capfirst }}</p>
-                                    <p><strong>Company</strong> :{{ experience.company|capfirst }}</p>
-                                    <p><strong>Duration</strong>:{{ experience.duration }}</p>
-                                    <p><strong>Location</strong>:{{ experience.location.name }}</p>
-                                </div>
-                                <div class="col-lg-7 p-3">
-                                    <h6>Work description</h6>
-                                    <p>{{ experience.description }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    {% endfor %}
-                {% else %}
-                    <div class="col-12 text-center">No experience added yet</div>
-                {% endif %}
-
-
-            </div>
 
 
     </main>

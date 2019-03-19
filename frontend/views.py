@@ -625,3 +625,16 @@ def experience(request):
 
 
     return redirect(reverse('frontend:portfolio'))
+
+@login_required
+def editportfolioproject(request,project_id):
+    instance = get_object_or_404(Portfolio, id=project_id)
+    project = Portfolio.objects.get(id=project_id)
+    form = Portfolio_form(request.POST or None, instance=instance)
+    if form.is_valid():
+        form.save()
+        return redirect('frontend:portfolio')
+
+    return render(request, 'frontend/developer/editproject.html',{'project': project,'form':form})
+
+
