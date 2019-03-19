@@ -71,85 +71,83 @@ def take(request, pk):
 
     quiz = get_object_or_404(Quiz, pk=pk)
     student = Student.objects.get(user_id=request.user.id)
-
-    questionlist = []
-    try:
-        tempquiz = RandomQuiz.objects.get(quiz_id=pk)
-    except RandomQuiz.DoesNotExist:
-        currentquiz =Question.objects.filter(quiz_id=pk)
-        for onequestion in currentquiz:
-
-            questionlist.append(onequestion.id)
-        try:
-            questionrandomlist = random.sample(questionlist, 30)
-            obj = RandomQuiz(quiz=quiz, student=student, questions=questionrandomlist)
-            obj.save()
-            return redirect('students:take', pk)
-        except:
-            pass
-    takenquizsubjectlist=[]
+    takenquizsubjectlist = []
     subjects = TakenQuiz.objects.filter(student_id=student.id)
     for subject in subjects:
         takenquizsubjectlist.append(subject.quiz.subject.id)
-    subjectsset=set(takenquizsubjectlist)
+    subjectsset = set(takenquizsubjectlist)
     if quiz.subject.id in subjectsset:
         return redirect('students:taken_quiz_list')
+    else:
+        questionlist = []
+        try:
+            tempquiz = RandomQuiz.objects.get(quiz_id=pk)
+        except RandomQuiz.DoesNotExist:
+            currentquiz =Question.objects.filter(quiz_id=pk)
+            for onequestion in currentquiz:
 
+                questionlist.append(onequestion.id)
+            try:
+                questionrandomlist = random.sample(questionlist, 30)
+                obj = RandomQuiz(quiz=quiz, student=student, questions=questionrandomlist)
+                obj.save()
+                return redirect('students:take', pk)
+            except:
+                pass
 
+        if not tempquiz.questions == None:
+            tempquizquestionsids =tempquiz.questions
+            randomquestionlist =[]
+            for tempquizquestionsid in tempquizquestionsids:
+                randomquestionlist.append(int(tempquizquestionsid))
+            questions =Question.objects.filter(id__in=randomquestionlist)
+            total_questions = len(randomquestionlist)
+            total_unanswered_questions = questions.count()
+            progress = 100 - round(((total_unanswered_questions - 1) / 30) * 100)
+            question = questions.first()
+            updatedrandomquestionlist =[]
+            updatedrandomquestionlist.append(question.id)
 
-    if not tempquiz.questions == None:
-        tempquizquestionsids =tempquiz.questions
-        randomquestionlist =[]
-        for tempquizquestionsid in tempquizquestionsids:
-            randomquestionlist.append(int(tempquizquestionsid))
-        questions =Question.objects.filter(id__in=randomquestionlist)
-        total_questions = len(randomquestionlist)
-        total_unanswered_questions = questions.count()
-        progress = 100 - round(((total_unanswered_questions - 1) / 30) * 100)
-        question = questions.first()
-        updatedrandomquestionlist =[]
-        updatedrandomquestionlist.append(question.id)
+            unanswered_questions = list(set(randomquestionlist) ^ set(updatedrandomquestionlist))
 
-        unanswered_questions = list(set(randomquestionlist) ^ set(updatedrandomquestionlist))
+            if request.method == 'POST':
+                form = TakeQuizForm(question=question, data=request.POST)
+                if form.is_valid():
+                    with transaction.atomic():
+                        if 'answer' in request.POST:
+                            student_answer = form.save(commit=False)
+                            student_answer.student = student
+                            student_answer.quiz = quiz
+                            student_answer.save()
+                            randomquizinstance = RandomQuiz.objects.get(quiz_id=pk)
+                            randomquizinstance.questions = unanswered_questions
+                            randomquizinstance.save()
 
-        if request.method == 'POST':
-            form = TakeQuizForm(question=question, data=request.POST)
-            if form.is_valid():
-                with transaction.atomic():
-                    if 'answer' in request.POST:
-                        student_answer = form.save(commit=False)
-                        student_answer.student = student
-                        student_answer.quiz = quiz
-                        student_answer.save()
-                        randomquizinstance = RandomQuiz.objects.get(quiz_id=pk)
-                        randomquizinstance.questions = unanswered_questions
-                        randomquizinstance.save()
+                        else:
+                            default_answer = StudentAnswer(quiz=quiz,student=student,answer=Answer.objects.filter(question_id = question.id).last())
+                            default_answer.save()
+                            randomquizinstance = RandomQuiz.objects.get(quiz_id=pk)
+                            randomquizinstance.questions = unanswered_questions
+                            randomquizinstance.save()
+                        if student.get_unanswered_questions(quiz).exists():
+                            return redirect('students:take', pk)
 
-                    else:
-                        default_answer = StudentAnswer(quiz=quiz,student=student,answer=Answer.objects.filter(question_id = question.id).last())
-                        default_answer.save()
-                        randomquizinstance = RandomQuiz.objects.get(quiz_id=pk)
-                        randomquizinstance.questions = unanswered_questions
-                        randomquizinstance.save()
-                    if student.get_unanswered_questions(quiz).exists():
-                        return redirect('students:take', pk)
+            else:
+                form = TakeQuizForm(question=question)
+
+            return render(request, 'classroom/students/take_quiz_form.html', {
+                'quiz': quiz,
+                'question': question,
+                'form': form,
+                'progress': progress
+            })
 
         else:
-            form = TakeQuizForm(question=question)
-
-        return render(request, 'classroom/students/take_quiz_form.html', {
-            'quiz': quiz,
-            'question': question,
-            'form': form,
-            'progress': progress
-        })
-
-    else:
-        correctanswercounter = StudentAnswer.objects.filter(quiz=quiz,student=student,answer__is_correct=True).count()
-        print(correctanswercounter)
-        score = (correctanswercounter / 30) * 100
-        TakenQuiz.objects.create(student=student, quiz=quiz, score=score)
-        return redirect('students:taken_quiz_list')
+            correctanswercounter = StudentAnswer.objects.filter(quiz=quiz,student=student,answer__is_correct=True).count()
+            print(correctanswercounter)
+            score = (correctanswercounter / 30) * 100
+            TakenQuiz.objects.create(student=student, quiz=quiz, score=score)
+            return redirect('students:taken_quiz_list')
 
 
 def retake(request,quizid,studentid):
