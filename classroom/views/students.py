@@ -87,8 +87,12 @@ def take(request, pk):
             return redirect('students:take', pk)
         except:
             pass
-
-    if student.quizzes.filter(pk=pk).exists():
+    takenquizsubjectlist=[]
+    subjects = TakenQuiz.objects.filter(student_id=student.id)
+    for subject in subjects:
+        takenquizsubjectlist.append(subject.quiz.subject.id)
+    subjectsset=set(takenquizsubjectlist)
+    if quiz.subject.id in subjectsset:
         return redirect('students:taken_quiz_list')
 
 
