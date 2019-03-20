@@ -5,7 +5,7 @@
 {% endblock %}
 {% load static %}
 {% block content %}
-    <main role="main" class="col-md-12 col-lg-10 ml-lg-auto   px-4 " xmlns="http://www.w3.org/1999/html">
+    <main role="main" class="col-md-12 col-lg-10 ml-lg-auto col-12  px-4 " xmlns="http://www.w3.org/1999/html">
         <div class="d-none d-lg-block">
             <nav class="navbar  navbar-light fixed-top fine border-bottom">
                 <h5>Portfolio</h5>
@@ -84,10 +84,11 @@
         <div class="d-lg-none" style="margin-top: 7em">
 
         </div>
-        <div class="shadow-sm p-3 portfo" style="height: 10%">
+
+        <div class="shadow-sm p-3 portfo d-none d-lg-block" style="height: 10%">
             <div class="row ">
 
-                <div class="col-lg-4">
+                <div class="col-lg-4 col">
 
                     {% for key, value in json.items %}
                         {% if key == 'avatar_url' %}
@@ -100,7 +101,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="col-lg-4" style="">
+                <div class="col-lg-4 col" style="">
 
                     <p>Name: {{ request.user.first_name }} {{ request.user.last_name }}</p>
                     <p>email: {{ request.user.email }}</p>
@@ -108,7 +109,7 @@
                     <p>Preffered work type: {{ request.user.profile.availabilty }}</p>
 
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4 col">
                     <div data-toggle="tooltip" data-placement="top" title="Based on Taken and passed quizzes">Verified
                         Skills <span data-feather="help-circle"></span></div>
                     {% if skills %}
@@ -125,16 +126,75 @@
 
 
         </div>
+        <!------show on smaller devices------>
+        <div class="shadow-sm row p-3 portfo d-lg-none" style="height: 8rem">
 
 
-        <div class="shadow-lg p-3 mb-5  mt-5">
+            <div class="col-12 " style="text-align: -webkit-center">
 
-            <h5 class="text-center">My Projects
-                <button type="button" class="btn btn-primary " style="margin-left: 50%" data-toggle="modal"
-                        data-target="#exampleModal">
+                {% for key, value in json.items %}
+                    {% if key == 'avatar_url' %}
+                        <div style="width: 13rem;">
+                            <img class="card-img-top"
+                                 style="border-radius: 50%;width: 70%;margin-top: 5%" src="{{ value }}"
+                                 alt="Card image cap">
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+
+        </div>
+        <!------show on smaller devices------>
+        <div class=" shadow-sm p-3 row d-lg-none" style="color: black;margin-top: 15%">
+
+            <div class="col-lg-4 col-12 " style="">
+
+                <p>Name: {{ request.user.first_name }} {{ request.user.last_name }}</p>
+                <p>email: {{ request.user.email }}</p>
+                <p>Linkedin profile: {{ request.user.profile.linkedin_url }}</p>
+                <p>Preffered work type: {{ request.user.profile.availabilty }}</p>
+
+            </div>
+            <div class="col-lg-4 col-12 ">
+                <div data-toggle="tooltip" data-placement="top" title="Based on Taken and passed quizzes">Verified
+                    Skills <span data-feather="help-circle"></span></div>
+                {% if skills %}
+                    {% for skill in skills %}
+                        <span class="badge btn-primary" style="background-color: #b627a1">{{ skill }}</span>
+                    {% endfor %}
+                {% else %}
+                    <span class="badge btn-primary" style="background-color: #28bbbb">Take an assessment quiz</span>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!------ projects------>
+        <div class="shadow-sm  p-3 mb-5 " style="margin-top: 6%">
+            <nav class="navbar  ">
+                <h5>My Projects</h5>
+
+
+                <div>
+                    <ul class="nav ml-auto">
+
+                        <li class="nav-item" style="color: #1e50c9">
+               <span data-feather="edit-2" data-toggle="modal"
+                     data-target="#exampleModal">
                     Add project
-                </button>
-            </h5>
+                </span>
+                        </li>
+
+
+                    </ul>
+
+                </div>
+            </nav>
+
+
             <hr>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -159,75 +219,81 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            {% if verified_projects %}
-                {% for verified_project in verified_projects %}
-                    <div class="col-lg-4">
-                        {% if verified_project.verified %}
-                            <a target="_blank" href="{{ verified_project.demo_link }}" style="color: black">
-                                <div class="card shadow-sm  bg-white"
-                                     style="border-bottom-left-radius: 0;border-bottom-right-radius: 0">
-                                    <img class="img-fluid" src="{{ verified_project.image }}" style=""
-                                         alt="Card image cap">
-                                    <div class="card-body">
-                                        <p>Project title: {{ verified_project.title }}</p>
-                                        <p>Project description: {{ verified_project.description }}</p>
-                                        <p><a href="{{ verified_project.repository_link }}">Repository link</a></p>
+            <div class="row">
+                {% if verified_projects %}
+                    {% for verified_project in verified_projects %}
+                        <div class="col-lg-4 mb-2">
 
-                                        <div data-toggle="tooltip" data-placement="top" title="Only visible to you">
+                                <a target="_blank" href="{{ verified_project.demo_link }}" style="color: black">
+                                    <div class="card shadow-sm  bg-white"
+                                         style="border-bottom-left-radius: 0;border-bottom-right-radius: 0;height: 100%">
+                                        <img class="img-fluid" src="{{ verified_project.image }}" style=""
+                                             alt="Card image cap">
+                                        <div class="card-body">
+                                            <p>Project title: {{ verified_project.title }}</p>
+                                            <p>Project description: {{ verified_project.description }}</p>
+                                            <p><a href="{{ verified_project.repository_link }}">Repository link</a></p>
+                                            {% if verified_project.verified %}
+
+                                            <div data-toggle="tooltip" data-placement="top" title="Only visible to you">
                                             <span class="badge btn-primary mt-2" style="background-color: #28bbbb">
                                             Verified </span><span data-feather="help-circle"></span>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </a>
-                        {% else %}
-
-                                <div class="card shadow-sm  bg-white"
-                                     style="border-bottom-left-radius: 0;border-bottom-right-radius: 0">
-                                    <img class="img-fluid" src="{{ verified_project.image }}" style=""
-                                         alt="Card image cap">
-                                    <div class="card-body">
-                                        <p>Project title: {{ verified_project.title }}</p>
-                                        <p>Project description: {{ verified_project.description }}</p>
-                                        <p><a href="{{ verified_project.repository_link }}">Repository link</a></p>
-
-                                        <span class="badge btn-primary mt-2" style="background-color: #b627a1">
+                                            </div>
+                                                {% else %}
+                                                <span class="badge btn-primary mt-2" style="background-color: #b627a1">
                                             Unverified </span><span data-feather="help-circle">
 
 
                                         </span>
-                                         <a href="{% url 'frontend:editportfolioproject' verified_project.id %}"
-                                class="btn-sm btn-primary">Edit</a>
+                                        <a href="{% url 'frontend:editportfolioproject' verified_project.id %}"
+                                        ><span data-feather="edit-2">Edit</span>
+                                        </a>
+                                            {% endif %}
 
+
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
+
+                        </div>
+
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12 text-center">No projects onboarded or verified</div>
+                {% endif %}
 
 
-                        {% endif %}
-                    </div>
-
-                {% endfor %}
-            {% else %}
-                <div class="col-12 text-center">No projects onboarded or verified</div>
-            {% endif %}
-
-
+            </div>
         </div>
-        <div class="shadow-sm p-3 mb-5  mt-5">
-            <h5 class="text-center">Work experience
-                <button type="button" class="btn btn-primary " style="margin-left: 50%" data-toggle="modal"
-                        data-target="#exampleModal1">
-                    Add work experience
-                </button>
-            </h5>
+
+
+        <!------ work experiences------>
+        <div class="shadow-sm p-3  mb-5  mt-5">
+        <nav class="navbar  ">
+                <h5>Work experience</h5>
+
+
+                <div>
+                    <ul class="nav ml-auto">
+
+                        <li class="nav-item" style="color: #1e50c9">
+               <span data-feather="edit-2" data-toggle="modal"
+                     data-target="#exampleModal1">
+                    Add work
+                </span>
+                        </li>
+
+
+                    </ul>
+
+                </div>
+            </nav>
+
             <hr>
             <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
@@ -264,10 +330,10 @@
             <div class="row">
                 {% if experiences %}
                     {% for experience in experiences %}
-                        <div class="col-lg-6  ">
+                        <div class="col-lg-6 mb-2 ">
 
 
-                            <div class="row shadow-lg " style="margin: auto">
+                            <div class="row shadow-lg " style="margin: auto;">
                                 <div class="col-lg-5 p-3" style="background-color: #c0f1e2">
                                     <p><strong>Title </strong> : {{ experience.title|capfirst }}</p>
                                     <p><strong>Company</strong> :{{ experience.company|capfirst }}</p>
@@ -290,15 +356,15 @@
             </div>
         </div>
 
-
-        <div class="shadow-sm p-3 mb-5  mt-5">
+        <!------github------>
+        <div class="shadow-sm p-3  mb-5  mt-5">
             <h5 class="text-center">Github Repositories</h5>
             <hr>
             <div class="row">
                 {% for repo in repos %}
 
-                    <div class="col-lg-3">
-                        <div class="card mt-2 ml-2" style="border-radius: 0;height: 5rem;">
+                    <div class="col-lg-3 col-6">
+                        <div class="card mt-2 ml-2 mb-2" style="border-radius: 0;height: 6rem;">
                             <div class="">
                                 {% for key, value in repo.items %}
 
@@ -370,8 +436,31 @@
 
         </div>
 
+        <!------show on smaller devices chart------>
+        <div class="shadow-sm  p-3 d-lg-none " style="">
+            <h5 class="text-center">Technologies used</h5>
 
-        <div class="shadow-sm p-3 " style="width: 80%;margin: auto;">
+            <div class="row">
+                {% for key,value in c.items %}
+                    <div class="col-lg-6 col-6">
+
+
+                        <div class="shadow p-3 mb-5 bg-white">
+                            {{ key }}
+                            <div>
+                                <span data-feather="git-commit"></span> commits: {{ value }}
+                            </div>
+                        </div>
+
+
+                    </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+        <!------show on large devices chart------>
+        <div class="shadow-sm p-3 d-none d-lg-block" style="width: 80%;margin: auto;">
             <h5 class="text-center">Technologies used</h5>
             <hr>
             <div class="row">
@@ -394,8 +483,11 @@
 
 
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 ">
+
                     <canvas id="myChart2"></canvas>
+
+
                 </div>
             </div>
         </div>
