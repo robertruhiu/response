@@ -10,7 +10,7 @@ from .models import Job, JobApplication
 from .forms import JobForm
 
 def job_list(request):
-    jobs = Job.objects.all()
+    jobs = Job.objects.order_by('-created')
     applied_jobs = ()
     if request.user.is_authenticated:
         developer = request.user
