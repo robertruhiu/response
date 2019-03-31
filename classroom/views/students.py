@@ -68,15 +68,14 @@ def student_registration(request):
 @login_required
 def take(request, pk):
     global tempquiz
-
     quiz = get_object_or_404(Quiz, pk=pk)
     student = Student.objects.get(user_id=request.user.id)
-    takenquizsubjectlist = []
+    takenquizlist = []
     subjects = TakenQuiz.objects.filter(student_id=student.id)
     for subject in subjects:
-        takenquizsubjectlist.append(subject.quiz.subject.id)
-    subjectsset = set(takenquizsubjectlist)
-    if quiz.subject.id in subjectsset:
+        takenquizlist.append(subject.quiz.id)
+    subjectsset = set(takenquizlist)
+    if quiz.id in subjectsset:
         return redirect('students:taken_quiz_list')
     else:
         questionlist = []
