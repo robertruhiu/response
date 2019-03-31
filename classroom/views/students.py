@@ -69,27 +69,31 @@ def student_registration(request):
 def take(request, pk):
     global tempquiz
     quiz = get_object_or_404(Quiz, pk=pk)
+
     student = Student.objects.get(user_id=request.user.id)
     takenquizlist = []
-    subjects = TakenQuiz.objects.filter(student_id=student.id)
-    for subject in subjects:
-        takenquizlist.append(subject.quiz.id)
-    subjectsset = set(takenquizlist)
-    if quiz.id in subjectsset:
+    quizzes = TakenQuiz.objects.filter(student_id=student.id)
+    for onequiz in quizzes:
+        takenquizlist.append(onequiz.quiz.name)
+
+    if quiz.name in takenquizlist:
         return redirect('students:taken_quiz_list')
     else:
         questionlist = []
         try:
-            tempquiz = RandomQuiz.objects.get(quiz_id=pk)
+            tempquiz = RandomQuiz.objects.get(student_id=student.id,quiz_id=pk)
+
+
         except RandomQuiz.DoesNotExist:
             currentquiz =Question.objects.filter(quiz_id=pk)
             for onequestion in currentquiz:
 
                 questionlist.append(onequestion.id)
             try:
-                questionrandomlist = random.sample(questionlist, 30)
+                questionrandomlist = random.sample(questionlist, 5)
                 obj = RandomQuiz(quiz=quiz, student=student, questions=questionrandomlist)
                 obj.save()
+
                 return redirect('students:take', pk)
             except:
                 pass
@@ -102,7 +106,7 @@ def take(request, pk):
             questions =Question.objects.filter(id__in=randomquestionlist)
             total_questions = len(randomquestionlist)
             total_unanswered_questions = questions.count()
-            progress = 100 - round(((total_unanswered_questions - 1) / 30) * 100)
+            progress = 100 - round(((total_unanswered_questions - 1) / 5) * 100)
             question = questions.first()
             updatedrandomquestionlist =[]
             updatedrandomquestionlist.append(question.id)
@@ -118,14 +122,14 @@ def take(request, pk):
                             student_answer.student = student
                             student_answer.quiz = quiz
                             student_answer.save()
-                            randomquizinstance = RandomQuiz.objects.get(quiz_id=pk)
+                            randomquizinstance = RandomQuiz.objects.get(quiz_id=pk,student_id=student.id)
                             randomquizinstance.questions = unanswered_questions
                             randomquizinstance.save()
 
                         else:
                             default_answer = StudentAnswer(quiz=quiz,student=student,answer=Answer.objects.filter(question_id = question.id).last())
                             default_answer.save()
-                            randomquizinstance = RandomQuiz.objects.get(quiz_id=pk)
+                            randomquizinstance = RandomQuiz.objects.get(quiz_id=pk,student_id=student.id)
                             randomquizinstance.questions = unanswered_questions
                             randomquizinstance.save()
                         if student.get_unanswered_questions(quiz).exists():
@@ -144,7 +148,7 @@ def take(request, pk):
         else:
             correctanswercounter = StudentAnswer.objects.filter(quiz=quiz,student=student,answer__is_correct=True).count()
             print(correctanswercounter)
-            score = (correctanswercounter / 30) * 100
+            score = (correctanswercounter / 5) * 100
             TakenQuiz.objects.create(student=student, quiz=quiz, score=score)
             return redirect('students:taken_quiz_list')
 
