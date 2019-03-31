@@ -90,7 +90,7 @@ def take(request, pk):
 
                 questionlist.append(onequestion.id)
             try:
-                questionrandomlist = random.sample(questionlist, 5)
+                questionrandomlist = random.sample(questionlist, 30)
                 obj = RandomQuiz(quiz=quiz, student=student, questions=questionrandomlist)
                 obj.save()
 
@@ -106,7 +106,7 @@ def take(request, pk):
             questions =Question.objects.filter(id__in=randomquestionlist)
             total_questions = len(randomquestionlist)
             total_unanswered_questions = questions.count()
-            progress = 100 - round(((total_unanswered_questions - 1) / 5) * 100)
+            progress = 100 - round(((total_unanswered_questions - 1) / 30) * 100)
             question = questions.first()
             updatedrandomquestionlist =[]
             updatedrandomquestionlist.append(question.id)
@@ -148,7 +148,7 @@ def take(request, pk):
         else:
             correctanswercounter = StudentAnswer.objects.filter(quiz=quiz,student=student,answer__is_correct=True).count()
             print(correctanswercounter)
-            score = (correctanswercounter / 5) * 100
+            score = (correctanswercounter / 30) * 100
             TakenQuiz.objects.create(student=student, quiz=quiz, score=score)
             return redirect('students:taken_quiz_list')
 
