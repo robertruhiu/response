@@ -217,6 +217,15 @@
                                           <span class="btn-sm btn-primary"> Apply </span>
                                       </a>
                                   </td>
+                                  {% elif opportunity.transaction.framework.language.name == langs.Nodejs %}
+                                  <td class="text-center">
+                                  <span class="badge badge-primary">requirements met</span>
+                                  </td>
+                                  <td class="text-center">
+                                      <a href="{% url 'frontend:apply' opportunity.transaction.id %}" style="text-decoration: none">
+                                          <span class="btn-sm btn-primary"> Apply </span>
+                                      </a>
+                                  </td>
                               {% else %}
                                   <td class="text-center">
                                   <span class="badge badge-danger">requirements not met</span>
@@ -265,7 +274,6 @@
 
 <br>
     <br>
-
 
 
 

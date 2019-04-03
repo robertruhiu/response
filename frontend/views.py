@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 from collections import Counter
 from django.urls import reverse
 import requests
-
+from django.core.mail import send_mail
 import json
 from decouple import config
 
@@ -24,7 +24,7 @@ from invitations.models import Invitation
 from projects.models import Project, Framework
 from frontend.form import Projectinvite, EditProjectForm,Submissions,Portfolio_form,Github_form,Experience_Form
 from frontend.models import candidatesprojects, devs, recruiters,submissions,Portfolio,Github,Experience
-from classroom.models import TakenQuiz,Student
+from classroom.models import TakenQuiz,Student,Quiz
 from marketplace.models import Job
 
 @login_required
@@ -243,8 +243,7 @@ def pricing(request):
 def dev(request):
     return render(request, 'frontend/dev.html')
 
-def competitions(request):
-    return render(request, 'frontend/recruiter/competitions.html')
+
 
 def takenquizzes(request):
     taken = TakenQuiz.objects.all()
@@ -638,3 +637,68 @@ def editportfolioproject(request,project_id):
     return render(request, 'frontend/developer/editproject.html',{'project': project,'form':form})
 
 
+
+
+def competitions(request):
+    qualifys={}
+    try:
+        transaction =Transaction.objects.get(user_id=760)
+        if request.user.is_authenticated:
+            try:
+                hi = Applications.objects.get(candidate=request.user, transaction_id=transaction.id)
+                qualifys=hi
+            except Applications.DoesNotExist:
+                qualifys = None
+    except Transaction.DoesNotExist:
+        transaction=None
+    quiz = Quiz.objects.get(id=12)
+    passedquizzes={}
+    if request.user.is_authenticated:
+
+        if request.user.profile.user_type=='developer':
+            student = Student.objects.get(user_id=request.user.id)
+            try:
+                passedquizzes = TakenQuiz.objects.get(score__gte=50,student_id=student.id,quiz_id=12)
+            except TakenQuiz.DoesNotExist:
+                passedquizzes=None
+
+
+
+
+    return render(request, 'frontend/recruiter/competitions.html',{'transaction':transaction,
+                                                                   'qualify':qualifys,'passedquizzes':passedquizzes,'quiz':quiz})
+@login_required
+def placeapplication(request,transaction_id):
+    language =OpenCall.objects.get(transaction=transaction_id)
+    student = Student.objects.get(user_id=request.user.id)
+    passedquizz = TakenQuiz.objects.filter(score__gte=50).filter(student_id=student)
+
+
+    allsubjectspassed = []
+    for d in passedquizz:
+        allsubjectspassed.append(d.quiz.subject)
+
+    uniquesubjects = list(set(allsubjectspassed))
+
+
+    for pa in uniquesubjects:
+        blu=TakenQuiz.objects.filter(quiz__subject=pa).filter(student_id=student)
+        doublequizzes =[]
+        for paz in blu:
+            doublequizzes.append(paz.score)
+
+
+        if pa.name == language.transaction.framework.language.name or  pa.name == language.transaction.framework.name:  #TODO: let it be explcitly for framework if pa.name==language.project.framework
+            qualifiedcandidate = Applications(recruiter=language.recruiter,transaction=language.transaction,project=language.project,candidate=request.user,stage='application sent',score=max(doublequizzes))
+
+            qualifiedcandidate.save()
+            subject = 'Application received'
+            message = ' Thank you for placing your application. \n ' \
+                      'You will soon get an invite to conduct further assessment by a Codeln representative \n' \
+                      '\n' \
+                      'Cheers team Codeln '
+            email_from = config('EMAIL_HOST_USER', default='EMAIL_HOST_USER')
+            to = request.user.email
+            send_mail(subject, message, email_from, [to])
+
+    return redirect('frontend:competitions')

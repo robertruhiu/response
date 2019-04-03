@@ -1,25 +1,23 @@
 {% extends 'base3.html' %}
 {% block title %}
-Competitions
+    Competitions
 {% endblock %}
-{%load static %}
+{% load static %}
 {% block content %}
 
-<!---- Hero image intro----->
+    <!---- Hero image intro----->
     <div class="jumbotron jumbotroncompetions  ">
         <div class="container  " style="height: 40vm">
-          <h4 class="mt-5 col-12 col-lg-6 col-xl-6 col-sm-12 col-md-6 d-none d-lg-block" style="font-weight: 700;font-size: 3.0rem;">MEST AFRICA DEV COMPETITION</h4>
-            <h4 class=" col-12 col-lg-6 col-xl-6 col-sm-12 col-md-6 d-lg-none" style="font-weight: 700;margin-top: 5rem">MEST AFRICA DEV COMPETITION</h4>
+            <h4 class="mt-5 col-12 col-lg-6 col-xl-6 col-sm-12 col-md-6 d-none d-lg-block"
+                style="font-weight: 700;font-size: 3.0rem;">NATTERBASE NODEJS TEST</h4>
+            <h4 class=" col-12 col-lg-6 col-xl-6 col-sm-12 col-md-6 d-lg-none"
+                style="font-weight: 700;margin-top: 5rem">NATTERBASE NODEJS TEST assessment</h4>
 
-            <p class="col-12 col-lg-6 col-xl-6 col-sm-12 col-md-6 d-none d-lg-block" style="font-size: 20px;line-height: 24px">
-              This competition is for young aspiring developers and will put your tech skills to a real-world test to see
-                if you have got what it takes to join other aspiring world-class developers at MEST Africa!
+            <p class="col-12 col-lg-6 col-xl-6 col-sm-12 col-md-6 d-none d-lg-block"
+               style="font-size: 20px;line-height: 24px">
+                Please complete the test to take specified to qualify for the next stage
 
-          </p>
-            <p class="col-12 col-lg-6 col-xl-6 col-sm-12 col-md-6 d-none d-lg-block " style="font-size: 20px;line-height: 24px">
-                Prepare to compete with individuals from around the continent to see how your tech skills stack up.
             </p>
-
 
 
         </div>
@@ -30,191 +28,136 @@ Competitions
     font-size: 16px;
     line-height: 22px;
     margin-bottom: 30px;">
-              This competition is for young aspiring developers and will put your tech skills to a real-world test to see if you have
-        got what it takes to join other aspiring world-class developers at MEST Africa!
+        Please complete the test to take specified to qualify for the next stage
 
-          </p>
-            <p class="col-12 col-lg-6 col-xl-6 col-sm-12 col-md-12  d-lg-none" style="color: #6b6b6b;font-size: 16px; line-height: 22px; margin-bottom: 30px;">
-            Prepare to compete with individuals from around the continent to see how your tech skills stack up.
-            </p>
+    </p>
 
 
-    <!-----how it works------->
-    <div class="position-relative overflow-hidden ">
-    <section>
-    <div class="row" style="margin-left: 0;margin-right: 0">
-        <div class="col-12 col-lg-6 col-md-12 col-sm-12 text-center ml-auto mr-auto">
-            <h2 class="d-none d-lg-block" style="margin: 10px auto 40px auto;">What's Up For Grabs</h2>
-            <h5 class="d-lg-none" style="margin: 10px auto 40px auto;">What's Up For Grabs</h5>
-        </div>
+    <div class="container-fluid">
+        <div class=" p-3 mb-5 bg-white rounded">
+            <div class="row" style="margin-left: 0;margin-right: 0">
+                <div class="col-lg-4">
+                    <div class="card" style="width: 18rem;margin-left: auto;margin-right: auto;border: 0">
+                        <img class="card-img-top" src="https://i.ibb.co/zH6QPcZ/node.png" alt="Card image cap">
 
-    </div>
-    <div class="col-12 col-lg-12 col-md-12 col-sm-12 ml-auto mr-auto">
-        <div class="row">
-            <div class="col-lg-6  col-md-6 col-sm-12 col-12 d-none d-lg-block" style="padding-left: 10rem;padding-top: 8em">
-                <h2 >Incubator space</h2>
-                <p style="font-size: 16px;line-height: 30px;color: #949494;font-weight: normal;margin-bottom: 1.25rem;" >
-                    <strong>3-month Community Membership</strong> at a MEST Incubator.
+                    </div>
 
-                </p>
+                </div>
+                <div class="col-lg-8 col-12">
+                    {% if transaction %}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+
+                                    <th scope="col">Company</th>
+                                    <th class="text-center" scope="col">Test to take</th>
+
+                                    <th class="text-center" scope="col">Requirements status</th>
+                                    <th class="text-center" scope="col">Application stage</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% if qualify %}
+                                    <tr>
+
+                                        <th scope="row">{{ qualify.transaction.projecttitle }}</th>
+
+
+                                        <td class="text-center">{{ qualify.transaction.framework|capfirst }}</td>
+
+                                        {% if qualify.stage == 'application sent' %}
+                                            <td class="text-center"><span
+                                                    class="badge badge-success">requirements met</span></td>
+                                            <td class="text-center"><span
+                                                    class="btn-sm btn-success"> {{ qualify.stage }} </span></td>
+                                        {% elif qualify.stage == 'accepted' %}
+                                            <td class="text-center"><span class="badge badge-success"
+                                                                          style="background-color: #b627a1">check invitations under build a project</span>
+                                            </td>
+                                            <td class="text-center"><span class="btn-sm btn-success"
+                                                                          style="background-color: #b627a1"> {{ qualify.stage }} </span>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% else %}
+                                    <tr>
+
+                                        <th scope="row">{{ transaction.projecttitle }}</th>
+
+
+                                        <td class="text-center">
+                                            {% if request.user.is_authenticated %}
+                                                {% if request.user.profile.user_type == 'developer' %}
+
+
+                                                    <a style="text-decoration: none"
+                                                       href="{% url 'students:take' quiz.id %}">
+                                                        {{ transaction.framework|capfirst }}
+                                                    </a>
+                                                {% else %}
+                                                    <a href="" style="text-decoration: none"
+                                                       onclick="alert('Only available to Developer profiles')"
+                                                       >
+                                                        {{ transaction.framework|capfirst }}
+                                                    </a>
+                                                {% endif %}
+                                            {% else %}
+                                                <a href="" style="text-decoration: none" onclick="alert('Please login to continue')"
+                                                   >
+                                                    {{ transaction.framework|capfirst }}
+                                                </a>
+
+                                            {% endif %}
+
+
+                                        </td>
+
+                                        {% if passedquizzes %}
+                                            <td class="text-center">
+                                                <span class="badge badge-primary">requirements met</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="{% url 'frontend:placeapplication' transaction.id %}"
+                                                   style="text-decoration: none">
+                                                    <span class="btn-sm btn-primary"> Apply </span>
+                                                </a>
+                                            </td>
+                                        {% else %}
+                                            <td class="text-center">
+                                                <span class="badge badge-danger">requirements not met</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <a onclick="alert('requirements not met')"
+                                                   style="text-decoration: none">
+                                                    <span class="btn-sm btn-warning"> Apply </span>
+                                                </a>
+
+                                            </td>
+
+                                        {% endif %}
+
+
+                                    </tr>
+
+                                {% endif %}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    {% else %}
+                        No opens calls from companies at the moment
+                    {% endif %}
+                </div>
             </div>
-            <div class="col-lg-6  col-md-6 col-sm-12 col-12 d-lg-none" >
-                <h5 class="text-center mt-sm-2 mt-md-5 ">Incubator space</h5>
-                <p class="ml-sm-5 ml-3 ml-md-5" style="font-size: 16px;line-height: 30px;color: #949494;font-weight: normal;margin-bottom: 1.25rem;" >
-                    <strong>3-month Community Membership</strong> at a MEST Incubator.
-
-                </p>
-            </div>
-
-
-
-        <div class="col-lg-6 col-md-6 col-sm-8 col-12 mr-auto ml-auto">
-            <img class="img-fluid" src="https://meltwater.org/wp-content/uploads/2018/02/Mest-incubator-gallery-accra-11.jpg">
-
-        </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-lg-6 col-md-6 col-sm-8 ml-auto mr-auto order-sm-2 order-lg-1 order-2">
-                <img class="img-fluid" style="" src="https://i.ibb.co/HdLTxrQ/MEST-AFRICA-SUMMIT-WEBSITE-V5-23.png">
-
 
 
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 d-none d-lg-block order-lg-2" style="padding-left: 4rem;padding-top:8em ">
-            <h2 class="">Mest Africa Summit</h2>
-           <p style="font-size: 16px;line-height: 30px;color: #949494;font-weight: normal;margin-bottom: 1.25rem;">
-               <strong>Event Tickets</strong> to the MEST Africa Summit 2019 in Nairobi, Kenya (check out information about the
-               2018 summit <a href="http://www.mestafricasummit.com/" target="_blank">here</a> )
-
-           </p>
-
-        </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 d-lg-none order-sm-1 order-1">
-            <h5 class="text-center mt-sm-2 mt-md-5 mt-5">Mest Africa Summit</h5>
-           <p class="ml-sm-5 ml-3 ml-md-5" style="font-size: 16px;line-height: 30px;color: #949494;font-weight: normal;margin-bottom: 1.25rem;">
-               <strong>Event Tickets</strong> to the MEST Africa Summit 2019 in Nairobi, Kenya (check out information about the
-               2018 summit <a href="http://www.mestafricasummit.com/" target="_blank">here</a> )
-
-           </p>
-
-        </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 d-none d-lg-block"style="padding-left: 10rem;padding-top: 8em">
-                <h2 class="">Become an Eit</h2>
-                <p style="font-size: 16px;line-height: 30px;color: #949494;font-weight: normal;margin-bottom: 1.25rem;">The chance to skip ahead to final interview stages in the application process for the
-                    <strong>MEST Entrepreneurial Training Program</strong> (You can learn more about the program <a href="http://bit.ly/mestprogram" target="_blank">here</a>.)
-
-                </p>
-
-
-        </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 d-lg-none">
-                <h5 class="text-center mt-sm-2 mt-md-5 mt-5">Become an Eit</h5>
-                <p class="ml-sm-5 ml-3 ml-md-5 mt-sm-2 mt-md-5" style="font-size: 16px;line-height: 30px;color: #949494;font-weight: normal;margin-bottom: 1.25rem;">
-                    The chance to skip ahead to final interview stages in the application process for
-                    the <strong>MEST Entrepreneurial Training Program</strong> (You can learn more about the program <a href="http://bit.ly/mestprogram" target="_blank">here</a>.)<br>
-
-
-
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-8 ml-auto mr-auto">
-            <img class="img-fluid" src="https://pbs.twimg.com/media/DmzbHjPWwAAe6RJ.jpg">
-
-        </div>
-        </div>
-
-
-    </div>
-    </section>
-    </div>
-    <!-----how to apply------->
-    <div class="position-relative overflow-hidden ">
-    <section>
-    <div class="row" style="margin-left: 0;margin-right: 0">
-        <div class="col-12 col-lg-6 col-md-12 col-sm-12 ml-auto mr-auto text-center">
-            <h2 class="d-none d-lg-block" style="margin: 50px auto 40px auto;">Here’s What you have to do</h2>
-            <h5 class="d-lg-none" style="margin: 50px auto 40px auto;">Here’s What you have to do</h5>
-        </div>
-
-    </div>
-    <div class="col-12 col-lg-6 col-md-12 col-sm-12 ml-auto mr-auto">
-
-        <ol class="ml-lg-5 d-none d-lg-block">
-        <li style="font-size: 20px;color: #4c4d4f;"> <a href="{% url 'account_signup' %}">Register or login</a> as a Developer</li>
-        <li style="font-size: 20px;color: #4c4d4f;">Fill out your profile</li>
-        <li style="font-size: 20px;color: #4c4d4f;">Complete any of the MEST Tech Challenge Quizzes from the ‘Companies recruiting’ session</li>
-        <li style="font-size: 20px;color: #4c4d4f;">Successful Quiz Candidates will be assigned Projects to build</li>
-        <li style="font-size: 20px;color: #4c4d4f;">3 Winners will be announced from each region (Nigeria, Ghana, Kenya, South Africa & Cote d’Ivoire) after the project deadlines.</li>
-
-        </ol>
-        <ol class="d-lg-none ml-md-5 ">
-        <li style="font-size: 16px;color: #4c4d4f;">Register as a Developer on <a href="{% url 'account_signup' %}">www.codeln.com</a></li>
-        <li style="font-size: 16px;color: #4c4d4f;">Fill out your profile</li>
-        <li style="font-size: 16px;color: #4c4d4f;">Complete any of the MEST Tech Challenge Quizzes from the ‘Companies recruiting’ session</li>
-        <li style="font-size: 16px;color: #4c4d4f;">Successful Quiz Candidates will be assigned Projects to build</li>
-        <li style="font-size: 16px;color: #4c4d4f;">3 Winners will be announced from each region (Nigeria, Ghana, Kenya, South Africa & Cote d’Ivoire) after the project deadlines.</li>
-
-        </ol>
-
-
-    </div>
-    </section>
     </div>
 
 
-<!--footer-->
-    <footer class="jumbotron jumbofoot">
-    <div class="container">
-        <div class="row">
 
-        <div class="col-6 col-md">
-          <h5>Menu</h5>
-          <ul class="list-unstyled text-small">
-            <li><a class="text-muted" href="/pricing">Pricing</a></li>
-            <li><a class="text-muted" href="/accounts/login/">Testing</a></li>
-            <li><a class="text-muted" href="{% url 'transactions:sourcing' %}">Sourcing</a></li>
-              <li><a class="text-muted" href="/dev">Developer</a></li>
-
-          </ul>
-        </div>
-        <div class="col-6 col-md">
-          <h5>Company</h5>
-          <ul class="list-unstyled text-small">
-            <li><a class="text-muted" href="/privacy">Privacy</a></li>
-            <li><a class="text-muted" href="/terms">Terms</a></li>
-
-
-          </ul>
-        </div>
-        <div class="col col-md">
-          <h5>Contact</h5>
-          <ul class="list-unstyled text-small">
-              <li>
-              <a href="mailto:info@codeln.com" target="_top">
-                  <i><span data-feather="mail"></span> </i>
-              </a>
-              <li>
-                <a class="text-muted" href="https://www.linkedin.com/company/codeln/" target="_blank">
-                <i><span data-feather="linkedin"></span></i>
-                </a>
-            </li>
-            <li>
-                <a class="text-muted" href="https://twitter.com/Codeln_spaces" target="_blank">
-                <i><span data-feather="twitter"></span></i>
-                </a>
-            </li>
-            <li>
-                <a class="text-muted" href="https://www.facebook.com/CodelnSpaces/" target="_blank">
-                <i><span data-feather="facebook"></span></i>
-                </a>
-            </li>
-
-          </ul>
-        </div>
-
-      </div>
-    </div>
-</footer>
 
 {% endblock %}
