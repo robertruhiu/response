@@ -9,153 +9,66 @@
     <div class="jumbotron jumbotroncompetions  ">
         <div class="container  " style="height: 40vm">
             <h4 class="mt-5 col-12 col-lg-6 col-xl-6 col-sm-12 col-md-6 d-none d-lg-block"
-                style="font-weight: 700;font-size: 3.0rem;">NATTERBASE NODEJS TEST</h4>
+                style="font-weight: 700;font-size: 3.0rem;">NATTERBASE NODEJS CHALLENGE</h4>
             <h4 class=" col-12 col-lg-6 col-xl-6 col-sm-12 col-md-6 d-lg-none"
-                style="font-weight: 700;margin-top: 5rem">NATTERBASE NODEJS TEST assessment</h4>
-
-            <p class="col-12 col-lg-6 col-xl-6 col-sm-12 col-md-6 d-none d-lg-block"
-               style="font-size: 20px;line-height: 24px">
-                Please complete the test to take specified to qualify for the next stage
-
-            </p>
+                style="font-weight: 700;margin-top: 5rem">NATTERBASE NODEJS CHALLENGE</h4>
 
 
         </div>
 
 
     </div>
-    <p class="col-12 col-lg-6 col-xl-6 col-sm-12 col-md-12  d-lg-none" style="color: #6b6b6b;
-    font-size: 16px;
-    line-height: 22px;
-    margin-bottom: 30px;">
-        Please complete the test to take specified to qualify for the next stage
-
-    </p>
 
 
-    <div class="container-fluid">
-        <div class=" p-3 mb-5 bg-white rounded">
+
+
+    <!-----how to apply------->
+    <div class="position-relative overflow-hidden ">
+        <section>
             <div class="row" style="margin-left: 0;margin-right: 0">
-                <div class="col-lg-4">
-                    <div class="card" style="width: 18rem;margin-left: auto;margin-right: auto;border: 0">
-                        <img class="card-img-top" src="https://i.ibb.co/zH6QPcZ/node.png" alt="Card image cap">
-
-                    </div>
-
+                <div class="col-12 col-lg-6 col-md-12 col-sm-12 ml-auto mr-auto text-center">
+                    <h2 class="d-none d-lg-block" style="margin: 50px auto 40px auto;">Here’s What you have to do</h2>
+                    <h5 class="d-lg-none" style="margin: 50px auto 40px auto;">Here’s What you have to do</h5>
                 </div>
-                <div class="col-lg-8 col-12">
-                    {% if transaction %}
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                <tr>
 
-                                    <th scope="col">Company</th>
-                                    <th class="text-center" scope="col">Test to take</th>
-
-                                    <th class="text-center" scope="col">Requirements status</th>
-                                    <th class="text-center" scope="col">Application stage</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% if qualify %}
-                                    <tr>
-
-                                        <th scope="row">{{ qualify.transaction.projecttitle }}</th>
-
-
-                                        <td class="text-center">{{ qualify.transaction.framework|capfirst }}</td>
-
-                                        {% if qualify.stage == 'application sent' %}
-                                            <td class="text-center"><span
-                                                    class="badge badge-success">requirements met</span></td>
-                                            <td class="text-center"><span
-                                                    class="btn-sm btn-success"> {{ qualify.stage }} </span></td>
-                                        {% elif qualify.stage == 'accepted' %}
-                                            <td class="text-center"><span class="badge badge-success"
-                                                                          style="background-color: #b627a1">check invitations under build a project</span>
-                                            </td>
-                                            <td class="text-center"><span class="btn-sm btn-success"
-                                                                          style="background-color: #b627a1"> {{ qualify.stage }} </span>
-                                            </td>
-                                        {% endif %}
-                                    </tr>
-                                {% else %}
-                                    <tr>
-
-                                        <th scope="row">{{ transaction.projecttitle }}</th>
-
-
-                                        <td class="text-center">
-                                            {% if request.user.is_authenticated %}
-                                                {% if request.user.profile.user_type == 'developer' %}
-
-
-                                                    <a style="text-decoration: none"
-                                                       href="{% url 'students:take' quiz.id %}">
-                                                        {{ transaction.framework|capfirst }}
-                                                    </a>
-                                                {% else %}
-                                                    <a href="" style="text-decoration: none"
-                                                       onclick="alert('Only available to Developer profiles')"
-                                                       >
-                                                        {{ transaction.framework|capfirst }}
-                                                    </a>
-                                                {% endif %}
-                                            {% else %}
-                                                <a href="" style="text-decoration: none" onclick="alert('Please login to continue')"
-                                                   >
-                                                    {{ transaction.framework|capfirst }}
-                                                </a>
-
-                                            {% endif %}
-
-
-                                        </td>
-
-                                        {% if passedquizzes %}
-                                            <td class="text-center">
-                                                <span class="badge badge-primary">requirements met</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <a href="{% url 'frontend:placeapplication' transaction.id %}"
-                                                   style="text-decoration: none">
-                                                    <span class="btn-sm btn-primary"> Apply </span>
-                                                </a>
-                                            </td>
-                                        {% else %}
-                                            <td class="text-center">
-                                                <span class="badge badge-danger">requirements not met</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <a onclick="alert('requirements not met')"
-                                                   style="text-decoration: none">
-                                                    <span class="btn-sm btn-warning"> Apply </span>
-                                                </a>
-
-                                            </td>
-
-                                        {% endif %}
-
-
-                                    </tr>
-
-                                {% endif %}
-
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                    {% else %}
-                        No opens calls from companies at the moment
-                    {% endif %}
-                </div>
             </div>
+            <div class="col-12 col-lg-6 col-md-12 col-sm-12 ml-auto mr-auto">
+
+                <ol class="ml-lg-5 d-none d-lg-block">
+                    <li style="font-size: 20px;color: #4c4d4f;"><a href="{% url 'account_signup' %}">Register or
+                        login</a> as a Developer
+                    </li>
+                    <li style="font-size: 20px;color: #4c4d4f;">Fill out your profile</li>
+                    <li style="font-size: 20px;color: #4c4d4f;">Complete the Nodejs Natterbase Challenge quiz from the
+                        <a href="{% url 'frontend:calltoapply' %}"> ‘Companies recruiting’</a> section
+                    </li>
+                    <li style="font-size: 20px;color: #4c4d4f;">The apply button will become active(blue) submit your
+                        application and a Codeln
+                        representative will contact you shortly
+                    </li>
+
+                </ol>
+                <ol class="d-lg-none ml-md-5 ">
+                    <li style="font-size: 16px;color: #4c4d4f;">Register as a Developer on <a
+                            href="{% url 'account_signup' %}">www.codeln.com</a></li>
+                    <li style="font-size: 16px;color: #4c4d4f;">Fill out your profile</li>
+                    <li style="font-size: 16px;color: #4c4d4f;">Complete any of the MEST Tech Challenge Quizzes from the
+                        ‘Companies recruiting’ session
+                    </li>
+                    <li style="font-size: 16px;color: #4c4d4f;">Successful Quiz Candidates will be assigned Projects to
+                        build
+                    </li>
+                    <li style="font-size: 16px;color: #4c4d4f;">3 Winners will be announced from each region (Nigeria,
+                        Ghana, Kenya, South Africa & Cote d’Ivoire) after the project deadlines.
+                    </li>
+
+                </ol>
 
 
-        </div>
+            </div>
+        </section>
     </div>
+
 
 
 

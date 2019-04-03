@@ -110,7 +110,6 @@
         <th scope="col">Company </th>
         <th class="text-center" scope="col">Country </th>
         <th class="text-center" scope="col">Test to take</th>
-        <th class="text-center" scope="col">Project framework</th>
         <th class="text-center" scope="col">Requirements status </th>
         <th class="text-center" scope="col">Application stage</th>
     </tr>
@@ -126,7 +125,6 @@
                       <th scope="row">{{ qualify.transaction.projecttitle }}</th>
 
                       <td class="text-center">{{ qualify.recruiter.profile.country.name }}</td>
-                      <td class="text-center">{{ qualify.transaction.framework.language|capfirst }}</td>
                       <td class="text-center">{{ qualify.transaction.framework|capfirst }}</td>
 
                       {% if qualify.stage == 'application sent' %}
@@ -157,13 +155,19 @@
                       <th scope="row">{{ opportunity.transaction.projecttitle  }}</th>
 
                       <td class="text-center">{{ opportunity.recruiter.profile.country.name }}</td>
+                       {% for quiz in quizzes %}
+                           {% if quiz.name == opportunity.transaction.framework.name %}
                       <td class="text-center">
-                          <a style="text-decoration: none" href="{% url 'students:tests' %}">
-                              {{ opportunity.transaction.framework.language|capfirst }}
+                          <a style="text-decoration: none" href="{% url 'students:take' quiz.id %}">
+                              {{ opportunity.transaction.framework|capfirst }}
                           </a>
 
                       </td>
-                  <td class="text-center">{{ opportunity.transaction.framework|capfirst }}</td>
+                           {% endif %}
+
+                  {% endfor %}
+
+
 
 
                           {% if langs %}
@@ -217,7 +221,7 @@
                                           <span class="btn-sm btn-primary"> Apply </span>
                                       </a>
                                   </td>
-                                  {% elif opportunity.transaction.framework.language.name == langs.Nodejs %}
+                                  {% elif opportunity.transaction.framework.name == langs.Nodejs %}
                                   <td class="text-center">
                                   <span class="badge badge-primary">requirements met</span>
                                   </td>
