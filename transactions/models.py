@@ -25,6 +25,7 @@ class Transaction(models.Model):
     framework = models.ForeignKey(Framework, on_delete=models.CASCADE)
     projecttitle = models.CharField(null=True, max_length=100)
     closed = models.BooleanField(default=False)
+    deadline = models.DateField(null=True)
 
     def allcandidates(self):
         candidates = Candidate.objects.filter(transaction=self.id)
