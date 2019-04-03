@@ -172,7 +172,7 @@
 
                           {% if langs %}
 
-                              {% if opportunity.transaction.framework.language.name == langs.Python  %}
+                              {% if opportunity.transaction.framework.language.name == langs.python  %}
                                   <td class="text-center">
                                   <span class="badge badge-primary">requirements met</span>
                                   </td>
@@ -183,7 +183,7 @@
                                   </td>
 
 
-                              {% elif opportunity.transaction.framework.language.name == langs.Javascript %}
+                              {% elif opportunity.transaction.framework.language.name == langs.javascript %}
                                   <td class="text-center">
                                   <span class="badge badge-primary">requirements met</span>
                                   </td>
@@ -192,17 +192,7 @@
                                           <span class="btn-sm btn-primary"> Apply </span>
                                       </a>
                                   </td>
-                              {% elif opportunity.transaction.framework.language.name == langs.Laravel %}
-                                  <td class="text-center">
-                                  <span class="badge badge-primary">requirements met</span>
-                                  </td>
-                                  <td class="text-center">
-                                      <a href="{% url 'frontend:apply' opportunity.transaction.id %}" style="text-decoration: none">
-                                          <span class="btn-sm btn-primary"> Apply </span>
-                                      </a>
-                                  </td>
-
-                              {% elif opportunity.transaction.framework.language.name == langs.Php %}
+                              {% elif opportunity.transaction.framework.language.name == langs.laravel %}
                                   <td class="text-center">
                                   <span class="badge badge-primary">requirements met</span>
                                   </td>
@@ -212,7 +202,7 @@
                                       </a>
                                   </td>
 
-                              {% elif opportunity.transaction.framework.language.name == langs.Sql %}
+                              {% elif opportunity.transaction.framework.language.name == langs.php %}
                                   <td class="text-center">
                                   <span class="badge badge-primary">requirements met</span>
                                   </td>
@@ -221,7 +211,17 @@
                                           <span class="btn-sm btn-primary"> Apply </span>
                                       </a>
                                   </td>
-                                  {% elif opportunity.transaction.framework.name == langs.Nodejs %}
+
+                              {% elif opportunity.transaction.framework.language.name == langs.sql %}
+                                  <td class="text-center">
+                                  <span class="badge badge-primary">requirements met</span>
+                                  </td>
+                                  <td class="text-center">
+                                      <a href="{% url 'frontend:apply' opportunity.transaction.id %}" style="text-decoration: none">
+                                          <span class="btn-sm btn-primary"> Apply </span>
+                                      </a>
+                                  </td>
+                                  {% elif opportunity.transaction.framework.name == langs.nodejs %}
                                   <td class="text-center">
                                   <span class="badge badge-primary">requirements met</span>
                                   </td>
