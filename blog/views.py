@@ -1,9 +1,13 @@
+from django.contrib.auth.decorators import login_required
+from django.http.response import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.urls import reverse
+from django.utils.text import slugify
 from django.views.generic import ListView
 
 from .models import Post, Comment
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 from taggit.models import Tag
 from django.db.models import Count
 
@@ -38,15 +42,11 @@ def post_list(request, tag_slug=None):
     return render(request, 'blog/post/list.html', {'page': page, 'posts': posts, 'tag': tag})
 
 
-def post_detail(request, year, month, day, post):
+def post_detail(request, post_id):
     """a view to display details of a single post."""
     post = get_object_or_404(
         Post,
-        slug=post,
-        status='published',
-        publish__year=year,
-        publish__month=month,
-        publish__day=day
+        id=post_id
     )
 
     # active comments for this post
@@ -75,3 +75,27 @@ def post_detail(request, year, month, day, post):
 
     return render(request, 'blog/post/detail.html',
                   {'post': post, 'comments': comments, 'comment_form': comment_form, 'similar_posts': similar_posts})
+
+
+@login_required
+def create_or_edit_post(request, _id=None):
+    if _id:
+        post = get_object_or_404(Post, pk=_id)
+        if post.author != request.user:
+            return HttpResponseForbidden()
+    else:
+        post = Post(author=request.user)
+
+    post_form = PostForm(data=request.POST or None, instance=post)
+
+    if request.POST and post_form.is_valid():
+        new_post = post_form.save(commit=False)
+        new_post.slug = slugify(new_post.title)
+        new_post.save()
+
+        tags = post_form.cleaned_data['tags']
+        new_post.tags.add(*tags)
+
+        return HttpResponseRedirect(reverse('blog:post_list'))
+
+    return render(request, 'blog/post/create.html', {'post_form': post_form})

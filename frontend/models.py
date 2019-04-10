@@ -41,7 +41,6 @@ class Portfolio(models.Model):
     candidate = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(null=True, max_length=200)
     description = models.CharField(null=True, max_length=400)
-    image = models.CharField(null=True, max_length=400)
     repository_link = models.CharField(null=True, max_length=400)
     demo_link = models.CharField(null=True, max_length=400)
     verified = models.BooleanField(default=False)
@@ -49,6 +48,7 @@ class Portfolio(models.Model):
 class Github(models.Model):
     candidate = models.ForeignKey(User, on_delete=models.CASCADE)
     github_username = models.CharField(null=True, max_length=100)
+    about = models.CharField(null=True, max_length=300)
 
 class Experience(models.Model):
     candidate = models.ForeignKey(User, on_delete=models.CASCADE)

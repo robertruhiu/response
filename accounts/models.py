@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 from django.db import models
 from django_countries.fields import CountryField
 
-
 # Create your models here.
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from taggit.managers import TaggableManager
 
 
 class Profile(models.Model):
@@ -30,13 +30,13 @@ class Profile(models.Model):
         ('2-4', '2-4'),
         ('4-above', '4-above'),
     )
-    
+
     CONTRACT_CHOICES = (
         ('fulltime', 'fulltime'),
         ('contract', 'contract'),
         ('remote', 'remote'),
         ('freelance', 'freelance'),
-        
+
     )
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -47,24 +47,24 @@ class Profile(models.Model):
     gender = models.CharField(choices=GENDER_CHOICES, null=True, blank=True, max_length=30)
     phone_number = models.CharField(null=True, max_length=30)
     # developer profile
-    linkedin_url =models.CharField(max_length=500, null=True, )
-    portfolio=models.CharField(max_length=500,blank=True, null=True )
+    linkedin_url = models.CharField(max_length=500, null=True, )
+    portfolio = models.CharField(max_length=500, blank=True, null=True)
     github_repo = models.CharField(max_length=500, null=True, )
     language = models.CharField(max_length=140, null=True, blank=True)
     framework = models.CharField(max_length=140, null=True, blank=True)
-    years = models.CharField(choices=YEARS_ACTIVE_CHOICES, null=True , max_length=30)
-   
+    years = models.CharField(choices=YEARS_ACTIVE_CHOICES, null=True, max_length=30)
+
     country = CountryField(null=True, max_length=30)
-    availabilty =models.CharField(choices=CONTRACT_CHOICES ,null=True , max_length=30)
-    
-    #years = models.CharField(max_length=30, choices=YEARS_ACTIVE_CHOICES, null=True, blank=True),
+    availabilty = models.CharField(choices=CONTRACT_CHOICES, null=True, max_length=30)
+
+    # years = models.CharField(max_length=30, choices=YEARS_ACTIVE_CHOICES, null=True, blank=True),
 
     # recruiter profile
     company = models.CharField(max_length=140, null=True, blank=True)
     job_role = models.CharField(max_length=140, null=True, blank=True)
     industry = models.CharField(max_length=80, null=True, blank=True)
-    company_url = models.CharField(max_length=500,null=True, blank=True)
-
+    company_url = models.CharField(max_length=500, null=True, blank=True)
+    tags = TaggableManager()
 
     def __str__(self):
         return self.user.username

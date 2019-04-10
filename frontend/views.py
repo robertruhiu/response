@@ -22,7 +22,7 @@ from accounts.forms import ProfileTypeForm, DeveloperFillingDetailsForm, Recruit
 from transactions.models import Transaction, Candidate,OpenCall,Applications
 from invitations.models import Invitation
 from projects.models import Project, Framework
-from frontend.form import Projectinvite, EditProjectForm,Submissions,Portfolio_form,Github_form,Experience_Form
+from frontend.form import Projectinvite, EditProjectForm,Submissions,Portfolio_form,Github_form,Experience_Form,About
 from frontend.models import candidatesprojects, devs, recruiters,submissions,Portfolio,Github,Experience
 from classroom.models import TakenQuiz,Student,Quiz
 from marketplace.models import Job
@@ -44,6 +44,27 @@ def developer_filling_details(request, current_profile):
             current_profile.phone_number = developer_filling_details_form.cleaned_data['phone_number']
             current_profile.stage = 'complete'
             current_profile.save()
+
+            user = User.objects.get(username=request.user)
+            exp1 = ''
+            exp2 = ''
+            # add tags to saved profile
+            if user.profile.years == "('1-2',)":
+                exp1 = 'Entry'
+                exp2 = 'Junior'
+            elif user.profile.years == "('2-4',)":
+                exp1 = 'Junior'
+                exp2 = 'Mid-Level'
+            elif user.profile.years == "('4-above',)":
+                exp1 = 'Mid-Level'
+                exp2 = 'Senior'
+
+            profile_tags = [current_profile.language, current_profile.framework, exp1, exp2, current_profile.country.name, current_profile.availabilty]
+
+            print('profile_tags-------------------> ', profile_tags)
+
+            current_profile.tags.add(profile_tags[0], profile_tags[1], profile_tags[2], profile_tags[3], profile_tags[4], profile_tags[5])
+
             return redirect(reverse('frontend:index'))
     else:
         developer_filling_details_form = DeveloperFillingDetailsForm()
@@ -389,51 +410,68 @@ def buildproject(request):
 def calltoapply(request):
     alltransactions=Transaction.objects.filter(stage='complete').filter(closed=False)
     complete=[]
-    for i in alltransactions:
-        complete.append(i.id)
+    for onetransaction in alltransactions:
+        complete.append(onetransaction)
 
-    opportunities = OpenCall.objects.all()
+    allopencalls = OpenCall.objects.all()
     opencalls=[]
-    for io in opportunities:
-        opencalls.append(io.transaction.id)
+    for oneopencall in allopencalls:
+        opencalls.append(oneopencall.transaction)
 
     payedopencalls = set(complete)&set(opencalls)
     payed = list(payedopencalls)
 
-    qualifys = Applications.objects.filter(candidate=request.user)
+    opencallapplied = Applications.objects.filter(candidate=request.user)
+    applied=[]
+    for opencall in opencallapplied:
+        applied.append(opencall.transaction)
+    opportunities=list(set(payed)-set(applied))
+
     student = Student.objects.get(user_id=request.user.id)
-    passedquizz = TakenQuiz.objects.filter(score__gte=50).filter(student_id=student)
+    takenquizzes = TakenQuiz.objects.filter(student_id=student)
+    allquizid=[]
+    for two in takenquizzes:
+        allquizid.append(two.quiz.id)
 
-    allsubjectspassed = []
-    for d in passedquizz:
-        allsubjectspassed.append(d.quiz.subject)
 
-    uniquesubjects = list(set(allsubjectspassed))
-    uniquelangs=[]
+    allsubjectstaken = []
+    for onequiz in takenquizzes:
+        allsubjectstaken.append(onequiz.quiz.subject)
+
+    uniquesubjects = list(set(allsubjectstaken))
     langs = {}
     for unique in uniquesubjects:
-        izzes = TakenQuiz.objects.filter(quiz__subject_id=unique.id).filter(student_id=student)
+        allstudentquizzes = TakenQuiz.objects.filter(quiz__subject_id=unique.id).filter(student_id=student)
 
-        for i in izzes:
-            langs[i.quiz.subject.name] = i.quiz.subject.name
-    original =[]
-    taken = []
-    for oppo in payed:
-        original.append(oppo)
-    for qualify in qualifys:
-        taken.append(qualify.transaction.id)
-    untaken=[]
+        for onestudentquiz in allstudentquizzes:
+            langs[onestudentquiz.quiz.subject.name] = onestudentquiz.quiz.subject.name
+    passedquizzes = TakenQuiz.objects.filter(score__gte=50).filter(student_id=student)
+    passedquizid=[]
+    for one in passedquizzes:
+        passedquizid.append(one.quiz.id)
     quizzes = Quiz.objects.all()
-    non = set(original) - set(taken)
-    untaken=list(non)
-    untakenopportunities =[]
-    for untake in untaken:
-        untakentrans =Transaction.objects.get(id=untake)
-        untakenopportunities.append(untakentrans.id)
+    qualified = {}
+    unqualified ={}
+    for onepassedquiz in passedquizzes:
+        for opportunity in opportunities:
+            if opportunity.framework.name == onepassedquiz.quiz.name:
+                qualified[opportunity]=onepassedquiz
+    qualifiedtransactions=[]
+    for key,value in qualified.items():
+        qualifiedtransactions.append(key)
+    unqualifiedtransactions =list(set(opportunities)-set(qualified))
+
+    openopportunities ={}
+    for oneunqualified in unqualifiedtransactions:
+        for quizmoja in quizzes:
+            if oneunqualified.framework.name == quizmoja.name:
+                openopportunities[oneunqualified]=quizmoja
+
 
     return render(request, 'classroom/students/opencalls.html',{'opportunities':opportunities,
-                                                                'qualifys':qualifys,'a':original,'taken':taken,'untaken':untaken,
-                                                                'langs':langs,'qualify':qualifys,'quizzes':quizzes})
+                                                                'opencallapplied':opencallapplied,
+                                                                'langs':langs,'quizzes':quizzes,'passedquizzes':passedquizzes,'qualified':qualified,
+                                                                'unqualifiedtransactions':openopportunities})
 @login_required
 def apply(request,opportunity_id):
     language =OpenCall.objects.get(transaction=opportunity_id)
@@ -480,9 +518,10 @@ def pickcandidates(request,trans_id,candidate_id):
     newcandidate=Candidate(email=application.candidate.email,first_name=application.candidate.first_name,last_name=application.candidate.last_name,transaction=transaction)
     newcandidate.save()
     application.save()
+
     subject = 'Accepted for next stage'
     html_message = render_to_string('invitations/email/opencallaccepted.html',
-                                    {'dev': request.user,'company':transaction})
+                                    {'dev': candidate,'company':transaction})
     plain_message = strip_tags(html_message)
     from_email = 'codeln@codeln.com'
     to = candidate.email
@@ -493,6 +532,7 @@ def pickcandidates(request,trans_id,candidate_id):
 @login_required
 def portfolio(request):
     try:
+
         candidate = Github.objects.get(candidate=request.user)
         user = candidate.github_username
         username = config('GITHUB_USERNAME',default='GITHUB_USERNAME')
@@ -501,6 +541,7 @@ def portfolio(request):
 
         form = Portfolio_form()
         experience_form = Experience_Form()
+        about_form = About()
         repo = 'https://api.github.com/users/' + user + '/repos'
         repos = requests.get(repo, auth=(username, token)).json()
         paginator = Paginator(repos, 8)
@@ -539,12 +580,12 @@ def portfolio(request):
         verified_projects = Portfolio.objects.filter(candidate=request.user).all()
         return render(request, 'frontend/developer/portfolio.html',
                       {'json': json_data, 'repos': repoz, 'data': data, 'c': c, 'form': form,
-                       'verified_projects': verified_projects,'experience_form':experience_form,'experiences':experiences,'skills':skills})
+                       'verified_projects': verified_projects,'experience_form':experience_form,'experiences':experiences,
+                       'skills':skills,'candidate':candidate,'about_form':about_form})
     except Github.DoesNotExist:
         form = Github_form()
 
         return render(request, 'frontend/developer/github.html',{'form':form})
-
 
 @login_required
 def newproject(request):
@@ -664,9 +705,6 @@ def competitions(request):
             except TakenQuiz.DoesNotExist:
                 passedquizzes=None
 
-
-
-
     return render(request, 'frontend/recruiter/competitions.html',{'transaction':transaction,
                                                                    'qualify':qualifys,'passedquizzes':passedquizzes,'quiz':quiz})
 @login_required
@@ -704,3 +742,13 @@ def placeapplication(request,transaction_id):
             send_mail(subject, message, email_from, [to])
 
     return redirect('frontend:competitions')
+def about(request,candidate_id):
+    instance = get_object_or_404(Github,candidate_id=candidate_id)
+    if request.method =='POST':
+        new_about = About(request.POST or None,instance=instance)
+        if new_about.is_valid():
+            new_about.save()
+            return redirect('frontend:portfolio')
+    return redirect(reverse('frontend:portfolio'))
+def management(request):
+    return render(request, 'frontend/recruiter/management.html')

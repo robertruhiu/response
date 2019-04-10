@@ -7,7 +7,8 @@ from frontend.views import home,activity,tracker,update_candidateprojects,\
     report,credits,onboarddevs,onboardrecruiters,seedevs,seerecruiters,manageprojects,managetransactions,\
     editproject,deleteproject,addproject,edittransactions\
     ,deletetransaction,buildproject,calltoapply,apply,opencalltracker,competitions,newproject,\
-    takenquizzes,get_data,pickcandidates,update_finishedopencall,portfolio,github,experience,closetransaction,editportfolioproject,placeapplication
+    takenquizzes,get_data,pickcandidates,update_finishedopencall,portfolio,github,experience,closetransaction,\
+    editportfolioproject,about,management
 from frontend.tasks import reminderforprofiledevs,applyreminder,massmail,submission
 from accounts.views import update_profile
 
@@ -54,7 +55,6 @@ urlpatterns = [
     path('takenquizzes',takenquizzes,name='takenquizzes'),
     path('competitions',competitions,name='competitions'),
     path('apply/<int:opportunity_id>',apply,name='apply'),
-    path('placeapplication/<int:transaction_id>',placeapplication,name='placeapplication'),
     path('opencalltracker/<int:trans_id>',opencalltracker,name='opencalltracker'),
     path('pickcandidates/<int:trans_id>/<int:candidate_id>',pickcandidates,name='pickcandidates'),
     path('reminderforprofiledevs',reminderforprofiledevs,name='reminderforprofiledevs'),
@@ -66,7 +66,9 @@ urlpatterns = [
     path('api/data/',get_data,name='api-data'),
     path('newproject',newproject,name='newproject'),
     path('experience',experience,name='experience'),
-    path('editportfolioproject/<int:project_id>',editportfolioproject,name='editportfolioproject')
+    path('editportfolioproject/<int:project_id>',editportfolioproject,name='editportfolioproject'),
+    path('about/<int:candidate_id>',about,name='about'),
+    path('management',management,name='management')
 
 
 ]

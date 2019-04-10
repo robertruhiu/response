@@ -82,30 +82,44 @@ def massmail(request):
     return render(request, 'frontend/recruiter/recruiter.html')
 
 def submission(request):
-    invitations_mails=[]
-    submissions_mails =[]
-    emails = candidatesprojects.objects.all()
-    for email in emails:
-        if email.stage == 'invite-accepted':
-            invitations_mails.append(email)
-        elif email.stage == 'project-in-progress':
-            submissions_mails.append(email)
-    for candidate in invitations_mails:
-        subject = 'Project submission deadline update'
-        html_message = render_to_string('invitations/email/mestsubmission.html',
-                                        {'dev': candidate})
-        plain_message = strip_tags(html_message)
-        from_email = 'codeln@codeln.com'
-        to = candidate.candidate.email
-        mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
-    for cand in submissions_mails:
-        subject = 'Project submission deadline update'
-        html_message = render_to_string('invitations/email/mestsubmission.html',
-                                        {'dev': cand})
-        plain_message = strip_tags(html_message)
-        from_email = 'codeln@codeln.com'
-        to = cand.candidate.email
-        mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+    # invitations_mails=[]
+    # submissions_mails =[]
+    # emails = candidatesprojects.objects.all()
+    # for email in emails:
+    #     if email.stage == 'invite-accepted':
+    #         invitations_mails.append(email)
+    #     elif email.stage == 'project-in-progress':
+    #         submissions_mails.append(email)
+    # for candidate in invitations_mails:
+    #     subject = 'Project submission deadline update'
+    #     html_message = render_to_string('invitations/email/mestsubmission.html',
+    #                                     {'dev': candidate})
+    #     plain_message = strip_tags(html_message)
+    #     from_email = 'codeln@codeln.com'
+    #     to = candidate.candidate.email
+    #     mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+    # for cand in submissions_mails:
+    #     subject = 'Project submission deadline update'
+    #     html_message = render_to_string('invitations/email/mestsubmission.html',
+    #                                     {'dev': cand})
+    #     plain_message = strip_tags(html_message)
+    #     from_email = 'codeln@codeln.com'
+    #     to = cand.candidate.email
+    #     mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+    passedlist = TakenQuiz.objects.filter(score__gte=50)
+    failedlist =TakenQuiz.objects.filter(score__lt=50)
+    allpassed=[]
+    for student in failedlist:
+        allpassed.append(student.student.user.email)
+    trimmed =set(allpassed)
+    kupita=list(trimmed)
+    print(*kupita, sep='\n')
+    # emails=User.objects.filter(id_in = kupita)
+    # passedemails =[]
+    # for email in emails:
+    #     print(email.email)
+
+
     return render(request, 'frontend/recruiter/recruiter.html')
 
 

@@ -99,8 +99,8 @@
       <tbody>
         {% for taken_quiz in taken_quizzes %}
           <tr>
-            <td>{{ taken_quiz.quiz.name }}</td>
-            <td>{{ taken_quiz.quiz.subject }}</td>
+            <td>{{ taken_quiz.quiz.name|capfirst }}</td>
+            <td>{{ taken_quiz.quiz.subject|capfirst }}</td>
             <td>{{ taken_quiz.score }}% </td>
 
 

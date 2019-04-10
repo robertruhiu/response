@@ -26,20 +26,23 @@ class Experience_Form(forms.ModelForm):
         model = Experience
         fields=['title','description','location','company','duration']
 class Portfolio_form(forms.ModelForm):
-    image = forms.CharField(required=True)
     title = forms.CharField(required=True)
     description = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}),required=True)
     demo_link = forms.CharField(required=True)
     repository_link = forms.CharField(required=True)
     class Meta:
         model = Portfolio
-        fields = ['image','title','description','demo_link','repository_link']
+        fields = ['title','description','demo_link','repository_link']
 
 class Github_form(Form):
     github_username = forms.CharField(required=True)
     password = forms.CharField(widget=forms.PasswordInput())
 
-
+class About(forms.ModelForm):
+    about = forms.CharField(widget=forms.Textarea(attrs={'rows': 7}), required=True)
+    class Meta:
+        model = Github
+        fields =['about']
 class EditProjectForm(forms.ModelForm):
     name = forms.CharField()
     brief = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}), )

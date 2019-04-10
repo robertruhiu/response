@@ -53,8 +53,8 @@
                                 Sidebar menu options
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{% url 'frontend:inprogress'%}">Ongoing
-                                    Projects</a>
+{#                                <a class="dropdown-item" href="{% url 'frontend:inprogress'%}">Ongoing#}
+{#                                    Projects</a>#}
                                 <a class="dropdown-item" href="/update_profile/">My profile</a>
                             </div>
                         </li>
@@ -106,7 +106,7 @@
                     <td>{{ job_detail.1}}</td>
                     <td>{{ job_detail.2 }}</td>
                     <td>
-                    <a href="{% url 'marketplace:recruiter_job_detail' job_detail.0.id %}">
+                    <a href="{% url 'marketplace:job_details' job_detail.0.id %}">
                                 Manage Job
                     </a>
 

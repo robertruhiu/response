@@ -1,0 +1,154 @@
+{% extends 'recruiterbase.html' %}
+{% block script %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{% endblock %}
+{%load static %}
+{% block content %}
+    <main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+    <div class="d-none d-lg-block">
+        <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                    <h5>Payment</h5>
+                    <ul class="nav ml-auto">
+
+
+
+            {% if request.user.is_authenticated %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+            </li>
+
+            {% else %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+            </li>
+            <li class="nav-item">
+                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+            </li>
+            {% endif %}
+
+
+    </ul>
+                </nav>
+    </div>
+
+    <!-----md devices adaptation------>
+    <div class="container d-lg-none">
+        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+            <h5 class="logoadapt h5" style="text-decoration: none" href="/home">Checkout</h5>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Menu
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'frontend:my-activity' %}" >Ongoing tests</a>
+                            <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
+                            <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
+                        </div>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="d-none d-lg-block" style="margin-top: 8%">
+
+</div >
+
+    <div class="d-lg-none"  style="margin-top: 7em">
+
+</div>
+    <div class="row">
+
+    <div class="col-lg-6 col-md-12 d-flex justify-content-center " style="margin-left: auto;margin-right: auto">
+    <div class="card" style="width: 28em;box-shadow:0 20px 50px rgba(0,0,0,.1);">
+        <img class="card-img-top img-fluid" style="width: 69%;margin: auto" src="/static/frontend/images/ill/card.svg" alt="Card image cap">
+
+        <div class="card-body">
+            <div class=" text-center h5" style="padding-top: 10%">Payment methods</div>
+            <hr>
+            <div class="row" style="margin: auto">
+                <div class="col-lg-6 col-md-12">
+                    <h6 class="text-center" style="margin-top:3% ">Flutterwave:</h6>
+                </div>
+                <div class="col-lg-3 col-md-12">
+                    <form style="text-align: -webkit-center;">
+                        <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+                        <a onClick="payWithRave('{{amount}}')"><img class="btn btn-outline-primary" style="width: 10rem" src="/static/frontend/images/flutter.svg"></a>
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+        const API_publicKey = "FLWPUBK-37536a50fc02bed5bddf5ebe89a18e7c-X";
+        const SuccessUrl = '{% url 'marketplace:payment_done' transaction.id %}';
+        const CancelledUrl = '{% url 'marketplace:payment_canceled' %}';
+
+        function payWithRave(amnt) {
+            var x = getpaidSetup({
+                PBFPubKey: API_publicKey,
+                customer_email: '{{ transaction.owner.email }}',
+                amount: amnt,
+                customer_phone: "234099940409",
+                currency: "USD",
+                payment_method: "both",
+                txref: {{ transaction.id }},
+                meta: [{
+                    metaname: "transactionID",
+                    metavalue: "Codeln2019"
+                }],
+                onclose: function () {
+                },
+                callback: function (response) {
+                    var txref = response.tx.txRef; // collect txRef returned and pass to a 					server page to complete status check.
+                    console.log("This is the response returned after a charge", response);
+                    if (
+                        response.tx.chargeResponseCode === "00" ||
+                        response.tx.chargeResponseCode === "0"
+                    ) {
+
+                        window.location.href = SuccessUrl;
+                    } else {
+                        // redirect to a failure page.
+                        window.location.href = CancelledUrl;
+                    }
+
+                    x.close(); // use this to close the modal immediately after payment.
+                }
+            });
+        }
+    </script>
+{% endblock %}
+
+</div>
+</div>
+</main>

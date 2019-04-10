@@ -1,5 +1,6 @@
-{% extends "blog/base2.html" %}
-
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
 {% load blog_tags %}
 
 {% block title %}{{ post.title }}{% endblock %}
@@ -56,9 +57,11 @@
     {% else %}
         <h6 style="font-weight: bold; margin-top: 20px">Add a new comment</h6>
         <form action="." method="post">
-            {{ comment_form.as_p }}
-            {% csrf_token %}
-            <p><input style="background: #007bff" type="submit" value="Add comment"></p>
+        {% csrf_token %}
+            {% bootstrap_form comment_form %}
+
+            <button class="btn btn-primary">Add comment</button>
         </form>
     {% endif %}
+
 {% endblock %}
