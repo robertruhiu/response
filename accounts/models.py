@@ -6,7 +6,7 @@ from django_countries.fields import CountryField
 # Create your models here.
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from taggit.managers import TaggableManager
+
 
 
 class Profile(models.Model):
@@ -64,7 +64,7 @@ class Profile(models.Model):
     job_role = models.CharField(max_length=140, null=True, blank=True)
     industry = models.CharField(max_length=80, null=True, blank=True)
     company_url = models.CharField(max_length=500, null=True, blank=True)
-    tags = TaggableManager()
+
 
     def __str__(self):
         return self.user.username
