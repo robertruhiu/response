@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 from django.core import mail
 from classroom.models import TakenQuiz
-from transactions.models import Applications
+from transactions.models import Applications,Transaction
 from frontend.models import candidatesprojects
 from accounts.models import Profile
 import csv
@@ -106,18 +106,24 @@ def submission(request):
     #     from_email = 'codeln@codeln.com'
     #     to = cand.candidate.email
     #     mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
-    passedlist = TakenQuiz.objects.filter(score__gte=50)
-    failedlist =TakenQuiz.objects.filter(score__lt=50)
-    allpassed=[]
-    for student in failedlist:
-        allpassed.append(student.student.user.email)
-    trimmed =set(allpassed)
-    kupita=list(trimmed)
-    print(*kupita, sep='\n')
-    # emails=User.objects.filter(id_in = kupita)
-    # passedemails =[]
-    # for email in emails:
-    #     print(email.email)
+    # passedlist = TakenQuiz.objects.filter(score__gte=50)
+    # failedlist =TakenQuiz.objects.filter(score__lt=50)
+    # allpassed=[]
+    # for student in failedlist:
+    #     allpassed.append(student.student.user.email)
+    # trimmed =set(allpassed)
+    # kupita=list(trimmed)
+    # print(*kupita, sep='\n')
+    # # emails=User.objects.filter(id_in = kupita)
+    # # passedemails =[]
+    # # for email in emails:
+    # #     print(email.email)
+    accepted=[]
+    pending=[]
+    transaction = Applications.objects.filter(stage='application sent',transaction_id=95)
+    for one in transaction:
+        accepted.append([one.candidate.first_name+one.candidate.last_name,one.candidate.email])
+    print(*accepted,sep='\n')
 
 
     return render(request, 'frontend/recruiter/recruiter.html')
