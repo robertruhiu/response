@@ -264,34 +264,7 @@
 
                     <hr>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add project</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form action="{% url 'frontend:newproject' %}" method="post">
-                                    {% csrf_token %}
-                                    <div class="modal-body">
 
-                                        {% bootstrap_field form.title placeholder=False %}
-                                        {% bootstrap_field form.description placeholder=False %}
-
-                                        {% bootstrap_field form.demo_link placeholder=False %}
-                                        {% bootstrap_field form.repository_link placeholder=False %}
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
 
                     {% if verified_projects %}
                         {% for verified_project in verified_projects %}
@@ -360,39 +333,7 @@
                     </nav>
 
                     <hr>
-                    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add work experience</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form action="{% url 'frontend:experience' %}" method="post">
-                                    {% csrf_token %}
-                                    <div class="modal-body">
 
-                                        {% bootstrap_field experience_form.title placeholder=False %}
-                                        {% bootstrap_field experience_form.description placeholder=False %}
-                                        {% bootstrap_field experience_form.company placeholder=False %}
-                                        {% bootstrap_field experience_form.location placeholder=False %}
-                                        <label>Duration in months</label>
-                                        {% bootstrap_field experience_form.duration placeholder=False show_label=False %}
-
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
-
-                    </div>
 
                     {% if experiences %}
                         {% for experience in experiences %}
@@ -541,34 +482,7 @@
 
                     <hr>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add project</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form action="{% url 'frontend:newproject' %}" method="post">
-                                    {% csrf_token %}
-                                    <div class="modal-body">
 
-                                        {% bootstrap_field form.title placeholder=False %}
-                                        {% bootstrap_field form.description placeholder=False %}
-
-                                        {% bootstrap_field form.demo_link placeholder=False %}
-                                        {% bootstrap_field form.repository_link placeholder=False %}
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
 
                     {% if verified_projects %}
                         {% for verified_project in verified_projects %}
@@ -637,39 +551,7 @@
                     </nav>
 
                     <hr>
-                    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add work experience</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form action="{% url 'frontend:experience' %}" method="post">
-                                    {% csrf_token %}
-                                    <div class="modal-body">
 
-                                        {% bootstrap_field experience_form.title placeholder=False %}
-                                        {% bootstrap_field experience_form.description placeholder=False %}
-                                        {% bootstrap_field experience_form.company placeholder=False %}
-                                        {% bootstrap_field experience_form.location placeholder=False %}
-                                        <label>Duration in months</label>
-                                        {% bootstrap_field experience_form.duration placeholder=False show_label=False %}
-
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
-
-                    </div>
 
                     {% if experiences %}
                         {% for experience in experiences %}
@@ -795,6 +677,67 @@
                                 </form>
                             </div>
                         </div>
+                    </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add project</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="{% url 'frontend:newproject' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="modal-body">
+
+                                        {% bootstrap_field form.title placeholder=False %}
+                                        {% bootstrap_field form.description placeholder=False %}
+
+                                        {% bootstrap_field form.demo_link placeholder=False %}
+                                        {% bootstrap_field form.repository_link placeholder=False %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add work experience</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="{% url 'frontend:experience' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="modal-body">
+
+                                        {% bootstrap_field experience_form.title placeholder=False %}
+                                        {% bootstrap_field experience_form.description placeholder=False %}
+                                        {% bootstrap_field experience_form.company placeholder=False %}
+                                        {% bootstrap_field experience_form.location placeholder=False %}
+                                        <label>Duration in months</label>
+                                        {% bootstrap_field experience_form.duration placeholder=False show_label=False %}
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
                     </div>
 
     </main>
