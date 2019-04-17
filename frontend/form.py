@@ -62,7 +62,7 @@ class GradingForm(Form):
     passed = forms.IntegerField(required=False)
     failed = forms.IntegerField(required=False)
     warnings =forms.IntegerField(required=False)
-    errors = forms.IntegerField(required=False)
+    bugs = forms.IntegerField(required=False)
     lines = forms.IntegerField(required=False)
     duplications = forms.IntegerField(required=False)
     classes = forms.IntegerField(required=False)
