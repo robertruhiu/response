@@ -6,9 +6,7 @@ from celery import Celery
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'codelnmain.settings')
 
 
-app = Celery('codelnmain',broker='amqp://ndjdevhx:r5qC0_UAj5gpxdXTZQxT-T46cjFcaihM@raven.rmq.cloudamqp.com/ndjdevhx',
-             backend='redis://h:p5a5c90f64f97e2a76bdb9d86a7697143c1d835dd0d5103a48db8614d0c7d2611@ec2-52-16-97-46.eu-west-1.compute.amazonaws.com:10739',
-             include=['frontend.tasks'])
+app = Celery()
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
