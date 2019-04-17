@@ -139,81 +139,151 @@
 
             </div>
         {% else %}
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                       aria-controls="nav-home" aria-selected="true">Finished Projects</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                       aria-controls="nav-profile" aria-selected="false">Ongoing projects</a>
 
-            <table class="table" style="width: 100%">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Project status</th>
-                    <th scope="col">Report</th>
-
-
-                </tr>
-                </thead>
-                <tbody>
-                {% for candidate in candswithreports %}
-                    <tr>
-                        <td> {{ forloop.counter }} </td>
-                        <td>{{ candidate.candidate.first_name }} {{ candidate.candidate.last_name }}  </td>
-
-                        <td>
-                            {% if candidate.stage == 'invite-accepted' %}
-                                <span class="badge badge-info">Invite accepted</span>
-                            {% endif %}
-                            {% if candidate.stage == 'project-in-progress' %}
-                                <span class="badge badge-primary">Project in progress</span>
-                            {% endif %}
-                            {% if candidate.stage == 'project-completed' %}
-                                <span class="badge badge-success">Project completed</span>
-                            {% endif %}
-
-                        </td>
-                        <td>
-                            <a target="_blank"
-                               href="{% url 'frontend:report' candidate.candidate_id candidate.transaction_id %}">
-                                Report
-                            </a>
-                        </td>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <table class="table" style="width: 100%">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Project status</th>
+                            <th scope="col">Report</th>
 
 
-                    </tr>
-                {% endfor %}
-                {% for candidate in candwithoutreports %}
-                    <tr>
-                        <td> {{ forloop.counter }} </td>
-                        <td>{{ candidate.candidate.first_name }} {{ candidate.candidate.last_name }}  </td>
+                        </tr>
+                        </thead>
 
-                        <td>
-                            {% if candidate.stage == 'invite-accepted' %}
-                                <span class="badge badge-info">Invite accepted</span>
-                            {% endif %}
-                            {% if candidate.stage == 'project-in-progress' %}
-                                <span class="badge badge-primary">Project in progress</span>
-                            {% endif %}
-                            {% if candidate.stage == 'project-completed' %}
-                                <span class="badge badge-success">Project completed</span>
-                            {% endif %}
 
-                        </td>
-                        {% if candidate.stage == 'project-completed' %}
-                                 <td>
-                            Report being processed
-                        </td>
+                        {% if candswithreports %}
+                            {% for candidate in candswithreports %}
+                                <tr>
+                                    <td> {{ forloop.counter }} </td>
+                                    <td>{{ candidate.candidate.first_name }} {{ candidate.candidate.last_name }}  </td>
+
+                                    <td>
+                                        {% if candidate.stage == 'invite-accepted' %}
+                                            <span class="badge badge-info">Invite accepted</span>
+                                        {% endif %}
+                                        {% if candidate.stage == 'project-in-progress' %}
+                                            <span class="badge badge-primary">Project in progress</span>
+                                        {% endif %}
+                                        {% if candidate.stage == 'project-completed' %}
+                                            <span class="badge badge-success">Project completed</span>
+                                        {% endif %}
+
+                                    </td>
+                                    <td>
+                                        <a target="_blank"
+                                           href="{% url 'frontend:report' candidate.candidate_id candidate.transaction_id %}">
+                                            Report
+                                        </a>
+                                    </td>
+
+
+                                </tr>
+                            {% endfor %}
+
+                        {% else %}
+                            <div class="alert col text-center alert-success" role="alert">
+                <h4 class="alert-heading">No projects complete yet</h4>
+                <p>Candidates who have finished the project will appear here</p>
+                <hr>
+                <p class="mb-0">CODELN may also source candidates for you for this project.Email us at :
+                    <a href="mailto:info@codeln.com?Subject=Source%20candidates%20for%20project%20{{ project.project.name }}%20{{ project.id }}"
+                       target="_top">
+                        info@codeLn.com
+                    </a>
+                </p>
+
+            </div>
+
+                        {% endif %}
+
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <table class="table" style="width: 100%">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Project status</th>
+                            <th scope="col">Report</th>
+
+
+                        </tr>
+                        </thead>
+
+
+
+                        {% if candwithoutreports %}
+                        {% for candidate in candwithoutreports %}
+                            <tr>
+                                <td> {{ forloop.counter }} </td>
+                                <td>{{ candidate.candidate.first_name }} {{ candidate.candidate.last_name }}  </td>
+
+                                <td>
+                                    {% if candidate.stage == 'invite-accepted' %}
+                                        <span class="badge badge-info">Invite accepted</span>
+                                    {% endif %}
+                                    {% if candidate.stage == 'project-in-progress' %}
+                                        <span class="badge badge-primary">Project in progress</span>
+                                    {% endif %}
+                                    {% if candidate.stage == 'project-completed' %}
+                                        <span class="badge badge-success">Project completed</span>
+                                    {% endif %}
+
+                                </td>
+                                {% if candidate.stage == 'project-completed' %}
+                                    <td>
+                                        Report being processed
+                                    </td>
+                                {% else %}
+                                    <td>
+                                        not available
+                                    </td>
+                                {% endif %}
+
+
+                            </tr>
+                        {% endfor %}
                             {% else %}
-                             <td>
-                            not available
-                        </td>
+                            <div class="alert col text-center alert-success" role="alert">
+                <h4 class="alert-heading">No Invites accepted yet</h4>
+                <p>Email invites have been sent to the candidates.Candidates who accept your invite will appear here</p>
+                <hr>
+                <p class="mb-0">CODELN may also source candidates for you for this project.Email us at :
+                    <a href="mailto:info@codeln.com?Subject=Source%20candidates%20for%20project%20{{ project.project.name }}%20{{ project.id }}"
+                       target="_top">
+                        info@codeLn.com
+                    </a>
+                </p>
+
+            </div>
+
                             {% endif %}
 
 
+                        </tbody>
+                    </table>
+                </div>
 
-                    </tr>
-                {% endfor %}
+            </div>
 
 
-                </tbody>
-            </table>
         {% endif %}
 
     </main>
