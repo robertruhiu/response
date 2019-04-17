@@ -797,8 +797,8 @@ def storegrades(request,candidate_id,transaction_id):
 
         passed = request.POST.get('passed', False);
         failed = request.POST.get('failed', False);
-        warnings = request.POST.get('warnings', False);
-        bugs = request.POST.get('bugs', False);
+        vulnerable = request.POST.get('vulnerable', False);
+        errors = request.POST.get('error', False);
         lines = request.POST.get('lines', False);
         duplications = request.POST.get('duplications', False);
         classes = request.POST.get('classes', False);
@@ -809,8 +809,8 @@ def storegrades(request,candidate_id,transaction_id):
 
         grading.insert(0, passed)
         grading.insert(1, failed)
-        grading.insert(2, warnings)
-        grading.insert(3, bugs)
+        grading.insert(2, vulnerable)
+        grading.insert(3, errors)
         grading.insert(4, lines)
         grading.insert(5, duplications)
         grading.insert(6, classes)
