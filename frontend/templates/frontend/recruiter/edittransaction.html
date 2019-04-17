@@ -112,7 +112,7 @@ recruiter dashboard
         <table class="table">
   <thead class="thead-light">
     <tr>
-
+        <th scope="col">id</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
         <th scope="col">Stage</th>
@@ -124,7 +124,7 @@ recruiter dashboard
   <tbody>
   {% for candidate in candidates %}
     <tr>
-
+        <td>{{ candidate.candidate.id }}</td>
       <td>{{ candidate.candidate.first_name }}  {{ candidate.candidate.last_name }}</td>
       <td>{{ candidate.candidate.email }}</td>
       <td>{{ candidate.stage }}</td>

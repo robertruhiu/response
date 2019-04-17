@@ -43,7 +43,7 @@ class GradingForm(Form):
         ('complete', 'COMPLETE'),
         ('incomplete', 'INCOMPLETE'),
     )
-    githuburl = forms.CharField(required=False)
+    github = forms.CharField(required=False)
     score = forms.IntegerField(required=False)
     requirement1 = forms.ChoiceField(choices=REQUIREMENT_TYPE_CHOICES)
     requirement2 = forms.ChoiceField(choices=REQUIREMENT_TYPE_CHOICES)

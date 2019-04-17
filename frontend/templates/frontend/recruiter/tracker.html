@@ -155,23 +155,23 @@
                 {% for candidate in candswithreports %}
                     <tr>
                         <td> {{ forloop.counter }} </td>
-                        <td>{{ candidate.0.candidate.first_name }} {{ candidate.0.candidate.last_name }}  </td>
+                        <td>{{ candidate.candidate.first_name }} {{ candidate.candidate.last_name }}  </td>
 
                         <td>
-                            {% if candidate.0.stage == 'invite-accepted' %}
+                            {% if candidate.stage == 'invite-accepted' %}
                                 <span class="badge badge-info">Invite accepted</span>
                             {% endif %}
-                            {% if candidate.0.stage == 'project-in-progress' %}
+                            {% if candidate.stage == 'project-in-progress' %}
                                 <span class="badge badge-primary">Project in progress</span>
                             {% endif %}
-                            {% if candidate.0.stage == 'project-completed' %}
+                            {% if candidate.stage == 'project-completed' %}
                                 <span class="badge badge-success">Project completed</span>
                             {% endif %}
 
                         </td>
                         <td>
                             <a target="_blank"
-                               href="{% url 'frontend:report' candidate.0.candidate_id candidate.0.transaction_id %}">
+                               href="{% url 'frontend:report' candidate.candidate_id candidate.transaction_id %}">
                                 Report
                             </a>
                         </td>
@@ -196,10 +196,16 @@
                             {% endif %}
 
                         </td>
-
-                        <td>
-                            Report not yet available
+                        {% if candidate.stage == 'project-completed' %}
+                                 <td>
+                            Report being processed
                         </td>
+                            {% else %}
+                             <td>
+                            not available
+                        </td>
+                            {% endif %}
+
 
 
                     </tr>

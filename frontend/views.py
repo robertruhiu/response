@@ -147,14 +147,20 @@ def tracker(request, id):
     candidates = candidatesprojects.objects.filter(transaction=id).order_by('-stage')
     submitted = submissions.objects.filter(transaction=id).all()
     readyreports = Report.objects.filter(transaction_id=id)
-    candswithreports=[]
-    candwithoutreports=[]
-    for one_candidate in candidates:
-        for onereport in readyreports:
-            if one_candidate.candidate_id == onereport.candidate_id:
-                candswithreports.append((one_candidate,onereport))
-            else:
-                candwithoutreports.append(one_candidate)
+    reports=[]
+
+    for on in readyreports:
+        reports.append(on.candidate_id)
+    allcandidates=[]
+    for one in candidates:
+        allcandidates.append(one.candidate_id)
+    withoutreports = list(set(allcandidates) - set(reports))
+    candswithreports =candidatesprojects.objects.filter(candidate_id__in=reports).order_by('-stage')
+    candwithoutreports=candidatesprojects.objects.filter(candidate_id__in=withoutreports).order_by('-stage')
+
+
+
+
     return render(request, 'frontend/recruiter/tracker.html', {'candswithreports': candswithreports,'candwithoutreports': candwithoutreports, 'project': project,'submitted':submitted,'readyreports':readyreports,
                                                                'cands':candidates})
 
@@ -812,11 +818,11 @@ def storegrades(request,candidate_id,transaction_id):
         grading.insert(8, depedencies)
         grading.insert(9, debt)
         grading.insert(10, gates)
-
+        github = request.POST.get('github', False);
         score = request.POST.get('score', False);
         print(score)
         obj = Report(candidate=candidate, transaction=transaction, requirements=requirements,
-                     keycompitency=keycompitency, grading=grading, score=score)
+                     keycompitency=keycompitency, grading=grading, score=score,github=github)
         obj.save()
 
 
