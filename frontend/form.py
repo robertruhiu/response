@@ -38,6 +38,43 @@ class Github_form(Form):
     github_username = forms.CharField(required=True)
     password = forms.CharField(widget=forms.PasswordInput())
 
+class GradingForm(Form):
+    REQUIREMENT_TYPE_CHOICES = (
+        ('complete', 'COMPLETE'),
+        ('incomplete', 'INCOMPLETE'),
+    )
+    githuburl = forms.CharField(required=False)
+    score = forms.IntegerField(required=False)
+    requirement1 = forms.ChoiceField(choices=REQUIREMENT_TYPE_CHOICES)
+    requirement2 = forms.ChoiceField(choices=REQUIREMENT_TYPE_CHOICES)
+    requirement3 = forms.ChoiceField(choices=REQUIREMENT_TYPE_CHOICES)
+    requirement4 = forms.ChoiceField(choices=REQUIREMENT_TYPE_CHOICES)
+    requirement5 = forms.ChoiceField(choices=REQUIREMENT_TYPE_CHOICES)
+    requirement6 = forms.ChoiceField(choices=REQUIREMENT_TYPE_CHOICES)
+    requirement7 = forms.ChoiceField(choices=REQUIREMENT_TYPE_CHOICES)
+    requirement8 = forms.ChoiceField(choices=REQUIREMENT_TYPE_CHOICES)
+    requirement9 = forms.ChoiceField(choices=REQUIREMENT_TYPE_CHOICES)
+    requirement10 = forms.ChoiceField(choices=REQUIREMENT_TYPE_CHOICES)
+    deliverables = forms.IntegerField(required=False)
+    errors = forms.IntegerField(required=False)
+    security = forms.IntegerField(required=False)
+    readability = forms.IntegerField(required=False)
+    passed = forms.IntegerField(required=False)
+    failed = forms.IntegerField(required=False)
+    warnings =forms.IntegerField(required=False)
+    errors = forms.IntegerField(required=False)
+    lines = forms.IntegerField(required=False)
+    duplications = forms.IntegerField(required=False)
+    classes = forms.IntegerField(required=False)
+    comments = forms.IntegerField(required=False)
+    depedencies = forms.IntegerField(required=False)
+    debt = forms.CharField(required=False)
+    gates = forms.CharField(required=False)
+
+
+
+
+
 class About(forms.ModelForm):
     about = forms.CharField(widget=forms.Textarea(attrs={'rows': 7}), required=True)
     class Meta:

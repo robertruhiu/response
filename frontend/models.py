@@ -1,10 +1,11 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+
 from django_countries.fields import CountryField
 from projects.models import Language, Framework ,Project
 from transactions.models import Transaction
-
+from separatedvaluesfield.models import SeparatedValuesField
 
 # Create your models here.
 class candidatesprojects(models.Model):
@@ -58,6 +59,14 @@ class Experience(models.Model):
     location = CountryField(null=True, max_length=30)
     duration = models.IntegerField(null=True)
 
+class Report(models.Model):
+    candidate = models.ForeignKey(User, on_delete=models.CASCADE)
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
+    requirements= SeparatedValuesField(null=True,max_length=150,token=',')
+    keycompitency = SeparatedValuesField(null=True,max_length=150,token=',')
+    grading = SeparatedValuesField(null=True,max_length=150,token=',')
+    score = models.IntegerField(null=True)
+    github = models.CharField(null=True, max_length=300)
 
 
 

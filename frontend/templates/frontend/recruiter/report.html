@@ -1,680 +1,681 @@
 {% extends 'recruiterbase.html' %}
 {% block title %}
-report
+    report
 {% endblock %}
-{%load static %}
+{% load static %}
 {% block content %}
-<main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
-    <div class="d-none d-lg-block">
-        <nav class="navbar  navbar-light fixed-top fine border-bottom">
-                    <ul class="nav nav-tabs" style="border-bottom: 0" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active " id="overview-tab" data-toggle="tab" href="#overview" role="tab"
-                       aria-controls="overview" aria-selected="true">Report Overview</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " id="criteria-tab" data-toggle="tab" href="#criteria" role="tab"
-                       aria-controls="criteria" aria-selected="false">Grading criteria </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " id="fraud-tab" data-toggle="tab" href="#fraud" role="tab"
-                       aria-controls="fraud" aria-selected="false">Cheat detection </a>
-                </li>
-
-
-            </ul>
-                    <ul class="nav ml-auto">
-
-
-
-            {% if request.user.is_authenticated %}
-
-            <li class="nav-item">
-                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
-            </li>
-
-            {% else %}
-
-            <li class="nav-item">
-                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
-            </li>
-            <li class="nav-item">
-                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
-            </li>
-            {% endif %}
-
-
-    </ul>
-                </nav>
-    </div>
-
-    <!-----md devices adaptation------>
-    <div class="container d-lg-none">
-        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
-            <ul class="nav nav-tabs" style="border-bottom: 0" id="myTab" role="tablist">
-                <li class="nav-item" style="margin-bottom: 1em;margin-top: 1em">
-                    <a class="nav-link1 active " style="color: white;text-decoration: none" id="overview-tab" data-toggle="tab" href="#overview" role="tab"
-                       aria-controls="overview" aria-selected="true">Report Overview</a>
-                </li>
-                <li class="nav-item" style="margin-bottom: 1em;margin-top: 1em">
-                    <a class="nav-link1 " id="criteria-tab" style="color: white;text-decoration: none" data-toggle="tab" href="#criteria" role="tab"
-                       aria-controls="criteria" aria-selected="false">Grading criteria </a>
-                </li>
-                <li class="nav-item" style="margin-bottom: 1em;margin-top: 1em">
-                    <a class="nav-link1 " id="fraud-tab" style="color: white;text-decoration: none" data-toggle="tab" href="#fraud" role="tab"
-                       aria-controls="fraud" aria-selected="false">Cheat detection </a>
-                </li>
-
-
-            </ul>
-            <button class="navbar-toggler ml-auto" style="margin-top: -1em" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span  class="">
-                    <span style="color: white" data-feather="menu"></span>
-                </span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-
-                <ul class="nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Menu
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'frontend:my-activity' %}" >Ongoing tests</a>
-                            <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
-                            <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
-                        </div>
+    <main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+        <div class="d-none d-lg-block">
+            <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                <ul class="nav nav-tabs" style="border-bottom: 0" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active " id="overview-tab" data-toggle="tab" href="#overview" role="tab"
+                           aria-controls="overview" aria-selected="true">Report Overview</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link " id="criteria-tab" data-toggle="tab" href="#criteria" role="tab"
+                           aria-controls="criteria" aria-selected="false">Grading criteria </a>
+                    </li>
+
+
+                </ul>
+                <ul class="nav ml-auto">
+
+
                     {% if request.user.is_authenticated %}
+
                         <li class="nav-item">
-                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                            <a href="{% url 'account_logout' %}" style="color: black" class="nav-link">Logout</a>
                         </li>
-                        <li class="nav-item">
-                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
-                        </li>
+
                     {% else %}
+
                         <li class="nav-item">
-                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                            <a href="{% url 'account_login' %}" style="color: black" class="nav-link">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                            <a href="{% url 'account_signup' %}" style="color: black" class="nav-link">Register</a>
                         </li>
                     {% endif %}
+
+
                 </ul>
-            </div>
-        </nav>
-    </div>
-
-<div class="d-none d-lg-block" style="margin-top: 8%">
-
-</div >
-
-<div class="d-lg-none"  style="margin-top: 8em">
-
-</div>
-
-
-
-
-    <div class="tab-content" id="myTabContent">
-        <!---overview details-->
-        <div class="tab-pane fade show active " id="overview" role="tabpanel" aria-labelledby="overview-tab">
-            <section>
-                <div class="card" style="width: 100%;border-radius: 0">
-
-                    <div class="card-body">
-                        <div class="row" style="margin-left: 0;margin-right: 0">
-                            <div class="col-lg-3 d-none d-sm-block d-lg-block d-md-block col-md-3 col-sm-4 mb-3 col-xl-2 col-12 ">
-                                <img  class="img-fluid" style="" src="" alt="profile picture">
-
-                            </div>
-                            <div class="col-lg-3 d-sm-none d-md-none d-lg-none  col-md-3 col-sm-4 mb-3 col-xl-2 col-12 ">
-
-                                <img  class=" img-fluid" style="" src="" alt="profile picture">
-                            </div>
-
-                            <div class="col-lg col-md-4 col-sm-8 mb-3 col">
-                                <div class="mt-3 ml-3">
-                                    <div><b>Candidate name:</b>{{ user.first_name }} {{ user.last_name }}</div>
-                                    <div><b>Email:</b>{{ user.email }}</div>
-                                    <div><a href="{{ user.profile.github_repo }}">Github profile</a></div>
-
-                                </div>
-
-
-                            </div>
-
-                            <div class="col-lg col-md-4 col-sm-12">
-                                <div class="card"
-                                     style="width: 100%;border-radius: 0;margin-right: auto;margin-left: auto">
-
-                                    <div class="card-body text-center">
-                                        <div class="h5">Mean score</div>
-                                        <h1>67% <span class="badge badge-primary">B</span></h1>
-                                        <a class="btn theme--dark primary1 mt-3 " style="border-radius: 0;color: white" href="/">View Code base</a>
-
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            <br>
-            <!-----Project details------>
-            <section>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="h5 text-center">{{ transaction.project.name}}</div>
-
-
-                    </div>
-                </div>
-                <div class="row">
-
-                    <div class="col-lg-6 col-md-6 col-sm-12 ">
-                        <div class="card" style="border: 0">
-
-                            <div class="card-body">
-                                <h5 class="card-title text-center">Project description</h5>
-                                <p class="card-text">{{ transaction.project.description}}</p>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-12 text-center">
-                        <div class="card" style="border: 0">
-
-                            <div class="card-body">
-                                <h5 class="card-title">Tech stack used</h5>
-                                <p class="card-text">
-                                    <span class="badge badge-info">{{ transaction.project.framework.name}}</span>
-                                    <span class="badge badge-info">{{ transaction.project.framework.language.name}}</span>
-
-                                </p>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </section>
-
-            <br>
-            <!-----deliverables------>
-            <section>
-                <div class="row" style="margin-left: 0;margin-right: 0">
-
-                    <div class="col-lg-12 col text-center h5">
-                        Project deliverables
-                    </div>
-                </div>
-                <div class="row" style="margin-left: 0;margin-right: 0">
-
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-
-                            <th scope="col">Deliverables</th>
-
-                            <th scope="col">status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        {% if transaction.project.requirement1 %}
-                             <tr>
-
-                            <td>{{ transaction.project.requirement1}}</td>
-
-                            <td><span class="badge badge-success">Complete</span></td>
-                        </tr>
-                        {% endif %}
-                        {% if transaction.project.requirement2 %}
-                             <tr>
-
-                            <td>{{ transaction.project.requirement2}}</td>
-
-                            <td><span class="badge badge-success">Complete</span></td>
-                        </tr>
-                        {% endif %}
-                        {% if transaction.project.requirement3 %}
-                             <tr>
-
-                            <td>{{ transaction.project.requirement3}}</td>
-
-                            <td><span class="badge badge-success">Complete</span></td>
-                        </tr>
-                        {% endif %}
-                        {% if transaction.project.requirement4 %}
-                             <tr>
-
-                            <td>{{ transaction.project.requirement4}}</td>
-
-                            <td><span class="badge badge-success">Complete</span></td>
-                        </tr>
-                        {% endif %}
-                        {% if transaction.project.requirement5 %}
-                             <tr>
-
-                            <td>{{ transaction.project.requirement5}}</td>
-
-                            <td><span class="badge badge-success">Complete</span></td>
-                        </tr>
-                        {% endif %}
-                        {% if transaction.project.requirement6 %}
-                             <tr>
-
-                            <td>{{ transaction.project.requirement6}}</td>
-
-                            <td><span class="badge badge-success">Complete</span></td>
-                        </tr>
-                        {% endif %}
-                        {% if transaction.project.requirement7 %}
-                             <tr>
-
-                            <td>{{ transaction.project.requirement7}}</td>
-
-                            <td><span class="badge badge-success">Complete</span></td>
-                        </tr>
-                        {% endif %}
-                        {% if transaction.project.requirement8 %}
-                             <tr>
-
-                            <td>{{ transaction.project.requirement8}}</td>
-
-                            <td><span class="badge badge-success">Complete</span></td>
-                        </tr>
-                        {% endif %}
-                        {% if transaction.project.requirement9 %}
-                             <tr>
-
-                            <td>{{ transaction.project.requirement9}}</td>
-
-                            <td><span class="badge badge-success">Complete</span></td>
-                        </tr>
-                        {% endif %}
-                        {% if transaction.project.requirement10 %}
-                             <tr>
-
-                            <td>{{ transaction.project.requirement10}}</td>
-
-                            <td><span class="badge badge-success">Complete</span></td>
-                        </tr>
-                        {% endif %}
-
-
-                        </tbody>
-                    </table>
-
-
-                </div>
-
-
-            </section>
-
-            <br>
-
-            <!-----Key competencies------>
-            <section>
-                <div class="row" style="margin-left: 0;margin-right: 0">
-                    <div class="col-lg-12 col text-center h5">
-                        Key competencies
-                    </div>
-                </div>
-                <div class="card" style="width: 100%;border-radius: 0">
-                    <div class="card-body">
-                        <div class="row text-center" style="margin-left: 0;margin-right: 0">
-
-                            <div class="col-lg-4 col-md-4 col-sm-6 col">
-                                <div class="h6"> Deliverables</div>
-                                <div class="card competencecard">
-
-
-                                    <div style="text-align: -webkit-center;">
-                                        <img style="width: 20%" class="card-img-top "
-                                             src="../../static/frontend/images/delivery.svg" alt="Card image cap">
-                                    </div>
-
-                                    <div class="card" style="border: 0 ">
-
-
-                                        <div class="card-body">
-
-                                            <h6 class="card-title" style="text-align: -webkit-center;">80% <span
-                                                    class="badge badge-primary">A</span></h6>
-                                            <p class="card-text">Metric used: Tests passed</p>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col">
-                                <div class="h6">Error handling</div>
-                                <div class="card competencecard">
-
-
-                                    <div style="text-align: -webkit-center;">
-                                        <img style="width: 20%" class="card-img-top "
-                                             src="../../static/frontend/images/404.svg" alt="Card image cap">
-                                    </div>
-
-                                    <div class="card" style="border: 0 ">
-
-
-                                        <div class="card-body">
-
-                                            <h6 class="card-title" style="text-align: -webkit-center;">80% <span
-                                                    class="badge badge-primary">A</span></h6>
-                                            <p class="card-text">Metric used: Errors</p>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col">
-                                <div class="h6"> Project security</div>
-                                <div class="card competencecard">
-
-
-                                    <div style="text-align: -webkit-center;">
-                                        <img style="width: 20%" class="card-img-top "
-                                             src="../../static/frontend/images/security.svg" alt="Card image cap">
-                                    </div>
-
-                                    <div class="card " style="border: 0 ">
-
-
-                                        <div class="card-body">
-
-                                            <h6 class="card-title" style="text-align: -webkit-center;">80% <span
-                                                    class="badge badge-primary">A</span></h6>
-                                            <p class="card-text">Metric used: Bugs</p>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col">
-                                <div class="h6"> Code readability</div>
-                                <div class="card competencecard">
-
-
-                                    <div style="text-align: -webkit-center;">
-                                        <img style="width: 20%" class="card-img-top "
-                                             src="../../static/frontend/images/laptop.svg" alt="Card image cap">
-                                    </div>
-
-                                    <div class="card " style="border: 0 ">
-
-
-                                        <div class="card-body">
-
-                                            <h6 class="card-title" style="text-align: -webkit-center;">80% <span
-                                                    class="badge badge-primary">A</span></h6>
-                                            <p class="card-text">Metric used: Comments</p>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col">
-                                <div class="h6">Time used</div>
-                                <div class="card competencecard">
-
-
-                                    <div style="text-align: -webkit-center;">
-                                        <img style="width: 20%" class="card-img-top "
-                                             src="../../static/frontend/images/racing.svg" alt="Card image cap">
-                                    </div>
-
-                                    <div class="card " style="border: 0 ">
-
-
-                                        <div class="card-body">
-
-                                            <h6 class="card-title" style="text-align: -webkit-center;">340 minutes </h6>
-                                            <p class="card-text">Metric used: Time</p>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-
-
-
-
+            </nav>
         </div>
-        <!---metrics-->
-        <div class="tab-pane fade  " id="criteria" role="tabpanel" aria-labelledby="criteria-tab">
+
+        <!-----md devices adaptation------>
+        <div class="container d-lg-none">
+            <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+                <ul class="nav nav-tabs" style="border-bottom: 0" id="myTab" role="tablist">
+                    <li class="nav-item" style="margin-bottom: 1em;margin-top: 1em">
+                        <a class="nav-link1 active " style="color: white;text-decoration: none" id="overview-tab"
+                           data-toggle="tab" href="#overview" role="tab"
+                           aria-controls="overview" aria-selected="true">Report Overview</a>
+                    </li>
+                    <li class="nav-item" style="margin-bottom: 1em;margin-top: 1em">
+                        <a class="nav-link1 " id="criteria-tab" style="color: white;text-decoration: none"
+                           data-toggle="tab" href="#criteria" role="tab"
+                           aria-controls="criteria" aria-selected="false">Grading criteria </a>
+                    </li>
 
 
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
-                        <div class="card metric">
-                            <div class="card-body text-center">
-                                <div class="card-title h4"><strong>Tests Passed</strong></div>
-                                <p>(Number of Unit Tests Passed)</p>
-                                <h3 style="color:rgb(0, 128, 28);"><strong>6</strong></h3>
+                </ul>
+                <button class="navbar-toggler ml-auto" style="margin-top: -1em" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                <span class="">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+
+                    <ul class="nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdown"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Menu
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'frontend:my-activity' %}">Ongoing tests</a>
+                                <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
+                                <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
-                        <div class="card metric">
-                            <div class="card-body text-center">
-                                <div class="card-title h4"><strong>Tests Failed</strong></div>
-                                <p>(Number of Unit Tests Failed)</p>
-                                <h3><strong>2</strong></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
-                        <div class="card metric">
-                            <div class="card-body text-center">
-                                <div class="card-title h4"><strong>Warnings</strong></div>
-                                <p>(Total Number of warnings)</p>
-                                <h3 style="color:rgb(241, 7, 7);"><strong>8</strong></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
-                        <div class="card metric">
-                            <div class="card-body text-center">
-                                <div class="card-title h4"><strong>Errors</strong></div>
-                                <p>(Total Number of errors)</p>
-                                <h3><strong>1</strong></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
-                        <div class="card metric">
-                            <div class="card-body text-center">
-                                <div class="card-title h4"><strong>Lines of Code</strong></div>
-                                <p>(Number of code lines)</p>
-                                <h3><strong>169</strong></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
-                        <div class="card metric">
-                            <div class="card-body text-center">
-                                <div class="card-title h4"><strong>Duplications</strong></div>
-                                <p>(Density of Duplication)</p>
-                                <h3><strong>0%</strong></h3>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
-                        <div class="card metric">
-                            <div class="card-body text-center">
-                                <div class="card-title h4"><strong>Classes</strong></div>
-                                <p>(Total Number of Classes)</p>
-                                <h3><strong>0</strong></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
-                        <div class="card metric">
-                            <div class="card-body text-center">
-                                <div class="card-title h4"><strong>Comments</strong></div>
-                                <p>(Comment Line Density)</p>
-                                <h3><strong>0%</strong></h3>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
-                        <div class="card metric">
-                            <div class="card-body text-center">
-                                <div class="card-title h4"><strong>Dependencies</strong></div>
-                                <p>(Dependencies to cut)</p>
-                                <h3><strong>0</strong></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
-                        <div class="card metric">
-                            <div class="card-body text-center">
-                                <div class="card-title h4"><strong>Run time</strong></div>
-                                <p>(In seconds)</p>
-                                <h3><strong>1.39</strong></h3>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
-                        <div class="card metric">
-                            <div class="card-body text-center">
-                                <div class="card-title h4"><strong>Technical Debt</strong></div>
-                                <p>(Cost to fix maintainability Issues)</p>
-                                <h3><strong>Nil</strong></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
-                        <div class="card metric">
-                            <div class="card-body text-center">
-                                <div class="card-title h4"><strong>Quality Gates</strong></div>
-                                <p>(Rate of code quality)</p>
-                                <h3 style="color:green;"><strong>OK</strong></h3>
-                            </div>
-
-                        </div>
-                    </div>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a href="/home" style="color: white" class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account_logout' %}" style="color: white" class="nav-link">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'account_login' %}" style="color: white" class="nav-link">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account_signup' %}" style="color: white" class="nav-link">Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
                 </div>
-            </div>
+            </nav>
+        </div>
 
+        <div class="d-none d-lg-block" style="margin-top: 8%">
 
         </div>
 
-        <!---fraud detection-->
-        <div class="tab-pane fade " id="fraud" role="tabpanel" aria-labelledby="fraud-tab">
-
-
-
-
-                <div class="row d-none d-sm-block " style="margin-left: 0;margin-right: 0;margin-bottom: 1em;background-color: aliceblue">
-                    <div class="col-md-12 col-lg-6 col-xl-6 text-center" style="margin-left: auto;margin-right: auto">
-                        <p class="h3">Cheat detection and mitigation
-                            <br>
-                        </p><p>Imagery of candidate during coding session</p>
-
-
-
-                        <br>
-
-                    </div>
-
-                </div>
-
-
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3 ">
-                    <img class="img-fluid" src="../../../static/frontend/images/fraud/1.jpg">
-
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
-                    <img class="img-fluid" src="../../../static/frontend/images/fraud/2.jpg">
-
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
-                    <img class="img-fluid" src="../../../static/frontend/images/fraud/3.jpg">
-
-
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
-                    <img class="img-fluid" src="../../../static/frontend/images/fraud/4.jpg">
-
-
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
-                    <img class="img-fluid" src="../../../static/frontend/images/fraud/5.jpg">
-
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
-                    <img class="img-fluid" src="../../../static/frontend/images/fraud/6.jpg">
-
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
-                    <img class="img-fluid" src="../../../static/frontend/images/fraud/7.jpg">
-
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
-                    <img class="img-fluid" src="../../../static/frontend/images/fraud/8.jpg">
-
-
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
-                    <img class="img-fluid" src="../../../static/frontend/images/fraud/9.jpg">
-
-                </div>
-
-
-            </div>
-
+        <div class="d-lg-none" style="margin-top: 8em">
 
         </div>
 
 
-    </div>
-<br>
-    <br>
+        <div class="tab-content" id="myTabContent">
+            <!---overview details-->
+            <div class="tab-pane fade show active " id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                <section>
+                    <div class="card" style="width: 100%;border-radius: 0">
 
-</main>
+                        <div class="card-body">
+                            <div class="row" style="margin-left: 0;margin-right: 0">
+
+
+                                <div class="col-lg col-md-4 col-sm-8 mb-3 col">
+                                    <div class="mt-3 ml-3">
+                                        <div class="h6">Candidate name:{{ user.first_name }} {{ user.last_name }}</div>
+                                        <div class="h6">Email:{{ user.email }}</div>
+
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-lg col-md-4 col-sm-12">
+                                    <div class="card"
+                                         style="width: 100%;border-radius: 0;margin-right: auto;margin-left: auto">
+
+                                        <div class="card-body text-center">
+                                            <div class="h5">Mean score</div>
+
+                                            <h1>{{ report.score }}
+                                                {% if report.score >= 80 %}
+                                                    <span class="badge badge-success">A</span>
+                                                {% elif report.score >= 60 and report.score < 80 %}
+                                                    <span class="badge badge-primary">B</span>
+                                                {% elif report.score >= 40 and report.score < 60 %}
+                                                    <span class="badge badge-warning">C</span>
+                                                {% elif report.score >= 20 and report.score < 40 %}
+                                                    <span class="badge badge-danger">D</span>
+                                                {% endif %}
+
+                                            </h1>
+                                        {% if report.github %}
+                                            <a target="_blank" class="btn theme--dark primary1 mt-3 "
+                                               style="border-radius: 0;color: white" href="{{ report.github }}">View Code base</a>
+
+                                        {% endif %}
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <br>
+                <!-----Project details------>
+                <section>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="h5 text-center">{{ transaction.project.name }}</div>
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 ">
+                            <div class="card" style="border: 0">
+
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Project description</h5>
+                                    <p class="card-text">{{ transaction.project.description }}</p>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 text-center">
+                            <div class="card" style="border: 0">
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Tech stack used</h5>
+                                    <p class="card-text">
+                                        <span class="badge badge-info">{{ transaction.project.framework.name }}</span>
+
+
+                                    </p>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </section>
+
+                <br>
+                <!-----deliverables------>
+                <section>
+                    <div class="row" style="margin-left: 0;margin-right: 0">
+
+                        <div class="col-lg-12 col text-center h5">
+                            Project deliverables
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left: 0;margin-right: 0">
+
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+
+                                <th scope="col">Deliverables</th>
+
+                                <th scope="col">status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% if transaction.project.requirement1 %}
+                                <tr>
+
+                                    <td>{{ transaction.project.requirement1 }}</td>
+                                    {% if report.requirements.0 == 'complete' %}
+                                        <td><span class="badge badge-success">{{ report.requirements.0 }}</span></td>
+                                    {% else %}
+
+
+                                        <td><span class="badge badge-warning">{{ report.requirements.0 }}</span></td>
+                                    {% endif %}
+                                </tr>
+                            {% endif %}
+                            {% if transaction.project.requirement2 %}
+                                <tr>
+
+                                    <td>{{ transaction.project.requirement2 }}</td>
+
+                                    {% if report.requirements.1 == 'complete' %}
+                                        <td><span class="badge badge-success">{{ report.requirements.1 }}</span></td>
+                                    {% else %}
+
+
+                                        <td><span class="badge badge-warning">{{ report.requirements.1 }}</span></td>
+                                    {% endif %}
+                                </tr>
+                            {% endif %}
+                            {% if transaction.project.requirement3 %}
+                                <tr>
+
+                                    <td>{{ transaction.project.requirement3 }}</td>
+
+                                    {% if report.requirements.2 == 'complete' %}
+                                        <td><span class="badge badge-success">{{ report.requirements.2 }}</span></td>
+                                    {% else %}
+
+
+                                        <td><span class="badge badge-warning">{{ report.requirements.2 }}</span></td>
+                                    {% endif %}
+                                </tr>
+                            {% endif %}
+                            {% if transaction.project.requirement4 %}
+                                <tr>
+
+                                    <td>{{ transaction.project.requirement4 }}</td>
+
+                                    {% if report.requirements.3 == 'complete' %}
+                                        <td><span class="badge badge-success">{{ report.requirements.3 }}</span></td>
+                                    {% else %}
+
+
+                                        <td><span class="badge badge-warning">{{ report.requirements.3 }}</span></td>
+                                    {% endif %}
+                                </tr>
+                            {% endif %}
+                            {% if transaction.project.requirement5 %}
+                                <tr>
+
+                                    <td>{{ transaction.project.requirement5 }}</td>
+
+                                    {% if report.requirements.4 == 'complete' %}
+                                        <td><span class="badge badge-success">{{ report.requirements.4 }}</span></td>
+                                    {% else %}
+
+
+                                        <td><span class="badge badge-warning">{{ report.requirements.4 }}</span></td>
+                                    {% endif %}
+                                </tr>
+                            {% endif %}
+                            {% if transaction.project.requirement6 %}
+                                <tr>
+
+                                    <td>{{ transaction.project.requirement6 }}</td>
+
+                                    {% if report.requirements.5 == 'complete' %}
+                                        <td><span class="badge badge-success">{{ report.requirements.5 }}</span></td>
+                                    {% else %}
+
+
+                                        <td><span class="badge badge-warning">{{ report.requirements.5 }}</span></td>
+                                    {% endif %}
+                                </tr>
+                            {% endif %}
+                            {% if transaction.project.requirement7 %}
+                                <tr>
+
+                                    <td>{{ transaction.project.requirement7 }}</td>
+
+                                    {% if report.requirements.6 == 'complete' %}
+                                        <td><span class="badge badge-success">{{ report.requirements.6 }}</span></td>
+                                    {% else %}
+
+
+                                        <td><span class="badge badge-warning">{{ report.requirements.6 }}</span></td>
+                                    {% endif %}
+                                </tr>
+                            {% endif %}
+                            {% if transaction.project.requirement8 %}
+                                <tr>
+
+                                    <td>{{ transaction.project.requirement8 }}</td>
+
+                                    {% if report.requirements.7 == 'complete' %}
+                                        <td><span class="badge badge-success">{{ report.requirements.7 }}</span></td>
+                                    {% else %}
+
+
+                                        <td><span class="badge badge-warning">{{ report.requirements.7 }}</span></td>
+                                    {% endif %}
+                                </tr>
+                            {% endif %}
+                            {% if transaction.project.requirement9 %}
+                                <tr>
+
+                                    <td>{{ transaction.project.requirement9 }}</td>
+
+                                    {% if report.requirements.8 == 'complete' %}
+                                        <td><span class="badge badge-success">{{ report.requirements.8 }}</span></td>
+                                    {% else %}
+
+
+                                        <td><span class="badge badge-warning">{{ report.requirements.8 }}</span></td>
+                                    {% endif %}
+                                </tr>
+                            {% endif %}
+                            {% if transaction.project.requirement10 %}
+                                <tr>
+
+                                    <td>{{ transaction.project.requirement10 }}</td>
+
+                                    {% if report.requirements.9 == 'complete' %}
+                                        <td><span class="badge badge-success">{{ report.requirements.9 }}</span></td>
+                                    {% else %}
+
+
+                                        <td><span class="badge badge-warning">{{ report.requirements.9 }}</span></td>
+                                    {% endif %}
+                                </tr>
+                            {% endif %}
+
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+
+                </section>
+
+                <br>
+
+                <!-----Key competencies------>
+                <section>
+                    <div class="row" style="margin-left: 0;margin-right: 0">
+                        <div class="col-lg-12 col text-center h5">
+                            Key competencies
+                        </div>
+                    </div>
+                    <div class="card" style="width: 100%;border-radius: 0">
+                        <div class="card-body">
+                            <div class="row text-center" style="margin-left: 0;margin-right: 0">
+
+                                <div class="col-lg-4 col-md-4 col-sm-6 col">
+                                    <div class="h6"> Deliverables</div>
+                                    <div class="card competencecard">
+
+
+                                        <div style="text-align: -webkit-center;">
+                                            <img style="width: 20%" class="card-img-top "
+                                                 src="../../static/frontend/images/delivery.svg" alt="Card image cap">
+                                        </div>
+
+                                        <div class="card" style="border: 0 ">
+
+
+                                            <div class="card-body">
+
+                                                <h6 class="card-title"
+                                                    style="text-align: -webkit-center;">{{ report.keycompitency.0 }}
+                                                    {% if report.keycompitency.0|add:"0" >= 80 %}
+                                                        <span class="badge badge-success">A</span>
+                                                    {% elif report.keycompitency.0|add:"0" >= 60 and report.keycompitency.0|add:"0" < 80 %}
+                                                        <span class="badge badge-primary">B</span>
+                                                    {% elif report.keycompitency.0|add:"0" >= 40 and report.keycompitency.0|add:"0" < 60 %}
+                                                        <span class="badge badge-warning">C</span>
+                                                    {% elif report.keycompitency.0|add:"0" >= 0 and report.keycompitency.0|add:"0" < 40 %}
+                                                        <span class="badge badge-danger">D</span>
+                                                    {% endif %}
+
+                                                </h6>
+                                                <p class="card-text">Metric used: Tests passed</p>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col">
+                                    <div class="h6">Error handling</div>
+                                    <div class="card competencecard">
+
+
+                                        <div style="text-align: -webkit-center;">
+                                            <img style="width: 20%" class="card-img-top "
+                                                 src="../../static/frontend/images/404.svg" alt="Card image cap">
+                                        </div>
+
+                                        <div class="card" style="border: 0 ">
+
+
+                                            <div class="card-body">
+
+                                                <h6 class="card-title"
+                                                    style="text-align: -webkit-center;">{{ report.keycompitency.1 }} %
+                                                    {% if report.keycompitency.1|add:"0" >= 80 %}
+                                                        <span class="badge badge-success">A</span>
+                                                    {% elif report.keycompitency.1|add:"0" >= 60 and report.keycompitency.1|add:"0" < 80 %}
+                                                        <span class="badge badge-primary">B</span>
+                                                    {% elif report.keycompitency.1|add:"0" >= 40 and report.keycompitency.1|add:"0" < 60 %}
+                                                        <span class="badge badge-warning">C</span>
+                                                    {% elif report.keycompitency.1|add:"0" >= 0 and report.keycompitency.1|add:"0" < 40 %}
+                                                        <span class="badge badge-danger">D</span>
+                                                    {% endif %}
+
+                                                </h6>
+                                                <p class="card-text">Metric used: Errors</p>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col">
+                                    <div class="h6"> Project security</div>
+                                    <div class="card competencecard">
+
+
+                                        <div style="text-align: -webkit-center;">
+                                            <img style="width: 20%" class="card-img-top "
+                                                 src="../../static/frontend/images/security.svg" alt="Card image cap">
+                                        </div>
+
+                                        <div class="card " style="border: 0 ">
+
+
+                                            <div class="card-body">
+
+                                                <h6 class="card-title"
+                                                    style="text-align: -webkit-center;">{{ report.keycompitency.2 }}%
+                                                    {% if report.keycompitency.2|add:"0" >= 80 %}
+                                                        <span class="badge badge-success">A</span>
+                                                    {% elif report.keycompitency.2|add:"0" >= 60 and report.keycompitency.2|add:"0" < 80 %}
+                                                        <span class="badge badge-primary">B</span>
+                                                    {% elif report.keycompitency.2|add:"0" >= 40 and report.keycompitency.2|add:"0" < 60 %}
+                                                        <span class="badge badge-warning">C</span>
+                                                    {% elif report.keycompitency.2|add:"0" >= 0 and report.keycompitency.2|add:"0" < 40 %}
+                                                        <span class="badge badge-danger">D</span>
+                                                    {% endif %}
+                                                </h6>
+                                                <p class="card-text">Metric used: Bugs</p>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col">
+                                    <div class="h6"> Code readability</div>
+                                    <div class="card competencecard">
+
+
+                                        <div style="text-align: -webkit-center;">
+                                            <img style="width: 20%" class="card-img-top "
+                                                 src="../../static/frontend/images/laptop.svg" alt="Card image cap">
+                                        </div>
+
+                                        <div class="card " style="border: 0 ">
+
+
+                                            <div class="card-body">
+
+                                                <h6 class="card-title"
+                                                    style="text-align: -webkit-center;">{{ report.keycompitency.3 }}%
+                                                    {% if report.keycompitency.3|add:"0" >= 80 %}
+                                                        <span class="badge badge-success">A</span>
+                                                    {% elif report.keycompitency.3|add:"0" >= 60 and report.keycompitency.3|add:"0" < 80 %}
+                                                        <span class="badge badge-primary">B</span>
+                                                    {% elif report.keycompitency.3|add:"0" >= 40 and report.keycompitency.3|add:"0" < 60 %}
+                                                        <span class="badge badge-warning">C</span>
+                                                    {% elif report.keycompitency.3|add:"0" >= 0 and report.keycompitency.3|add:"0" < 40 %}
+                                                        <span class="badge badge-danger">D</span>
+                                                    {% endif %}
+                                                </h6>
+                                                <p class="card-text">Metric used: Comments</p>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+            </div>
+            <!---metrics-->
+            <div class="tab-pane fade  " id="criteria" role="tabpanel" aria-labelledby="criteria-tab">
+
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                            <div class="card metric">
+                                <div class="card-body text-center">
+                                    <div class="card-title h4"><strong>Tests Passed</strong></div>
+                                    <p>(Number of Unit Tests Passed)</p>
+                                    <h3 style="color:rgb(0, 128, 28);"><strong>{{ report.grading.0 }}</strong></h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                            <div class="card metric">
+                                <div class="card-body text-center">
+                                    <div class="card-title h4"><strong>Tests Failed</strong></div>
+                                    <p>(Number of Unit Tests Failed)</p>
+                                    <h3><strong>{{ report.grading.1 }}</strong></h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                            <div class="card metric">
+                                <div class="card-body text-center">
+                                    <div class="card-title h4"><strong>Warnings</strong></div>
+                                    <p>(Total Number of warnings)</p>
+                                    <h3 style="color:rgb(241, 7, 7);"><strong>{{ report.grading.2 }}</strong></h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                            <div class="card metric">
+                                <div class="card-body text-center">
+                                    <div class="card-title h4"><strong>Errors</strong></div>
+                                    <p>(Total Number of errors)</p>
+                                    <h3><strong>{{ report.grading.3 }}</strong></h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                            <div class="card metric">
+                                <div class="card-body text-center">
+                                    <div class="card-title h4"><strong>Lines of Code</strong></div>
+                                    <p>(Number of code lines)</p>
+                                    <h3><strong>{{ report.grading.4 }}</strong></h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                            <div class="card metric">
+                                <div class="card-body text-center">
+                                    <div class="card-title h4"><strong>Duplications</strong></div>
+                                    <p>(Density of Duplication)</p>
+                                    <h3><strong>{{ report.grading.5 }}%</strong></h3>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                            <div class="card metric">
+                                <div class="card-body text-center">
+                                    <div class="card-title h4"><strong>Classes</strong></div>
+                                    <p>(Total Number of Classes)</p>
+                                    <h3><strong>{{ report.grading.6 }}</strong></h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                            <div class="card metric">
+                                <div class="card-body text-center">
+                                    <div class="card-title h4"><strong>Comments</strong></div>
+                                    <p>(Comment Line Density)</p>
+                                    <h3><strong>{{ report.grading.7 }}%</strong></h3>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                            <div class="card metric">
+                                <div class="card-body text-center">
+                                    <div class="card-title h4"><strong>Dependencies</strong></div>
+                                    <p>(Dependencies to cut)</p>
+                                    <h3><strong>{{ report.grading.8 }}</strong></h3>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                            <div class="card metric">
+                                <div class="card-body text-center">
+                                    <div class="card-title h4"><strong>Technical Debt</strong></div>
+                                    <p>(Cost to fix maintainability Issues)</p>
+                                    <h3><strong>{{ report.grading.9 }}</strong></h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                            <div class="card metric">
+                                <div class="card-body text-center">
+                                    <div class="card-title h4"><strong>Quality Gates</strong></div>
+                                    <p>(Rate of code quality)</p>
+                                    <h3 style="color:green;"><strong>{{ report.grading.10 }}</strong></h3>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <br>
+        <br>
+
+    </main>
 {% endblock %}

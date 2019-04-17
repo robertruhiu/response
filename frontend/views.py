@@ -22,8 +22,8 @@ from accounts.forms import ProfileTypeForm, DeveloperFillingDetailsForm, Recruit
 from transactions.models import Transaction, Candidate,OpenCall,Applications
 from invitations.models import Invitation
 from projects.models import Project, Framework
-from frontend.form import Projectinvite, EditProjectForm,Submissions,Portfolio_form,Github_form,Experience_Form,About
-from frontend.models import candidatesprojects, devs, recruiters,submissions,Portfolio,Github,Experience
+from frontend.form import Projectinvite, EditProjectForm,Submissions,Portfolio_form,Github_form,Experience_Form,About,GradingForm
+from frontend.models import candidatesprojects, devs, recruiters,submissions,Portfolio,Github,Experience,Report
 from classroom.models import TakenQuiz,Student,Quiz
 from marketplace.models import Job
 
@@ -144,9 +144,19 @@ def activity(request):
 @login_required
 def tracker(request, id):
     project = Transaction.objects.get(id=id)
-    candidates = candidatesprojects.objects.filter(transaction=id)
+    candidates = candidatesprojects.objects.filter(transaction=id).order_by('-stage')
     submitted = submissions.objects.filter(transaction=id).all()
-    return render(request, 'frontend/recruiter/tracker.html', {'candidates': candidates, 'project': project,'submitted':submitted})
+    readyreports = Report.objects.filter(transaction_id=id)
+    candswithreports=[]
+    candwithoutreports=[]
+    for one_candidate in candidates:
+        for onereport in readyreports:
+            if one_candidate.candidate_id == onereport.candidate_id:
+                candswithreports.append((one_candidate,onereport))
+            else:
+                candwithoutreports.append(one_candidate)
+    return render(request, 'frontend/recruiter/tracker.html', {'candswithreports': candswithreports,'candwithoutreports': candwithoutreports, 'project': project,'submitted':submitted,'readyreports':readyreports,
+                                                               'cands':candidates})
 
 
 @login_required
@@ -253,10 +263,12 @@ def howitworks(request):
     return render(request, 'frontend/how.html')
 
 
-def report(request, email, transaction_id):
-    user = User.objects.get(email=email)
+def report(request,candidate_id,transaction_id):
+    user = User.objects.get(id=candidate_id)
+    report =Report.objects.get(candidate_id=candidate_id,transaction_id=transaction_id)
     transaction = Transaction.objects.get(id=transaction_id)
-    return render(request, 'frontend/recruiter/report.html', {'user': user, 'transaction': transaction})
+    print(type(report.keycompitency[0]))
+    return render(request, 'frontend/recruiter/report.html', {'user': user, 'transaction': transaction,'report':report})
 
 
 def onboarddevs(request):
@@ -367,7 +379,7 @@ def addproject(request):
 @login_required
 def edittransactions(request, transaction_id):
     transaction = Transaction.objects.get(id=transaction_id)
-    candidates =Candidate.objects.filter(transaction_id=transaction_id)
+    candidates =candidatesprojects.objects.filter(transaction_id=transaction_id).order_by('-stage')
     return render(request, 'frontend/recruiter/edittransaction.html',{'transaction':transaction,'candidates':candidates})
 @login_required
 def deletetransaction(request,transaction_id):
@@ -729,3 +741,83 @@ def about(request,candidate_id):
     return redirect(reverse('frontend:portfolio'))
 def management(request):
     return render(request, 'frontend/recruiter/management.html')
+def grading(request,candidate_id,transaction_id):
+    candidate = User.objects.get(id=candidate_id)
+    transaction = Transaction.objects.get(id=transaction_id)
+    gradingform = GradingForm()
+    return render(request, 'frontend/recruiter/grading.html',{'candidate':candidate,'transaction':transaction,'form':gradingform })
+
+
+def storegrades(request,candidate_id,transaction_id):
+    candidate = User.objects.get(id=candidate_id)
+    transaction = Transaction.objects.get(id=transaction_id)
+    requirements = []
+    keycompitency = []
+    grading = []
+    if request.method == 'POST':
+        form = GradingForm(request.POST)
+
+        requirement1 = request.POST.get('requirement1', False);
+        requirement2 = request.POST.get('requirement2', False);
+        requirement3 = request.POST.get('requirement3', False);
+        requirement4 = request.POST.get('requirement4', False);
+        requirement5 = request.POST.get('requirement5', False);
+        requirement6 = request.POST.get('requirement6', False);
+        requirement7 = request.POST.get('requirement7', False);
+        requirement8 = request.POST.get('requirement8', False);
+        requirement9 = request.POST.get('requirement9', False);
+        requirement10 = request.POST.get('requirement10', False);
+
+        requirements.insert(0, requirement1)
+        requirements.insert(1, requirement2)
+        requirements.insert(2, requirement3)
+        requirements.insert(3, requirement4)
+        requirements.insert(4, requirement5)
+        requirements.insert(5, requirement6)
+        requirements.insert(6, requirement7)
+        requirements.insert(7, requirement8)
+        requirements.insert(8, requirement9)
+        requirements.insert(9, requirement10)
+
+        deliverables = request.POST.get('deliverables', False);
+        errors = request.POST.get('errors', False);
+        security = request.POST.get('security', False);
+        readability = request.POST.get('readability', False);
+
+        keycompitency.insert(0, deliverables)
+        keycompitency.insert(1, errors)
+        keycompitency.insert(2, security)
+        keycompitency.insert(3, readability)
+
+        passed = request.POST.get('passed', False);
+        failed = request.POST.get('failed', False);
+        warnings = request.POST.get('warnings', False);
+        errors = request.POST.get('errors', False);
+        lines = request.POST.get('lines', False);
+        duplications = request.POST.get('duplications', False);
+        classes = request.POST.get('classes', False);
+        comments = request.POST.get('comments', False);
+        depedencies = request.POST.get('depedencies', False);
+        debt = request.POST.get('debt', False);
+        gates = request.POST.get('gates', False);
+
+        grading.insert(0, passed)
+        grading.insert(1, failed)
+        grading.insert(2, warnings)
+        grading.insert(3, errors)
+        grading.insert(4, lines)
+        grading.insert(5, duplications)
+        grading.insert(6, classes)
+        grading.insert(7, comments)
+        grading.insert(8, depedencies)
+        grading.insert(9, debt)
+        grading.insert(10, gates)
+
+        score = request.POST.get('score', False);
+        print(score)
+        obj = Report(candidate=candidate, transaction=transaction, requirements=requirements,
+                     keycompitency=keycompitency, grading=grading, score=score)
+        obj.save()
+
+
+    return redirect('frontend:edittransactions', transaction_id)

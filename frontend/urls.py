@@ -8,7 +8,7 @@ from frontend.views import home,activity,tracker,update_candidateprojects,\
     editproject,deleteproject,addproject,edittransactions\
     ,deletetransaction,buildproject,calltoapply,apply,opencalltracker,competitions,newproject,\
     takenquizzes,get_data,pickcandidates,update_finishedopencall,portfolio,github,experience,closetransaction,\
-    editportfolioproject,about,management
+    editportfolioproject,about,management,grading,storegrades
 from frontend.tasks import reminderforprofiledevs,applyreminder,massmail,submission
 from accounts.views import update_profile
 
@@ -20,7 +20,7 @@ urlpatterns = [
     path('dev', dev, name='dev'),
     path('howitworks', howitworks, name='howitworks'),
     path('pricing', pricing, name='pricing'),
-    path('report/<str:email>/<int:transaction_id>', report, name='report'),
+    path('report/<int:candidate_id>/<int:transaction_id>', report, name='report'),
     path('privacy', privacy, name='privacy'),
     path('terms', terms, name='terms'),
     path('sample', sample, name='sample'),
@@ -68,7 +68,9 @@ urlpatterns = [
     path('experience',experience,name='experience'),
     path('editportfolioproject/<int:project_id>',editportfolioproject,name='editportfolioproject'),
     path('about/<int:candidate_id>',about,name='about'),
-    path('management',management,name='management')
+    path('management',management,name='management'),
+    path('grading/<int:candidate_id>/<int:transaction_id>',grading,name='grading'),
+    path('storegrades/<int:candidate_id>/<int:transaction_id>',storegrades,name='storegrades')
 
 
 ]

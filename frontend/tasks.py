@@ -98,14 +98,15 @@ def submission(request):
     #     from_email = 'codeln@codeln.com'
     #     to = candidate.candidate.email
     #     mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
-    # for cand in submissions_mails:
-    #     subject = 'Project submission deadline update'
-    #     html_message = render_to_string('invitations/email/mestsubmission.html',
-    #                                     {'dev': cand})
-    #     plain_message = strip_tags(html_message)
-    #     from_email = 'codeln@codeln.com'
-    #     to = cand.candidate.email
-    #     mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+    candidates=Applications.objects.filter(transaction_id=95,stage='accepted')
+    for cand in candidates:
+        subject = 'Book time'
+        html_message = render_to_string('invitations/email/mestsubmission.html',
+                                        {'dev': cand})
+        plain_message = strip_tags(html_message)
+        from_email = 'codeln@codeln.com'
+        to = cand.candidate.email
+        mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
     # passedlist = TakenQuiz.objects.filter(score__gte=50)
     # failedlist =TakenQuiz.objects.filter(score__lt=50)
     # allpassed=[]
@@ -118,12 +119,12 @@ def submission(request):
     # # passedemails =[]
     # # for email in emails:
     # #     print(email.email)
-    accepted=[]
-    pending=[]
-    transaction = Applications.objects.filter(stage='application sent',transaction_id=95)
-    for one in transaction:
-        accepted.append([one.candidate.first_name+one.candidate.last_name,one.candidate.email])
-    print(*accepted,sep='\n')
+    # accepted=[]
+    # pending=[]
+    # transaction = Applications.objects.filter(stage='application sent',transaction_id=95)
+    # for one in transaction:
+    #     accepted.append([one.candidate.first_name+one.candidate.last_name,one.candidate.email])
+    # print(*accepted,sep='\n')
 
 
     return render(request, 'frontend/recruiter/recruiter.html')
