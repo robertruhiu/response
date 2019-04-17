@@ -139,22 +139,27 @@
                                             <div class="h5">Mean score</div>
 
                                             <h1>{{ report.score }}
-                                                {% if report.score >= 80 %}
+                                                {% if report.score >= 70 %}
                                                     <span class="badge badge-success">A</span>
-                                                {% elif report.score >= 60 and report.score < 80 %}
+                                                {% elif report.score >= 60 and report.score < 70 %}
                                                     <span class="badge badge-primary">B</span>
-                                                {% elif report.score >= 40 and report.score < 60 %}
-                                                    <span class="badge badge-warning">C</span>
-                                                {% elif report.score >= 20 and report.score < 40 %}
-                                                    <span class="badge badge-danger">D</span>
+                                                {% elif report.score >= 50 and report.score < 60 %}
+                                                    <span class="badge badge-info">C</span>
+                                                {% elif report.score >= 40 and report.score < 50 %}
+                                                    <span class="badge badge-secondary">D</span>
+                                                {% elif report.score >= 30 and report.score < 40 %}
+                                                    <span class="badge badge-warning">E</span>
+                                                {% elif report.score < 30 %}
+                                                    <span class="badge badge-danger">F</span>
                                                 {% endif %}
 
                                             </h1>
-                                        {% if report.github %}
-                                            <a target="_blank" class="btn theme--dark primary1 mt-3 "
-                                               style="border-radius: 0;color: white" href="{{ report.github }}">View Code base</a>
+                                            {% if report.github %}
+                                                <a target="_blank" class="btn theme--dark primary1 mt-3 "
+                                                   style="border-radius: 0;color: white" href="{{ report.github }}">View
+                                                    Code base</a>
 
-                                        {% endif %}
+                                            {% endif %}
 
 
                                         </div>
@@ -396,7 +401,7 @@
                         <div class="card-body">
                             <div class="row text-center" style="margin-left: 0;margin-right: 0">
 
-                                <div class="col-lg-4 col-md-4 col-sm-6 col">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col">
                                     <div class="h6"> Deliverables</div>
                                     <div class="card competencecard">
 
@@ -412,15 +417,19 @@
                                             <div class="card-body">
 
                                                 <h6 class="card-title"
-                                                    style="text-align: -webkit-center;">{{ report.keycompitency.0 }}
-                                                    {% if report.keycompitency.0|add:"0" >= 80 %}
+                                                    style="text-align: -webkit-center;">{{ report.keycompitency.0 }} %
+                                                    {% if report.keycompitency.0|add:"0" >= 70 %}
                                                         <span class="badge badge-success">A</span>
-                                                    {% elif report.keycompitency.0|add:"0" >= 60 and report.keycompitency.0|add:"0" < 80 %}
+                                                    {% elif report.keycompitency.0|add:"0" >= 60 and report.keycompitency.0|add:"0" < 70 %}
                                                         <span class="badge badge-primary">B</span>
-                                                    {% elif report.keycompitency.0|add:"0" >= 40 and report.keycompitency.0|add:"0" < 60 %}
-                                                        <span class="badge badge-warning">C</span>
-                                                    {% elif report.keycompitency.0|add:"0" >= 0 and report.keycompitency.0|add:"0" < 40 %}
-                                                        <span class="badge badge-danger">D</span>
+                                                    {% elif report.keycompitency.0|add:"0" >= 50 and report.keycompitency.0|add:"0" < 60 %}
+                                                        <span class="badge badge-info">C</span>
+                                                    {% elif report.keycompitency.0|add:"0" >= 40 and report.keycompitency.0|add:"0" < 50 %}
+                                                        <span class="badge badge-secondary">D</span>
+                                                    {% elif report.keycompitency.0|add:"0" >= 30 and report.keycompitency.0|add:"0" < 40 %}
+                                                        <span class="badge badge-warning">E</span>
+                                                    {% elif  report.keycompitency.0|add:"0" < 30 %}
+                                                        <span class="badge badge-danger">F</span>
                                                     {% endif %}
 
                                                 </h6>
@@ -432,7 +441,7 @@
 
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-6 col">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col">
                                     <div class="h6">Error handling</div>
                                     <div class="card competencecard">
 
@@ -449,14 +458,18 @@
 
                                                 <h6 class="card-title"
                                                     style="text-align: -webkit-center;">{{ report.keycompitency.1 }} %
-                                                    {% if report.keycompitency.1|add:"0" >= 80 %}
+                                                    {% if report.keycompitency.1|add:"0" >= 70 %}
                                                         <span class="badge badge-success">A</span>
-                                                    {% elif report.keycompitency.1|add:"0" >= 60 and report.keycompitency.1|add:"0" < 80 %}
+                                                    {% elif report.keycompitency.1|add:"0" >= 60 and report.keycompitency.1|add:"0" < 70 %}
                                                         <span class="badge badge-primary">B</span>
-                                                    {% elif report.keycompitency.1|add:"0" >= 40 and report.keycompitency.1|add:"0" < 60 %}
-                                                        <span class="badge badge-warning">C</span>
-                                                    {% elif report.keycompitency.1|add:"0" >= 0 and report.keycompitency.1|add:"0" < 40 %}
-                                                        <span class="badge badge-danger">D</span>
+                                                    {% elif report.keycompitency.1|add:"0" >= 50 and report.keycompitency.1|add:"0" < 60 %}
+                                                        <span class="badge badge-info">C</span>
+                                                    {% elif report.keycompitency.1|add:"0" >= 40 and report.keycompitency.1|add:"0" < 50 %}
+                                                        <span class="badge badge-secondary">D</span>
+                                                    {% elif report.keycompitency.1|add:"0" >= 30 and report.keycompitency.1|add:"0" < 40 %}
+                                                        <span class="badge badge-warning">E</span>
+                                                    {% elif  report.keycompitency.1|add:"0" < 30 %}
+                                                        <span class="badge badge-danger">F</span>
                                                     {% endif %}
 
                                                 </h6>
@@ -468,7 +481,7 @@
 
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-6 col">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col">
                                     <div class="h6"> Project security</div>
                                     <div class="card competencecard">
 
@@ -485,14 +498,18 @@
 
                                                 <h6 class="card-title"
                                                     style="text-align: -webkit-center;">{{ report.keycompitency.2 }}%
-                                                    {% if report.keycompitency.2|add:"0" >= 80 %}
+                                                    {% if report.keycompitency.2|add:"0" >= 70 %}
                                                         <span class="badge badge-success">A</span>
-                                                    {% elif report.keycompitency.2|add:"0" >= 60 and report.keycompitency.2|add:"0" < 80 %}
+                                                    {% elif report.keycompitency.2|add:"0" >= 60 and report.keycompitency.2|add:"0" < 70 %}
                                                         <span class="badge badge-primary">B</span>
-                                                    {% elif report.keycompitency.2|add:"0" >= 40 and report.keycompitency.2|add:"0" < 60 %}
-                                                        <span class="badge badge-warning">C</span>
-                                                    {% elif report.keycompitency.2|add:"0" >= 0 and report.keycompitency.2|add:"0" < 40 %}
-                                                        <span class="badge badge-danger">D</span>
+                                                    {% elif report.keycompitency.2|add:"0" >= 50 and report.keycompitency.2|add:"0" < 60 %}
+                                                        <span class="badge badge-info">C</span>
+                                                    {% elif report.keycompitency.2|add:"0" >= 40 and report.keycompitency.2|add:"0" < 50 %}
+                                                        <span class="badge badge-secondary">D</span>
+                                                    {% elif report.keycompitency.2|add:"0" >= 30 and report.keycompitency.2|add:"0" < 40 %}
+                                                        <span class="badge badge-warning">E</span>
+                                                    {% elif  report.keycompitency.2|add:"0" < 30 %}
+                                                        <span class="badge badge-danger">F</span>
                                                     {% endif %}
                                                 </h6>
                                                 <p class="card-text">Metric used: Bugs</p>
@@ -503,7 +520,7 @@
 
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-6 col">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col">
                                     <div class="h6"> Code readability</div>
                                     <div class="card competencecard">
 
@@ -520,14 +537,18 @@
 
                                                 <h6 class="card-title"
                                                     style="text-align: -webkit-center;">{{ report.keycompitency.3 }}%
-                                                    {% if report.keycompitency.3|add:"0" >= 80 %}
+                                                    {% if report.keycompitency.3|add:"0" >= 70 %}
                                                         <span class="badge badge-success">A</span>
-                                                    {% elif report.keycompitency.3|add:"0" >= 60 and report.keycompitency.3|add:"0" < 80 %}
+                                                    {% elif report.keycompitency.3|add:"0" >= 60 and report.keycompitency.3|add:"0" < 70 %}
                                                         <span class="badge badge-primary">B</span>
-                                                    {% elif report.keycompitency.3|add:"0" >= 40 and report.keycompitency.3|add:"0" < 60 %}
-                                                        <span class="badge badge-warning">C</span>
-                                                    {% elif report.keycompitency.3|add:"0" >= 0 and report.keycompitency.3|add:"0" < 40 %}
-                                                        <span class="badge badge-danger">D</span>
+                                                    {% elif report.keycompitency.3|add:"0" >= 50 and report.keycompitency.3|add:"0" < 60 %}
+                                                        <span class="badge badge-info">C</span>
+                                                    {% elif report.keycompitency.3|add:"0" >= 40 and report.keycompitency.3|add:"0" < 50 %}
+                                                        <span class="badge badge-secondary">D</span>
+                                                    {% elif report.keycompitency.3|add:"0" >= 30 and report.keycompitency.3|add:"0" < 40 %}
+                                                        <span class="badge badge-warning">E</span>
+                                                    {% elif  report.keycompitency.3|add:"0" < 30 %}
+                                                        <span class="badge badge-danger">F</span>
                                                     {% endif %}
                                                 </h6>
                                                 <p class="card-text">Metric used: Comments</p>
@@ -643,7 +664,6 @@
                                 </div>
                             </div>
                         </div>
-
 
 
                         <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
