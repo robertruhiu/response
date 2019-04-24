@@ -87,17 +87,9 @@
         <div class="row ">
             <div class="col-lg-4 col-12 d-none d-lg-block " style="position: fixed">
                 <div class="shadow-sm p-3  mb-5 " style="width: 80%">
-                    {% for key, value in json.items %}
-                        {% if key == 'avatar_url' %}
-                            <div style="width: 13rem;">
-                                <img class="card-img-top"
-                                     style="" src="{{ value }}"
-                                     alt="Card image cap">
-                            </div>
-                        {% endif %}
-                    {% endfor %}
 
-                        <h5>Bio</h5>
+
+                    <h5>Bio</h5>
                     <hr>
 
 
@@ -111,8 +103,8 @@
                     {% if not candidate.about %}
 
                         <p class="text-muted">Tell us something about yourself
-                        <span style="color: #1e50c9" data-feather="plus" data-toggle="modal"
-                     data-target="#exampleModal2">
+                            <span style="color: #1e50c9" data-feather="plus" data-toggle="modal"
+                                  data-target="#exampleModal2">
                     Bio
                 </span>
 
@@ -122,8 +114,8 @@
 
 
                         <p class="text-muted">{{ candidate.about }}
-                             <span style="color: #1e50c9" data-feather="edit-2" data-toggle="modal"
-                     data-target="#exampleModal2">
+                            <span style="color: #1e50c9" data-feather="edit-2" data-toggle="modal"
+                                  data-target="#exampleModal2">
                     Bio
                 </span>
                         </p>
@@ -134,61 +126,33 @@
 
 
 
-                    <p class="font-weight-bold">Technologies used</p>
-                    <small class="form-text text-muted">Based on github activity</small>
-                    {% for key,value in c.items %}
-                        {% if key != None %}
-                            <span class="badge badge-pill badge-primary">{{ key }}</span>
-                        {% endif %}
-
-                    {% endfor %}
 
 
-                    <p>Preferred work type : <span>{{ request.user.profile.availabilty }}</span></p>
+                    <p>Preferred work type : <span class="badge btn-primary" style="background-color: #b627a1">{{ request.user.profile.availabilty }}</span></p>
 
                 </div>
 
 
             </div>
-        <div class=" col d-lg-none mb-3" >
-                <div class="shadow-sm p-3 " >
-                    {% for key, value in json.items %}
-                        {% if key == 'avatar_url' %}
-                            <div style="width: 13rem;">
-                                <img class="card-img-top"
-                                     style="" src="{{ value }}"
-                                     alt="Card image cap">
-                            </div>
-                        {% endif %}
-                    {% endfor %}
+            <div class=" col d-lg-none mb-3">
+                <div class="shadow-sm p-3 ">
 
-                        <h5>Bio</h5>
+                    <h5>Bio</h5>
                     <hr>
-
-
-
-
-
-
-
-
 
                     {% if not candidate.about %}
 
                         <p class="text-muted">Tell us something about yourself
-                        <span style="color: #1e50c9" data-feather="plus" data-toggle="modal"
-                     data-target="#exampleModal2">
+                            <span style="color: #1e50c9" data-feather="plus" data-toggle="modal"
+                                  data-target="#exampleModal2">
                     Bio
                 </span>
 
                         </p>
                     {% else %}
-
-
-
                         <p class="text-muted">{{ candidate.about }}
-                             <span style="color: #1e50c9" data-feather="edit-2" data-toggle="modal"
-                     data-target="#exampleModal2">
+                            <span style="color: #1e50c9" data-feather="edit-2" data-toggle="modal"
+                                  data-target="#exampleModal2">
                     Bio
                 </span>
                         </p>
@@ -196,20 +160,7 @@
 
                     {% endif %}
 
-
-
-
-                    <p class="font-weight-bold">Technologies used</p>
-                    <small class="form-text text-muted">Based on github activity</small>
-                    {% for key,value in c.items %}
-                        {% if key != None %}
-                            <span class="badge badge-pill badge-primary">{{ key }}</span>
-                        {% endif %}
-
-                    {% endfor %}
-
-
-                    <p>Preferred work type : <span>{{ request.user.profile.availabilty }}</span></p>
+                    <p>Preferred work type : <span class="badge btn-primary" style="background-color: #b627a1">{{ request.user.profile.availabilty }}</span></p>
 
                 </div>
 
@@ -353,89 +304,9 @@
 
                 </div>
 
-                <!------github------>
-                <div class="shadow-sm p-3  mb-5  mt-5">
-                    <h5>Github Activity</h5>
-                    <hr>
-                    <div class="row">
-                        {% for repo in repos %}
-
-                            <div class="col-lg-3 col-6">
-                                <div class="card mt-2 ml-2 mb-2" style="border-radius: 0;height: 6rem;">
-                                    <div class="">
-                                        {% for key, value in repo.items %}
-
-                                            {% if key == 'name' %}
-                                                <div style="background-color: #c0f1e2;padding: 1%">
-                                                    <p class="ml-2 mt-1"><span data-feather="github"></span> {{ value }}
-                                                    </p>
-                                                </div>
-                                            {% endif %}
-
-
-
-                                            {% if key == 'language' %}
-                                                <div style="padding: 1%;">
-                                                    <p class="ml-2"><span data-feather="code"></span> {{ value }}</p>
-                                                </div>
-
-                                            {% endif %}
-
-
-
-
-
-                                        {% endfor %}
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        {% endfor %}
-
-                    </div>
-
-                    <div class="d-flex justify-content-center mt-2">
-                        <div class="pagination">
-    <span class="step-links">
-    <ul class="pagination">
-
-        {% if repos.has_previous %}
-            <li class="page-item">
-            <a class="page-link" href="?page=1">&laquo; first</a>
-            </li>
-            <li class="page-item">
-            <a class="page-link" href="?page={{ repos.previous_page_number }}">previous</a>
-            </li>
-        {% endif %}
-
-        <li class="page-link">
-        <span class="current">
-
-            Page {{ repos.number }} of {{ repos.paginator.num_pages }}.
-
-        </span>
-        </li>
-
-        {% if repos.has_next %}
-            <li class="page-item">
-            <a class="page-link" href="?page={{ repos.next_page_number }}">next</a>
-            </li>
-            <li class="page-item">
-            <a class="page-link" href="?page={{ repos.paginator.num_pages }}">last &raquo;</a>
-            </li>
-        {% endif %}
-        </li>
-    </ul>
-    </span>
-                        </div>
-                    </div>
-
-                </div>
 
             </div>
-        <div class="col-lg-8 col-12 d-none d-lg-block" style="margin-left: 33%">
+            <div class="col-lg-8 col-12 d-none d-lg-block" style="margin-left: 33%">
 
 
                 <div class="shadow-sm p-3 mb-5">
@@ -571,174 +442,94 @@
 
                 </div>
 
-                <!------github------>
-                <div class="shadow-sm p-3  mb-5  mt-5">
-                    <h5>Github Activity</h5>
-                    <hr>
-                    <div class="row">
-                        {% for repo in repos %}
 
-                            <div class="col-lg-3 col-6">
-                                <div class="card mt-2 ml-2 mb-2" style="border-radius: 0;height: 6rem;">
-                                    <div class="">
-                                        {% for key, value in repo.items %}
+            </div>
+            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add bio</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{% url 'frontend:about' request.user.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="modal-body">
 
-                                            {% if key == 'name' %}
-                                                <div style="background-color: #c0f1e2;padding: 1%">
-                                                    <p class="ml-2 mt-1"><span data-feather="github"></span> {{ value }}
-                                                    </p>
-                                                </div>
-                                            {% endif %}
+                                {% bootstrap_field about_form.about placeholder=candidate.about %}
 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add project</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{% url 'frontend:newproject' %}" method="post">
+                            {% csrf_token %}
+                            <div class="modal-body">
 
+                                {% bootstrap_field form.title placeholder=False %}
+                                {% bootstrap_field form.description placeholder=False %}
 
-                                            {% if key == 'language' %}
-                                                <div style="padding: 1%;">
-                                                    <p class="ml-2"><span data-feather="code"></span> {{ value }}</p>
-                                                </div>
+                                {% bootstrap_field form.demo_link placeholder=False %}
+                                {% bootstrap_field form.repository_link placeholder=False %}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add work experience</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{% url 'frontend:experience' %}" method="post">
+                            {% csrf_token %}
+                            <div class="modal-body">
 
-                                            {% endif %}
-
-
-
-
-
-                                        {% endfor %}
-                                    </div>
-
-                                </div>
+                                {% bootstrap_field experience_form.title placeholder=False %}
+                                {% bootstrap_field experience_form.description placeholder=False %}
+                                {% bootstrap_field experience_form.company placeholder=False %}
+                                {% bootstrap_field experience_form.location placeholder=False %}
+                                <label>Duration in months</label>
+                                {% bootstrap_field experience_form.duration placeholder=False show_label=False %}
 
 
                             </div>
-                        {% endfor %}
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
 
                     </div>
-
-                    <div class="d-flex justify-content-center mt-2">
-                        <div class="pagination">
-    <span class="step-links">
-    <ul class="pagination">
-
-        {% if repos.has_previous %}
-            <li class="page-item">
-            <a class="page-link" href="?page=1">&laquo; first</a>
-            </li>
-            <li class="page-item">
-            <a class="page-link" href="?page={{ repos.previous_page_number }}">previous</a>
-            </li>
-        {% endif %}
-
-        <li class="page-link">
-        <span class="current">
-
-            Page {{ repos.number }} of {{ repos.paginator.num_pages }}.
-
-        </span>
-        </li>
-
-        {% if repos.has_next %}
-            <li class="page-item">
-            <a class="page-link" href="?page={{ repos.next_page_number }}">next</a>
-            </li>
-            <li class="page-item">
-            <a class="page-link" href="?page={{ repos.paginator.num_pages }}">last &raquo;</a>
-            </li>
-        {% endif %}
-        </li>
-    </ul>
-    </span>
-                        </div>
-                    </div>
-
                 </div>
 
             </div>
-        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add bio</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form action="{% url 'frontend:about' request.user.id %}" method="post">
-                                    {% csrf_token %}
-                                    <div class="modal-body">
-
-                                        {% bootstrap_field about_form.about placeholder=candidate.about %}
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add project</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form action="{% url 'frontend:newproject' %}" method="post">
-                                    {% csrf_token %}
-                                    <div class="modal-body">
-
-                                        {% bootstrap_field form.title placeholder=False %}
-                                        {% bootstrap_field form.description placeholder=False %}
-
-                                        {% bootstrap_field form.demo_link placeholder=False %}
-                                        {% bootstrap_field form.repository_link placeholder=False %}
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add work experience</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form action="{% url 'frontend:experience' %}" method="post">
-                                    {% csrf_token %}
-                                    <div class="modal-body">
-
-                                        {% bootstrap_field experience_form.title placeholder=False %}
-                                        {% bootstrap_field experience_form.description placeholder=False %}
-                                        {% bootstrap_field experience_form.company placeholder=False %}
-                                        {% bootstrap_field experience_form.location placeholder=False %}
-                                        <label>Duration in months</label>
-                                        {% bootstrap_field experience_form.duration placeholder=False show_label=False %}
-
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
-
-                    </div>
 
     </main>
 {% endblock %}

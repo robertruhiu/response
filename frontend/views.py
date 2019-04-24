@@ -330,7 +330,7 @@ def sample(request):
     return render(request, 'frontend/sample.html')
 
 
-def page_404(request):
+def page_404(request,exception=None):
     return render(request, 'frontend/error_pages/404.html')
 
 
@@ -537,30 +537,7 @@ def portfolio(request):
         form = Portfolio_form()
         experience_form = Experience_Form()
         about_form = About()
-        repo = 'https://api.github.com/users/' + user + '/repos'
-        repos = requests.get(repo, auth=(username, token)).json()
-        paginator = Paginator(repos, 8)
 
-        page = request.GET.get('page')
-        repoz = paginator.get_page(page)
-        languages = []
-
-        for i in repos:
-            for x in i:
-                languages.append(i['language'])
-
-        counter = Counter(languages)
-        labels = []
-        c = {}
-        items = []
-        for z in counter:
-            c[z] = counter[z]
-            labels.append(z)
-            items.append(counter[z])
-        data = {
-            "labels": labels,
-            "data": items,
-        }
         student = Student.objects.get(user_id=request.user.id)
         verified_skills = TakenQuiz.objects.filter(student=student).filter(score__gte=50).all()
         skill=[]
@@ -574,7 +551,7 @@ def portfolio(request):
         experiences=Experience.objects.filter(candidate=request.user).all()
         verified_projects = Portfolio.objects.filter(candidate=request.user).all()
         return render(request, 'frontend/developer/portfolio.html',
-                      {'json': json_data, 'repos': repoz, 'data': data, 'c': c, 'form': form,
+                      {'json': json_data,'form': form,
                        'verified_projects': verified_projects,'experience_form':experience_form,'experiences':experiences,
                        'skills':skills,'candidate':candidate,'about_form':about_form})
     except Github.DoesNotExist:
@@ -589,44 +566,43 @@ def newproject(request):
         if myprojects.is_valid():
             title = myprojects.cleaned_data['title']
             description = myprojects.cleaned_data['description']
-            image = myprojects.cleaned_data['image']
             repo = myprojects.cleaned_data['repository_link']
             demo = myprojects.cleaned_data['demo_link']
-            newprojo =Portfolio(candidate=request.user,demo_link=demo,repository_link=repo,title=title,image=image,description=description)
+            newprojo =Portfolio(candidate=request.user,demo_link=demo,repository_link=repo,title=title,description=description)
             newprojo.save()
     return redirect(reverse('frontend:portfolio'))
 @login_required
-def get_data(request, *args, **kwargs):
-    try:
-        candidate = Github.objects.get(candidate=request.user)
-        user = candidate.github_username
-        username = config('GITHUB_USERNAME',default='GITHUB_USERNAME')
-        token = config('ACCESS_TOKEN',default='ACCESS_TOKEN')
-        repo = 'https://api.github.com/users/' + user + '/repos'
-        repos = requests.get(repo, auth=(username, token)).json()
-
-        languages = []
-        for i in repos:
-            for x in i:
-                languages.append(i['language'])
-        counter = Counter(languages)
-        labels = []
-        items = []
-        for z in counter:
-            labels.append(z)
-            items.append(counter[z])
-        data = {
-            "labels": labels,
-            "data": items,
-        }
-
-        return JsonResponse(data)
-
-
-    except Github.DoesNotExist:
-        form = Github_form()
-
-        return render(request, 'frontend/developer/github.html',{'form':form})
+# def get_data(request, *args, **kwargs):
+#     try:
+#         candidate = Github.objects.get(candidate=request.user)
+#         user = candidate.github_username
+#         username = config('GITHUB_USERNAME',default='GITHUB_USERNAME')
+#         token = config('ACCESS_TOKEN',default='ACCESS_TOKEN')
+#         repo = 'https://api.github.com/users/' + user + '/repos'
+#         repos = requests.get(repo, auth=(username, token)).json()
+#
+#         languages = []
+#         for i in repos:
+#             for x in i:
+#                 languages.append(i['language'])
+#         counter = Counter(languages)
+#         labels = []
+#         items = []
+#         for z in counter:
+#             labels.append(z)
+#             items.append(counter[z])
+#         data = {
+#             "labels": labels,
+#             "data": items,
+#         }
+#
+#         return JsonResponse(data)
+#
+#
+#     except Github.DoesNotExist:
+#         form = Github_form()
+#
+#         return render(request, 'frontend/developer/github.html',{'form':form})
 
 def github(request):
     if request.method == 'POST':
