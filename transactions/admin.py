@@ -1,7 +1,7 @@
 from django.contrib import admin
 from transactions.models import Candidate, Transaction,OpenCall,Applications
 
-from frontend.models import candidatesprojects,devs,recruiters
+from frontend.models import candidatesprojects,devs,recruiters,Report
 
 # Register your models here.
 
@@ -28,3 +28,4 @@ admin.site.register(devs)
 admin.site.register(OpenCall)
 admin.site.register(Applications)
 admin.site.register(recruiters)
+admin.site.register(Report)
