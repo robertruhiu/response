@@ -232,9 +232,12 @@ def dev_details(request, dev_id, req_id):
         dev_picked = True
 
     requested_dev = User.objects.get(id=dev_id)
+    try:
+        student = Student.objects.get(user_id=dev_id)
+    except Student.DoesNotExist:
+        student = None
 
 
-    student = Student.objects.get(user_id=dev_id)
     verified_skills = TakenQuiz.objects.filter(student=student).filter(score__gte=50).all()
     skill = []
     for verified_skill in verified_skills:
