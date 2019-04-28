@@ -125,71 +125,84 @@ def submission(request):
     # for one in transaction:
     #     accepted.append([one.candidate.first_name+one.candidate.last_name,one.candidate.email])
     # print(*accepted,sep='\n')
-    candidates=Profile.objects.filter(user_type='developer')
+    candidate=Profile.objects.filter(user_type='developer')
+    allids=[]
+    for o in candidate:
+        if o.stage == 'complete':
+            allids.append(o.user_id)
+
+    candidates = Profile.objects.filter(user_id__in=allids)
     for onecandidate in candidates:
         if onecandidate.profile_tags == None:
             tags = []
-            frameworks = Profile.objects.get(user_id=onecandidate.user_id)
-            tags = []
-            if frameworks:
-                if 'react' in frameworks.framework.lower():
-                    tags.insert(0, 'reactjs')
-                else:
-                    tags.insert(0, False)
-                if 'vue' in frameworks.framework.lower():
-                    tags.insert(1, 'vuejs')
-                else:
-                    tags.insert(1, False)
-                if 'angular' in frameworks.framework.lower():
-                    tags.insert(2, 'angularjs')
-                else:
-                    tags.insert(2, False)
-                if 'express' in frameworks.framework.lower():
-                    tags.insert(3, 'expressjs')
-                else:
-                    tags.insert(3, False)
-                if 'laravel' in frameworks.framework.lower():
-                    tags.insert(4, 'laravel')
-                else:
-                    tags.insert(4, False)
-                if 'django' in frameworks.framework.lower():
-                    tags.insert(5, 'django')
-                else:
-                    tags.insert(5, False)
-                if 'net' in frameworks.framework.lower():
-                    tags.insert(6, True)
-                else:
-                    tags.insert(6, False)
-                if 'flutter' in frameworks.framework.lower():
-                    tags.insert(7, 'flutter')
-                else:
-                    tags.insert(7, False)
-                if 'android' in frameworks.framework.lower():
-                    tags.insert(8, 'android')
-                else:
-                    tags.insert(8, False)
-                if 'ionic' in frameworks.framework.lower():
-                    tags.insert(9, 'ionicjs')
-                else:
-                    tags.insert(9, False)
-                if 'java' in frameworks.language.lower():
-                    if 'javascript' in frameworks.language.lower():
-                        tags.insert(10, False)
+            try:
+                frameworks = Profile.objects.get(user_id=onecandidate.user_id)
+                tags = []
+                if frameworks.framework:
+                    if 'react' in frameworks.framework.lower():
+                        tags.insert(0, 'reactjs')
                     else:
-                        tags.insert(10, 'java')
-                else:
-                    tags.insert(10, False)
-                if 'c++' in frameworks.language.lower():
-                    tags.insert(11, 'c++')
-                else:
-                    tags.insert(11, False)
-                if 'c#' in frameworks.language.lower():
-                    tags.insert(12, 'c#')
-                else:
-                    tags.insert(12, False)
-            dev_tags = Profile.objects.get(user_id=onecandidate.user_id)
-            dev_tags.profile_tags = tags
-            dev_tags.save()
+                        tags.insert(0, False)
+                    if 'vue' in frameworks.framework.lower():
+                        tags.insert(1, 'vuejs')
+                    else:
+                        tags.insert(1, False)
+                    if 'angular' in frameworks.framework.lower():
+                        tags.insert(2, 'angularjs')
+                    else:
+                        tags.insert(2, False)
+                    if 'express' in frameworks.framework.lower():
+                        tags.insert(3, 'expressjs')
+                    else:
+                        tags.insert(3, False)
+                    if 'laravel' in frameworks.framework.lower():
+                        tags.insert(4, 'laravel')
+                    else:
+                        tags.insert(4, False)
+                    if 'django' in frameworks.framework.lower():
+                        tags.insert(5, 'django')
+                    else:
+                        tags.insert(5, False)
+                    if 'net' in frameworks.framework.lower():
+                        tags.insert(6, True)
+                    else:
+                        tags.insert(6, False)
+                    if 'flutter' in frameworks.framework.lower():
+                        tags.insert(7, 'flutter')
+                    else:
+                        tags.insert(7, False)
+                    if 'android' in frameworks.framework.lower():
+                        tags.insert(8, 'android')
+                    else:
+                        tags.insert(8, False)
+                    if 'ionic' in frameworks.framework.lower():
+                        tags.insert(9, 'ionicjs')
+                    else:
+                        tags.insert(9, False)
+
+                if frameworks.language:
+                    if 'java' in frameworks.language.lower():
+                        if 'javascript' in frameworks.language.lower():
+                            tags.insert(10, False)
+                        else:
+                            tags.insert(10, 'java')
+                    else:
+                        tags.insert(10, False)
+                    if 'c++' in frameworks.language.lower():
+                        tags.insert(11, 'c++')
+                    else:
+                        tags.insert(11, False)
+                    if 'c#' in frameworks.language.lower():
+                        tags.insert(12, 'c#')
+                    else:
+                        tags.insert(12, False)
+
+                dev_tags = Profile.objects.get(user_id=onecandidate.user_id)
+                dev_tags.profile_tags = tags
+                dev_tags.save()
+            except Profile.DoesNotExist:
+                pass
+
 
 
     return render(request, 'frontend/recruiter/recruiter.html')

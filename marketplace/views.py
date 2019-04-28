@@ -24,6 +24,7 @@ from .models import Job, JobApplication, DevRequest
 from .forms import JobForm
 
 
+
 def job_list(request):
     jobs = Job.objects.all()
     applied_jobs = ()
@@ -155,7 +156,12 @@ def dev_pool(request):
         dev_req = DevRequest.objects.filter(owner=request.user, paid=False, closed=False).get()
         devcount = dev_req.developers
         requestcount=len(devcount)
-        developers = User.objects.filter(profile__user_type='developer')
+        studentlist=[]
+        currentstudents=Student.objects.all()
+        for onestudent in currentstudents:
+            studentlist.append(onestudent.user_id)
+
+        developers = User.objects.filter(pk__in=studentlist)
         if dev_req:
             req_id = dev_req.id
         if request.method == 'POST':
