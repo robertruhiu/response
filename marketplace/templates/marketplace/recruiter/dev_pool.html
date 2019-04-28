@@ -201,10 +201,8 @@
 
         <div class="row">
             {% for dev in developers %}
-
-                <div class="shadow-lg p-3 mb-5 bg-white rounded pool" >
-                        <div>
-                            <div class="row" style="margin-top: -4%;margin-bottom: -4%;margin-left: -4%;">
+                <div class="col-6">
+                <div class="row shadow-lg  mb-5 bg-white rounded pool" style="padding: 0">
                                 <div class="col-4" style="background-color: aliceblue">
                                     <svg class=""
                                          style=""
@@ -213,7 +211,7 @@
                                         developer name
                                     </svg>
                                     <p class="card-caption"><span
-                                            data-feather="user"> </span>: {{ dev.first_name }} {{ dev.last_name|truncatechars:2 }}
+                                            data-feather="user"> </span>: {{ dev.first_name|truncatechars:5 }} {{ dev.last_name|truncatechars:2 }}
                                     </p>
                                     <p><span data-feather="briefcase"> </span>: {{ dev.profile.availabilty }}</p>
 
@@ -259,9 +257,12 @@
                                 </div>
 
                             </div>
-                        </div>
 
-                    </div>
+                </div>
+
+
+
+
             {% endfor %}
         </div>
 
