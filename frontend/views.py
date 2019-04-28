@@ -728,7 +728,9 @@ def about(request):
             return redirect('frontend:portfolio')
     return redirect(reverse('frontend:portfolio'))
 def management(request):
-    return render(request, 'frontend/recruiter/management.html')
+    jobs=Job.objects.all()
+
+    return render(request, 'frontend/recruiter/management.html',{'jobs':jobs})
 def grading(request,candidate_id,transaction_id):
     candidate = User.objects.get(id=candidate_id)
     transaction = Transaction.objects.get(id=transaction_id)

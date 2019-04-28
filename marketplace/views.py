@@ -22,7 +22,7 @@ from frontend.models import Experience, Portfolio
 from marketplace.filters import UserFilter
 from .models import Job, JobApplication, DevRequest
 from .forms import JobForm
-
+from accounts.models import Profile
 
 
 def job_list(request):
@@ -35,28 +35,24 @@ def job_list(request):
 
 @login_required
 def job_details(request, id):
-    if request.user.profile.user_type == 'recruiter':
-        job = Job.objects.get(id=id)
+    job = Job.objects.get(id=id)
 
-        selected_candidates = []
-        applicants = []
-        selected_devs = JobApplication.objects.filter(selected=True).all()
-        for selectdev in selected_devs:
-            selected_candidates.append(selectdev.candidate)
-        all_devs = JobApplication.objects.filter(selected=False).all()
-        for alldev in all_devs:
-            applicants.append(alldev.candidate)
+    selected_candidates = []
+    applicants = []
+    selected_devs = JobApplication.objects.filter(selected=True).all()
+    for selectdev in selected_devs:
+        selected_candidates.append(selectdev.candidate)
+    all_devs = JobApplication.objects.filter(selected=False).all()
+    for alldev in all_devs:
+        applicants.append(alldev.candidate)
 
-        recommended = [dev for dev in get_recommended_developers(job) if dev not in selected_candidates]
+    # recommended=Profile.objects.filter(profile_tags__icontains=job.tech_stack.lower())
 
-        return render(request, 'marketplace/recruiter/jobs/detail.html',
+    recommended= User.objects.filter(profile__user_type='developer').filter(Q(profile__profile_tags__icontains=job.tech_stack.lower()))
+    return render(request, 'marketplace/recruiter/jobs/detail.html',
                       {'job': job, 'applicants': applicants, 'recommended': recommended,
                        'selected_candidates': selected_candidates})
-    elif request.user.profile.user_type == 'developer':
-        status = JobApplication.objects.filter(job_id=id).filter(candidate=request.user).all()
-        job = Job.objects.get(id=id)
-        return render(request, 'marketplace/developer/jobs/detail.html',
-                      {'job': job, 'status': status})
+
 
 
 @login_required
@@ -125,11 +121,6 @@ def select_candidate(request, job_id, dev_id):
 
 @login_required
 def get_recommended_developers(job):
-    job_tags = [job.engagement_type.lower(), job.job_role.lower(), job.location.name.lower(),
-                job.dev_experience.lower()]
-
-    for tech_stack_item in job.tech_stack.split(','):
-        job_tags.append(tech_stack_item.lower())
 
     developers = User.objects.filter(profile__user_type='developer').filter(
         profile__profile_tags__icontains=job.tech_stack.lower()).distinct()
