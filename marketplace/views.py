@@ -32,7 +32,7 @@ def job_list(request):
         applied_jobs = JobApplication.objects.filter(candidate=developer)
     return render(request, 'frontend/jobs.html', {'jobs': jobs, 'applied_jobs': applied_jobs})
 
-
+@login_required
 def job_details(request, id):
     if request.user.profile.user_type == 'recruiter':
         job = Job.objects.get(id=id)
@@ -91,7 +91,7 @@ def apply_for_job(request, job_id):
     else:
         return redirect(reverse('marketplace:job_list'))
 
-
+@login_required
 def manage_posted_jobs(request):
     jobs = Job.objects.filter(posted_by=request.user)
     job_details = []
@@ -104,7 +104,7 @@ def manage_posted_jobs(request):
 
     return render(request, 'marketplace/recruiter/jobs/list.html', {'job_details': job_details})
 
-
+@login_required
 def pick_candidate(request, job_id, dev_id):
     job = Job.objects.get(id=job_id)
     dev = User.objects.get(id=dev_id)
@@ -113,7 +113,7 @@ def pick_candidate(request, job_id, dev_id):
 
     return HttpResponseRedirect(reverse('marketplace:recruiter_job_detail', args=(job_id,)))
 
-
+@login_required
 def select_candidate(request, job_id, dev_id):
     candidate = User.objects.get(id=dev_id)
     job = JobApplication.objects.filter(job_id=job_id).filter(candidate=candidate).get()
@@ -122,7 +122,7 @@ def select_candidate(request, job_id, dev_id):
     return redirect('marketplace:job_details', job_id)
 
 
-
+@login_required
 def get_recommended_developers(job):
     job_tags = [job.engagement_type.lower(), job.job_role.lower(), job.location.name.lower(),
                 job.dev_experience.lower()]
@@ -135,7 +135,7 @@ def get_recommended_developers(job):
 
     return developers
 
-
+@login_required
 def dev_pool(request):
     req_id = 0
     dev_req = None
@@ -154,7 +154,7 @@ def dev_pool(request):
     try:
         dev_req = DevRequest.objects.filter(owner=request.user, paid=False, closed=False).get()
         devcount = dev_req.developers
-        requestcount = len(devcount)
+        requestcount=len(devcount)
         developers = User.objects.filter(profile__user_type='developer')
         if dev_req:
             req_id = dev_req.id
@@ -219,7 +219,7 @@ def dev_pool(request):
 
                            'req_id': req_id, 'devcount': requestcount, 'paidfor': paidfordevs})
 
-
+@login_required
 def dev_details(request, dev_id, req_id):
     dev_picked = False
     if req_id != 0 and dev_id in DevRequest.objects.get(id=req_id).get_developers():
@@ -294,6 +294,7 @@ def payment_done(request, req_id):
 
     return render(request, 'transactions/invitations.html',
                   {'candidates': dev_req.dev, 'current_transaction': dev_req})
+@login_required
 def mydevs(request):
     mydevs =DevRequest.objects.filter(owner=request.user)
     devs=[]
@@ -304,6 +305,8 @@ def mydevs(request):
     developers = User.objects.filter(pk__in=alldevs)
 
     return render(request, 'marketplace/recruiter/paid.html',{'developers':developers})
+
+@login_required
 def paid_dev_details(request, dev_id):
 
 
