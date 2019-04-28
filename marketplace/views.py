@@ -209,7 +209,17 @@ def dev_pool(request):
         dev_req = None
         req_id=0
         requestcount = 0
-        developers = User.objects.filter(profile__user_type='developer')
+        studentlist = []
+        currentstudents = Student.objects.all()
+        for onestudent in currentstudents:
+            studentlist.append(onestudent.user_id)
+        complete = []
+        completeprofiles = Profile.objects.filter(stage='complete')
+        for oncomplete in completeprofiles:
+            complete.append(oncomplete.user_id)
+        newlist = list(set(complete + studentlist))
+        developers = User.objects.filter(pk__in=newlist)
+
         if request.method == 'POST':
             search_field = request.POST['search_field']
 
