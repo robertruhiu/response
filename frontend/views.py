@@ -386,7 +386,19 @@ def addproject(request):
 def edittransactions(request, transaction_id):
     transaction = Transaction.objects.get(id=transaction_id)
     candidates =candidatesprojects.objects.filter(transaction_id=transaction_id).order_by('-stage')
-    return render(request, 'frontend/recruiter/edittransaction.html',{'transaction':transaction,'candidates':candidates})
+    candidateswithreports=Report.objects.filter(transaction_id=transaction_id)
+    withreports=[]
+    withoutreports=[]
+    for candidatewith in candidateswithreports:
+        withreports.append(candidatewith.candidate)
+    for candidatewithout in candidates:
+        withoutreports.append(candidatewithout.candidate)
+    without=set(withoutreports)-set(withreports)
+
+    allcandidateswithout=candidatesprojects.objects.filter(candidate_id__in=without,transaction_id=transaction_id).order_by('-stage')
+
+
+    return render(request, 'frontend/recruiter/edittransaction.html',{'transaction':transaction,'candidates':candidateswithreports,'withoutreport':allcandidateswithout})
 @login_required
 def deletetransaction(request,transaction_id):
     OpenCall.objects.filter(transaction_id=transaction_id).delete()
@@ -774,7 +786,7 @@ def storegrades(request,candidate_id,transaction_id):
         passed = request.POST.get('passed', False);
         failed = request.POST.get('failed', False);
         vulnerable = request.POST.get('vulnerable', False);
-        errors = request.POST.get('error', False);
+        errors = request.POST.get('errors', False);
         lines = request.POST.get('lines', False);
         duplications = request.POST.get('duplications', False);
         classes = request.POST.get('classes', False);

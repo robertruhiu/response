@@ -127,6 +127,19 @@ recruiter dashboard
         <td>{{ candidate.candidate.id }}</td>
       <td>{{ candidate.candidate.first_name }}  {{ candidate.candidate.last_name }}</td>
       <td>{{ candidate.candidate.email }}</td>
+      <td>graded</td>
+
+        <td><span class="badge badge-primary">graded</span> </td>
+
+
+
+    </tr>
+  {% endfor %}
+  {% for candidate in withoutreport %}
+    <tr>
+        <td>{{ candidate.candidate.id }}</td>
+      <td>{{ candidate.candidate.first_name }}  {{ candidate.candidate.last_name }}</td>
+      <td>{{ candidate.candidate.email }}</td>
       <td>{{ candidate.stage }}</td>
     {% if candidate.stage == 'project-completed' %}
         <td><a href="{% url 'frontend:grading' candidate.candidate_id candidate.transaction_id %}" class="btn-sm btn-success">grade</a> </td>

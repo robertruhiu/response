@@ -1,0 +1,7 @@
+DEFAULT_FROM_EMAIL=codeln@codeln.com
+EMAIL_HOST_PASSWORD=#tag#icui4cu#
+EMAIL_HOST_USER=codeln@codeln.com
+SECRET_KEY=!&)6qusz5um2+_6=465*-t-=*gks#q=o@z*db8b_4v-zrbyh7x
+ACCESS_TOKEN=c3ed201518a9367822159c33e4ed40aa89882443
+GITHUB_USERNAME=robertruhiu
+DEBUG=True
