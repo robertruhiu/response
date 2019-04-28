@@ -169,8 +169,12 @@ def dev_pool(request):
         currentstudents=Student.objects.all()
         for onestudent in currentstudents:
             studentlist.append(onestudent.user_id)
-
-        developers = User.objects.filter(pk__in=studentlist)
+        complete=[]
+        completeprofiles=Profile.objects.filter(stage='complete')
+        for oncomplete in completeprofiles:
+            complete.append(oncomplete.user_id)
+        newlist=list(set(complete + studentlist))
+        developers = User.objects.filter(pk__in=newlist)
         if dev_req:
             req_id = dev_req.id
         if request.method == 'POST':
