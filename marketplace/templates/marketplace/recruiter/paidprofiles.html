@@ -98,8 +98,11 @@
                                 </svg>
                             </div>
 
+                    <h5>Name: {{ developer.first_name }}  {{ developer.last_name }}</h5>
+                    <a style="text-decoration: none" href="{{ developer.profile.linkedin_url  }}" target="_blank">Linkedin</a>
+                    <a style="text-decoration: none" href="{{developer.profile.github_repo  }}" target="_blank">Github</a>
+                    <h6>Bio</h6>
 
-                    <h5>Bio</h5>
                     <hr>
 
                     <p class="text-muted">{{ developer.profile.about }}</p>
@@ -109,13 +112,6 @@
 
                     <p>Preferred work type : <span class="">{{ developer.profile.availabilty }}</span></p>
 
-                    {% if dev_picked %}
-                        <span class="btn-sm btn-dark">Candidate Picked</span>
-                    {% else %}
-                        <a style="text-decoration: none"
-                           href="{% url 'marketplace:add_dev_to_wish_list' developer.id %}"><span
-                                class="btn-sm btn-primary">Pick Candidate</span></a>
-                    {% endif %}
 
                 </div>
 
@@ -134,8 +130,10 @@
                                 </svg>
                             </div>
 
-
-                    <h5>Bio</h5>
+                    <h5>Name: {{ developer.first_name }}  {{ developer.last_name }}</h5>
+                    <a href="{{ developer.profile.linkedin_url  }}" target="_blank">Linkedin</a>
+                    <a href="{{developer.profile.github_repo  }}" target="_blank">Github</a>
+                    <h6>Bio</h6>
                     <hr>
 
                     <p class="text-muted">{{ developer.profile.about }}</p>

@@ -7,7 +7,7 @@ from frontend.views import home,activity,tracker,update_candidateprojects,\
     report,credits,onboarddevs,onboardrecruiters,seedevs,seerecruiters,manageprojects,managetransactions,\
     editproject,deleteproject,addproject,edittransactions\
     ,deletetransaction,buildproject,calltoapply,apply,opencalltracker,competitions,newproject,\
-    takenquizzes,pickcandidates,update_finishedopencall,portfolio,github,experience,closetransaction,\
+    takenquizzes,pickcandidates,update_finishedopencall,portfolio,experience,closetransaction,\
     editportfolioproject,about,management,grading,storegrades
 from frontend.tasks import reminderforprofiledevs,applyreminder,massmail,submission
 from accounts.views import update_profile
@@ -62,12 +62,12 @@ urlpatterns = [
     path('massmail', massmail, name='massmail'),
     path('submission', submission, name='submission'),
     path('portfolio',portfolio,name='portfolio'),
-    path('github',github,name='github'),
+
     # path('api/data/',get_data,name='api-data'),
     path('newproject',newproject,name='newproject'),
     path('experience',experience,name='experience'),
     path('editportfolioproject/<int:project_id>',editportfolioproject,name='editportfolioproject'),
-    path('about/<int:candidate_id>',about,name='about'),
+    path('about',about,name='about'),
     path('management',management,name='management'),
     path('grading/<int:candidate_id>/<int:transaction_id>',grading,name='grading'),
     path('storegrades/<int:candidate_id>/<int:transaction_id>',storegrades,name='storegrades')

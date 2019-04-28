@@ -46,10 +46,6 @@ class Portfolio(models.Model):
     demo_link = models.CharField(null=True, max_length=400)
     verified = models.BooleanField(default=False)
 
-class Github(models.Model):
-    candidate = models.ForeignKey(User, on_delete=models.CASCADE)
-    github_username = models.CharField(null=True, max_length=100)
-    about = models.CharField(null=True, max_length=300)
 
 class Experience(models.Model):
     candidate = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -6,7 +6,10 @@ from django_countries.fields import CountryField
 # Create your models here.
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from taggit.managers import TaggableManager
+import datetime
+from django.core.cache import cache
+from separatedvaluesfield.models import SeparatedValuesField
 
 
 class Profile(models.Model):
@@ -53,7 +56,8 @@ class Profile(models.Model):
     language = models.CharField(max_length=140, null=True, blank=True)
     framework = models.CharField(max_length=140, null=True, blank=True)
     years = models.CharField(choices=YEARS_ACTIVE_CHOICES, null=True, max_length=30)
-
+    about = models.CharField(null=True, max_length=300)
+    profile_tags = SeparatedValuesField(null=True, max_length=150, token=',')
     country = CountryField(null=True, max_length=30)
     availabilty = models.CharField(choices=CONTRACT_CHOICES, null=True, max_length=30)
 
@@ -64,10 +68,23 @@ class Profile(models.Model):
     job_role = models.CharField(max_length=140, null=True, blank=True)
     industry = models.CharField(max_length=80, null=True, blank=True)
     company_url = models.CharField(max_length=500, null=True, blank=True)
-
+    tags = TaggableManager()
 
     def __str__(self):
         return self.user.username
+
+    def last_seen(self):
+        return cache.get('last_seen_%s' % self.user.username)
+
+    def online(self):
+        if self.last_seen():
+            now = datetime.datetime.now()
+            if now > (self.last_seen() + datetime.timedelta(seconds=settings.USER_ONLINE_TIMEOUT)):
+                return False
+            else:
+                return True
+        else:
+            return False
 
     def photo(self, default_path="default_user_photo.png"):
         if self.profile_photo:

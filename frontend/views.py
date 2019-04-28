@@ -18,12 +18,12 @@ from django.core import mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
-from accounts.forms import ProfileTypeForm, DeveloperFillingDetailsForm, RecruiterFillingDetailsForm
+from accounts.forms import ProfileTypeForm, DeveloperFillingDetailsForm, RecruiterFillingDetailsForm,Profile
 from transactions.models import Transaction, Candidate,OpenCall,Applications
 from invitations.models import Invitation
 from projects.models import Project, Framework
-from frontend.form import Projectinvite, EditProjectForm,Submissions,Portfolio_form,Github_form,Experience_Form,About,GradingForm
-from frontend.models import candidatesprojects, devs, recruiters,submissions,Portfolio,Github,Experience,Report
+from frontend.form import Projectinvite, EditProjectForm,Submissions,Portfolio_form,Experience_Form,About,GradingForm
+from frontend.models import candidatesprojects, devs, recruiters,submissions,Portfolio,Experience,Report
 from classroom.models import TakenQuiz,Student,Quiz
 from marketplace.models import Job
 
@@ -103,7 +103,71 @@ def index(request):
                 try:
                     student = Student.objects.get(user_id=request.user.id)
                     passedquizz = TakenQuiz.objects.filter(score__gt=50).filter(student_id=student)
+                    # if request.user.profile.profile_tags == None:
+                    #     tags = []
+                    #     frameworks = Profile.objects.get(user_id=request.user.id)
+                    #     tags = []
+                    #     if frameworks:
+                    #         if 'react' in frameworks.framework.lower():
+                    #             tags.insert(0, True)
+                    #         else:
+                    #             tags.insert(0, False)
+                    #         if 'vue' in frameworks.framework.lower():
+                    #             tags.insert(1, True)
+                    #         else:
+                    #             tags.insert(1, False)
+                    #         if 'angular' in frameworks.framework.lower():
+                    #             tags.insert(2, True)
+                    #         else:
+                    #             tags.insert(2, False)
+                    #         if 'express' in frameworks.framework.lower():
+                    #             tags.insert(3, True)
+                    #         else:
+                    #             tags.insert(3, False)
+                    #         if 'laravel' in frameworks.framework.lower():
+                    #             tags.insert(4, True)
+                    #         else:
+                    #             tags.insert(4, False)
+                    #         if 'django' in frameworks.framework.lower():
+                    #             tags.insert(5, True)
+                    #         else:
+                    #             tags.insert(5, False)
+                    #         if 'net' in frameworks.framework.lower():
+                    #             tags.insert(6, True)
+                    #         else:
+                    #             tags.insert(6, False)
+                    #         if 'flutter' in frameworks.framework.lower():
+                    #             tags.insert(7, True)
+                    #         else:
+                    #             tags.insert(7, False)
+                    #         if 'android' in frameworks.framework.lower():
+                    #             tags.insert(8, True)
+                    #         else:
+                    #             tags.insert(8, False)
+                    #         if 'ionic' in frameworks.framework.lower():
+                    #             tags.insert(9, True)
+                    #         else:
+                    #             tags.insert(9, False)
+                    #         if 'java' in frameworks.language.lower():
+                    #             tags.insert(10, True)
+                    #         else:
+                    #             tags.insert(10, False)
+                    #         if 'c++' in frameworks.language.lower():
+                    #             tags.insert(11, True)
+                    #         else:
+                    #             tags.insert(11, False)
+                    #         if 'c#' in frameworks.language.lower():
+                    #             tags.insert(12, True)
+                    #         else:
+                    #             tags.insert(12, False)
+                    #     dev_tags = Profile.objects.get(user_id=request.user.id)
+                    #     dev_tags.profile_tags = tags
+                    #     dev_tags.save()
+                    #
+                    #     return render(request, 'frontend/developer/developer.html', {'passedquizz': passedquizz})
+                    # else:
                     return render(request, 'frontend/developer/developer.html', {'passedquizz': passedquizz})
+
                 except Student.DoesNotExist:
                     obj = Student(user=request.user)
                     obj.save()
@@ -117,6 +181,7 @@ def index(request):
 
 def home(request):
     return render(request, 'frontend/landing.html')
+
 
 
 @login_required
@@ -386,19 +451,7 @@ def addproject(request):
 def edittransactions(request, transaction_id):
     transaction = Transaction.objects.get(id=transaction_id)
     candidates =candidatesprojects.objects.filter(transaction_id=transaction_id).order_by('-stage')
-    candidateswithreports=Report.objects.filter(transaction_id=transaction_id)
-    withreports=[]
-    withoutreports=[]
-    for candidatewith in candidateswithreports:
-        withreports.append(candidatewith.candidate)
-    for candidatewithout in candidates:
-        withoutreports.append(candidatewithout.candidate)
-    without=set(withoutreports)-set(withreports)
-
-    allcandidateswithout=candidatesprojects.objects.filter(candidate_id__in=without,transaction_id=transaction_id).order_by('-stage')
-
-
-    return render(request, 'frontend/recruiter/edittransaction.html',{'transaction':transaction,'candidates':candidateswithreports,'withoutreport':allcandidateswithout})
+    return render(request, 'frontend/recruiter/edittransaction.html',{'transaction':transaction,'candidates':candidates})
 @login_required
 def deletetransaction(request,transaction_id):
     OpenCall.objects.filter(transaction_id=transaction_id).delete()
@@ -538,38 +591,25 @@ def pickcandidates(request,trans_id,candidate_id):
 
 @login_required
 def portfolio(request):
-    try:
+    form = Portfolio_form()
+    experience_form = Experience_Form()
+    about_form = About()
 
-        candidate = Github.objects.get(candidate=request.user)
-        user = candidate.github_username
-        username = config('GITHUB_USERNAME',default='GITHUB_USERNAME')
-        token = config('ACCESS_TOKEN',default='ACCESS_TOKEN')
-        json_data = requests.get('https://api.github.com/users/' + user, auth=(username, token)).json()
+    student = Student.objects.get(user_id=request.user.id)
+    verified_skills = TakenQuiz.objects.filter(student=student).filter(score__gte=50).all()
+    skill = []
+    for verified_skill in verified_skills:
+        skill.append(verified_skill.quiz.subject.name)
+    skillset = set(skill)
+    skills = list(skillset)
 
-        form = Portfolio_form()
-        experience_form = Experience_Form()
-        about_form = About()
-
-        student = Student.objects.get(user_id=request.user.id)
-        verified_skills = TakenQuiz.objects.filter(student=student).filter(score__gte=50).all()
-        skill=[]
-        for verified_skill in verified_skills:
-            skill.append(verified_skill.quiz.subject.name)
-        skillset=set(skill)
-        skills =list(skillset)
-
-
-
-        experiences=Experience.objects.filter(candidate=request.user).all()
-        verified_projects = Portfolio.objects.filter(candidate=request.user).all()
-        return render(request, 'frontend/developer/portfolio.html',
-                      {'json': json_data,'form': form,
-                       'verified_projects': verified_projects,'experience_form':experience_form,'experiences':experiences,
-                       'skills':skills,'candidate':candidate,'about_form':about_form})
-    except Github.DoesNotExist:
-        form = Github_form()
-
-        return render(request, 'frontend/developer/github.html',{'form':form})
+    experiences = Experience.objects.filter(candidate=request.user).all()
+    verified_projects = Portfolio.objects.filter(candidate=request.user).all()
+    return render(request, 'frontend/developer/portfolio.html',
+                  {'form': form,
+                   'verified_projects': verified_projects, 'experience_form': experience_form,
+                   'experiences': experiences,
+                   'skills': skills, 'about_form': about_form})
 
 @login_required
 def newproject(request):
@@ -583,56 +623,10 @@ def newproject(request):
             newprojo =Portfolio(candidate=request.user,demo_link=demo,repository_link=repo,title=title,description=description)
             newprojo.save()
     return redirect(reverse('frontend:portfolio'))
-@login_required
-# def get_data(request, *args, **kwargs):
-#     try:
-#         candidate = Github.objects.get(candidate=request.user)
-#         user = candidate.github_username
-#         username = config('GITHUB_USERNAME',default='GITHUB_USERNAME')
-#         token = config('ACCESS_TOKEN',default='ACCESS_TOKEN')
-#         repo = 'https://api.github.com/users/' + user + '/repos'
-#         repos = requests.get(repo, auth=(username, token)).json()
-#
-#         languages = []
-#         for i in repos:
-#             for x in i:
-#                 languages.append(i['language'])
-#         counter = Counter(languages)
-#         labels = []
-#         items = []
-#         for z in counter:
-#             labels.append(z)
-#             items.append(counter[z])
-#         data = {
-#             "labels": labels,
-#             "data": items,
-#         }
-#
-#         return JsonResponse(data)
-#
-#
-#     except Github.DoesNotExist:
-#         form = Github_form()
-#
-#         return render(request, 'frontend/developer/github.html',{'form':form})
-
-def github(request):
-    if request.method == 'POST':
-        newuser = Github_form(request.POST)
-        if newuser.is_valid():
-            username = newuser.cleaned_data['github_username']
-            password =newuser.cleaned_data['password']
-
-            if requests.get('https://api.github.com/users/' + username, auth=(username, password)):
-                newgithubprofile = Github(candidate=request.user, github_username=username)
-                newgithubprofile.save()
-                return redirect(reverse('frontend:portfolio'))
-            else:
 
 
-                return redirect(reverse('frontend:portfolio'))
 
-    return redirect(reverse('frontend:portfolio'))
+
 def experience(request):
     if request.method == 'POST':
         new_experience = Experience_Form(request.POST)
@@ -725,8 +719,8 @@ def placeapplication(request,transaction_id):
             send_mail(subject, message, email_from, [to])
 
     return redirect('frontend:competitions')
-def about(request,candidate_id):
-    instance = get_object_or_404(Github,candidate_id=candidate_id)
+def about(request):
+    instance = get_object_or_404(Profile,user_id=request.user.id)
     if request.method =='POST':
         new_about = About(request.POST or None,instance=instance)
         if new_about.is_valid():

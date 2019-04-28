@@ -5,6 +5,7 @@ from django.db import models
 from django.urls import reverse
 from django_countries.fields import CountryField
 from django.contrib.auth.models import User
+from separatedvaluesfield.models import SeparatedValuesField
 
 
 class Job(models.Model):
@@ -62,11 +63,20 @@ class JobApplication(models.Model):
 
 class DevRequest(models.Model):
     owner = models.ForeignKey(User, related_name='owner', on_delete=models.CASCADE)
-    dev = models.ForeignKey(User, related_name='dev', on_delete=models.CASCADE)
+    developers = SeparatedValuesField(null=True,max_length=150,token=',')
     created = models.DateTimeField(auto_now_add=True)
     completed = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
     closed = models.BooleanField(default=False)
 
-    def __str__(self):
-        return "{},{}".format(self.owner.username, self.dev.username)
+
+
+    def amount(self):
+        total_amount = 0
+        total_devs = len(self.developers)
+
+        if 1 <= total_devs <= 10:
+            total_amount = 100
+        elif 10 < total_devs <= 100:
+            total_amount = 20 * total_devs
+        return total_amount

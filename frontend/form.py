@@ -1,8 +1,11 @@
 from django import forms
 from django.forms import ModelForm, Form
-from frontend.models import candidatesprojects,Portfolio,Github,Experience
+from django.contrib.auth.models import User
+
+from frontend.models import candidatesprojects,Portfolio,Experience
 from projects.models import Framework, Project
 from django_countries.fields import CountryField
+from accounts.models import Profile
 
 
 class Projectinvite(forms.ModelForm):
@@ -34,9 +37,6 @@ class Portfolio_form(forms.ModelForm):
         model = Portfolio
         fields = ['title','description','demo_link','repository_link']
 
-class Github_form(Form):
-    github_username = forms.CharField(required=True)
-    password = forms.CharField(widget=forms.PasswordInput())
 
 class GradingForm(Form):
     REQUIREMENT_TYPE_CHOICES = (
@@ -71,13 +71,11 @@ class GradingForm(Form):
     gates = forms.CharField(required=False)
 
 
-
-
-
 class About(forms.ModelForm):
+
     about = forms.CharField(widget=forms.Textarea(attrs={'rows': 7}), required=True)
     class Meta:
-        model = Github
+        model =Profile
         fields =['about']
 class EditProjectForm(forms.ModelForm):
     name = forms.CharField()

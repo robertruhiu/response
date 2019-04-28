@@ -85,6 +85,7 @@
 
         </div>
         <div class="row ">
+
             <div class="col-lg-4 col-12 d-none d-lg-block " style="position: fixed">
                 <div class="shadow-sm p-3  mb-5 " style="width: 80%">
 
@@ -100,7 +101,7 @@
 
 
 
-                    {% if not candidate.about %}
+                    {% if not request.user.profile.about %}
 
                         <p class="text-muted">Tell us something about yourself
                             <span style="color: #1e50c9" data-feather="plus" data-toggle="modal"
@@ -113,7 +114,7 @@
 
 
 
-                        <p class="text-muted">{{ candidate.about }}
+                        <p class="text-muted">{{ request.user.profile.about }}
                             <span style="color: #1e50c9" data-feather="edit-2" data-toggle="modal"
                                   data-target="#exampleModal2">
                     Bio
@@ -140,7 +141,7 @@
                     <h5>Bio</h5>
                     <hr>
 
-                    {% if not candidate.about %}
+                    {% if not request.user.profile.about %}
 
                         <p class="text-muted">Tell us something about yourself
                             <span style="color: #1e50c9" data-feather="plus" data-toggle="modal"
@@ -150,7 +151,7 @@
 
                         </p>
                     {% else %}
-                        <p class="text-muted">{{ candidate.about }}
+                        <p class="text-muted">{{ request.user.profile.about }}
                             <span style="color: #1e50c9" data-feather="edit-2" data-toggle="modal"
                                   data-target="#exampleModal2">
                     Bio
@@ -444,6 +445,8 @@
 
 
             </div>
+
+
             <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
                  aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
@@ -455,11 +458,11 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="{% url 'frontend:about' request.user.id %}" method="post">
+                        <form action="{% url 'frontend:about' %}" method="post">
                             {% csrf_token %}
                             <div class="modal-body">
 
-                                {% bootstrap_field about_form.about placeholder=candidate.about %}
+                                {% bootstrap_field about_form.about placeholder=request.user.profile.about  %}
 
                             </div>
                             <div class="modal-footer">
