@@ -48,7 +48,25 @@ def job_details(request, id):
 
     # recommended=Profile.objects.filter(profile_tags__icontains=job.tech_stack.lower())
 
-    recommended= User.objects.filter(profile__user_type='developer').filter(Q(profile__profile_tags__icontains=job.tech_stack.lower()))
+    profiletags= User.objects.filter(profile__user_type='developer').filter(Q(profile__profile_tags__icontains=job.tech_stack.lower()))
+
+    languages = User.objects.filter(profile__user_type='developer').filter(
+        Q(profile__language__icontains=job.tech_stack.lower()))
+
+    frameworks = User.objects.filter(profile__user_type='developer').filter(
+        Q(profile__framework__icontains=job.tech_stack.lower()))
+
+    alldevs = []
+    for onedev in profiletags:
+        alldevs.append(onedev.id)
+    for onelanguage in languages:
+        alldevs.append(onelanguage.id)
+    for oneframework in frameworks:
+        alldevs.append(oneframework.id)
+
+    listofdevs=list(set(alldevs))
+
+    recommended=User.objects.filter(pk__in=listofdevs)
     return render(request, 'marketplace/recruiter/jobs/detail.html',
                       {'job': job, 'applicants': applicants, 'recommended': recommended,
                        'selected_candidates': selected_candidates})
