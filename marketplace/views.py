@@ -172,9 +172,10 @@ def dev_pool(request):
         complete=[]
         completeprofiles=Profile.objects.filter(stage='complete')
         for oncomplete in completeprofiles:
-            complete.append(oncomplete.user_id)
+            if oncomplete.user_type == 'developer':
+                complete.append(oncomplete.user_id)
         newlist=list(set(complete + studentlist))
-        developers = User.objects.filter(pk__in=newlist)
+        developers = User.objects.filter(pk__in=newlist,profile__user_type='developer')
         if dev_req:
             req_id = dev_req.id
         if request.method == 'POST':
@@ -216,9 +217,10 @@ def dev_pool(request):
         complete = []
         completeprofiles = Profile.objects.filter(stage='complete')
         for oncomplete in completeprofiles:
-            complete.append(oncomplete.user_id)
+            if oncomplete.user_type == 'developer':
+                complete.append(oncomplete.user_id)
         newlist = list(set(complete + studentlist))
-        developers = User.objects.filter(pk__in=newlist)
+        developers = User.objects.filter(pk__in=newlist,profile__user_type='developer')
 
         if request.method == 'POST':
             search_field = request.POST['search_field']
