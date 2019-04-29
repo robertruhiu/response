@@ -460,7 +460,7 @@ def edittransactions(request, transaction_id):
         without.append(all.candidate_id)
 
     withoutreportslist=list(set(without)-set(reports))
-    withoutreport=candidatesprojects.objects.filter(candidate_id__in=withoutreportslist).order_by('-stage')
+    withoutreport=candidatesprojects.objects.filter(candidate_id__in=withoutreportslist,transaction_id=transaction_id).order_by('-stage')
     return render(request, 'frontend/recruiter/edittransaction.html',{'transaction':transaction,'candidates':withreports,'withoutreport':withoutreport})
 @login_required
 def deletetransaction(request,transaction_id):
