@@ -174,7 +174,7 @@ def dev_pool(request):
         for oncomplete in completeprofiles:
             if oncomplete.user_type == 'developer':
                 complete.append(oncomplete.user_id)
-        newlist=list(set(complete + studentlist))
+        newlist=list(set(complete) -set(studentlist))
         developers = User.objects.filter(pk__in=newlist,profile__user_type='developer')
         if dev_req:
             req_id = dev_req.id
@@ -219,7 +219,7 @@ def dev_pool(request):
         for oncomplete in completeprofiles:
             if oncomplete.user_type == 'developer':
                 complete.append(oncomplete.user_id)
-        newlist = list(set(complete + studentlist))
+        newlist = list(set(complete)-set( studentlist))
         developers = User.objects.filter(pk__in=newlist,profile__user_type='developer')
 
         if request.method == 'POST':
@@ -342,10 +342,14 @@ def mydevs(request):
 
 @login_required
 def paid_dev_details(request, dev_id):
+    try:
+        student = Student.objects.get(user_id=dev_id)
+    except Student.DoesNotExist:
+        student = None
 
 
     requested_dev = User.objects.get(id=dev_id)
-    student = Student.objects.get(user_id=dev_id)
+
     verified_skills = TakenQuiz.objects.filter(student=student).filter(score__gte=50).all()
     skill = []
     for verified_skill in verified_skills:
