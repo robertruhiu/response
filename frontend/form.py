@@ -41,6 +41,7 @@ class Portfolio_form(forms.ModelForm):
 class GradingForm(Form):
     REQUIREMENT_TYPE_CHOICES = (
         ('complete', 'COMPLETE'),
+        ('partial', 'PARTIAL'),
         ('incomplete', 'INCOMPLETE'),
     )
     github = forms.CharField(required=False)

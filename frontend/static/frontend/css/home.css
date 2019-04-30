@@ -65,6 +65,7 @@ nav ul li a{color:black;padding:0 30px;}
 .jumbotron1__background{position:absolute;top:0;left:0;right:0;bottom:0;contain:strict;transition:inherit;}
 .nav-container{color: #5036ff;transition:background-color 0.2s linear;}
 .nav-container.solid-nav{background-color:#272339;transition:background-color 0.2s linear;}
+.nav-container1{background-color:#272339;transition:background-color 0.2s linear;}
 
 
 .subheading{color:white;font-size:22px!important;font-weight:400;}

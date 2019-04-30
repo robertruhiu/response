@@ -220,7 +220,8 @@ def tracker(request, id):
     for one in candidates:
         allcandidates.append(one.candidate_id)
     withoutreports = list(set(allcandidates) - set(reports))
-    candswithreports =candidatesprojects.objects.filter(candidate_id__in=reports,transaction_id=id).order_by('-stage')
+    candswithreports =Report.objects.filter(transaction_id=id).order_by('-score')
+
     candwithoutreports=candidatesprojects.objects.filter(candidate_id__in=withoutreports,transaction_id=id).order_by('-stage')
 
 

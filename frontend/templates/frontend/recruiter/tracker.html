@@ -155,7 +155,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Project status</th>
+                            <th scope="col">Score</th>
                             <th scope="col">Report</th>
 
 
@@ -170,15 +170,7 @@
                                     <td>{{ candidate.candidate.first_name }} {{ candidate.candidate.last_name }}  </td>
 
                                     <td>
-                                        {% if candidate.stage == 'invite-accepted' %}
-                                            <span class="badge badge-info">Invite accepted</span>
-                                        {% endif %}
-                                        {% if candidate.stage == 'project-in-progress' %}
-                                            <span class="badge badge-primary">Project in progress</span>
-                                        {% endif %}
-                                        {% if candidate.stage == 'project-completed' %}
-                                            <span class="badge badge-success">Project completed</span>
-                                        {% endif %}
+                                        {{ candidate.score }}
 
                                     </td>
                                     <td>

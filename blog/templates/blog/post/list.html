@@ -1,120 +1,103 @@
-{% extends 'base.html' %}
+{% extends 'baseblog.html' %}
 
 {% load blog_tags %}
 
 {% block title %}Blog{% endblock %}
-
+{%load static %}
 {% block content %}
+<div class="slider" style="height: 25em;
 
+    background-image: url(http://www.guardxinc.com/blog/wp-content/uploads/2016/09/techblog.png);
+    background-size: cover;">
+<div class="overlay"></div>
+    <div class="container">
+      <div class="row" style="padding: 11em">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading text-center" >
+            <h1 style="color: white">Codeln Blog</h1>
 
-
-    <div class="jumbotron jumbotron7  text-white  bg-dark">
-        <div class="col-md-6 px-0">
-            <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
-            <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and
-                efficiently about what's most interesting in this post's contents.</p>
-            <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
+          </div>
         </div>
+      </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-md-6">
-            <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-                <div class="card-body d-flex flex-column align-items-start">
-                    <strong class="d-inline-block mb-2 text-primary">World</strong>
-                    <h3 class="mb-0">
-                        <a class="text-dark" href="#">Featured post</a>
-                    </h3>
-                    <div class="mb-1 text-muted">Nov 12</div>
-                    <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to
-                        additional content.</p>
-                    <a href="#">Continue reading</a>
-                </div>
-                <img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb"
-                     alt="Card image cap">
-            </div>
+</div>
+
+<div class="wrap">
+<section style="padding-top: 3em">
+
+
+        <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-preview">
+          <a href="post.html">
+            <h2 class="post-title">
+              Man must explore, and this is exploration at its greatest
+            </h2>
+            <h3 class="post-subtitle">
+              Problems look mighty small from 150 miles up
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on September 24, 2019</p>
         </div>
-        <div class="col-md-6">
-            <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-                <div class="card-body d-flex flex-column align-items-start">
-                    <strong class="d-inline-block mb-2 text-success">Design</strong>
-                    <h3 class="mb-0">
-                        <a class="text-dark" href="#">Post title</a>
-                    </h3>
-                    <div class="mb-1 text-muted">Nov 11</div>
-                    <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to
-                        additional content.</p>
-                    <a href="#">Continue reading</a>
-                </div>
-                <img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb"
-                     alt="Card image cap">
-            </div>
+        <hr>
+        <div class="post-preview">
+          <a href="post.html">
+            <h2 class="post-title">
+              I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
+            </h2>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on September 18, 2019</p>
         </div>
+        <hr>
+        <div class="post-preview">
+          <a href="post.html">
+            <h2 class="post-title">
+              Science has not yet mastered prophecy
+            </h2>
+            <h3 class="post-subtitle">
+              We predict too much for the next year and yet far too little for the next ten.
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on August 24, 2019</p>
+        </div>
+        <hr>
+        <div class="post-preview">
+          <a href="post.html">
+            <h2 class="post-title">
+              Failure is not an option
+            </h2>
+            <h3 class="post-subtitle">
+              Many say exploration is part of our destiny, but it’s actually our duty to future generations.
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on July 8, 2019</p>
+        </div>
+        <hr>
+        <!-- Pager -->
+        <div class="clearfix">
+          <a class="btn btn-primary float-right" href="#">Older Posts →</a>
+        </div>
+      </div>
     </div>
-
-
-    <main role="main" class="container">
-        <div class="row">
-            <div class="col-md-8 blog-main">
-                {% for post in posts %}
-                    <div class="blog-post">
-                        <a href="{% url 'blog:post_detail' post.id %}">
-                {{ post.title }}
-            </a>
-                        <p class="blog-post-meta">{{ post.publish }} {{ post.author }}</p>
-
-
-                            {{ post.body|truncatewords_html:20 }}
-
-                        {% if request.user.is_staff %}
-                            <a style="color: darkgreen" href="{% url 'blog:edit_post' post.id %}">
-                                Edit This Post
-                            </a>
-                        {% endif %}
-                    </div>
-                {% endfor %}
+  </div>
 
 
 
 
 
+</section>
+</div>
 
-                <!-- /.blog-post -->
-
-                <nav class="blog-pagination">
-                    <a class="btn btn-outline-primary" href="?page={{ page.previous_page_number }}">Older</a>
-                    <a class="btn btn-outline-secondary disabled" href="?page={{ page.next_page_number }}">Newer</a>
-                </nav>
-
-            </div><!-- /.blog-main -->
-
-            <aside class="col-md-4 blog-sidebar">
-
-
-                <div class="p-3">
-                    <h4 class="font-italic">Archives</h4>
-                    <ol class="list-unstyled mb-0">
-                        <li><a href="#">March 2014</a></li>
-                        <li><a href="#">February 2014</a></li>
-                        <li><a href="#">January 2014</a></li>
-                        <li><a href="#">December 2013</a></li>
-                        <li><a href="#">November 2013</a></li>
-                        <li><a href="#">October 2013</a></li>
-                        <li><a href="#">September 2013</a></li>
-                        <li><a href="#">August 2013</a></li>
-                        <li><a href="#">July 2013</a></li>
-                        <li><a href="#">June 2013</a></li>
-                        <li><a href="#">May 2013</a></li>
-                        <li><a href="#">April 2013</a></li>
-                    </ol>
-                </div>
-
-
-            </aside><!-- /.blog-sidebar -->
-
-        </div><!-- /.row -->
-
-    </main><!-- /.container -->
 
 
 
