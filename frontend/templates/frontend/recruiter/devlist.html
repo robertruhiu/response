@@ -1,132 +1,132 @@
 {% extends 'recruiterbase.html' %}
 {% block title %}
-recruiter dashboard
+    recruiter dashboard
 {% endblock %}
 {% load static %}
 {% block content %}
-<main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
-    <div class="d-none d-lg-block">
-        <nav class="navbar  navbar-light fixed-top fine border-bottom">
-                    <h5>Onboarded Developers</h5>
-                    <ul class="nav ml-auto">
+    <main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+        <div class="d-none d-lg-block">
+            <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                <h5>Onboarded Developers</h5>
+                <ul class="nav ml-auto">
 
 
-
-            {% if request.user.is_authenticated %}
-
-
-
-            <li class="nav-item">
-                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
-            </li>
-
-            {% else %}
-
-            <li class="nav-item">
-                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
-            </li>
-            <li class="nav-item">
-                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
-            </li>
-            {% endif %}
-
-
-    </ul>
-                </nav>
-    </div>
-
-    <!-----md devices adaptation------>
-    <div class="container d-lg-none">
-        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
-            <a class="logoadapt h5" style="text-decoration: none" href="/home">Onboarded developers</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span  class="navbar-toggler-icon">
-                    <span style="color: white" data-feather="menu"></span>
-                </span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Menu
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'frontend:my-activity' %}" >Ongoing tests</a>
-                            <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
-                            <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
-
-                        </div>
-                    </li>
                     {% if request.user.is_authenticated %}
+
+
+
                         <li class="nav-item">
-                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                            <a href="{% url 'account_logout' %}" style="color: black" class="nav-link">Logout</a>
                         </li>
-                        <li class="nav-item">
-                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
-                        </li>
+
                     {% else %}
+
                         <li class="nav-item">
-                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                            <a href="{% url 'account_login' %}" style="color: black" class="nav-link">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                            <a href="{% url 'account_signup' %}" style="color: black" class="nav-link">Register</a>
                         </li>
                     {% endif %}
+
+
                 </ul>
-            </div>
-        </nav>
+            </nav>
+        </div>
+
+        <!-----md devices adaptation------>
+        <div class="container d-lg-none">
+            <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+                <a class="logoadapt h5" style="text-decoration: none" href="/home">Onboarded developers</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdown"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Menu
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'frontend:my-activity' %}">Ongoing tests</a>
+                                <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
+                                <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
+
+                            </div>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a href="/home" style="color: white" class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account_logout' %}" style="color: white" class="nav-link">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'account_login' %}" style="color: white" class="nav-link">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account_signup' %}" style="color: white" class="nav-link">Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="d-none d-lg-block" style="margin-top: 6%">
+
+        </div>
+
+        <div class="d-lg-none" style="margin-top: 7em">
+
+        </div>
+    <div class="table-responsive w-auto" >
+        <table class="table table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">email</th>
+                <th scope="col">Country</th>
+                <th scope="col">language</th>
+                <th scope="col">Framework</th>
+                <th scope="col">Date joined</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for dev in developers %}
+                <tr>
+                    <td class="w-auto"> {{ forloop.counter }} </td>
+                    <td class="w-auto">{{ dev.first_name }} {{ dev.last_name }}</td>
+                    <td class="w-auto">{{ dev.email }}</td>
+                    <td>{{ dev.profile.country.name }}</td>
+                    <td>{{ dev.profile.language }}</td>
+                    <td>{{ dev.profile.framework }}</td>
+                    <td>{{ dev.date_joined }}</td>
+
+
+
+                </tr>
+
+            {% endfor %}
+
+
+            </tbody>
+        </table>
     </div>
 
-<div class="d-none d-lg-block" style="margin-top: 6%">
-
-</div >
-
-<div class="d-lg-none"  style="margin-top: 7em">
-
-</div>
-
-
-<a id="devs" href="{% url 'frontend:onboarddevs' %}"><span data-feather="rotate-cw"></span> Refresh list</a>
-
-    <table class="table">
-  <thead class="thead-dark">
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-      <th scope="col">email</th>
-      <th scope="col">Country</th>
-        <th scope="col">language</th>
-        <th scope="col">Framework</th>
-        <th scope="col">Github</th>
-        <th scope="col">Linkedin</th>
-        <th scope="col">Portfolio</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for dev in developers %}
-       <tr>
-       <td> {{ forloop.counter }} </td>
-      <td>{{ dev.firstname }} {{ dev.lastname }}</td>
-      <td>{{ dev.email }}</td>
-      <td>{{ dev.country.name}}</td>
-       <td>{{ dev.language }}</td>
-       <td>{{ dev.framework }}</td>
-       <td><a href="{{ dev.github }}" target="_blank">github account</a></td>
-           <td><a href="{{ dev.linkedin }}" target="_blank">linkedin</a></td>
-           <td><a href="{{ dev.portfolio }}" target="_blank">portfolio</a></td>
-    </tr>
-
-  {% endfor %}
-
-
-  </tbody>
-</table>
 
 
 
-
-
-</main>
+    </main>
 
 
 

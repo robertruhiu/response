@@ -1,126 +1,131 @@
 {% extends 'recruiterbase.html' %}
 {% block title %}
-recruiter dashboard
+    recruiter dashboard
 {% endblock %}
 {% load static %}
 {% block content %}
-<main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
-    <div class="d-none d-lg-block">
-        <nav class="navbar  navbar-light fixed-top fine border-bottom">
-                    <h5>Onboarded Recruiters</h5>
-                    <ul class="nav ml-auto">
+    <main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+        <div class="d-none d-lg-block">
+            <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                <h5>Onboarded Recruiters</h5>
+                <ul class="nav ml-auto">
 
 
-
-            {% if request.user.is_authenticated %}
-
-
-
-            <li class="nav-item">
-                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
-            </li>
-
-            {% else %}
-
-            <li class="nav-item">
-                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
-            </li>
-            <li class="nav-item">
-                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
-            </li>
-            {% endif %}
-
-
-    </ul>
-                </nav>
-    </div>
-
-    <!-----md devices adaptation------>
-    <div class="container d-lg-none">
-        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
-            <a class="logoadapt h5" style="text-decoration: none" href="/home">Onboarded Recruiters</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span  class="navbar-toggler-icon">
-                    <span style="color: white" data-feather="menu"></span>
-                </span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Menu
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'frontend:my-activity' %}" >Ongoing tests</a>
-                            <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
-                            <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
-
-                        </div>
-                    </li>
                     {% if request.user.is_authenticated %}
+
+
+
                         <li class="nav-item">
-                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                            <a href="{% url 'account_logout' %}" style="color: black" class="nav-link">Logout</a>
                         </li>
-                        <li class="nav-item">
-                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
-                        </li>
+
                     {% else %}
+
                         <li class="nav-item">
-                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                            <a href="{% url 'account_login' %}" style="color: black" class="nav-link">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                            <a href="{% url 'account_signup' %}" style="color: black" class="nav-link">Register</a>
                         </li>
                     {% endif %}
+
+
                 </ul>
-            </div>
-        </nav>
-    </div>
+            </nav>
+        </div>
 
-<div class="d-none d-lg-block" style="margin-top: 8%">
+        <!-----md devices adaptation------>
+        <div class="container d-lg-none">
+            <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+                <a class="logoadapt h5" style="text-decoration: none" href="/home">Onboarded Recruiters</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdown"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Menu
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'frontend:my-activity' %}">Ongoing tests</a>
+                                <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
+                                <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
 
-</div >
+                            </div>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a href="/home" style="color: white" class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account_logout' %}" style="color: white" class="nav-link">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'account_login' %}" style="color: white" class="nav-link">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account_signup' %}" style="color: white" class="nav-link">Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
 
-<div class="d-lg-none"  style="margin-top: 7em">
+        <div class="d-none d-lg-block" style="margin-top: 8%">
 
-</div>
-<a id="recruiters" href="{% url 'frontend:onboardrecruiters' %}"><span data-feather="rotate-cw"></span> Refresh list</a>
+        </div>
 
-    <table class="table">
-  <thead class="thead-light">
-    <tr>
-        <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">email</th>
-        <th scope="col">Company</th>
-        <th scope="col">Company url</th>
-        <th scope="col">Country</th>
+        <div class="d-lg-none" style="margin-top: 7em">
 
-    </tr>
-  </thead>
-  <tbody>
-  {% for pay in payers %}
-       <tr>
-       <td> {{ forloop.counter }} </td>
-      <td>{{ pay.firstname }} {{ pay.lastname }}</td>
-      <td>{{ pay.email }}</td>
-       <td>{{ pay.company }}</td>
-       <td>{{ pay.companyurl }}</td>
-       <td>{{ pay.country.name }}</td>
+        </div>
 
-    </tr>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">email</th>
+                <th scope="col">Company</th>
+                <th scope="col">Company url</th>
+                <th scope="col">Country</th>
+                <th scope="col">Date joined</th>
 
-  {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for pay in payers %}
+                <tr>
+                    <td> {{ forloop.counter }} </td>
+                    <td>{{ pay.firstname }} {{ pay.lastname }}</td>
+                    <td>{{ pay.email }}</td>
+                    <td>{{ pay.profile.company }}</td>
+                    {% if pay.profile.companyurl %}
+                        <td>{{ pay.profile.companyurl }}</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+
+                    <td>{{ pay.country.name }}</td>
+                    <td>{{ pay.date_joined }}</td>
+
+                </tr>
+
+            {% endfor %}
 
 
-  </tbody>
-</table>
+            </tbody>
+        </table>
 
 
-
-
-
-</main>
+    </main>
 
 
 

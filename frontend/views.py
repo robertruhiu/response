@@ -23,7 +23,7 @@ from transactions.models import Transaction, Candidate,OpenCall,Applications
 from invitations.models import Invitation
 from projects.models import Project, Framework
 from frontend.form import Projectinvite, EditProjectForm,Submissions,Portfolio_form,Experience_Form,About,GradingForm
-from frontend.models import candidatesprojects, devs, recruiters,submissions,Portfolio,Experience,Report
+from frontend.models import candidatesprojects,submissions,Portfolio,Experience,Report
 from classroom.models import TakenQuiz,Student,Quiz
 from marketplace.models import Job
 
@@ -405,13 +405,19 @@ def page_500(request):
 
 
 def seedevs(request):
-    developers = devs.objects.all()
+
+    developers=User.objects.filter(profile__user_type='developer').order_by('-date_joined')
+
+
     return render(request, 'frontend/recruiter/devlist.html', {'developers': developers})
 
 
 def seerecruiters(request):
-    payers = recruiters.objects.all()
-    return render(request, 'frontend/recruiter/recruiterslist.html', {'payers': payers})
+
+    recruiters = User.objects.filter(profile__user_type='recruiter').order_by('-date_joined')
+
+
+    return render(request, 'frontend/recruiter/recruiterslist.html', {'payers': recruiters})
 
 @login_required
 def manageprojects(request):

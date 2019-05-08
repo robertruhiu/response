@@ -14,24 +14,7 @@ class candidatesprojects(models.Model):
     transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
 
 
-class devs(models.Model):
-    email=models.EmailField(null=True,max_length=50)
-    language=models.CharField(null=True,max_length=500)
-    framework=models.CharField(null=True,max_length=500)
-    country =CountryField(null=True, max_length=30)
-    firstname=models.CharField(null=True,max_length=30)
-    lastname=models.CharField(null=True,max_length=30)
-    github = models.CharField(null=True,max_length=500)
-    linkedin = models.CharField(null=True, max_length=500)
-    portfolio = models.CharField(null=True, max_length=500)
 
-class recruiters(models.Model):
-    email = models.EmailField(null=True,max_length=50)
-    country = CountryField(null=True, max_length=30)
-    firstname = models.CharField(null=True,max_length=30)
-    lastname = models.CharField(null=True,max_length=30)
-    company = models.CharField(null=True,max_length=200)
-    companyurl = models.CharField(null=True,max_length=200)
 class submissions(models.Model):
     candidate = models.ForeignKey(User, on_delete=models.CASCADE)
     transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
