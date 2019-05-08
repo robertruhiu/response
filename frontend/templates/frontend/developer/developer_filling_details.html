@@ -75,7 +75,7 @@
         </nav>
     </div>
 
-<div class="d-none d-lg-block" style="margin-top: 8%">
+<div class="d-none d-lg-block" style="margin-top: 5%">
      <div class="alert alert-info" role="alert">
             You are highly encouraged to fill all details.It will enable better job matching
         </div>
@@ -130,8 +130,21 @@
             <label>I am available to work?</label>
             {% bootstrap_field developer_filling_details_form.availabilty show_label=False %}
         </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 ">
+            <label>Are you part of the CodeLn Student Ambassador Program?</label>
+            {% bootstrap_field developer_filling_details_form.csa show_label=False %}
+        </div>
 
 
+
+
+        </div>
+    <div class="row">
+            <div class="col-lg-6">
+                <label>Your bio</label>
+                        {% bootstrap_field developer_filling_details_form.about show_label=False placeholder='' %}
+
+                    </div>
 
         </div>
     <div class="d-flex justify-content-center">

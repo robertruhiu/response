@@ -45,6 +45,9 @@ def developer_filling_details(request, current_profile):
             current_profile.availabilty = developer_filling_details_form.cleaned_data['availabilty']
             current_profile.country = developer_filling_details_form.cleaned_data['country']
             current_profile.phone_number = developer_filling_details_form.cleaned_data['phone_number']
+            current_profile.csa = developer_filling_details_form.cleaned_data['csa']
+            current_profile.about = developer_filling_details_form.cleaned_data['about']
+
             current_profile.stage = 'complete'
             current_profile.save()
             return redirect(reverse('frontend:index'))

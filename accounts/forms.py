@@ -15,12 +15,12 @@ class ProfileTypeForm(forms.Form):
 
 
 class DeveloperFillingDetailsForm(forms.ModelForm):
-
+    about = forms.CharField(widget=forms.Textarea(attrs={'rows': 7}))
     class Meta:
         model = Profile
 
         fields = ['github_repo','gender','phone_number', 'linkedin_url',
-                  'portfolio','years','country','language', 'framework','availabilty']
+                  'portfolio','years','country','language', 'framework','availabilty','csa','about']
 
 
     # PROGRAMMING_LANGUAGE_CHOICES = (('python', 'Python'),)
@@ -60,11 +60,11 @@ class SignUpForm(forms.Form):
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email',)
+        fields = ('first_name', 'last_name',)
         widgets = {
             'first_name': TextInput(attrs={'class': 'input', }),
-            'last_name': TextInput(attrs={'class': 'input', }),
-            'email': EmailInput(attrs={'class': 'input', 'type': 'email'}),
+            'last_name': TextInput(attrs={'class': 'input', })
+
         }
 
     def __init__(self, *args, **kwargs):
@@ -82,9 +82,11 @@ class ProfileEditForm(forms.ModelForm):
         }
 
 class DeveloperProfileEditForm(forms.ModelForm):
+    about = forms.CharField(widget=forms.Textarea(attrs={'rows': 7}))
     class Meta:
         model = Profile
-        fields = ['github_repo', 'years', 'language', 'framework']
+        fields = ['github_repo','phone_number', 'linkedin_url',
+                  'portfolio','language', 'framework','availabilty','csa','about']
 
 class RecruiterProfileEditForm(forms.ModelForm):
     class Meta:

@@ -77,32 +77,77 @@
         </nav>
     </div>
 
-<div class="d-none d-lg-block" style="margin-top: 5%">
+<div class="d-none d-lg-block" style="margin-top: 8%">
 
 </div >
 
 <div class="d-lg-none"  style="margin-top: 7em">
 
 </div>
-
-        <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-            <form method="post">
+<div class="shadow-lg p-3 mt-3">
+    <form method="post">
                 {% csrf_token %}
-                {% bootstrap_form user_form %}
-                {% bootstrap_form profile_form %}
+                <div class="row">
+                    <div class="col-lg-4">
+                        {% bootstrap_field profile_form.github_repo %}
 
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                    <div class="col-lg-4">
+                        {% bootstrap_field profile_form.linkedin_url %}
+
+                    </div>
+                    <div class="col-lg-4">
+                        {% bootstrap_field profile_form.portfolio %}
+
+                    </div>
+
+                    <div class="col-lg-4">
+                        {% bootstrap_field profile_form.phone_number %}
+
+                    </div>
+
+                    <div class="col-lg-4">
+                        {% bootstrap_field profile_form.language %}
+
+                    </div>
+                    <div class="col-lg-4">
+                        {% bootstrap_field profile_form.framework %}
+
+                    </div>
+                    <div class="col-lg-4">
+                        {% bootstrap_field profile_form.availabilty %}
+
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Are you part of the CodeLn Student Ambassador Program?</label>
+                        {% bootstrap_field profile_form.csa show_label=False %}
+
+                    </div>
+
+
+                </div>
+        <div class="row">
+            <div class="col-lg-6">
+                        {% bootstrap_field profile_form.about %}
+
+                    </div>
+
+        </div>
+
+
+
+         <div class="d-flex justify-content-lg-start">
+        <button class="btn primary1  col-3" style="color: white"  type="submit">Submit</button>
+    </div>
 
             </form>
 
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col">
-            <img class="img-fluid" src="" >
+</div>
 
-        </div>
 
-    </div>
+
+
+
 
 
 
