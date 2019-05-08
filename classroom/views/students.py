@@ -154,7 +154,7 @@ def take(request, pk):
 
 
 def retake(request,quizid,studentid):
-
+    RandomQuiz.objects.filter(quiz_id=quizid,student_id=studentid).delete()
     TakenQuiz.objects.filter(quiz_id=quizid,student_id=studentid).delete()
     StudentAnswer.objects.filter(quiz_id=quizid,student_id=studentid).delete()
-    return redirect('students:take_quiz', quizid)
+    return redirect('students:take', quizid)
