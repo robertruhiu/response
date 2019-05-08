@@ -8,7 +8,7 @@ from frontend.views import home,activity,tracker,update_candidateprojects,\
     editproject,deleteproject,addproject,edittransactions\
     ,deletetransaction,buildproject,calltoapply,apply,opencalltracker,competitions,newproject,\
     takenquizzes,pickcandidates,update_finishedopencall,portfolio,experience,closetransaction,\
-    editportfolioproject,about,management,grading,storegrades
+    editportfolioproject,about,management,grading,storegrades,analytics
 from frontend.tasks import reminderforprofiledevs,applyreminder,massmail,submission
 from accounts.views import update_profile
 
@@ -62,6 +62,7 @@ urlpatterns = [
     path('massmail', massmail, name='massmail'),
     path('submission', submission, name='submission'),
     path('portfolio',portfolio,name='portfolio'),
+    path('analytics',analytics,name='analytics'),
 
     # path('api/data/',get_data,name='api-data'),
     path('newproject',newproject,name='newproject'),

@@ -6,7 +6,10 @@ from django.db.models.aggregates import Max
 from django.core.paginator import Paginator
 from collections import Counter
 from django.urls import reverse
+from django.db.models import Count
+from django.db.models.functions import TruncMonth
 import requests
+from datetime import date,datetime,time
 from django.core.mail import send_mail
 import json
 from decouple import config
@@ -344,38 +347,13 @@ def report(request,candidate_id,transaction_id):
 
 
 def onboarddevs(request):
-    for alluser in User.objects.all():
-        if alluser.profile.user_type == 'developer':
-            if alluser.profile.stage == 'complete':
-                if not devs.objects.filter(email=alluser.email).exists():
-                    dev = devs()
-                    dev.email = alluser.email
-                    dev.firstname = alluser.first_name
-                    dev.lastname = alluser.last_name
-                    dev.language = alluser.profile.language
-                    dev.framework = alluser.profile.framework
-                    dev.country = alluser.profile.country
-                    dev.github = alluser.profile.github_repo
-                    dev.linkedin = alluser.profile.linkedin_url
-                    dev.portfolio = alluser.profile.portfolio
-                    dev.save()
+
 
     return redirect(reverse('frontend:seedevs'))
 
 
 def onboardrecruiters(request):
-    for alluser in User.objects.all():
-        if alluser.profile.user_type == 'recruiter':
-            if alluser.profile.stage == 'complete':
-                if not recruiters.objects.filter(email=alluser.email).exists():
-                    recruiter = recruiters()
-                    recruiter.email = alluser.email
-                    recruiter.firstname = alluser.first_name
-                    recruiter.lastname = alluser.last_name
-                    recruiter.company = alluser.profile.company
-                    recruiter.companyurl = alluser.profile.company_url
-                    recruiter.country = alluser.profile.country
-                    recruiter.save()
+
 
     return redirect(reverse('frontend:seerecruiters'))
 
@@ -828,3 +806,87 @@ def storegrades(request,candidate_id,transaction_id):
 
 
     return redirect('frontend:edittransactions', transaction_id)
+def analytics(request):
+    passedtests = TakenQuiz.objects.filter(score__gte=50).annotate(month=TruncMonth('date')).values(
+        'month').annotate(
+        total=Count('student_id'))
+    faileddataset=[]
+    passeddatasets=[]
+    alltestdataset=[]
+    developersdataset=[]
+    recruitersdataset=[]
+    for one in passedtests:
+        timevalue=''
+        totalvalue=''
+        for key, value in one.items():
+            if key =='month':
+                timevalue=value
+            if key =='total':
+                totalvalue=value
+        passeddatasets.append([timevalue.year,timevalue.month,totalvalue])
+    passed=(sorted(passeddatasets))
+
+
+
+
+
+
+
+    failedtests= TakenQuiz.objects.filter(score__lt=50).annotate(month=TruncMonth('date')).values('month').annotate(
+        total=Count('student_id'))
+    for one in failedtests:
+        timevalue=''
+        totalvalue=''
+        for key, value in one.items():
+            if key =='month':
+                timevalue=value
+            if key =='total':
+                totalvalue=value
+        faileddataset.append([timevalue.year,timevalue.month,totalvalue])
+    failed=(sorted(faileddataset))
+
+
+    alltested = TakenQuiz.objects.annotate(month=TruncMonth('date')).values('month').annotate(
+        total=Count('student_id'))
+    for one in alltested:
+        timevalue=''
+        totalvalue=''
+        for key, value in one.items():
+            if key =='month':
+                timevalue=value
+            if key =='total':
+                totalvalue=value
+        alltestdataset.append([timevalue.year,timevalue.month,totalvalue])
+    alltests=(sorted(alltestdataset))
+
+
+    alldevelopers=User.objects.filter(profile__user_type='developer').annotate(month=TruncMonth('date_joined')).values('month').annotate(
+        total=Count('id'))
+    for one in alldevelopers:
+        timevalue=''
+        totalvalue=''
+        for key, value in one.items():
+            if key =='month':
+                timevalue=value
+            if key =='total':
+                totalvalue=value
+        developersdataset.append([timevalue.year,timevalue.month,totalvalue])
+    developers=(sorted(developersdataset))
+
+    allrecruiters = User.objects.filter(profile__user_type='recruiter').annotate(month=TruncMonth('date_joined')).values(
+        'month').annotate(
+        total=Count('id'))
+    for one in allrecruiters:
+        timevalue=''
+        totalvalue=''
+        for key, value in one.items():
+            if key =='month':
+                timevalue=value
+            if key =='total':
+                totalvalue=value
+        recruitersdataset.append([timevalue.year,timevalue.month,totalvalue])
+    recruiters=(sorted(recruitersdataset))
+
+    return render(request, 'frontend/recruiter/analytics.html',{'passed':passed,'failed':failed,'alltests':alltests,'developers':developers,
+                                                                'recruiters':recruiters})
+

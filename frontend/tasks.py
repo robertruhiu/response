@@ -10,7 +10,7 @@ from transactions.models import Applications,Transaction
 from frontend.models import candidatesprojects
 from accounts.models import Profile
 from django.db.models import Count
-
+from django.db.models.functions import TruncMonth
 import csv
 
 @shared_task
@@ -204,16 +204,23 @@ def submission(request):
     #             dev_tags.save()
     #         except Profile.DoesNotExist:
     #             pass
-    fm=[]
-    fromgh=Profile.objects.filter(country='GH').filter(gender='male')
-    for one in fromgh:
-        fm.append(one.user_id)
-    gh=[]
-    ghanain = Student.objects.filter(user_id__in=fm)
-    for tw in ghanain:
-        gh.append(tw.id)
-    ok = set(TakenQuiz.objects.filter(score__gte=50,student_id__in=gh).values_list("student").annotate(freq=Count("student")))
-    print(ok)
+    # fm=[]
+    # fromgh=Profile.objects.filter(country='GH').filter(gender='male')
+    # for one in fromgh:
+    #     fm.append(one.user_id)
+    # gh=[]
+    # ghanain = Student.objects.filter(user_id__in=fm)
+    # for tw in ghanain:
+    #     gh.append(tw.id)
+    # ok = set(TakenQuiz.objects.filter(score__gte=50,student_id__in=gh).values_list("student").annotate(freq=Count("student")))
+    # print(ok)
+    passedstudents = TakenQuiz.objects.filter(score__gte=50).annotate(month=TruncMonth('date')).values('month').annotate(
+        total=Count('student_id'))
+    students =TakenQuiz.objects.filter(score__lt=50).annotate(month=TruncMonth('date')).values('month').annotate(total=Count('student_id'))
+    for one in passedstudents:
+        print(one.items())
+
+
 
     return render(request, 'frontend/recruiter/recruiter.html')
 
