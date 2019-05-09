@@ -37,40 +37,40 @@
                 <hr>
                 {{ job.description }}
                 <br>
-                {% if applied_jobs %}
-                        {% for app in applied_jobs %}
-
-                            {% if job.id == app.job_id and app.selected %}
-                                <span class="badge btn-primary mt-2" style="background-color: #b627a1">Picked for next stage</span>
-                                {% elif job.id == app.job_id and app.selected == False %}
-                                <span class="badge btn-primary mt-2" style="background-color: #28bbbb">Applied</span>
-                                {% else %}
-                                <form action="{% url 'marketplace:apply_for_job' job.id %}" method="post" class="form">
-                                    {% csrf_token %}
-                                    <a style="color:white" class="btn btn-primary mt-3">Apply</a >
-                                </form>
-                            {% endif %}
-                        {% endfor %}
-                    {% else %}
-                    <form action="{% url 'marketplace:apply_for_job' job.id %}" method="post" class="form">
-                        {% csrf_token %}
-                        {% if request.user.is_authenticated %}
-                        {% if request.user.profile.user_type == 'developer' %}
-                            <input class="btn theme--dark primary mt-3 " style="border-radius: 0; margin: auto; color: white" type="submit" value="Apply">
-                        {% else %}
-                            <a style="color:white" onclick="alert('Only available to Developer profiles')" class="btn btn-primary mt-3" >
-                                Apply
-                            </a>
-                        {% endif %}
-                            {% else %}
-                            <a style="color:white" onclick="alert('Please login to continue')" class="btn btn-warning mt-3" >
-                                Apply
-                            </a>
-
-                            {% endif %}
-                    </form>
-
-                    {% endif %}
+{#                {% if applied_jobs %}#}
+{#                        {% for app in applied_jobs %}#}
+{##}
+{#                            {% if job.id == app.job_id and app.selected %}#}
+{#                                <span class="badge btn-primary mt-2" style="background-color: #b627a1">Picked for next stage</span>#}
+{#                                {% elif job.id == app.job_id and app.selected == False %}#}
+{#                                <span class="badge btn-primary mt-2" style="background-color: #28bbbb">Applied</span>#}
+{#                                {% else %}#}
+{#                                <form action="{% url 'marketplace:apply_for_job' job.id %}" method="post" class="form">#}
+{#                                    {% csrf_token %}#}
+{#                                    <a style="color:white" class="btn btn-primary mt-3">Apply</a >#}
+{#                                </form>#}
+{#                            {% endif %}#}
+{#                        {% endfor %}#}
+{#                    {% else %}#}
+{#                    <form action="{% url 'marketplace:apply_for_job' job.id %}" method="post" class="form">#}
+{#                        {% csrf_token %}#}
+{#                        {% if request.user.is_authenticated %}#}
+{#                        {% if request.user.profile.user_type == 'developer' %}#}
+{#                            <input class="btn theme--dark primary mt-3 " style="border-radius: 0; margin: auto; color: white" type="submit" value="Apply">#}
+{#                        {% else %}#}
+{#                            <a style="color:white" onclick="alert('Only available to Developer profiles')" class="btn btn-primary mt-3" >#}
+{#                                Apply#}
+{#                            </a>#}
+{#                        {% endif %}#}
+{#                            {% else %}#}
+{#                            <a style="color:white" onclick="alert('Please login to continue')" class="btn btn-warning mt-3" >#}
+{#                                Apply#}
+{#                            </a>#}
+{##}
+{#                            {% endif %}#}
+{#                    </form>#}
+{##}
+{#                    {% endif %}#}
 
                 </div>
 
