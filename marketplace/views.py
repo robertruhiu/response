@@ -26,7 +26,7 @@ from accounts.models import Profile
 
 
 def job_list(request):
-    jobs = Job.objects.all().order_by('-created')
+    jobs = Job.objects.all().order_by('-updated')
     applied_jobs = ()
     if request.user.is_authenticated:
         developer = request.user
