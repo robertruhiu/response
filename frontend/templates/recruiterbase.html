@@ -10,28 +10,36 @@
     <meta name="theme-color" content="#272339">
     <title>{% block title %}
 
-        {% endblock %} | Codeln</title>
+    {% endblock %} | Codeln</title>
 
     {% bootstrap_css %}
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
 
-    <link rel="stylesheet" href="{% static 'frontend/css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'frontend/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'frontend/css/home.css' %}">
     <link rel="stylesheet" href="{% static 'frontend/css/stay.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
 
 
     {% block css %}
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130019198-1"></script>
 
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        <script>
+            window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'UA-130019198-1');
-</script>
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
+            gtag('js', new Date());
+
+            gtag('config', 'UA-130019198-1');
+        </script>
 
 
 
@@ -40,100 +48,111 @@
 <body>
 <div class="container-fluid">
     <div class="row" style="height: 50vmax;margin-left: 0;margin-right: 0">
-    <nav class="col-md-2 d-none d-lg-block col-lg-2 flex-column sidebar col-xl-2" style="background-color: #332d40">
-         <div class="row" style="width: 100%">
-             <div class="col-lg-12">
+        <nav class="col-md-2 d-none d-lg-block col-lg-2 flex-column sidebar col-xl-2" style="background-color: #332d40">
+            <div class="row" style="width: 100%">
+                <div class="col-lg-12">
 
-                 <a class="brandhome codelnlogo1" href="/home">
-                     <img src="{%static 'frontend/images/logo/cd_ln_wo.png' %}" class="img-fluid ml-3  mt-2" width="120" alt="">
-                 </a>
-             </div>
-         </div>
+                    <a class="brandhome codelnlogo1" href="/home">
+                        <img src="{% static 'frontend/images/logo/cd_ln_wo.png' %}" class="img-fluid ml-3  mt-2"
+                             width="120" alt="">
+                    </a>
+                </div>
+            </div>
 
-    {% if request.user.profile.stage == 'complete' %}
+            {% if request.user.profile.stage == 'complete' %}
 
-            <ul class="nav  mb-2 ">
-                <li class="nav-item" >
+                <ul class="nav  mb-2 ">
+                    <li class="nav-item">
                         <a class="nav-link disabled" style="color:#FFFFFF;" href="/">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-home">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
                             Dashboard <span class="sr-only">(current)</span>
                         </a>
                     </li>
-              <li class="nav-item">
-                <a class="nav-link" style="color: white" href="{% url 'frontend:my-activity' %}">
-                    <span data-feather="edit"></span>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" href="{% url 'frontend:my-activity' %}">
+                            <span data-feather="edit"></span>
                             Ongoing tests
 
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" style="color: white" href="{% url 'projects:categories' %}">
-                  <span data-feather="book"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" href="{% url 'projects:categories' %}">
+                            <span data-feather="book"></span>
                             Create new test
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" style="color: white" href="{% url 'transactions:sourcing' %}">
-                     <span data-feather="users"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" href="{% url 'transactions:sourcing' %}">
+                            <span data-feather="users"></span>
                             Source Candidates
 
-                </a>
-              </li>
-                {% if request.user.is_staff %}
+                        </a>
+                    </li>
+                    {% if request.user.is_staff %}
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: white" href="{% url 'frontend:management' %}">
+                                <span data-feather="hexagon"></span>
+                                Admin
+
+                            </a>
+                        </li>
+
+
+                    {% endif %}
+
+                </ul>
+            {% else %}
+                <ul class="nav  mb-2 ">
                     <li class="nav-item">
-                <a class="nav-link" style="color: white" href="{% url 'frontend:management' %}">
-                     <span data-feather="hexagon"></span>
-                            Admin
-
-                </a>
-              </li>
-
-
-                {% endif %}
-
-            </ul>
-        {% else %}
-        <ul class="nav  mb-2 ">
-                <li class="nav-item" >
                         <a class="nav-link disabled" style="color:#FFFFFF;" href="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-home">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
                             Dashboard <span class="sr-only">(current)</span>
                         </a>
                     </li>
-              <li class="nav-item">
-                <a class="nav-link" style="color: white" href="">
-                    <span data-feather="edit"></span>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" href="">
+                            <span data-feather="edit"></span>
                             Ongoing tests
 
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" style="color: white" href="">
-                  <span data-feather="book"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" href="">
+                            <span data-feather="book"></span>
                             Create new test
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" style="color: white" href="">
-                     <span data-feather="users"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" href="">
+                            <span data-feather="users"></span>
                             Source Candidates
 
-                </a>
-              </li>
-                {% if request.user.is_staff %}
-                    <li class="nav-item">
-                <a class="nav-link" style="color: white" href="">
-                     <span data-feather="hexagon"></span>
-                            Admin
+                        </a>
+                    </li>
+                    {% if request.user.is_staff %}
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: white" href="">
+                                <span data-feather="hexagon"></span>
+                                Admin
 
-                </a>
-              </li>
+                            </a>
+                        </li>
 
 
-                {% endif %}
+                    {% endif %}
 
-            </ul>
-    {% endif %}
+                </ul>
+            {% endif %}
 
 
         </nav>
@@ -146,84 +165,94 @@
 </div>
 
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+{% bootstrap_javascript %}
+<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        {% bootstrap_javascript %}
-        <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
-        <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-        <script>
-            feather.replace()
-        </script>
-
-        <script>
-            $(document).ready(function(e){
-                $(".img-check").click(function(){
-                    $(this).toggleClass("check");
-                });
-            });
-        </script>
 <script>
-{% block jquery %}
-var endpoint = '/api/data/'
-var defaultData = []
-var labels = [];
-$.ajax({
-    method: "GET",
-    url: endpoint,
-    success: function(data){
-        labels = data.labels
-        defaultData = data.data
-        setChart()
-    },
-    error: function(error_data){
-        console.log("error")
-        console.log(error_data)
-    }
-})
-function setChart(){
-    var ctx = document.getElementById("myChart");
-    var ctx2 = document.getElementById("myChart2");
-    Chart.defaults.scale.gridLines.display = false;
-    var myChart = new Chart(ctx2, {
-    type: 'doughnut',
-    data: {
-        labels: labels,
-        datasets: [{
-            label: '# languages in use',
-            data: defaultData,
-            backgroundColor: [
-                '#FF1744',
-                '#D500F9',
-                '#651FFF',
-                '#DD2C00',
-                '#0be881',
-                '#4bcffa',
-                '#0091EA',
-                '#FF1744'
-            ],
+    feather.replace()
+</script>
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable();
+    $('#myDevs').DataTable();
+    $('#Takenquizzes').DataTable();
+    $('#Allquizzes').DataTable();
+    $('#Transactions').DataTable();
+} );
+</script>
+<script>
+    $(document).ready(function (e) {
+        $(".img-check").click(function () {
+            $(this).toggleClass("check");
+        });
+    });
+</script>
+<script>
+    {% block jquery %}
+        var endpoint = '/api/data/'
+        var defaultData = []
+        var labels = [];
+        $.ajax({
+            method: "GET",
+            url: endpoint,
+            success: function (data) {
+                labels = data.labels
+                defaultData = data.data
+                setChart()
+            },
+            error: function (error_data) {
+                console.log("error")
+                console.log(error_data)
+            }
+        })
+        function setChart() {
+            var ctx = document.getElementById("myChart");
+            var ctx2 = document.getElementById("myChart2");
+            Chart.defaults.scale.gridLines.display = false;
+            var myChart = new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '# languages in use',
+                        data: defaultData,
+                        backgroundColor: [
+                            '#FF1744',
+                            '#D500F9',
+                            '#651FFF',
+                            '#DD2C00',
+                            '#0be881',
+                            '#4bcffa',
+                            '#0091EA',
+                            '#FF1744'
+                        ],
 
-        }]
-    },
-    options: {
+                    }]
+                },
+                options: {},
 
-    },
+            });
 
-});
-
-}
-// var ctx = document.getElementById("myChart");
-{% endblock %}
+        }
+        // var ctx = document.getElementById("myChart");
+    {% endblock %}
 </script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/jdenticon@2.1.1" async>
 </script>
-        {% block script %}
+{% block script %}
 
-        {% endblock %}
+{% endblock %}
 </body>
 </html>
