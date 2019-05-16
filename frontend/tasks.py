@@ -51,13 +51,12 @@ def applyreminder(request):
 
 
 def massmail(request):
-    angular = Profile.objects.filter(framework__contains='angular').filter(country='NG')
-    react = Profile.objects.filter(framework__contains='react').filter(country='NG')
+    angular = Profile.objects.filter(framework__icontains='angular').filter(country='GH')
+    react = Profile.objects.filter(framework__icontains='react').filter(country='NG')
     mongo = Profile.objects.filter(framework__contains='Node').filter(country='NG')
     python = Profile.objects.filter(language__contains='python').filter(country='NG')
     golang = Profile.objects.filter(language__contains='golang').filter(country='NG')
-    li=[
-]
+    li=[]
     newset = set(li)
     new =list(newset)
     me = []
@@ -65,20 +64,18 @@ def massmail(request):
     #     li.append(can.user_id)
     # for can in react:
     #     li.append(can.user_id)
-    for can in mongo:
-        li.append(can.user_id)
+    for can in angular:
+        li.append(can.user)
     # for can in python:
     #     li.append(can.user_id)
     # for can in golang:
     #     li.append(can.user_id)
     # myset =set(li)
     # newlist = list(myset)
-    nn =[]
-    for m in new:
-        casc = User.objects.get(id=m)
-        nn.append(casc.email)
-    for jsk in nn:
-        print(jsk)
+
+    for jsk in li:
+        print(jsk.first_name,jsk.last_name,jsk.email)
+
 
 
     return render(request, 'frontend/recruiter/recruiter.html')
@@ -214,11 +211,11 @@ def submission(request):
     #     gh.append(tw.id)
     # ok = set(TakenQuiz.objects.filter(score__gte=50,student_id__in=gh).values_list("student").annotate(freq=Count("student")))
     # print(ok)
-    passedstudents = TakenQuiz.objects.filter(score__gte=50).annotate(month=TruncMonth('date')).values('month').annotate(
-        total=Count('student_id'))
-    students =TakenQuiz.objects.filter(score__lt=50).annotate(month=TruncMonth('date')).values('month').annotate(total=Count('student_id'))
-    for one in passedstudents:
-        print(one.items())
+    # passedstudents = TakenQuiz.objects.filter(score__gte=50).annotate(month=TruncMonth('date')).values('month').annotate(
+    #     total=Count('student_id'))
+    # students =TakenQuiz.objects.filter(score__lt=50).annotate(month=TruncMonth('date')).values('month').annotate(total=Count('student_id'))
+    # for one in passedstudents:
+    #     print(one.items())
 
 
 

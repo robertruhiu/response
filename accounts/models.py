@@ -10,7 +10,7 @@ from taggit.managers import TaggableManager
 import datetime
 from django.core.cache import cache
 from separatedvaluesfield.models import SeparatedValuesField
-
+from cloudinary.models import CloudinaryField
 
 class Profile(models.Model):
     USER_TYPE_CHOICES = (
@@ -69,6 +69,7 @@ class Profile(models.Model):
     industry = models.CharField(max_length=80, null=True, blank=True)
     company_url = models.CharField(max_length=500, null=True, blank=True)
     tags = TaggableManager()
+    file = CloudinaryField(resource_type="raw", default=False)
 
     def __str__(self):
         return self.user.username

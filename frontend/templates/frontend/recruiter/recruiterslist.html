@@ -104,16 +104,16 @@
             {% for pay in payers %}
                 <tr>
                     <td> {{ forloop.counter }} </td>
-                    <td>{{ pay.firstname }} {{ pay.lastname }}</td>
+                    <td>{{ pay.first_name }} {{ pay.last_name }}</td>
                     <td>{{ pay.email }}</td>
                     <td>{{ pay.profile.company }}</td>
                     {% if pay.profile.companyurl %}
-                        <td>{{ pay.profile.companyurl }}</td>
+                        <td>{{ pay.profile.company_url }}</td>
                     {% else %}
                         <td></td>
                     {% endif %}
 
-                    <td>{{ pay.country.name }}</td>
+                    <td>{{ pay.profile.country.name }}</td>
                     <td>{{ pay.date_joined }}</td>
 
                 </tr>

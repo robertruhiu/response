@@ -9,7 +9,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.core import mail
@@ -17,7 +17,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
 from classroom.models import Student, TakenQuiz
-from frontend.form import Portfolio_form, Experience_Form
+from frontend.form import Portfolio_form, Experience_Form,CvForm
 from frontend.models import Experience, Portfolio
 from marketplace.filters import UserFilter
 from .models import Job, JobApplication, DevRequest
@@ -26,12 +26,46 @@ from accounts.models import Profile
 
 
 def job_list(request):
-    jobs = Job.objects.all().order_by('-updated')
-    applied_jobs = ()
     if request.user.is_authenticated:
+
+        applied_list = []
+        alljoblist = []
+        alljobs = Job.objects.all().order_by('-updated')
+
+        for one_job in alljobs:
+            alljoblist.append(one_job.id)
         developer = request.user
         applied_jobs = JobApplication.objects.filter(candidate=developer)
-    return render(request, 'frontend/jobs.html', {'jobs': jobs, 'applied_jobs': applied_jobs})
+        for one_applied in applied_jobs:
+            applied_list.append(one_applied.job_id)
+        availablejobs_list=list(set(alljoblist)-set(applied_list))
+        availablejobs = Job.objects.filter(pk__in=availablejobs_list)
+
+        instance = get_object_or_404(Profile, user_id=request.user.id)
+        unsigned = request.GET.get("unsigned") == "true"
+        context = dict(
+
+            backend_form=CvForm(),
+            unsigned=unsigned,
+            jobs=availablejobs,
+            applied_jobs=applied_jobs,
+
+
+
+        )
+        if request.method == 'POST':
+            # Only backend upload should be posting here
+            form = CvForm(request.POST or None, request.FILES, instance=instance)
+            context['posted'] = form.instance
+            if form.is_valid():
+                form.save()
+    else:
+        jobs = Job.objects.all().order_by('-updated')
+        context = dict(
+            jobs=jobs
+
+        )
+    return render(request, 'frontend/jobs.html', context)
 
 @login_required
 def job_details(request, id):
@@ -91,14 +125,16 @@ def post_job(request):
 
 @login_required
 def apply_for_job(request, job_id):
+    job=Job.objects.get(id=job_id)
     if request.method == 'POST':
-        # subject = 'Job Application received'
-        # html_message = render_to_string('invitations/email/jobapplications.html',
-        #                                 {'dev': request.user})
-        # plain_message = strip_tags(html_message)
-        # from_email = 'codeln@codeln.com'
-        # to = request.user.email
-        # mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+
+        subject = job.title + 'Application sent by' + request.user.first_name + request.user.last_name
+        html_message = render_to_string('invitations/email/jobapplications.html',
+                                        {'dev': request.user,'job':job})
+        plain_message = strip_tags(html_message)
+        from_email = 'codeln@codeln.com'
+        to = 'jobs@codeln.com'
+        mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
         job = Job.objects.get(id=job_id)
         newapply = JobApplication(candidate=request.user, job=job)
         newapply.save()

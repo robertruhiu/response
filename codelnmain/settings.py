@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'classroom',
     'blog',
     'django.contrib.admindocs',
+    'cloudinary_storage',
+    'cloudinary',
 
 
 
@@ -262,3 +264,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 TAGGIT_CASE_INSENSITIVE = True
 if ENVIRONMENT != 'local':
     pass
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
+
+CLOUDINARY = {
+  'cloud_name': 'dwtvwjhn3',
+  'api_key': '748889632162181',
+  'api_secret': 'ecbWIeK33ka7-1wyy9TiB6pVwAw',
+}
+

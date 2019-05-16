@@ -6,6 +6,7 @@ from frontend.models import candidatesprojects,Portfolio,Experience
 from projects.models import Framework, Project
 from django_countries.fields import CountryField
 from accounts.models import Profile
+from cloudinary.forms import  CloudinaryFileField
 
 
 class Projectinvite(forms.ModelForm):
@@ -111,3 +112,11 @@ class EditProjectForm(forms.ModelForm):
                   'projectimage5', 'projectimage6', 'projectimage7', 'projectimage8', 'projectimage9', 'projectimage10',
                   'requirement1', 'requirement2', 'requirement3', 'requirement4', 'requirement5', 'requirement6',
                   'requirement7', 'requirement8', 'requirement9', 'requirement10', 'framework','devtype','projecttype','owner','brief','hasvideo']
+class CvForm(ModelForm):
+    file = CloudinaryFileField(
+        options={
+            'resource_type': "raw"
+        })
+    class Meta:
+        model = Profile
+        fields=['file']
