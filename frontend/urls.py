@@ -64,7 +64,6 @@ urlpatterns = [
     path('portfolio',portfolio,name='portfolio'),
     path('analytics',analytics,name='analytics'),
 
-    # path('api/data/',get_data,name='api-data'),
     path('newproject',newproject,name='newproject'),
     path('experience',experience,name='experience'),
     path('editportfolioproject/<int:project_id>',editportfolioproject,name='editportfolioproject'),
