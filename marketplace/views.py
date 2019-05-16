@@ -73,10 +73,10 @@ def job_details(request, id):
 
     selected_candidates = []
     applicants = []
-    selected_devs = JobApplication.objects.filter(selected=True).all()
+    selected_devs = JobApplication.objects.filter(selected=True,job=job).all()
     for selectdev in selected_devs:
         selected_candidates.append(selectdev.candidate)
-    all_devs = JobApplication.objects.filter(selected=False).all()
+    all_devs = JobApplication.objects.filter(selected=False,job=job).all()
     for alldev in all_devs:
         applicants.append(alldev.candidate)
 
