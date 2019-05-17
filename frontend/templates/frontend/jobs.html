@@ -114,8 +114,8 @@
                                     </a>
                                 {% endif %}
                             {% else %}
-                                <a style="color:white" onclick="alert('Please login to continue')"
-                                   class="btn btn-warning mt-3">
+                                <a style="color:white" href="{% url 'marketplace:apply_for_job' job.id %}"
+                                   class="btn btn-primary mt-3">
                                     Apply
                                 </a>
 
