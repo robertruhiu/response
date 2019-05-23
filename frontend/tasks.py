@@ -216,6 +216,11 @@ def submission(request):
     # students =TakenQuiz.objects.filter(score__lt=50).annotate(month=TruncMonth('date')).values('month').annotate(total=Count('student_id'))
     # for one in passedstudents:
     #     print(one.items())
+    allusers=Profile.objects.all()
+    for oneuser in allusers:
+        instance = get_object_or_404(Profile, user_id=oneuser.user_id)
+        instance.file=''
+        instance.save()
 
 
 

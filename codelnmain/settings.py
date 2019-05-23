@@ -26,7 +26,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = config('SECRET_KEY', default='SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ENVIRONMENT = config('ENVIRONMENT', default='local')
 
@@ -71,6 +71,8 @@ INSTALLED_APPS = [
     'django_countries',
     'phonenumber_field',
     'celery',
+    'ckeditor',
+    'ckeditor_uploader',
 
 
 
@@ -127,6 +129,16 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'dfrqm5mpfa2bvr',
+#         'USER': 'lhhjslensqrmsl',
+#         'PASSWORD': '45a798f60492d72aa0d8017b48816b10a184a5f6c93494e9253730be18eeeb49',
+#         'HOST': 'ec2-79-125-124-30.eu-west-1.compute.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -272,4 +284,21 @@ CLOUDINARY = {
   'api_key': '748889632162181',
   'api_secret': 'ecbWIeK33ka7-1wyy9TiB6pVwAw',
 }
+CLOUDINARY_STORAGE={
 
+    'CLOUD_NAME': 'dwtvwjhn3',
+    'API_KEY': '748889632162181',
+    'API_SECRET': 'ecbWIeK33ka7-1wyy9TiB6pVwAw',
+
+}
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+
+    },
+}

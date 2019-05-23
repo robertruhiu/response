@@ -88,9 +88,23 @@ h1 {font-size:1rem;}
   background-size: cover;
 
 }
-.wrap{    max-width: 1250px;
-
+.wrap{
+    max-width: 1250px;
     margin: 0 auto;
+    margin-top: 8%;
     background: #fff;
-    -webkit-box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1);
-    box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1);}
+    }
+.wrap2{
+    max-width: 1250px;
+    margin: 0 auto;
+
+    background: #fff;
+    }
+.blog-image {
+
+  height: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}

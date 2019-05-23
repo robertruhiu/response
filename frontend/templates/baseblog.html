@@ -40,10 +40,10 @@
 
     {% endblock %}
 </head>
-<body style="background-image: url({% static "frontend/images/ill/background.webp" %})">
-<nav class="navbar navbar-expand-md fixed-top  nav-container">
+<body>
+<nav class="navbar navbar-expand-md fixed-top  " style="background-color: #332d40">
     <a class="navbar-brand1" href="/home">
-        <img src="../static/frontend/images/logo/cd_ln_wo.png" class="img-fluid ml-4  mt-2" width="120" alt="">
+        <img src="../static/frontend/images/logo/logo.svg" class="img-fluid ml-4  mt-2" width="120" alt="">
     </a>
 
     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -104,19 +104,13 @@
 
 {% block content %}
 
-{% endblock %}
 
 
 
 
 
 
-
-
-
-
-
-
+    {% block script %}
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -132,27 +126,8 @@
 <script>
     feather.replace()
 </script>
-<script>
-    $(document).ready(function () {
-
-        $(window).scroll(function () {
-
-            var height = $('.nav-container').height();
-            var scrollTop = $(window).scrollTop();
-
-            if (scrollTop >= height - 38) {
-                $('.nav-container').addClass('solid-nav');
-            } else {
-                $('.nav-container').removeClass('solid-nav');
-            }
-
-        });
-    });
-</script>
-
-
-{% block script %}
-
 {% endblock %}
+{% endblock %}
+
 </body>
 </html>

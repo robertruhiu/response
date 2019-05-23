@@ -12,34 +12,13 @@ from taggit.models import Tag
 from django.db.models import Count
 
 
-class PostListView(ListView):
-    """a class-based view to display the list of posts."""
-    queryset = Post.published.all()  # object list
-    context_object_name = 'posts'  # context variable for query results, defaults to object_list
-    paginate_by = 1  # number of posts per page
-    template_name = 'blog/post/list.html'  # rendering template
+def post_list(request):
+
+    posts = Post.published.all()
 
 
-def post_list(request, tag_slug=None):
-    """a view to display the list of posts."""
-    object_list = Post.published.all()
-    tag = None
 
-    if tag_slug:
-        tag = get_object_or_404(Tag, slug=tag_slug)
-        object_list = object_list.filter(tags__in=[tag])
-
-    paginator = Paginator(object_list, 3)  # number of posts per page
-    page = request.GET.get('page')
-
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        posts = paginator.page(1)  # deliver first page if page is not an integer
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)  # deliver last page if page is out of range
-
-    return render(request, 'blog/post/list.html', {'page': page, 'posts': posts, 'tag': tag})
+    return render(request, 'blog/post/list.html', { 'posts': posts})
 
 
 def post_detail(request, post_id):
@@ -68,13 +47,11 @@ def post_detail(request, post_id):
     else:
         comment_form = CommentForm()
 
-    # List of similar posts
-    post_tags_ids = post.tags.values_list('id', flat=True)
-    similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
-    similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags', '-publish')[:4]
+
+
 
     return render(request, 'blog/post/detail.html',
-                  {'post': post, 'comments': comments, 'comment_form': comment_form, 'similar_posts': similar_posts})
+                  {'post': post, 'comments': comments, 'comment_form': comment_form, })
 
 
 @login_required
@@ -90,12 +67,10 @@ def create_or_edit_post(request, _id=None):
 
     if request.POST and post_form.is_valid():
         new_post = post_form.save(commit=False)
-        new_post.slug = slugify(new_post.title)
         new_post.save()
-
-        tags = post_form.cleaned_data['tags']
-        new_post.tags.add(*tags)
 
         return HttpResponseRedirect(reverse('blog:post_list'))
 
     return render(request, 'blog/post/create.html', {'post_form': post_form})
+
+

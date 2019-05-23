@@ -35,7 +35,9 @@ urlpatterns = [
     path('', include('classroom.urls')),
     path('invitations/', include('invitations.urls', namespace='invitations')),
     path('marketplace/', include('marketplace.urls', namespace='marketplace')),
-    path('blog/',include('blog.urls',namespace='blog'))
+    path('blog/',include('blog.urls',namespace='blog')),
+    path('martor/', include('martor.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 
 ]
 

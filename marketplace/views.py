@@ -136,6 +136,13 @@ def apply_for_job(request, job_id):
         to = 'jobs@codeln.com'
         mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
         job = Job.objects.get(id=job_id)
+        subject = 'Application received'
+        html_message = render_to_string('invitations/email/applynotifiy.html',
+                                        {'dev': request.user, 'job': job})
+        plain_message = strip_tags(html_message)
+        from_email = 'codeln@codeln.com'
+        to = [request.user.email]
+        mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
         newapply = JobApplication(candidate=request.user, job=job)
         newapply.save()
         return redirect(reverse('marketplace:job_list'))
@@ -159,6 +166,13 @@ def manage_posted_jobs(request):
 def pick_candidate(request, job_id, dev_id):
     job = Job.objects.get(id=job_id)
     dev = User.objects.get(id=dev_id)
+    subject = 'Shortlisted for job'
+    html_message = render_to_string('invitations/email/accepted.html',
+                                    {'dev': dev, 'job': job})
+    plain_message = strip_tags(html_message)
+    from_email = 'codeln@codeln.com'
+    to = [dev.email]
+    mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
     newpick = JobApplication(job=job, candidate=dev, selected=True)
     newpick.save()
 
@@ -168,6 +182,13 @@ def pick_candidate(request, job_id, dev_id):
 def select_candidate(request, job_id, dev_id):
     candidate = User.objects.get(id=dev_id)
     job = JobApplication.objects.filter(job_id=job_id).filter(candidate=candidate).get()
+    subject = 'Shortlisted for job'
+    html_message = render_to_string('invitations/email/accepted.html',
+                                    {'dev': candidate, 'job': job})
+    plain_message = strip_tags(html_message)
+    from_email = 'codeln@codeln.com'
+    to = [candidate.email]
+    mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
     job.selected = True
     job.save()
     return redirect('marketplace:job_details', job_id)

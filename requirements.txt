@@ -44,7 +44,7 @@ jsonpickle==1.0
 keyring==10.6.0
 keyrings.alt==3.0
 kombu==4.2.1
-Markdown==3.0.1
+Markdown>=3.0
 mock==3.0.5
 oauthlib==2.1.0
 paramiko==2.4.2

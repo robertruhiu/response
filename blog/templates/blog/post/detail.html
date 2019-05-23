@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'baseblog.html' %}
 {% load bootstrap4 %}
 {% load static %}
 {% load blog_tags %}
@@ -6,62 +6,110 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
-    <h3 style="color: #007bff; font-weight: bold">{{ post.title }}</h3>
+    <div class="jumbotron blog-image"
+         style="height:25vmax;background-image: linear-gradient(rgba(0, 0, 0, 0.13), rgba(0, 0, 0, 0.25)), url({{ post.blogsplashimage }});border-radius: 0">
+        <h1 class="display-4  mt-5 text-center" style="color: white">{{ post.title }}</h1>
 
-    <p class="date">
-        Published {{ post.publish }} by {{ post.author }}
-    </p>
+    </div>
 
-    <p class="tags">
-        Tags:
-        {% for tag in post.tags.all %}
-            <a href="{% url "blog:post_list_by_tag" tag.slug %}">
-                {{ tag.name }}
-            </a>
-            {% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    </p>
+    <main class="container-fluid mb-2">
 
-    {{ post.body|safe|markdown }}
+        <div class="wrap2 ">
 
-    <h6 style="font-weight: bold">Similar posts</h6>
-    {% for post in similar_posts %}
-        <p>
-            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-        </p>
-    {% empty %}
-        <p>There are no similar posts yet.</p>
-    {% endfor %}
 
-    {% with comments.count as total_comments %}
-        <h6 style="font-weight: bold">
-            {{ total_comments }} comment{{ total_comments|pluralize }}
-        </h6>
-    {% endwith %}
+            <div class="container-fluid" >
+                <div class="wrap2 col-lg-8 mx-auto shadow-lg p-3">
+                    {{ post.body|safe }}
 
-    {% for comment in comments %}
-        <div class="comment">
-            <p class="info">
-                Comment {{ forloop.counter }} by {{ comment.name }}
-                {{ comment.created }}
-            </p>
-            {{ comment.body|linebreaks }}
+
+                </div>
+               <h6 class="col-lg-6 mx-auto" style="font-weight: bold">
+                        {% with comments.count as total_comments %}
+                            {{ total_comments }} comment{{ total_comments|pluralize }}
+                            </h6>
+                        {% endwith %}
+
+                    {% for comment in comments %}
+                        <div class="comment col-lg-6 mx-auto">
+                            <p class="info">
+                                Comment {{ forloop.counter }} by {{ comment.name }}
+                                {{ comment.created }}
+                            </p>
+                            {{ comment.body|linebreaks }}
+                        </div>
+                    {% empty %}
+                        <p class="col-lg-6 mx-auto">There are no comments yet.</p>
+                    {% endfor %}
+
+
+                    {% if new_comment %}
+                        <h6 class="mx-auto text-center">Your comment has been added.</h6>
+                    {% else %}
+                        <h6 class="mx-auto text-center" style="font-weight: bold; margin-top: 20px">Add a new
+                            comment</h6>
+                        <form action="." method="post" class="col-lg-6 mx-auto">
+                            {% csrf_token %}
+                            {% bootstrap_form comment_form %}
+
+                            <button class="btn btn-primary">Add comment</button>
+                        </form>
+                    {% endif %}
+            </div>
+
+
         </div>
-    {% empty %}
-        <p>There are no comments yet.</p>
-    {% endfor %}
+    </main>
+
+    <footer class="footer jumbotron jumbofoot">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-6 col-md">
+                    <h5>Menu</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="/pricing">Pricing</a></li>
+                        <li><a class="text-muted" href="/accounts/login/">Testing</a></li>
+                        <li><a class="text-muted" href="{% url 'transactions:sourcing' %}">Sourcing</a></li>
+                        <li><a class="text-muted" href="/dev">Developer</a></li>
+
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Company</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="/privacy">Privacy</a></li>
+                        <li><a class="text-muted" href="/terms">Terms</a></li>
 
 
-    {% if new_comment %}
-        <h6>Your comment has been added.</h6>
-    {% else %}
-        <h6 style="font-weight: bold; margin-top: 20px">Add a new comment</h6>
-        <form action="." method="post">
-        {% csrf_token %}
-            {% bootstrap_form comment_form %}
+                    </ul>
+                </div>
+                <div class="col col-md">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled  text-small">
+                        <li>
+                            <a href="mailto:info@codeln.com" target="_top">
+                                <i><span data-feather="mail"></span></i>
+                            </a>
+                        <li>
+                            <a class="text-muted" href="https://www.linkedin.com/company/codeln/" target="_blank">
+                                <i><span data-feather="linkedin"></span></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-muted" href="https://twitter.com/Codeln_spaces" target="_blank">
+                                <i><span data-feather="twitter"></span></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-muted" href="https://www.facebook.com/CodelnSpaces/" target="_blank">
+                                <i><span data-feather="facebook"></span></i>
+                            </a>
+                        </li>
 
-            <button class="btn btn-primary">Add comment</button>
-        </form>
-    {% endif %}
+                    </ul>
+                </div>
 
+            </div>
+        </div>
+    </footer>
 {% endblock %}
