@@ -108,3 +108,7 @@ h1 {font-size:1rem;}
   background-size: cover;
   position: relative;
 }
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}

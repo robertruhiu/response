@@ -61,7 +61,7 @@
 
 
                         <hr>
-                        {{ app.job.description }}
+                        {{ app.job.description|safe }}
                         <br>
                         {% if app.selected %}
                             <span class="badge btn-primary mt-2"
@@ -91,8 +91,8 @@
 
 
                         <hr>
-                        {{ job.description }}
-                        <br>
+                        {{ job.description|safe }}
+
                         <form action="{% url 'marketplace:apply_for_job' job.id %}" method="post" class="form">
                             {% csrf_token %}
                             {% if request.user.is_authenticated %}

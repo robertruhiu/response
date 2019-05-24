@@ -101,9 +101,9 @@
                     </div>
                 </div>
                 <div class="row">
-                     <div class="col-lg-4 col-md-6 col-sm-6 ">
+                     <div class="col-lg-12 col-md-6 col-sm-6 ">
                         <label>Body</label>
-                        {% bootstrap_field post_form.body placeholder=False show_label=False %}
+                        <textarea name="body" id="textarea" ></textarea>
                     </div>
                 </div>
 
@@ -118,4 +118,19 @@
 
 
     </main>
+
+
+{% endblock %}
+ {% block script %}
+<script>
+    $(document).ready( function () {
+    var body = {{ post | safe }};
+    console.log(body)
+    $('#textarea').each(function () {
+    var editor = new Jodit(this);
+    editor.value = body
+});
+} );
+</script>
+
 {% endblock %}

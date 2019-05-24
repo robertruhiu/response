@@ -132,7 +132,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Job Description</label>
-                    {% bootstrap_field job_form.description placeholder=False show_label=False %}
+                    <textarea name="description" id="textarea" ></textarea>
 
                 </div>
                 <div class="d-flex justify-content-center">
@@ -145,4 +145,17 @@
 
 
     </main>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready( function () {
+    var description = {{ job | safe }};
+    $('#textarea').each(function () {
+    var editor = new Jodit(this);
+    editor.value = description
+});
+} );
+</script>
+
 {% endblock %}

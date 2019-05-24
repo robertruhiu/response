@@ -10,7 +10,7 @@ class CommentForm(forms.ModelForm):
 
 
 class PostForm(forms.ModelForm):
-    body = forms.CharField(widget=CKEditorWidget())
+
     class Meta:
         model = Post
         fields = ('title', 'status', 'body','blogsplashimage')

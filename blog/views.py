@@ -10,7 +10,8 @@ from .models import Post, Comment
 from .forms import CommentForm, PostForm
 from taggit.models import Tag
 from django.db.models import Count
-
+from django.utils.safestring import mark_safe
+import json
 
 def post_list(request):
 
@@ -23,6 +24,7 @@ def post_list(request):
 
 def post_detail(request, post_id):
     """a view to display details of a single post."""
+    allposts=Post.objects.filter(status='published')
     post = get_object_or_404(
         Post,
         id=post_id
@@ -51,7 +53,7 @@ def post_detail(request, post_id):
 
 
     return render(request, 'blog/post/detail.html',
-                  {'post': post, 'comments': comments, 'comment_form': comment_form, })
+                  {'post': post, 'comments': comments, 'comment_form': comment_form,'allposts':allposts })
 
 
 @login_required
@@ -71,6 +73,7 @@ def create_or_edit_post(request, _id=None):
 
         return HttpResponseRedirect(reverse('blog:post_list'))
 
-    return render(request, 'blog/post/create.html', {'post_form': post_form})
+
+    return render(request, 'blog/post/create.html', {'post_form': post_form,'post': mark_safe(json.dumps(post.body))})
 
 

@@ -7,7 +7,7 @@ import requests
 from decouple import config
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
@@ -23,7 +23,8 @@ from marketplace.filters import UserFilter
 from .models import Job, JobApplication, DevRequest
 from .forms import JobForm
 from accounts.models import Profile
-
+from django.utils.safestring import mark_safe
+import json
 
 def job_list(request):
     if request.user.is_authenticated:
@@ -106,21 +107,25 @@ def job_details(request, id):
                        'selected_candidates': selected_candidates})
 
 
-
 @login_required
-def post_job(request):
-    recruiter = request.user
-
-    if request.method == 'POST':
-        job_form = JobForm(data=request.POST)
-        if job_form.is_valid():
-            new_job = job_form.save(commit=False)
-            new_job.posted_by = recruiter
-            new_job.save()
-            return HttpResponseRedirect(reverse('marketplace:manage_posted_jobs'))
+def create_or_edit_job(request, _id=None):
+    if _id:
+        job = get_object_or_404(Job, pk=_id)
+        if job.posted_by != request.user:
+            return HttpResponseForbidden()
     else:
-        job_form = JobForm()
-        return render(request, 'marketplace/recruiter/jobs/create.html', {'job_form': job_form})
+        job = Job(posted_by=request.user)
+
+    job_form = JobForm(data=request.POST or None, instance=job)
+
+    if request.POST and job_form.is_valid():
+        new_job = job_form.save(commit=False)
+        new_job.save()
+
+        return HttpResponseRedirect(reverse('marketplace:manage_posted_jobs'))
+
+
+    return render(request, 'marketplace/recruiter/jobs/create.html', {'job_form': job_form,'job': mark_safe(json.dumps(job.description))})
 
 
 @login_required

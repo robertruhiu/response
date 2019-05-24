@@ -95,10 +95,13 @@
 
 
                     <hr>
-                    {{ job.description }}
+                    {{ job.description|safe }}
                 </div>
 
 
+            </div>
+            <div class="col-lg-4">
+                <a href="{% url 'marketplace:edit_job' job.id %}" class="btn btn-primary">Edit job</a>
             </div>
 
 
