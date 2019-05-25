@@ -202,7 +202,7 @@
 
 
                                                     {% for experience in experiences %}
-                                                        {% if verified_project.candidate == dev %}
+                                                        {% if experience.candidate == dev %}
                                                             <div>
                                                                 <p> {{ experience.title|capfirst }}
                                                                 <p><span
