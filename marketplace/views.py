@@ -209,114 +209,18 @@ def get_recommended_developers(job):
 
 @login_required
 def dev_pool(request):
-    req_id = 0
-    dev_req = None
-    paidfor=DevRequest.objects.filter(owner_id=request.user.id,paid=True)
-    paidfordevs=[]
-    for onepaid in paidfor:
-        for i in onepaid.developers:
-            paidfordevs.append(int(i))
-    alldevs=[]
-    alldevelopers = User.objects.filter(profile__user_type='developer')
-    for onedev in alldevelopers:
-        alldevs.append(onedev.id)
-    unpaidfordevs=list(set(alldevs)-set(paidfordevs))
+    developers=User.objects.filter(profile__user_type='developer')
+    experiences = Experience.objects.all()
+    verified_projects = Portfolio.objects.all()
 
-    paidfordevelopers = User.objects.filter(profile__user_type='developer',pk__in=paidfordevs)
-    try:
-        dev_req = DevRequest.objects.filter(owner=request.user, paid=False, closed=False).get()
-        devcount = dev_req.developers
-        requestcount=len(devcount)
-        studentlist=[]
-        currentstudents=Student.objects.all()
-        for onestudent in currentstudents:
-            studentlist.append(onestudent.user_id)
-        complete=[]
-        completeprofiles=Profile.objects.filter(stage='complete')
-        for oncomplete in completeprofiles:
-            if oncomplete.user_type == 'developer':
-                complete.append(oncomplete.user_id)
-        newlist=list(set(complete) -set(studentlist))
-        developers = User.objects.filter(pk__in=newlist,profile__user_type='developer')
-        if dev_req:
-            req_id = dev_req.id
-        if request.method == 'POST':
-            search_field = request.POST['search_field']
+    return render(request, 'marketplace/recruiter/dev_pool.html',
+                  {'developers': developers,'experiences':experiences,'projects':verified_projects})
 
-            developers_filter = UserFilter(request.POST, queryset=developers)
-
-            filtered_devs = developers_filter.qs
-
-            developers = filtered_devs.filter(
-                Q(profile__gender__icontains=search_field)
-                | Q(profile__framework__icontains=search_field)
-                | Q(profile__language__icontains=search_field)
-            )
-
-            developers = [dev for dev in developers]
-
-            return render(request, 'marketplace/recruiter/dev_pool.html',
-                          {'developers': developers, 'search_form': developers_filter.form,
-
-                           'req_id': req_id, 'devcount': requestcount})
-        else:
-            developers_filter = UserFilter(request.GET, queryset=developers)
-            developers = [dev for dev in developers_filter.qs]
-
-            return render(request, 'marketplace/recruiter/dev_pool.html',
-                          {'developers': developers, 'search_form': developers_filter.form,
-
-                           'req_id': req_id, 'devcount': requestcount, 'paidfor': paidfordevs})
-
-    except DevRequest.DoesNotExist:
-        dev_req = None
-        req_id=0
-        requestcount = 0
-        studentlist = []
-        currentstudents = Student.objects.all()
-        for onestudent in currentstudents:
-            studentlist.append(onestudent.user_id)
-        complete = []
-        completeprofiles = Profile.objects.filter(stage='complete')
-        for oncomplete in completeprofiles:
-            if oncomplete.user_type == 'developer':
-                complete.append(oncomplete.user_id)
-        newlist = list(set(complete)-set( studentlist))
-        developers = User.objects.filter(pk__in=newlist,profile__user_type='developer')
-
-        if request.method == 'POST':
-            search_field = request.POST['search_field']
-
-            developers_filter = UserFilter(request.POST, queryset=developers)
-
-            filtered_devs = developers_filter.qs
-
-            developers = filtered_devs.filter(
-                Q(profile__gender__icontains=search_field)
-                | Q(profile__profile_tags__icontains=search_field)
-
-            )
-
-            developers = [dev for dev in developers]
-
-            return render(request, 'marketplace/recruiter/dev_pool.html',
-                          {'developers': developers, 'search_form': developers_filter.form,
-
-                           'req_id': req_id, 'devcount': requestcount})
-        else:
-            developers_filter = UserFilter(request.GET, queryset=developers)
-            developers = [dev for dev in developers_filter.qs]
-
-            return render(request, 'marketplace/recruiter/dev_pool.html',
-                          {'developers': developers, 'search_form': developers_filter.form,
-
-                           'req_id': req_id, 'devcount': requestcount, 'paidfor': paidfordevs})
 
 @login_required
-def dev_details(request, dev_id, req_id):
+def dev_details(request, dev_id):
     dev_picked = False
-    if req_id != 0 and dev_id in DevRequest.objects.get(id=req_id).get_developers():
-        dev_picked = True
+
 
     requested_dev = User.objects.get(id=dev_id)
     try:

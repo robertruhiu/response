@@ -6,53 +6,17 @@
 {% endblock %}
 
 {% load static %}
+
 {% block content %}
     <main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
         <div class="d-none d-lg-block">
             <nav class="navbar  navbar-light fixed-top fine border-bottom">
-                <h5>
-                    Developer Pool
+                 <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" id="myInput" placeholder="Search" aria-label="Search">
 
-                </h5>
+    </form>
                 <ul class="nav ml-auto">
-                {% if request.user.is_authenticated and req_id != 0 %}
-                    <li class="nav-item">
 
-
-
-                            <a class="nav-link" style="text-decoration: none"
-                               href="{% url 'marketplace:process_payment' req_id %}">
-                                <span  data-feather="shopping-cart"></span>
-                                <span class="badge badge-primary">{{ devcount }}</span>
-                            </a>
-
-
-
-
-
-
-                    </li>
-
-                {% endif %}
-                {% if paidfor  %}
-                    <li class="nav-item">
-
-
-
-                            <a class="nav-link btn btn-outline-success" style="text-decoration: none"
-                               href="{% url 'marketplace:mydevs' %}">
-                                My devs
-
-
-                            </a>
-
-
-
-
-
-
-                    </li>
-                {% endif %}
 
 
                     {% if request.user.is_authenticated %}
@@ -75,6 +39,7 @@
 
 
                 </ul>
+
             </nav>
         </div>
 
@@ -101,7 +66,7 @@
                                 <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
                                 <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
                                 {% if request.user.is_staff %}
-                                    <a class="dropdown-item" href="{% url 'frontend:onboarddevs' %}">devs</a>
+
                                     <a class="dropdown-item"
                                        href="{% url 'frontend:onboardrecruiters' %}">recruiters</a>
                                 {% endif %}
@@ -131,139 +96,197 @@
         </div>
         <div class="d-lg-none" style="margin-top: 5em">
         </div>
-
-        <form action="." method="post" class="form">
-            {% csrf_token %}
-            <div class="row">
-                <div class="input-group col-md-8">
-                    <input class="form-control py-2" type="search" placeholder="Search for developers"
-                           name="search_field" value="">
-                    {#                    {% bootstrap_field type="search" search_form.search_field placeholder="Search for developers" show_label=False %}#}
-                    <span class="input-group-append">
-                        <button style="color: white" class="btn primary1 btn-outline-secondary" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-
-                <div class="col-md-4">
-                    <button class="btn primary1" style="color: white" type="button" data-toggle="collapse"
-                            data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
-                        <i class="fa fa-filter"></i> Filters
-                    </button>
-                </div>
-            </div>
-
-            <div class="d-lg-none" style="margin-top: 5em">
-            </div>
-
-            <hr>
-
-            <div class="collapse" id="collapseFilters">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <label>Language</label>
-                        {% bootstrap_field search_form.profile__language placeholder=False show_label=False %}
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <label>Framework</label>
-                        {% bootstrap_field search_form.profile__framework placeholder=False show_label=False %}
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <label>Location</label>
-                        {% bootstrap_field search_form.profile__country placeholder=False show_label=False %}
-                    </div>
-                    {#                     <div class="col-lg-4 col-md-6 col-sm-6">#}
-                    {#                        <label>Tech Stack</label>#}
-                    {#                        {% bootstrap_field job_form.tech_stack placeholder=False show_label=False %}#}
-                    {#                    </div>#}
-                </div>
-
-                <div class="row">
-                    {#                    <div class="col-lg-4 col-md-6 col-sm-6">#}
-                    {#                        <label>Job role</label>#}
-                    {#                        {% bootstrap_field job_form.job_role show_label=False %}#}
-                    {#                    </div>#}
-
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <label>Experience</label>
-                        {% bootstrap_field search_form.profile__years show_label=False %}
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <label>Contract type</label>
-                        {% bootstrap_field search_form.profile__availabilty placeholder='react, angular, python etc' show_label=False %}
-                    </div>
-                </div>
-            </div>
-        </form>
-
-
-
         <div class="row">
-            {% for dev in developers %}
-                <div class="col-6">
-                <div class="row shadow-lg  mb-5 bg-white rounded pool" style="padding: 0">
-                                <div class="col-4" style="background-color: aliceblue">
-                                    <svg class=""
-                                         style=""
-                                         data-jdenticon-value=" {{ dev.first_name }} + {{ dev.last_name }} "
-                                    >
-                                        developer name
-                                    </svg>
-                                    <p class="card-caption"><span
-                                            data-feather="user"> </span>: {{ dev.first_name|truncatechars:5 }} {{ dev.last_name|truncatechars:2 }}
-                                    </p>
-                                    <p><span data-feather="briefcase"> </span>: {{ dev.profile.availabilty }}</p>
+            <div class="col-9">
+                <div class="row mb-2">
 
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="container" id=myGroup>
+                            {% for dev in developers %}
+
+                                <div class="card mb-2 shadow-lg  " style="border-radius: 0;; " id="mycard">
+
+                                    <a data-toggle="modal" style="color: black;text-decoration: none"
+                                       data-target="#{{ dev.id }}" href="#{{ dev.id }}" role="button"
+                                       aria-expanded="false" aria-controls="{{ dev.id }}">
+
+                                        <div class="card-body">
+                                            <p class="card-title"> {{ dev.first_name|capfirst }}</p>
+                                            <p style="">Bio</p>
+
+                                            <p class="pedit smalle">{{ dev.profile.about|truncatechars:150 }}
+                                            </p>
+                                            <p>
+                                                <span data-feather="codepen"> </span>
+
+                                                {% if dev.profile.profile_tags.0 == 'reactjs' %}
+
+                                                    <span class="badge text-white"
+                                                          style="background-color: #007bff">Reactjs</span>
+                                                {% endif %}
+                                                {% if dev.profile.profile_tags.1 == 'vuejs' %}
+                                                    <span class="badge text-white"
+                                                          style="background-color: #a6c!important">Vuejs</span>
+                                                {% endif %}
+                                                {% if dev.profile.profile_tags.2 == 'angularjs' %}
+                                                    <span class="badge text-white"
+                                                          style="background-color: #00c851!important">Angular</span>
+                                                {% endif %}
+                                                {% if dev.profile.profile_tags.8 == 'android' %}
+                                                    <span class="badge text-white"
+                                                          style="background-color: #33b5e5!important">Android</span>
+                                                {% endif %}
+                                                {% if dev.profile.profile_tags.3 == 'expressjs' %}
+                                                    <span class="badge text-white"
+                                                          style="background-color: #b627a1">Express js</span>
+                                                {% endif %}
+
+
+                                            </p>
+
+                                        </div>
+
+                                    </a>
 
                                 </div>
-                                <div class="col-8">
-                                    <div class="table">
-                                        <p class="card-description" style="margin-top: 3%">Bio
-                                            <br>{{ dev.profile.about|truncatechars:150 }}
-                                        </p>
-                                        <p>
-                                            <span data-feather="codepen"> </span>
-
-                                            {% if dev.profile.profile_tags.0 == 'reactjs' %}
-
-                                                <span class="badge text-white"
-                                                      style="background-color: #007bff">Reactjs</span>
-                                            {% endif %}
-                                            {% if dev.profile.profile_tags.1 == 'vuejs' %}
-                                                <span class="badge text-white" style="background-color: #a6c!important">Vuejs</span>
-                                            {% endif %}
-                                            {% if dev.profile.profile_tags.2 == 'angularjs' %}
-                                                <span class="badge text-white"
-                                                      style="background-color: #00c851!important">Angular</span>
-                                            {% endif %}
-                                            {% if dev.profile.profile_tags.8 == 'android' %}
-                                                <span class="badge text-white"
-                                                      style="background-color: #33b5e5!important">Android</span>
-                                            {% endif %}
-                                            {% if dev.profile.profile_tags.3 == 'expressjs' %}
-                                                <span class="badge text-white" style="background-color: #b627a1">Express js</span>
-                                            {% endif %}
+                                <div class="modal right fade" id="{{ dev.id }}" tabindex="-1" role="dialog"
+                                     aria-labelledby="myModalLabel2">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
 
 
-                                        </p>
+                                            <div class="modal-body">
+                                                <h5>Bio</h5>
+                                                <hr>
+                                                <p>{{ dev.profile.about }}
+                                                </p>
+                                                <!------ projects------>
+                                                <div class="shadow-sm  p-3 mb-5 ">
+
+                                                    <h5>Past Projects</h5>
 
 
-                                    </div>
-                                    <a class="btn-sm btn-primary " style="text-decoration: none;margin-top: 2%"
-                                       href="{% url 'marketplace:dev_details' dev.id req_id %}">See more</a>
+                                                    <hr>
 
 
+                                                    {% for verified_project in projects %}
+                                                        {% if verified_project.candidate == dev %}
+                                                            <div>
+                                                                <p class="font-weight-bold">{{ verified_project.title }}</p>
+                                                                <p class="text-muted">
+                                                                    {{ verified_project.description }}
+                                                                </p>
+
+                                                                <p><a target="_blank"
+                                                                      href="{{ verified_project.demo_link }}">See
+                                                                    Project</a></p>
+                                                                <hr>
+                                                            </div>
+                                                        {% endif %}
+
+                                                    {% endfor %}
+
+
+                                                </div>
+                                                <!------ work experiences------>
+                                                <div class="shadow-sm p-3  mb-5  mt-5">
+
+                                                    <h5>Work experience</h5>
+
+
+                                                    <hr>
+
+
+
+                                                    {% for experience in experiences %}
+                                                        {% if verified_project.candidate == dev %}
+                                                            <div>
+                                                                <p> {{ experience.title|capfirst }}
+                                                                <p><span
+                                                                        data-feather="briefcase"></span> {{ experience.company|capfirst }}
+                                                                    <span data-feather="calendar"></span> {{ experience.duration }}
+                                                                    months
+                                                                    <span data-feather="map-pin"></span> {{ experience.location.name }}
+                                                                </p>
+                                                                <p class="text-muted">{{ experience.description }}</p>
+                                                                <hr>
+                                                            </div>
+                                                        {% endif %}
+
+
+                                                    {% endfor %}
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </div><!-- modal-content -->
+                                    </div><!-- modal-dialog -->
                                 </div>
 
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="col-3" >
+
+                     <div class="mt-3" style="position: fixed">
+                            <p class="text-muted text-center">TESTIMONIALS</p>
+                            <div class="shadow-sm p-3 mb-2" style="font-size: 14px;">
+
+                                <blockquote class="text-center">
+                                    <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                                        posuere
+                                        erat a
+                                        ante.</p>
+                                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source
+                                        Title</cite></footer>
+                                </blockquote>
+                            </div>
+                            <div class="shadow-sm p-3 mb-2" style="font-size: 14px;">
+
+                                <blockquote class="text-center">
+                                    <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                                        posuere
+                                        erat a
+                                        ante.</p>
+                                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source
+                                        Title</cite></footer>
+                                </blockquote>
+                            </div>
+                            <div class="shadow-sm p-3 mb-2" style="font-size: 14px;">
+
+                                <blockquote class="text-center">
+                                    <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                                        posuere
+                                        erat a
+                                        ante.</p>
+                                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source
+                                        Title</cite></footer>
+                                </blockquote>
                             </div>
 
-                </div>
+                        </div>
 
 
 
 
-            {% endfor %}
+
+
+
+            </div>
         </div>
 
 
@@ -271,5 +294,18 @@
 
 
 
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myGroup #mycard").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+        });
+    </script>
 
 {% endblock %}

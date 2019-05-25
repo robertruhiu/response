@@ -129,7 +129,9 @@
 
 
 
-                    <p>Preferred work type : <span class="badge btn-primary" style="background-color: #b627a1">{{ request.user.profile.availabilty }}</span></p>
+                    <p>Preferred work type : <span class="badge btn-primary"
+                                                   style="background-color: #b627a1">{{ request.user.profile.availabilty }}</span>
+                    </p>
 
                 </div>
 
@@ -161,7 +163,9 @@
 
                     {% endif %}
 
-                    <p>Preferred work type : <span class="badge btn-primary" style="background-color: #b627a1">{{ request.user.profile.availabilty }}</span></p>
+                    <p>Preferred work type : <span class="badge btn-primary"
+                                                   style="background-color: #b627a1">{{ request.user.profile.availabilty }}</span>
+                    </p>
 
                 </div>
 
@@ -461,8 +465,12 @@
                         <form action="{% url 'frontend:about' %}" method="post">
                             {% csrf_token %}
                             <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Bio</label>
+                                    <textarea name="about" class="form-control" id="exampleFormControlTextarea1" rows="4">{{ request.user.profile.about }}</textarea>
+                                </div>
 
-                                {% bootstrap_field about_form.about placeholder=request.user.profile.about  %}
+
 
                             </div>
                             <div class="modal-footer">
