@@ -220,18 +220,24 @@ def dev_pool(request):
 
             picked.append(int(one_dev))
         picked_devs=User.objects.filter(pk__in=picked)
-        developers = User.objects.filter(profile__user_type='developer').exclude(pk__in=picked)
+        developers_list = User.objects.filter(profile__user_type='developer').exclude(pk__in=picked)
 
 
         experiences = Experience.objects.all()
         verified_projects = Portfolio.objects.all()
+        paginator = Paginator(developers_list, 25)
+        page = request.GET.get('page')
+        developers = paginator.get_page(page)
         return render(request, 'marketplace/recruiter/dev_pool.html',
                       {'developers': developers, 'experiences': experiences, 'projects': verified_projects,'picked':picked_devs,
                        'dev_count': mark_safe(json.dumps(requestcount))})
     except DevRequest.DoesNotExist:
-        developers=User.objects.filter(profile__user_type='developer')
+        developers_list=User.objects.filter(profile__user_type='developer')
         experiences = Experience.objects.all()
         verified_projects = Portfolio.objects.all()
+        paginator = Paginator(developers_list, 25)
+        page = request.GET.get('page')
+        developers = paginator.get_page(page)
         return render(request, 'marketplace/recruiter/dev_pool.html',
                   {'developers': developers,'experiences':experiences,'projects':verified_projects})
 @login_required
