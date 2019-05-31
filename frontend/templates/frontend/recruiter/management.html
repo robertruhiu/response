@@ -220,7 +220,32 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col mb-2" style="width: 100%;">
                     <div class="card recruithomecard" style="width:15em;margin: auto">
-                        <a href="{% url 'frontend:takenquizzes' %}">
+                        <a href="{% url 'frontend:passedquizzes' %}">
+                            <div style="text-align: -webkit-center;">
+
+                                <img class="img-fluid" src="../../../static/frontend/images/pass.svg"
+                                     style="width: 40%;margin-right: 25%;margin-left: 25%" alt="Card image cap">
+
+
+                            </div>
+                            <div class="card" style="border: 0 ">
+
+
+                                <div class="card-body">
+
+                                    <h6 class="card-title text-center" style="text-align: -webkit-center;">Passed
+                                        quizzes</h6>
+
+
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col mb-2" style="width: 100%;">
+                    <div class="card recruithomecard" style="width:15em;margin: auto">
+                        <a href="{% url 'frontend:failedquizzes' %}">
                             <div style="text-align: -webkit-center;">
 
                                 <img class="img-fluid" src="../../../static/frontend/images/how/completed.svg"
@@ -233,7 +258,7 @@
 
                                 <div class="card-body">
 
-                                    <h6 class="card-title text-center" style="text-align: -webkit-center;">Taken
+                                    <h6 class="card-title text-center" style="text-align: -webkit-center;">Failed
                                         quizzes</h6>
 
 
@@ -243,6 +268,7 @@
                         </a>
                     </div>
                 </div>
+
             <div class=" col-lg-3 col-md-6 col-sm-6 col mb-2">
                     <div class="card recruithomecard" style="width:15em;margin: auto">
                         <a href="{% url 'marketplace:dev_pool' %}">

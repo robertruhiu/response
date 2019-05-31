@@ -1,21 +1,22 @@
 from collections import Counter
-
+from itertools import chain
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
-
+from django.http import JsonResponse
 import requests
 from decouple import config
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.http import HttpResponseRedirect,HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponseForbidden, HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.contrib.auth.models import User
 from django.urls import reverse
-from django.core import mail
+from django.core import mail, serializers
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from classroom.models import Student, TakenQuiz
 from frontend.form import Portfolio_form, Experience_Form,CvForm
 from frontend.models import Experience, Portfolio
@@ -209,12 +210,54 @@ def get_recommended_developers(job):
 
 @login_required
 def dev_pool(request):
-    developers=User.objects.filter(profile__user_type='developer')
-    experiences = Experience.objects.all()
-    verified_projects = Portfolio.objects.all()
+    try:
+        dev_req = DevRequest.objects.filter(owner=request.user, paid=False, closed=False).get()
+        devcount = dev_req.developers
+        requestcount = len(devcount)
 
-    return render(request, 'marketplace/recruiter/dev_pool.html',
+        picked=[]
+        for one_dev in dev_req.developers:
+
+            picked.append(int(one_dev))
+        picked_devs=User.objects.filter(pk__in=picked)
+        developers = User.objects.filter(profile__user_type='developer').exclude(pk__in=picked)
+
+
+        experiences = Experience.objects.all()
+        verified_projects = Portfolio.objects.all()
+        return render(request, 'marketplace/recruiter/dev_pool.html',
+                      {'developers': developers, 'experiences': experiences, 'projects': verified_projects,'picked':picked_devs,
+                       'dev_count': mark_safe(json.dumps(requestcount))})
+    except DevRequest.DoesNotExist:
+        developers=User.objects.filter(profile__user_type='developer')
+        experiences = Experience.objects.all()
+        verified_projects = Portfolio.objects.all()
+        return render(request, 'marketplace/recruiter/dev_pool.html',
                   {'developers': developers,'experiences':experiences,'projects':verified_projects})
+@login_required
+
+def dev_data(APIVIEW):
+
+    developers = User.objects.filter(profile__user_type='developer')
+
+    dev_data={}
+    experience=[]
+    project=[]
+    for dev in developers:
+        experiences = Experience.objects.filter(candidate_id=dev.id)
+        for work in experiences:
+            experience.append(work)
+        verified_projects = Portfolio.objects.filter(candidate_id=dev.id)
+        for one_project in verified_projects:
+            project.append(one_project)
+        dev_data[dev]=[experience,project]
+
+    data = {
+        'title':'dennis'
+    }
+
+
+    return Response(data)
 
 
 @login_required
@@ -246,29 +289,51 @@ def dev_details(request, dev_id):
 
 
 @login_required()
-def add_dev_to_wish_list(request, dev_id):
+def add_dev_to_wish_list(request):
+    if request.method == 'GET':
+        dev_id = request.GET['dev_id']
+        try:
+            dev_list=[]
+            dev_req = DevRequest.objects.filter(owner=request.user, paid=False, closed=False).get()
+            for onedev in dev_req.developers:
+                dev_list.append(onedev)
+            dev_list.append(str(dev_id))
+            dev_req.developers=dev_list
+            dev_req.save()
+            count = len(dev_req.developers)
+            data = {
+                'dev_count': count
+            }
+            return JsonResponse(data)
+        except DevRequest.DoesNotExist:
+            devlist = []
+            devlist.append(dev_id)
+            dev_req = DevRequest(owner=request.user, paid=False, closed=False, developers=devlist)
+            dev_req.save()
+            count = len(dev_req.developers)
+            dev_count = {
+                'dev_count':count
+            }
 
-    devlist = []
-    devlist.append(dev_id)
-    dev_req = DevRequest(owner=request.user, paid=False, closed=False,developers=devlist)
-    dev_req.save()
+            return JsonResponse(dev_count)
 
 
-
-    return redirect(reverse('marketplace:dev_pool'))
+    else:
+        return HttpResponse("Request method is not a GET")
 
 
 @login_required()
-def process_payment(request, req_id):
-    if req_id == 0:
-        return redirect(reverse('marketplace:dev_pool'))
+def process_payment(request):
 
-    dev_req = DevRequest.objects.get(id=req_id)
 
-    print('pay amount-------> ', dev_req.amount())
+    dev_req = DevRequest.objects.filter(paid=False,closed=False,owner=request.user).get()
+    amount = len(dev_req.developers) * 20
+
+
+
 
     return render(request, 'marketplace/recruiter/payment.html',
-                  {'amount': dev_req.amount(), 'transaction': dev_req})
+                  {'amount': amount, 'transaction': dev_req})
 
 
 @csrf_exempt
@@ -277,20 +342,23 @@ def payment_canceled(request):
 
 
 @csrf_exempt
-def payment_done(request, req_id):
-    dev_req = DevRequest.objects.get(id=req_id)
+def payment_done(request):
+    dev_req = DevRequest.objects.get(closed=False,paid=False,owner=request.user)
     dev_req.paid = True
     dev_req.closed = True
     dev_req.save()
-
-    send_mail(
-        'Test invitation',
-        'Hello' + ' ' + dev_req.dev.first_name + ' ' + dev_req.dev.last_name + ' ' + 'you have been invited by a Recruiter to partake in a test. '
-                                                                                     'Use this link to login and access the test invite under Invites: http://beta.codeln.com/accounts/login/',
-        'codeln@codeln.com',
-        [dev_req.dev.email],
-        fail_silently=False,
-    )
+    email=[]
+    for onedev in dev_req.developers:
+        email.append(onedev.id)
+    print(email)
+    # send_mail(
+    #     'Test invitation',
+    #     'Hello' + ' ' + dev_req.dev.first_name + ' ' + dev_req.dev.last_name + ' ' + 'you have been invited by a Recruiter to partake in a test. '
+    #                                                                                  'Use this link to login and access the test invite under Invites: http://beta.codeln.com/accounts/login/',
+    #     'codeln@codeln.com',
+    #     [dev_req.dev.email],
+    #     fail_silently=False,
+    # )
 
     return render(request, 'transactions/invitations.html',
                   {'candidates': dev_req.dev, 'current_transaction': dev_req})

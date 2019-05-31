@@ -7,7 +7,7 @@ from frontend.views import home,activity,tracker,update_candidateprojects,\
     report,credits,onboarddevs,onboardrecruiters,seedevs,seerecruiters,manageprojects,managetransactions,\
     editproject,deleteproject,addproject,edittransactions\
     ,deletetransaction,buildproject,calltoapply,apply,opencalltracker,competitions,newproject,\
-    takenquizzes,pickcandidates,update_finishedopencall,portfolio,experience,closetransaction,\
+    passedquizzes,failedquizzes,pickcandidates,update_finishedopencall,portfolio,experience,closetransaction,\
     editportfolioproject,about,management,grading,storegrades,analytics
 from frontend.tasks import reminderforprofiledevs,applyreminder,massmail,submission
 from accounts.views import update_profile
@@ -52,7 +52,8 @@ urlpatterns = [
     path('addproject',addproject,name='addproject'),
     path('calltoapply',calltoapply,name='calltoapply'),
     path('buildproject',buildproject,name='buildproject'),
-    path('takenquizzes',takenquizzes,name='takenquizzes'),
+    path('passedquizzes',passedquizzes,name='passedquizzes'),
+    path('failedquizzes',failedquizzes,name='failedquizzes'),
     path('competitions',competitions,name='competitions'),
     path('apply/<int:opportunity_id>',apply,name='apply'),
     path('opencalltracker/<int:trans_id>',opencalltracker,name='opencalltracker'),

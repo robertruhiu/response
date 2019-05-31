@@ -38,6 +38,7 @@ urlpatterns = [
     path('blog/',include('blog.urls',namespace='blog')),
     path('martor/', include('martor.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('api-auth/', include('rest_framework.urls'))
 
 ]
 

@@ -107,13 +107,12 @@ def submission(request):
     #     to = cand.candidate.email
     #     mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
     # passedlist = TakenQuiz.objects.filter(score__gte=50)
-    # failedlist =TakenQuiz.objects.filter(score__lt=50)
-    # allpassed=[]
-    # for student in failedlist:
-    #     allpassed.append(student.student.user.email)
-    # trimmed =set(allpassed)
-    # kupita=list(trimmed)
-    # print(*kupita, sep='\n')
+    failedlist =TakenQuiz.objects.filter(score__lt=50)
+    allpassed=[]
+    for student in failedlist:
+        allpassed.append([student.student.user.email,student.date.time])
+
+    print(*allpassed, sep='\n')
     # # emails=User.objects.filter(id_in = kupita)
     # # passedemails =[]
     # # for email in emails:
@@ -216,12 +215,12 @@ def submission(request):
     # students =TakenQuiz.objects.filter(score__lt=50).annotate(month=TruncMonth('date')).values('month').annotate(total=Count('student_id'))
     # for one in passedstudents:
     #     print(one.items())
-    allusers=Profile.objects.all()
-    for oneuser in allusers:
-        instance = get_object_or_404(Profile, user_id=oneuser.user_id)
-        instance.file=''
-        instance.save()
-
+    # allusers=Profile.objects.all()
+    # for oneuser in allusers:
+    #     instance = get_object_or_404(Profile, user_id=oneuser.user_id)
+    #     instance.file=''
+    #     instance.save()
+    #
 
 
     return render(request, 'frontend/recruiter/recruiter.html')

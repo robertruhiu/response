@@ -86,7 +86,7 @@ Taken quizzes
 </div>
 
 
-      <table class="table" id="Takenquizzes">
+<table class="table" id="Failedquizzes">
   <thead class="thead-dark">
     <tr>
         <th scope="col">#</th>
@@ -101,17 +101,17 @@ Taken quizzes
     </tr>
   </thead>
   <tbody>
-  {% for dev in taken %}
-      {% if dev.score >= 50 %}
-           <tr>
+  {% for devs in taken %}
+      {% if devs.score < 50 %}
+          <tr>
        <td> {{ forloop.counter }} </td>
-      <td>{{ dev.student.user.first_name }} {{ dev.student.user.last_name }}</td>
-      <td>{{ dev.student.user.email }}</td>
-      <td>{{ dev.student.user.profile.country.name}}</td>
-       <td>{{ dev.quiz }}</td>
-       <td>{{ dev.score }}</td>
-           <td>{{ dev.student.user.profile.csa }}</td>
-       <td>{{ dev.date }}</td>
+      <td>{{ devs.student.user.first_name }} {{ devs.student.user.last_name }}</td>
+      <td>{{ devs.student.user.email }}</td>
+      <td>{{ devs.student.user.profile.country.name}}</td>
+       <td>{{ devs.quiz }}</td>
+       <td>{{ devs.score }}</td>
+           <td>{{ devs.student.user.profile.csa }}</td>
+       <td>{{ devs.date }}</td>
 
     </tr>
       {% endif %}
@@ -122,10 +122,6 @@ Taken quizzes
 
   </tbody>
 </table>
-
-
-
-
 
 
 

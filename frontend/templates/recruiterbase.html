@@ -25,6 +25,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
 <link rel="stylesheet" href="{% static 'frontend/css/jodit.min.css' %}">
+<link rel="stylesheet" href="{% static 'frontend/css/tags.css' %}">
 
 
 
@@ -197,50 +198,10 @@
 <script>
     feather.replace()
 </script>
-<script>
-    $(document).ready( function () {
-    $('#myTable').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    } );
-    $('#myDevs').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    } );
-    $('#Takenquizzes').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    } );
-    $('#Allquizzes').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    } );
-    $('#Transactions').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    } );
-
-} );
-</script>
-<script>
-    $(document).ready(function (e) {
-        $(".img-check").click(function () {
-            $(this).toggleClass("check");
-        });
-    });
-</script>
 
 <script src="{% static 'frontend/js/jodit.min.js' %}"></script>
+<script src="{% static 'frontend/js/custom/custom.js' %}"></script>
+<script src="{% static 'frontend/js/custom/tags.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/jdenticon@2.1.1" async>
 </script>
 {% block script %}

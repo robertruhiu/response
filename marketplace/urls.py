@@ -2,7 +2,7 @@ from django.urls import path
 
 from marketplace.views import job_list, job_details, apply_for_job, manage_posted_jobs, pick_candidate, \
     select_candidate, dev_pool, dev_details, process_payment, payment_canceled, payment_done, add_dev_to_wish_list,\
-    mydevs,paid_dev_details,create_or_edit_job
+    mydevs,paid_dev_details,create_or_edit_job,dev_data
 
 app_name = 'marketplace'
 
@@ -18,11 +18,12 @@ urlpatterns = [
     path('pick_candidate/<int:job_id>/<int:dev_id>/', pick_candidate, name='pick_candidate'),
     path('select_candidate/<int:job_id>/<int:dev_id>/', select_candidate, name='select_candidate'),
     path('dev_pool/', dev_pool, name='dev_pool'),
+    path('dev_data/', dev_data, name='dev_data'),
     path('mydevs/', mydevs, name='mydevs'),
     path('dev_details/<int:dev_id>', dev_details, name='dev_details'),
     path('paid_dev_details/<int:dev_id>', paid_dev_details, name='paid_dev_details'),
-    path('add_dev_to_wish_list/<int:dev_id>/', add_dev_to_wish_list, name='add_dev_to_wish_list'),
-    path('process_payment/<int:req_id>/', process_payment, name='process_payment'),
-    path('payment_canceled/', payment_canceled, name='payment_canceled'),
-    path('payment_done/<int:req_id>/', payment_done, name='payment_done'),
+    path('add_dev_to_wish_list', add_dev_to_wish_list, name='add_dev_to_wish_list'),
+    path('process_payment', process_payment, name='process_payment'),
+    path('payment_canceled', payment_canceled, name='payment_canceled'),
+    path('payment_done', payment_done, name='payment_done'),
 ]

@@ -69,14 +69,3 @@ class DevRequest(models.Model):
     paid = models.BooleanField(default=False)
     closed = models.BooleanField(default=False)
 
-
-
-    def amount(self):
-        total_amount = 0
-        total_devs = len(self.developers)
-
-        if 1 <= total_devs <= 10:
-            total_amount = 100
-        elif 10 < total_devs <= 100:
-            total_amount = 20 * total_devs
-        return total_amount

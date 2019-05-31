@@ -110,7 +110,7 @@
 
 
         const API_publicKey = "FLWPUBK-37536a50fc02bed5bddf5ebe89a18e7c-X";
-        const SuccessUrl = '{% url 'marketplace:payment_done' transaction.id %}';
+        const SuccessUrl = '{% url 'marketplace:payment_done' %}';
         const CancelledUrl = '{% url 'marketplace:payment_canceled' %}';
 
         function payWithRave(amnt) {

@@ -331,11 +331,12 @@ def dev(request):
 
 
 
-def takenquizzes(request):
+def passedquizzes(request):
     taken = TakenQuiz.objects.all()
-
-
     return render(request, 'frontend/recruiter/takenquizzes.html',{'taken':taken})
+def failedquizzes(request):
+    taken = TakenQuiz.objects.all()
+    return render(request, 'frontend/recruiter/failed.html',{'taken':taken})
 
 def howitworks(request):
     return render(request, 'frontend/how.html')
