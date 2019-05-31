@@ -333,9 +333,9 @@ def dev(request):
 
 def takenquizzes(request):
     taken = TakenQuiz.objects.all()
-    allquizzes = TakenQuiz.objects.filter(score__gte=50).all()
 
-    return render(request, 'frontend/recruiter/takenquizzes.html',{'allquizzes':allquizzes,'taken':taken})
+
+    return render(request, 'frontend/recruiter/takenquizzes.html',{'taken':taken})
 
 def howitworks(request):
     return render(request, 'frontend/how.html')
