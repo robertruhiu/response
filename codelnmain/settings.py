@@ -73,7 +73,6 @@ INSTALLED_APPS = [
     'celery',
     'ckeditor',
     'ckeditor_uploader',
-    'formtools',
     'rest_framework',
 
 
