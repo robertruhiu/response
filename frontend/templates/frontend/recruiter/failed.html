@@ -89,7 +89,7 @@ Taken quizzes
 <table class="table" id="Failedquizzes">
   <thead class="thead-dark">
     <tr>
-        <th scope="col">#</th>
+
         <th scope="col">Name</th>
       <th scope="col">email</th>
       <th scope="col">Country</th>
@@ -104,7 +104,7 @@ Taken quizzes
   {% for devs in taken %}
       {% if devs.score < 50 %}
           <tr>
-       <td> {{ forloop.counter }} </td>
+
       <td>{{ devs.student.user.first_name }} {{ devs.student.user.last_name }}</td>
       <td>{{ devs.student.user.email }}</td>
       <td>{{ devs.student.user.profile.country.name}}</td>
