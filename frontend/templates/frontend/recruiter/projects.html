@@ -1,0 +1,150 @@
+{% extends 'recruiterbase.html' %}
+{% block title %}
+recruiter dashboard
+{% endblock %}
+{% load static %}
+{% block content %}
+<main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+    <div class="d-none d-lg-block">
+        <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                    <h5 >Manage projects</h5>
+                    <ul class="nav ml-auto">
+
+
+
+            {% if request.user.is_authenticated %}
+
+
+
+            <li class="nav-item">
+                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+            </li>
+
+            {% else %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+            </li>
+            <li class="nav-item">
+                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+            </li>
+            {% endif %}
+
+
+    </ul>
+                </nav>
+    </div>
+
+    <!-----md devices adaptation------>
+    <div class="container d-lg-none">
+        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+            <a class="logoadapt h5" style="text-decoration: none" href="/home">Manage projects</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Menu
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'frontend:my-activity' %}" >Ongoing tests</a>
+                            <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
+                            <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
+                            {% if request.user.is_staff %}
+                                <a class="dropdown-item" href="{% url 'frontend:onboarddevs' %}">devs</a>
+                                <a class="dropdown-item" href="{% url 'frontend:onboardrecruiters' %}">recruiters</a>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+<div class="d-none d-lg-block" style="margin-top: 8%">
+    <div class="row">
+        <div class="col-lg-10 col-sm-6 col-md-8 col-8">
+            <div class="alert alert-primary "  role="alert">
+        Manage the various projects here
+
+    </div>
+
+        </div>
+        <div class="col-lg-2 col-sm-6 col-md-4 col-4">
+            <a href="{% url 'frontend:addproject' %}"><button class="btn btn-warning">Add Project</button></a>
+
+        </div>
+    </div>
+
+
+
+</div >
+
+<div class="d-lg-none"  style="margin-top: 7em">
+    <div class="row">
+        <div class="col-lg-10 col-sm-8 col-md-8 col-8">
+            <div class="alert alert-primary "  role="alert">
+        Manage the various projects here
+
+    </div>
+
+        </div>
+        <div class="col col-sm-4 col-md-4 col-4">
+            <a href="{% url 'frontend:addproject' %}"><button class="btn btn-warning">Add Project</button></a>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="row" style="margin-left: 0;margin-right: 0" >
+
+
+
+        {% for foo in projects %}
+
+        <div class="col-lg-4 col-sm-6 mb-3 col-md-4" >
+            <a href="{% url 'frontend:editproject' foo.id %}" style="text-decoration: none;">
+            <div class="card" style="width:100%;height: 100%">
+                <img class="img-fluid" src="{{foo.projectimage1}}" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">Project name: {{ foo.name }}
+                    </p>
+                    <p><span class="badge badge-primary">Level : {{ foo.level }} </span></p>
+
+                </div>
+
+
+            </div>
+            </a>
+
+        </div>
+        {% endfor %}
+    </div>
+
+</main>
+
+
+
+{% endblock %}

@@ -1,0 +1,301 @@
+.codelnlogo1{padding-left:0;font-size:19px;letter-spacing:.4em;font-family:'sans-serif',Montserrat;font-weight:bold;color:#ffffff;text-transform:uppercase;}
+.codelnlogo{padding-left:0;font-size:19px;letter-spacing:.4em;font-family:'sans-serif',Montserrat;font-weight:bold;color:#ffffff;text-transform:uppercase;}
+.logoadapt{padding-left:0;padding: 16px 15px;letter-spacing:.1em;color:#ffffff;}
+
+.colorlink{color:black;}
+.brandhome{float:left;padding:16px 15px;font-size:20px;}
+.rowalign{margin-right:0;margin-left:0;}
+.intro{margin-top:8%;}
+.jumbo{margin-bottom:0rem;background-color:#ffffff;border-radius:.0px;}
+.jumbo1{background-color:#ffffff;border-radius:.0px;margin-top:-3%;}
+.jumbo5{background-color:#ffffff;border-radius:.0px;margin-top:-7%;}
+.jumbo8{background-color:#f1f9fb;border-radius:.0px;}
+.jumbo10{background-color:#ffffff;border-radius:.0px;margin-top:-5%;}
+.jumbo4{background-color:#ffffff;border-radius:.0px;margin-top:-7%;}
+.jumbo2{background-color:#e1f2f678;}
+.jumbo7{background-color:#ffffff;border-radius:0px}
+.jumbo3{background-color:rgba(255, 255, 255, 0.47);border-radius:.0px;margin-top:-4%}
+.jumbofoot{margin-bottom:0rem;background-color:#E8EBEF;border-radius:.0px;}
+.beer1{height:100%;width:100%;}
+.nav-colored{background-color:#ffffff;}
+.nav-transparent{background-color:transparent;}
+.how{min-width:20%;}
+.noed{border:0px;}
+.yum{width:100%;}
+.fly{border:0px}
+.benefit{width:30%;margin-bottom:5%;}
+.lang{border:0px solid rgba(0,0,0,.125);}
+
+.ml{border-radius:0px;}
+.price{width: 10em}
+.lis{position:relative;display:block;padding:.75rem 1.25rem;margin-bottom:-1px;background-color:#fff;}
+.proce{margin-left:35%;width:32%;}
+.role{width:40%;margin-left:32%}
+.nav-tabs .nav-link.active{color:#1e50c9;background-color: #ffffff;}
+.nav-tabs .nav-link{border-top-left-radius:0rem;border-top-right-radius:0rem;}
+.nav-tabs .nav-link1.active{color:#1e50c9;background-color: #9247fd;}
+.nav-tabs .nav-link1{border-top-left-radius:0rem;border-top-right-radius:0rem;padding: .5rem 1rem;}
+.nav-tabs .nav-item.show .nav-link1 .nav-link .nav-tabs .nav-link.active .nav-link1.active {
+
+    border: 0;
+}
+.cad{width:50%;margin-left:25%}
+.cad1{width:72%;margin-left:15%}
+.little-box{padding:18px;margin:2px;border:2px solid #6c63ff;height:200px;border-radius:8px;}
+.little-box p{font-size:15px;}
+.little-box h5{padding-bottom:0;}
+.top-logo img{height:50px;width:100px;}
+.forbtn{background-color:#2dc997;color:white;}
+.pulse{box-shadow:0 0 0 0 rgb(132, 134, 255);webkit-perspective:1000;cursor:pointer;-webkit-animation:pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);-moz-animation:pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);-ms-animation:pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);animation:pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);}
+.pulse:hover{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none;}
+@-webkit-keyframes pulse{to{box-shadow:0 0 0 45px rgba(232, 76, 61, 0);}}
+@-moz-keyframes pulse{to{box-shadow:0 0 0 45px rgba(232, 76, 61, 0);}}
+@-ms-keyframes pulse{to{box-shadow:0 0 0 45px rgba(232, 76, 61, 0);}}
+@keyframes pulse{to{box-shadow:0 0 0 45px rgba(232, 76, 61, 0);}}
+.dev-text p{font-size:15px !important;}
+nav ul{list-style-type:none;float:right;}
+nav ul li{float:left;}
+nav ul li a{color:black;padding:0 30px;}
+.contact{top:50%;left:50%;transform:translate(-50%,-50%);height:100%;background:#fff;box-shadow:0 20px 50px rgba(0,0,0,.1);border-radius:0;transition:0.5s;}
+.contact2{background:#fff;box-shadow:0 20px 50px rgba(0,0,0,.1);border-radius:0;transition:0.5s;}
+.check{opacity:0.5;color:#996;}
+.jumbotronmobile{display:block;top:0;transition:.3s cubic-bezier(.25,.8,.5,1)}
+.jumbotron1__wrapper{height:100%;overflow:hidden;position:relative;transition:inherit;width:100%;}
+.jumbotron1__image{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);min-width:100%;will-change:transform;transition:inherit;}
+.jumbotron1__background{position:absolute;top:0;left:0;right:0;bottom:0;contain:strict;transition:inherit;}
+.nav-container{color: #5036ff;transition:background-color 0.2s linear;}
+.nav-container.solid-nav{background-color:#272339;transition:background-color 0.2s linear;}
+.nav-container1{background-color:#272339;transition:background-color 0.2s linear;}
+
+
+.subheading{color:white;font-size:22px!important;font-weight:400;}
+.display-2{color:white;font-weight:400;letter-spacing:normal!important;font-size:45px!important;line-height:48px!important;}
+.display-6{color:white;font-weight:400;letter-spacing:normal!important;font-size:30px!important;line-height:48px!important;}
+.display-7{font-size:20px;line-height:40px}
+.primary{background-color:#2196f3 !important;border-color:#2196f3 !important;}
+.primary1{background-color:#9247fd !important;border-color:#9247fd !important;}
+.btn__content{-ms-flex-align:center;align-items:center;border-radius:inherit;color:white;display:-ms-flexbox;display:flex;height:inherit;-ms-flex:1 0 auto;flex:1 0 auto;-ms-flex-pack:center;justify-content:center;margin:0 auto;padding:0 16px;transition:.3s cubic-bezier(.25,.8,.5,1);white-space:nowrap;width:inherit;}
+
+.loginbar{background-color:#272339;width:100%;}
+.productcard{box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);height: 100%}
+
+
+/* ----------- iPad Pro ----------- */
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 1024px)
+  and (max-device-width: 1366px)
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+}
+
+/* Portrait */
+@media only screen
+  and (min-device-width: 1024px)
+  and (max-device-width: 1366px)
+  and (orientation: portrait)
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+}
+
+/* Landscape */
+@media only screen
+  and (min-device-width: 1024px)
+  and (max-device-width: 1366px)
+  and (orientation: landscape)
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+
+}
+.jumbotron1{
+    display:block;
+    top:0;
+    transition:.3s cubic-bezier(.25,.8,.5,1);
+    height: 42vmax;
+    border-radius: 0;
+    background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85)),
+    url(/static/frontend/images/storm.jpg);
+    background-position: center;
+    color:white !important;
+    background-size: cover;
+}
+.projectsoverlay{
+    background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));
+
+}
+.jumbotronmobile{
+    border-radius: 0;
+    background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85)),
+    url(/static/frontend/images/storm.jpg);
+    background-position: center;
+
+    color:white !important;
+    background-size: cover;
+}
+.jumb{
+    border-radius: 0;
+    background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));
+    background-position: center;
+
+    color:white !important;
+    background-size: cover;
+}
+.jumbotrondev{
+
+    border-radius: 0;
+    background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85)),
+    url(/static/frontend/images/dev.jpg);
+    background-position: center;
+
+    color:white !important;
+    background-size: cover;
+}
+.jumbotroncompetions{
+    display:block;
+    top:0;
+    transition:.3s cubic-bezier(.25,.8,.5,1);
+
+    border-radius: 0;
+    background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85))
+    ;
+
+
+    color:white !important;
+    background-size: cover;
+}
+.jumbotron2{
+    border-radius: 0;
+    background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));
+    color:white !important;
+    padding: 4%;
+
+}
+.trust{
+    width:7em;
+
+}
+.trust1{
+    width: 6em;
+
+
+}
+.navbar-brand1 {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
+
+}
+.news{
+    max-height: 70px;
+    filter: grayscale(100%);
+    opacity: .7;
+}
+.grey{
+
+    filter: grayscale(100%);
+    opacity: .7;
+}
+
+
+.centerimage{
+    margin-left: 33%;
+    margin-right: 33%;
+}
+.module {
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.6)
+    ),
+    url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/skyscrapers.jpg);
+  background-size: cover;
+  width: 300px;
+  height: 200px;
+  margin: 10px 0 0 10px;
+  position: relative;
+  float: left;
+}
+
+.top h2 {
+  color: white;
+  margin: 0;
+  padding: 20px;
+}
+.projectcardoverlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #2e3d49;
+    opacity: .9;
+}
+.bodycard{
+    flex-grow: 1;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+.titlecard{
+    margin: .2rem 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+}
+.brief{
+    z-index: 1;
+}
+.projectcard{
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    background: #2e3d49;
+    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+    /* border-radius: .375rem; */
+    transition: .3s;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 10rem;
+    width: 100%;
+    padding: .4rem 1rem .6rem;
+}
+.showme{
+   display: none;
+    font-size: .8rem;
+    font-weight: 300;
+    line-height: 1.4em;
+    color: white;
+    font-family: "Open Sans",sans-serif;
+ }
+ .showhim:hover .showme{
+   display : block;
+ }
+ .showhim:hover .ok{
+   display : none;
+ }
+.removed{
+    padding-top: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 4rem;
+    padding-left: 2rem;
+}
+#main {
+    height: 100vh;
+}
+.halfway {
+	color: #0000ff;
+}
+.portfo{
+
+    top:0;
+
+
+    background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(60, 60, 77, 0.85)),
+    url(http://s1.1zoom.me/b5050/564/Masks_Painting_Art_African_masks_525450_1920x1080.jpg);
+    background-position: center;
+    color:white !important;
+
+
+
+
+}

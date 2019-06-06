@@ -1,0 +1,316 @@
+{% extends 'recruiterbase.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block title %}
+    project details
+{% endblock %}
+{% block content %}
+    <main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+        <div class="d-none d-lg-block">
+            <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                <h5 >Edit project</h5>
+                <ul class="nav ml-auto">
+
+
+
+                    {% if request.user.is_authenticated %}
+
+                        <li class="nav-item">
+                            <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+                        </li>
+
+                    {% else %}
+
+                        <li class="nav-item">
+                            <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+                        </li>
+                    {% endif %}
+
+
+                </ul>
+            </nav>
+        </div>
+
+        <!-----md devices adaptation------>
+        <div class="container d-lg-none">
+            <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+                <h5 class="logoadapt h5" style="text-decoration: none" href="/home">Project details</h5>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Menu
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'frontend:my-activity' %}" >Ongoing tests</a>
+                                <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
+                                <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
+                            </div>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="d-none d-lg-block" style="margin-top: 8%">
+
+        </div >
+
+        <div class="d-lg-none"  style="margin-top: 7em">
+
+        </div>
+
+
+<form action="{% url 'frontend:editproject' project.id %}" method="post">
+            {% csrf_token %}
+        <div class="row">
+
+
+
+            <div class="col-lg-7 col-md-7" >
+            <h6 class="card-title">Project images</h6>
+                <div class="card mb-4" style="border-radius: 0">
+
+                <div class="row">
+                {% if project.projectimage1 %}
+                    <div class="col-6">
+
+                        <img class=" img-fluid" style="width: 100%" src="{{project.projectimage1}}" alt="Second slide">
+                            {% bootstrap_field form.projectimage1 placeholder=project.projectimage1 show_label=False %}
+
+
+                    </div>
+                {% endif %}
+
+
+                {% if project.projectimage2 %}
+                    <div class="col-6">
+                    {% if project.hasvideo %}
+                         <div class="embed-responsive embed-responsive-16by9">
+  <iframe class="embed-responsive-item" src="{{ project.projectimage2 }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+                        {% else %}
+                        <img class=" img-fluid" style="width: 100%" src="{{project.projectimage2}}" alt="Second slide">
+                    {% endif %}
+
+
+                            {% bootstrap_field form.projectimage2 placeholder=project.projectimage2 show_label=False %}
+
+
+                    </div>
+                {% endif %}
+                {% if project.projectimage3 %}
+                    <div class="col-6">
+
+                        <img class=" img-fluid" style="width: 100%" src="{{project.projectimage3}}" alt="Second slide">
+                            {% bootstrap_field form.projectimage3 placeholder=project.projectimage3 show_label=False %}
+
+
+                    </div>
+                {% endif %}
+                {% if project.projectimage4 %}
+                    <div class="col-6">
+
+                        <img class=" img-fluid" style="width: 100%" src="{{project.projectimage4}}" alt="Second slide">
+                            {% bootstrap_field form.projectimage4 placeholder=project.projectimage4 show_label=False %}
+
+
+                    </div>
+                {% endif %}
+                {% if project.projectimage5 %}
+                    <div class="col-6">
+
+                        <img class=" img-fluid" style="width: 100%" src="{{project.projectimage5}}" alt="Second slide">
+                            {% bootstrap_field form.projectimage5 placeholder=project.projectimage5 show_label=False %}
+
+
+                    </div>
+                {% endif %}
+                {% if project.projectimage6 %}
+                    <div class="col-6">
+
+                        <img class=" img-fluid" style="width: 100%" src="{{project.projectimage6}}" alt="Second slide">
+                            {% bootstrap_field form.projectimage6 placeholder=project.projectimage6 show_label=False %}
+
+
+                    </div>
+                {% endif %}
+                {% if project.projectimage7 %}
+                    <div class="col-6">
+
+                        <img class=" img-fluid" style="width: 100%" src="{{project.projectimage7}}" alt="Second slide">
+                            {% bootstrap_field form.projectimage7 placeholder=project.projectimage7 show_label=False %}
+
+
+                    </div>
+                {% endif %}
+                {% if project.projectimage8 %}
+                    <div class="col-6">
+
+                        <img class=" img-fluid" style="width: 100%" src="{{project.projectimage8}}" alt="Second slide">
+                            {% bootstrap_field form.projectimage8 placeholder=project.projectimage8 show_label=False %}
+
+
+                    </div>
+                {% endif %}
+                {% if project.projectimage9 %}
+                    <div class="col-6">
+
+                        <img class=" img-fluid" style="width: 100%" src="{{project.projectimage9}}" alt="Second slide">
+                            {% bootstrap_field form.projectimage9 placeholder=project.projectimage9 show_label=False %}
+
+
+                    </div>
+                {% endif %}
+                {% if project.projectimage10 %}
+                    <div class="col-6">
+
+                        <img class=" img-fluid" style="width: 100%" src="{{project.projectimage10}}" alt="Second slide">
+                            {% bootstrap_field form.projectimage10 placeholder=project.projectimage10 show_label=False %}
+
+
+                    </div>
+                {% endif %}
+
+
+                </div>
+
+
+                </div>
+            <div class="card" style="border-radius: 0">
+                <div class="card-body">
+                    <label>Project name</label>
+                    {% bootstrap_field form.name show_label=False  placeholder=project.name %}
+                    <label>Level </label>
+                    {% bootstrap_field form.level placeholder=project.level show_label=False %}
+                    <label>Project brief </label>
+                    {% bootstrap_field form.brief placeholder=project.brief show_label=False %}
+                    <label>Description </label>
+                    {% bootstrap_field form.description placeholder=project.description show_label=False %}
+                    {% bootstrap_field form.hasvideo  %}
+
+                </div>
+            </div>
+
+
+            </div>
+            <div class="col-lg-5 col-md-5" >
+            <h6 class="card-title">Requirements</h6>
+                <div class="card" style="height: available;border-radius: 0" >
+
+                    <div class="card-body">
+                        {% if project.requirement1 %}
+                            {% bootstrap_field form.requirement1 placeholder=project.requirement1 show_label=False %}
+                        {% endif %}
+                    {% if project.requirement2 %}
+
+                                {% bootstrap_field form.requirement2 placeholder=project.requirement2 show_label=False %}
+
+
+                            {% endif %}
+                    {% if project.requirement3 %}
+
+                                {% bootstrap_field form.requirement3 placeholder=project.requirement3 show_label=False %}
+
+
+                            {% endif %}
+                    {% if project.requirement4 %}
+
+                                {% bootstrap_field form.requirement4 placeholder=project.requirement4 show_label=False %}
+
+
+                            {% endif %}
+                    {% if project.requirement5 %}
+
+                                {% bootstrap_field form.requirement5 placeholder=project.requirement5 show_label=False %}
+
+
+                            {% endif %}
+                    {% if project.requirement6 %}
+
+                                {% bootstrap_field form.requirement6 placeholder=project.requirement6 show_label=False %}
+
+
+                            {% endif %}
+                    {% if project.requirement7 %}
+
+                                {% bootstrap_field form.requirement7 placeholder=project.requirement7 show_label=False %}
+
+
+                            {% endif %}
+                    {% if project.requirement8 %}
+
+                                {% bootstrap_field form.requirement8 placeholder=project.requirement8 show_label=False %}
+
+
+                            {% endif %}
+                    {% if project.requirement9 %}
+
+                                {% bootstrap_field form.requirement9 placeholder=project.requirement9 show_label=False %}
+
+
+                            {% endif %}
+                    {% if project.requirement10 %}
+
+                                {% bootstrap_field form.requirement10 placeholder=project.requirement10 show_label=False %}
+
+
+                            {% endif %}
+                    {% bootstrap_field form.framework %}
+                    {% bootstrap_field form.devtype %}
+                    {% bootstrap_field form.projecttype %}
+                    {% bootstrap_field form.owner %}
+
+
+
+
+                            <div style="text-align: right">
+                               <a class="btn btn-warning" href="{% url 'frontend:deleteproject' project.id %}" >
+                                   Delete project
+                              </a>
+                                <button type="submit" class="btn btn-success">Submit changes</button>
+                            </div>
+
+
+
+
+
+
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </form>
+        <br>
+        <br>
+    </main>
+{% endblock %}

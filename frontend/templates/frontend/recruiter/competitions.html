@@ -1,0 +1,75 @@
+{% extends 'base3.html' %}
+{% block title %}
+    Competitions
+{% endblock %}
+{% load static %}
+{% block content %}
+
+    <!---- Hero image intro----->
+    <div class="jumbotron jumbotroncompetions  ">
+        <div class="container  " style="height: 40vm">
+            <h4 class="mt-5 col-12 col-lg-6 col-xl-6 col-sm-12 col-md-6 d-none d-lg-block"
+                style="font-weight: 700;font-size: 3.0rem;">NATTERBASE  CHALLENGE</h4>
+            <h4 class=" col-12 col-lg-6 col-xl-6 col-sm-12 col-md-6 d-lg-none"
+                style="font-weight: 700;margin-top: 5rem">NATTERBASE  CHALLENGE</h4>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+    <!-----how to apply------->
+    <div class="position-relative overflow-hidden ">
+        <section>
+            <div class="row" style="margin-left: 0;margin-right: 0">
+                <div class="col-12 col-lg-6 col-md-12 col-sm-12 ml-auto mr-auto text-center">
+                    <h2 class="d-none d-lg-block" style="margin: 50px auto 40px auto;">Here’s What you have to do</h2>
+                    <h5 class="d-lg-none" style="margin: 50px auto 40px auto;">Here’s What you have to do</h5>
+                </div>
+
+            </div>
+            <div class="col-12 col-lg-6 col-md-12 col-sm-12 ml-auto mr-auto">
+
+                <ol class="ml-lg-5 d-none d-lg-block">
+                    <li style="font-size: 20px;color: #4c4d4f;"><a href="{% url 'account_signup' %}">Register or
+                        login</a> as a Developer
+                    </li>
+                    <li style="font-size: 20px;color: #4c4d4f;">Fill out your profile</li>
+                    <li style="font-size: 20px;color: #4c4d4f;">Complete the Nodejs Natterbase Challenge quiz from the
+                        <a href="{% url 'frontend:calltoapply' %}"> ‘Companies recruiting’</a> section
+                    </li>
+                    <li style="font-size: 20px;color: #4c4d4f;">The apply button will become active(blue) submit your
+                        application and a Codeln
+                        representative will contact you shortly
+                    </li>
+
+                </ol>
+                <ol class="d-lg-none ml-md-5 ">
+                    <li style="font-size: 16px;color: #4c4d4f;"><a href="{% url 'account_signup' %}">Register or
+                        login</a> as a Developer</li>
+                    <li style="font-size: 16px;color: #4c4d4f;">Fill out your profile</li>
+                    <li style="font-size: 16px;color: #4c4d4f;">Complete the Nodejs Natterbase Challenge quiz from the
+                        <a href="{% url 'frontend:calltoapply' %}"> ‘Companies recruiting’</a> section
+                    </li>
+                    <li style="font-size: 16px;color: #4c4d4f;">The apply button will become active(blue) submit your
+                        application and a Codeln
+                        representative will contact you shortly
+                    </li>
+
+
+                </ol>
+
+
+            </div>
+        </section>
+    </div>
+
+
+
+
+
+{% endblock %}

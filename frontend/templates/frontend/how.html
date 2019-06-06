@@ -1,0 +1,163 @@
+{% extends 'base3.html' %}
+{% block title %}
+index
+{% endblock %}
+{%load static %}
+{% block content %}
+<div class="jumbotron jumbotron2">
+        <div class="container">
+          <div class="">
+
+            <div class=" h3 text-center d-none d-lg-block " style="color: white">How it works</div>
+
+              <div class="d-lg-none h5 text-center" style="color: white;margin-top: 4em;">How it works</div>
+        </div>
+        </div>
+      </div>
+    <div class="container-fluid">
+
+    <div class="section">
+    <div class="row " style="margin: 0">
+        <div class="col-lg-6 col-sm-12 col-md-6 col-xl-6 col-12">
+            <div >
+                <b class=" h5 text-center">Pick a Test </b>
+                <p>
+                    We offer  project-based tests which represents real world tasks.
+                    From research, these kinds of tests have proven to be a true test of a Programmers prowess.
+                    The Projects are workplace sample tests that truely emulate the tasks that candidates will be employed to perform.
+                    These tests are segmented into various categories you can pick from: full stack, frontend, backend and mobile.
+
+                </p>
+            </div>
+
+
+
+        </div>
+        <div class="col-lg-6 col-sm-12 col-md-6 col-xl-6 col-12">
+            <div class="card" style="border: 0" >
+                <img class="img-fluid" src="../../static/frontend/images/how/type.PNG" alt="Card image cap">
+            </div>
+
+        </div>
+    </div>
+    <hr>
+
+
+    <div class="row" style="margin: 0">
+        <div class="col-lg-6 col-sm-12 col-md-6 col-xl-6 col-12 order-2 order-sm-2 order-md-1 order-lg-1 order-xl-1">
+            <div class="card"  style="border: 0">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="../../static/frontend/images/video/candidate.gif"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-12 col-xl-6 col-12 col-md-6 order-md-2 order-1 order-lg-2 order-xl-2 order-sm-1">
+            <div style="margin-top: 1em">
+                <b class="display-7 h6">Invite Candidates </b>
+                <p>
+                    Easily add candidates list, candidates are automatically invited to an online
+                    workspace where they are to build the project. This workspace is timed and monitored for cheat detection.
+                    We verify candidates identity before they begin the test and monitor them throughout the test session.
+
+                </p>
+            </div>
+
+
+        </div>
+    </div>
+
+    <hr>
+    <div class="row" style="margin: 0">
+        <div class="col-lg-6 col-sm-12 col-md-6 col-xl-6">
+            <div style="">
+                <b class="display-7 h6">Receive Reports</b>
+                <p>
+                    Once candidates are done with the test, we conduct code analysis and evaluate their coding skills
+                    based on language specific standards and best practices.
+                    Some of the key metrics we measure are: code quality, problem solving,
+                    language knowledge and code security.<br>
+                    <a class="d-none d-sm-block d-lg-block d-md-block" href="/sample">See sample report</a>
+
+
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-6 d-none d-sm-block d-lg-block d-md-block col-sm-12 col-md-6 col-xl-6">
+            <div class="card"  style="border: 0">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item"  src="../../static/frontend/images/how/ile.gif"></iframe>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+    </div>
+
+
+    <!--footer-->
+    <footer class="jumbotron jumbofoot">
+    <div class="container">
+        <div class="row">
+
+        <div class="col-6 col-md">
+          <h5>Menu</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="/pricing">Pricing</a></li>
+            <li><a class="text-muted" href="/accounts/login/">Testing</a></li>
+            <li><a class="text-muted" href="{% url 'transactions:sourcing' %}">Sourcing</a></li>
+              <li><a class="text-muted" href="/dev">Developer</a></li>
+
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Company</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="/privacy">Privacy</a></li>
+            <li><a class="text-muted" href="/terms">Terms</a></li>
+
+
+          </ul>
+        </div>
+        <div class="col col-md">
+          <h5>Contact</h5>
+          <ul class="list-unstyled text-small">
+              <li>
+              <a href="mailto:info@codeln.com" target="_top">
+                  <i><span data-feather="mail"></span> </i>
+              </a>
+              <li>
+                <a class="text-muted" href="https://www.linkedin.com/company/codeln/" target="_blank">
+                <i><span data-feather="linkedin"></span></i>
+                </a>
+            </li>
+            <li>
+                <a class="text-muted" href="https://twitter.com/Codeln_spaces" target="_blank">
+                <i><span data-feather="twitter"></span></i>
+                </a>
+            </li>
+            <li>
+                <a class="text-muted" href="https://www.facebook.com/CodelnSpaces/" target="_blank">
+                <i><span data-feather="facebook"></span></i>
+                </a>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

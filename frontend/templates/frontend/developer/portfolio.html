@@ -1,0 +1,546 @@
+{% extends 'candidatesbase.html' %}
+{% load bootstrap4 %}
+{% block title %}
+    My portolio
+{% endblock %}
+{% load static %}
+{% block content %}
+    <main role="main" class="col-md-12 col-lg-10 ml-lg-auto col-12  px-4 " xmlns="http://www.w3.org/1999/html">
+        <div class="d-none d-lg-block">
+            <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                <h5>Portfolio</h5>
+                <ul class="nav ml-auto">
+
+
+                    {% if request.user.is_authenticated %}
+
+
+                        <li class="nav-item">
+                            <a href="{% url 'account_logout' %}" style="color: black" class="nav-link">Logout</a>
+                        </li>
+
+                    {% else %}
+
+                        <li class="nav-item">
+                            <a href="{% url 'account_login' %}" style="color: black" class="nav-link">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'account_signup' %}" style="color: black" class="nav-link">Register</a>
+                        </li>
+                    {% endif %}
+
+
+                </ul>
+            </nav>
+        </div>
+
+        <!-----md devices adaptation------>
+        <div class="container d-lg-none">
+            <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+                <a class="logoadapt h5" style="text-decoration: none" href="/home">Portfolio</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdown"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Sidebar menu options
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/">Dashboard</a>
+                                <a class="dropdown-item" href="{% url 'frontend:buildproject' %}">Build a Project</a>
+                                <a class="dropdown-item" href="{% url 'students:tests' %}">Skill assessment</a>
+                                <a class="dropdown-item" href="{% url 'frontend:calltoapply' %}">Companies
+                                    recruiting</a>
+                                <a class="dropdown-item" href="/update_profile/">My profile</a>
+                            </div>
+                        </li>
+                        {% if request.user.is_authenticated %}
+
+                            <li class="nav-item">
+                                <a href="{% url 'account_logout' %}" style="color: white" class="nav-link">Log out</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'account_login' %}" style="color: white" class="nav-link">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account_signup' %}" style="color: white" class="nav-link">Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="d-none d-lg-block" style="margin-top: 6%">
+
+        </div>
+        <div class="d-lg-none" style="margin-top: 7em">
+
+        </div>
+        <div class="row ">
+
+            <div class="col-lg-4 col-12 d-none d-lg-block " style="position: fixed">
+                <div class="shadow-sm p-3  mb-5 " style="width: 80%">
+
+
+                    <h5>Bio</h5>
+                    <hr>
+
+
+
+
+
+
+
+
+
+                    {% if not request.user.profile.about %}
+
+                        <p class="text-muted">Tell us something about yourself
+                            <span style="color: #1e50c9" data-feather="plus" data-toggle="modal"
+                                  data-target="#exampleModal2">
+                    Bio
+                </span>
+
+                        </p>
+                    {% else %}
+
+
+
+                        <p class="text-muted">{{ request.user.profile.about }}
+                            <span style="color: #1e50c9" data-feather="edit-2" data-toggle="modal"
+                                  data-target="#exampleModal2">
+                    Bio
+                </span>
+                        </p>
+
+
+                    {% endif %}
+
+
+
+
+
+
+                    <p>Preferred work type : <span class="badge btn-primary"
+                                                   style="background-color: #b627a1">{{ request.user.profile.availabilty }}</span>
+                    </p>
+
+                </div>
+
+
+            </div>
+            <div class=" col d-lg-none mb-3">
+                <div class="shadow-sm p-3 ">
+
+                    <h5>Bio</h5>
+                    <hr>
+
+                    {% if not request.user.profile.about %}
+
+                        <p class="text-muted">Tell us something about yourself
+                            <span style="color: #1e50c9" data-feather="plus" data-toggle="modal"
+                                  data-target="#exampleModal2">
+                    Bio
+                </span>
+
+                        </p>
+                    {% else %}
+                        <p class="text-muted">{{ request.user.profile.about }}
+                            <span style="color: #1e50c9" data-feather="edit-2" data-toggle="modal"
+                                  data-target="#exampleModal2">
+                    Bio
+                </span>
+                        </p>
+
+
+                    {% endif %}
+
+                    <p>Preferred work type : <span class="badge btn-primary"
+                                                   style="background-color: #b627a1">{{ request.user.profile.availabilty }}</span>
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="col-lg-8 col-12 d-lg-none">
+
+
+                <div class="shadow-sm p-3 mb-5">
+
+                    <h5> Verified skills</h5>
+                    <small class="form-text text-muted">Based on tests taken on codeln</small>
+
+
+                    <hr>
+
+                    {% if skills %}
+                        {% for skill in skills %}
+                            <span class="badge btn-primary" style="background-color: #b627a1">{{ skill }}</span>
+                        {% endfor %}
+                    {% else %}
+                        <span class="badge btn-primary" style="background-color: #28bbbb">Candidate hasn't taken any tests</span>
+                    {% endif %}
+
+
+                </div>
+
+                <!------ projects------>
+                <div class="shadow-sm  p-3 mb-5 " style="margin-top: 6%">
+                    <nav class="navbar portolio ">
+                        <h5>My Projects</h5>
+
+
+                        <div>
+                            <ul class="nav ml-auto">
+
+                                <li class="nav-item" style="color: #1e50c9">
+               <span data-feather="plus" data-toggle="modal"
+                     data-target="#exampleModal">
+                    Add project
+                </span>
+                                </li>
+
+
+                            </ul>
+
+                        </div>
+                    </nav>
+
+
+                    <hr>
+
+
+
+                    {% if verified_projects %}
+                        {% for verified_project in verified_projects %}
+                            <div>
+                                <p class="font-weight-bold">{{ verified_project.title }}</p>
+                                <p class="text-muted">
+                                    {{ verified_project.description }}
+                                </p>
+                                {% if verified_project.verified %}
+
+                                    <div data-toggle="tooltip" data-placement="top"
+                                         title="Only visible to you">
+                                            <span class="badge btn-primary mt-2" style="background-color: #28bbbb">
+                                            Verified </span>
+                                        <span data-feather="help-circle"></span>
+                                    </div>
+                                {% else %}
+                                    <span class="badge btn-primary mt-2"
+                                          style="background-color: #b627a1">
+                                            Unverified
+                                </span>
+                                    <span data-feather="help-circle">
+
+
+                                        </span>
+                                    <span>
+
+                                        <a href="{% url 'frontend:editportfolioproject' verified_project.id %}"
+                                        ><span data-feather="edit-2">Edit</span>
+                                        </a>
+                                    </span>
+
+
+                                {% endif %}
+                                <p><a target="_blank" href="{{ verified_project.demo_link }}">See Project</a></p>
+                                <hr>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-12 text-center">No projects onboarded or verified</div>
+                    {% endif %}
+
+                </div>
+
+
+                <!------ work experiences------>
+                <div class="shadow-sm p-3  mb-5  mt-5">
+                    <nav class="navbar portolio ">
+                        <h5>Work experience</h5>
+
+
+                        <div>
+                            <ul class="nav ml-auto">
+
+                                <li class="nav-item" style="color: #1e50c9">
+               <span data-feather="plus" data-toggle="modal"
+                     data-target="#exampleModal1">
+                    Add work
+                </span>
+                                </li>
+
+
+                            </ul>
+
+                        </div>
+                    </nav>
+
+                    <hr>
+
+
+                    {% if experiences %}
+                        {% for experience in experiences %}
+                            <div>
+                                <p> {{ experience.title|capfirst }}
+                                <p><span data-feather="briefcase"></span> {{ experience.company|capfirst }}
+                                    <span data-feather="calendar"></span> {{ experience.duration }} months
+                                    <span data-feather="map-pin"></span> {{ experience.location.name }}</p>
+                                <p class="text-muted">{{ experience.description }}</p>
+                                <hr>
+                            </div>
+
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-12 text-center">No experience added yet</div>
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+            <div class="col-lg-8 col-12 d-none d-lg-block" style="margin-left: 33%">
+
+
+                <div class="shadow-sm p-3 mb-5">
+
+                    <h5> Verified skills</h5>
+                    <small class="form-text text-muted">Based on tests taken on codeln</small>
+
+
+                    <hr>
+
+                    {% if skills %}
+                        {% for skill in skills %}
+                            <span class="badge btn-primary" style="background-color: #b627a1">{{ skill }}</span>
+                        {% endfor %}
+                    {% else %}
+                        <span class="badge btn-primary" style="background-color: #28bbbb">Candidate hasn't taken any tests</span>
+                    {% endif %}
+
+
+                </div>
+
+                <!------ projects------>
+                <div class="shadow-sm  p-3 mb-5 " style="margin-top: 6%">
+                    <nav class="navbar portolio ">
+                        <h5>My Projects</h5>
+
+
+                        <div>
+                            <ul class="nav ml-auto">
+
+                                <li class="nav-item" style="color: #1e50c9">
+               <span data-feather="plus" data-toggle="modal"
+                     data-target="#exampleModal">
+                    Add project
+                </span>
+                                </li>
+
+
+                            </ul>
+
+                        </div>
+                    </nav>
+
+
+                    <hr>
+
+
+
+                    {% if verified_projects %}
+                        {% for verified_project in verified_projects %}
+                            <div>
+                                <p class="font-weight-bold">{{ verified_project.title }}</p>
+                                <p class="text-muted">
+                                    {{ verified_project.description }}
+                                </p>
+                                {% if verified_project.verified %}
+
+                                    <div data-toggle="tooltip" data-placement="top"
+                                         title="Only visible to you">
+                                            <span class="badge btn-primary mt-2" style="background-color: #28bbbb">
+                                            Verified </span>
+                                        <span data-feather="help-circle"></span>
+                                    </div>
+                                {% else %}
+                                    <span class="badge btn-primary mt-2"
+                                          style="background-color: #b627a1">
+                                            Unverified
+                                </span>
+                                    <span data-feather="help-circle">
+
+
+                                        </span>
+                                    <span>
+
+                                        <a href="{% url 'frontend:editportfolioproject' verified_project.id %}"
+                                        ><span data-feather="edit-2">Edit</span>
+                                        </a>
+                                    </span>
+
+
+                                {% endif %}
+                                <p><a target="_blank" href="{{ verified_project.demo_link }}">See Project</a></p>
+                                <hr>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-12 text-center">No projects onboarded or verified</div>
+                    {% endif %}
+
+                </div>
+
+
+                <!------ work experiences------>
+                <div class="shadow-sm p-3  mb-5  mt-5">
+                    <nav class="navbar portolio ">
+                        <h5>Work experience</h5>
+
+
+                        <div>
+                            <ul class="nav ml-auto">
+
+                                <li class="nav-item" style="color: #1e50c9">
+               <span data-feather="plus" data-toggle="modal"
+                     data-target="#exampleModal1">
+                    Add work
+                </span>
+                                </li>
+
+
+                            </ul>
+
+                        </div>
+                    </nav>
+
+                    <hr>
+
+
+                    {% if experiences %}
+                        {% for experience in experiences %}
+                            <div>
+                                <p> {{ experience.title|capfirst }}
+                                <p><span data-feather="briefcase"></span> {{ experience.company|capfirst }}
+                                    <span data-feather="calendar"></span> {{ experience.duration }} months
+                                    <span data-feather="map-pin"></span> {{ experience.location.name }}</p>
+                                <p class="text-muted">{{ experience.description }}</p>
+                                <hr>
+                            </div>
+
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-12 text-center">No experience added yet</div>
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+
+
+            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add bio</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{% url 'frontend:about' %}" method="post">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Bio</label>
+                                    <textarea name="about" class="form-control" id="exampleFormControlTextarea1" rows="4">{{ request.user.profile.about }}</textarea>
+                                </div>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add project</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{% url 'frontend:newproject' %}" method="post">
+                            {% csrf_token %}
+                            <div class="modal-body">
+
+                                {% bootstrap_field form.title placeholder=False %}
+                                {% bootstrap_field form.description placeholder=False %}
+
+                                {% bootstrap_field form.demo_link placeholder=False %}
+                                {% bootstrap_field form.repository_link placeholder=False %}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add work experience</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{% url 'frontend:experience' %}" method="post">
+                            {% csrf_token %}
+                            <div class="modal-body">
+
+                                {% bootstrap_field experience_form.title placeholder=False %}
+                                {% bootstrap_field experience_form.description placeholder=False %}
+                                {% bootstrap_field experience_form.company placeholder=False %}
+                                {% bootstrap_field experience_form.location placeholder=False %}
+                                <label>Duration in months</label>
+                                {% bootstrap_field experience_form.duration placeholder=False show_label=False %}
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+    </main>
+{% endblock %}

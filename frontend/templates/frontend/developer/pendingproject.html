@@ -1,0 +1,142 @@
+{% extends 'candidatesbase.html' %}
+{% load bootstrap4 %}
+{% block title %}
+pendingproject
+{% endblock %}
+{%load static %}
+{% block content %}
+<main role="main" class="col-md-10 col-lg-10 ml-lg-auto   px-4 ">
+    <div class="d-none d-lg-block">
+        <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                    <h5 >Pending invites</h5>
+                    <ul class="nav ml-auto">
+
+
+
+            {% if request.user.is_authenticated %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+            </li>
+
+            {% else %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+            </li>
+            <li class="nav-item">
+                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+            </li>
+            {% endif %}
+
+
+    </ul>
+                </nav>
+    </div>
+
+    <!-----md devices adaptation------>
+    <div class="container d-lg-none">
+        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+            <a class="logoadapt h5" style="text-decoration: none" href="">Pending invites</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sidebar menu options
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/">Dashboard</a>
+                            <a class="dropdown-item" href="{% url 'frontend:buildproject' %}">Build a Project</a>
+                            <a class="dropdown-item" href="{% url 'students:tests' %}">Skill assessment</a>
+                            <a class="dropdown-item" href="{% url 'frontend:calltoapply' %}">Companies recruiting</a>
+                            <a class="dropdown-item" href="/update_profile/">My profile</a>
+                        </div>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+<div class="d-none d-lg-block" style="margin-top: 8%">
+
+</div >
+
+<div class="d-lg-none"  style="margin-top: 7em">
+
+</div>
+    <div class="row">
+        <div class="col-lg" style="text-align: left">
+
+
+            <div class="card5" style="text-align: left">
+                <div class="card-body">
+
+                    <h5 class="card-subtitle mb-2 ">{{ transaction.project.name }}</h5>
+
+
+                    <hr>
+                    <p class="card-text ">
+                        <span class="badge badge-primary">Level :{{ transaction.project.level }} </span>
+                    </p><p>
+                    {{ transaction.project.description }}
+
+
+                </p>
+
+                    <p></p>
+
+
+                    <h5 class="card-subtitle mb-2 ">Enviroment variables</h5>
+                    <hr>
+                    <p class="card-text ">
+                    </p><ul>
+                    <li>Framework to be used : {{ transaction.framework }}</li>
+
+
+                </ul>
+                    {% if acceptedinvites %}
+                        already accepted
+                    {% else %}
+
+
+                        <a href="/projectinvites/{{ transaction.id }}">
+
+                        <button type="submit" class="btn btn-primary">Accept project</button>
+
+                    </a>
+                    {% endif %}
+
+
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</main>
+
+{% endblock %}

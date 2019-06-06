@@ -1,0 +1,409 @@
+{% extends 'base.html' %}
+{% block title %}
+Hire for skill
+{% endblock %}
+{%load static %}
+{% block content %}
+
+
+
+    <div class="jumbotron jumbotron1 " style="margin-bottom: 1em">
+        <div class="container">
+          <div class="mt-5">
+
+            <div class="display-2 h1 text-center d-none d-lg-block " style="color: white;margin-top: 12%">Hire Skilled Software Developers — Faster</div>
+
+            <div class="subheading d-none d-lg-block text-center">Codeln Offers Monitored Workspaces To Verify Coding Skills Using Real World Projects.  </div>
+            <!----for md to sm---->
+              <div class="d-lg-none h5 text-center" style="color: white;margin-top: 4em;">Empower your workforce with better hires</div>
+
+            <!----for lg to xl---->
+              <p class="text-center mt-4">
+
+                 <button type="button" onclick="location.href='{% url 'account_login' %}';" value="Go to login" class="btn theme--dark primary " style="border-radius: 0;margin: auto">
+                <div class="btn__content" href="{% url 'account_login' %}">
+                Get started
+                </div>
+            </button>
+              </p>
+
+
+
+        </div>
+        </div>
+      </div>
+<!--media-->
+<div class="position-relative overflow-hidden d-none d-lg-block ">
+    <section>
+
+    <div class="row" style="margin-left: 0;margin-right: 0">
+        <div class="col-sm-6 col-md-3  col-lg-3">
+            <a target="_blank" href="https://www.forbes.com/sites/tobyshapshak/2018/09/10/renowned-african-incubator-mest-celebrates-10-years-with-700000-investment/#6821e7772af5" class="centerimage">
+                <img class="news" src="{% static "frontend/images/home/forbes-hover.png" %}" alt="Forbes" style="margin-top: 2em">
+            </a>
+        </div>
+        <div class="col-sm-6 col-md-3   col-lg-3">
+            <a target="_blank" href="https://techcrunch.com/2018/12/11/introducing-the-startups-and-agenda-for-startup-battlefield-africa/" class="centerimage">
+                <img class="news" src="{% static "frontend/images/home/techcrunch-hover.png" %}" alt="Techcrunch" style="margin-top: 2em" >
+            </a>
+        </div>
+        <div class="col-sm-6 col-md-3  col-lg-3">
+            <a target="_blank" href="https://www.seedstarsworld.com/company/61574" class="centerimage">
+                <img class="news" src="{% static "frontend/images/home/seed.png" %}" alt="Seedstars" >
+            </a>
+        </div>
+        <div class="col-sm-6 col-md-3   col-lg-3">
+            <a target="_blank" href="http://disrupt-africa.com/2018/09/mest-invests-700k-in-7-african-tech-startups/" class="centerimage">
+                <img class="news" src="{% static "frontend/images/home/DA-logo-on-transparent-with-tag-small-e1414593297539.png" %}" alt="Disrupt africa" >
+            </a>
+        </div>
+
+
+    </div>
+
+    </section>
+</div>
+
+
+
+
+
+
+    <!--products-->
+    <div class="position-relative overflow-hidden ">
+    <section>
+    <div class="row mt-5" style="margin-left: 0;margin-right: 0">
+        <div class="col-lg-12 text-center h3">
+            Products
+
+        </div>
+
+    </div>
+    <div class="row d-flex justify-content-center " style="margin-top: 2%;margin-left: 0;margin-right: 0">
+
+        <div class="col-lg-4 col-md-6 col-sm-6" style="margin-bottom: 2%;">
+            <div class="productcard">
+                <div class="d-xl-none" style="background-color: #02ccba;height: 1rem"></div>
+                <div class="row  p-1" style="margin-right: 0;margin-left: 0">
+                <div class="col-4 d-none d-lg-block" >
+                    <img class="card-img-top product mt-5 " style="margin-right: auto;margin-left: auto" src="../../static/frontend/images/computer.svg" alt="Card image cap">
+
+
+                </div>
+                <div class="col">
+                    <h5 class="card-title" style="margin-top: 1em">Screening</h5>
+                    <p class="card-text ">Our testing platform helps you validate the coding skills and competency of Programmers.</p>
+                    {% if request.user.profile.user_type == 'developer' %}
+                        <a class="btn theme--dark primary mt-3 " style="border-radius: 0;color: white" onclick="alert('available only for recruiters')">Start testing</a>
+                    {% elif request.user.profile.user_type == 'recruiter' %}
+                        <a class="btn theme--dark primary mt-3 " style="border-radius: 0;color: white" href="{% url 'frontend:index' %}">Start testing</a>
+                    {% else %}
+                        <a class="btn theme--dark primary mt-3 " style="border-radius: 0;color: white" href="{% url 'account_login' %}">Start testing</a>
+
+                    {% endif %}
+
+
+                    <p></p>
+                </div>
+            </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-6 " style="margin-bottom: 2%;">
+            <div class="productcard">
+                <div class="d-xl-none" style="background-color: #be85e9;height: 1rem"></div>
+                <div class="row  p-1" style="margin-right: 0;margin-left: 0" >
+                <div class="col-4 d-none d-lg-block" >
+                    <img class="card-img-top product mt-5" style="margin-right: auto;margin-left: auto" src="../../static/frontend/images/pick.svg" alt="Card image cap">
+
+                </div>
+                <div class="col">
+                    <h5 class="card-title" style="margin-top: 1em">Sourcing</h5>
+                    <p class="card-text">Get quick access to a pool of tested and certified Programmers
+                            based on your job requirement.</p>
+
+                    {% if request.user.profile.user_type == 'developer' %}
+                        <a class="btn theme--dark primary mt-3 " style="border-radius: 0;color: white" onclick="alert('available only for recruiters')">Start sourcing</a>
+                    {% elif request.user.profile.user_type == 'recruiter' %}
+                        <a class="btn theme--dark primary mt-3 " style="border-radius: 0;color: white" href="{% url 'transactions:sourcing' %}">Start sourcing</a>
+                    {% else %}
+                        <a class="btn theme--dark primary mt-3 " style="border-radius: 0;color: white" href="{% url 'account_login' %}">Start sourcing</a>
+
+                    {% endif %}
+
+                    <p></p>
+                </div>
+
+            </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+</section>
+    </div>
+
+    <!--call to action how it works-->
+    <div class="position-relative overflow-hidden text-center jumbo2 jumbotron ">
+            <div class="row" style="margin-left: 0;margin-right: 0;margin-top: 2%">
+        <div class="col-md-6 col-lg-6 col-xl-6 text-center" style="margin-left: auto;margin-right: auto">
+            <p class="h3">Curious About Our Screening Process?
+                <br>
+                <a class="btn btn-primary mt-3 " style="border-radius: 0;color: white" href="/howitworks">See How It Works</a>
+
+            </p>
+
+        </div>
+
+    </div>
+    </div>
+
+     <!--benefits-->
+    <div class="position-relative overflow-hidden  ">
+
+    <div class="row" style="margin-left: 0;margin-right: 0">
+        <div class="col-lg-12 text-center h3">
+            Why CodeLn
+        </div>
+    </div>
+    <div class="row" style="margin-left: 0;margin-right: 0">
+        <div class="col-lg-5 d-none d-lg-block">
+            <div class="card noed">
+                <img class="card-img-top yum text-center" src="../../static/frontend/images/ill/stats.svg" alt="Card image benefits">
+
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="row">
+                <div class="col-12 col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="card noed text-sm-center text-md-center text-lg-left text-center  " style="">
+                        <div class="card-body">
+                            <div>
+                                <img class="text-center  benefit img-fluid " src="../../static/frontend/images/home/bank.svg" alt="Card image cost">
+                            </div>
+                            <h6 class="card-subtitle mb-2   ">Reduce Recruitment Cost</h6>
+                            <p class="card-text text-muted">
+                                Save money, reduce overall recruitment cost.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="card noed text-sm-center text-md-center text-lg-left text-center  " style="">
+                        <div class="card-body">
+                            <div>
+                                <img class="text-center  benefit img-fluid" src="../../static/frontend/images/home/time.svg" alt="Card image time">
+                            </div>
+                            <h6 class="card-subtitle mb-2   ">Reduce Recruitment time </h6>
+                            <p class="card-text text-muted">Save time, reduce overall hiring time.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="card noed text-sm-center text-md-center text-lg-left text-center " style="">
+                        <div class="card-body">
+                            <div>
+                                <img class="text-center  benefit img-fluid" src="../../static/frontend/images/home/screen.svg" alt="Card image skills">
+                            </div>
+                            <h6 class="card-subtitle mb-2   ">Validate Candidate’s Skills</h6>
+                            <p class="card-text text-muted">Verify a Candidate’s ability to build real-world projects.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                    <div class="card noed text-sm-center text-md-center text-lg-left text-center  " style="">
+                        <div class="card-body">
+                            <div>
+                                <img class=" benefit img-fluid" src="../../static/frontend/images/home/workplace.svg"
+                                     alt="Card image quality">
+                            </div>
+                            <h6 class="card-subtitle mb-2  ">Improve the quality of hire</h6>
+                            <p class="card-text text-muted">
+                                Hiring a skills-fit reduces Employee turnover rate.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <!--Languages and frameworks-->
+
+    <div class="jumbo2 jumbotron" style="margin-top: 4em">
+    <div class="row" style="margin-left: 0;margin-right: 0">
+        <div class="col-lg-12 col-sm-12 col-md-12 col-12 text-center ">
+            <h3>We support</h3>
+            <p class="h5 text-muted text-center">Programming Languages, Frameworks, and Libraries</p>
+        </div>
+
+    </div>
+
+    <div class="row ml-lg-5 ml-md-5 ml-sm-5 ml-5 " >
+        <div class="col-lg-2 col-md-2 col-4 col-sm-3 col-xl-2 mb-1">
+            <img class="  img-fluid languages "  src="../../static/frontend/images/languages/icons8-javascript.svg" alt="Card image cap">
+        </div>
+        <div class="col-lg-2 col-md-2 col-4 col-sm-3 col-xl-2 mb-1">
+            <img class="  img-fluid languages" src="../../static/frontend/images/languages/icons8-python.svg" alt="Card image cap">
+        </div>
+        <div class="col-lg-2 col-md-2 col-4 col-sm-3 col-xl-2 mb-1">
+            <img class="  img-fluid languages" src="../../static/frontend/images/languages/icons8-php-logo.svg" alt="Card image cap">
+        </div>
+        <div class="col-lg-2 col-md-2 col-4 col-sm-3 col-xl-2 mb-1">
+            <img class="  img-fluid languages" src="../../static/frontend/images/languages/java.svg" alt="Card image cap">
+        </div>
+        <div class="col-lg-2 col-md-2 col-4 col-sm-3 col-xl-2 mb-1">
+            <img class="  img-fluid languages" src="../../static/frontend/images/languages/android.svg" alt="Card image cap">
+        </div>
+        <div class="col-lg-2 col-md-2 col-4 col-sm-3 col-xl-2 mb-1">
+            <img class="  img-fluid languages" src="../../static/frontend/images/languages/react.svg" alt="Card image cap">
+        </div>
+        <div class="col-lg-2 col-md-2 col-4 col-sm-3 col-xl-2 mb-1">
+            <img class=" img-fluid languages" src="../../static/frontend/images/languages/icons8-angularjs.svg" alt="Card image cap">
+        </div>
+        <div class="col-lg-2 col-md-2 col-4 col-sm-3 col-xl-2 mb-1">
+            <img class=" img-fluid languages" src="../../static/frontend/images/languages/Django.svg" alt="Card image cap">
+        </div>
+        <div class="col-lg-2 col-md-2 col-4 col-sm-3 col-xl-2 mb-1">
+            <img class=" img-fluid languages" src="../../static/frontend/images/languages/Laravel.svg" alt="Card image cap">
+        </div>
+        <div class="col-lg-2 col-md-2 col-4 col-sm-3 col-xl-2 mb-1">
+            <img class=" img-fluid languages" src="../../static/frontend/images/languages/icons8-mysql-logo-filled.svg" alt="Card image cap">
+        </div>
+        <div class="col-lg-2 col-md-2 col-4 col-sm-3 col-xl-2 mb-1">
+            <img class=" img-fluid languages" src="../../static/frontend/images/languages/icons8-postgresql.svg" alt="Card image cap">
+        </div>
+        <div class="col-lg-2 col-md-2 col-4 col-sm-3 col-xl-2 mb-1">
+            <img class=" img-fluid languages" src="../../static/frontend/images/languages/icons8-mongodb.svg" alt="Card image cap">
+        </div>
+
+    </div>
+
+    </div>
+
+
+    <!-----trusted by----->
+    <div class="d-none d-sm-block jumbotron" style="background-color: white">
+        <div class="row" style="margin-left: 0;margin-right: 0">
+        <div class="col-lg-12 text-center ">
+            <h3>Trusted by</h3>
+
+        </div>
+
+    </div>
+        <div class="row  " style="margin-left: 0;margin-right: 0">
+            <div class="col text-center">
+                 <img class=" trust " src="../../static/frontend/images/home/meltwater.png" alt="Card image meltwater">
+
+            </div>
+            <div class="col text-center">
+                 <img class="trust mt-4" src="../../static/frontend/images/vogue.svg" alt="Card image enpact">
+            </div>
+            <div class="col text-center">
+                <img class="trust " src="../../static/frontend/images/photo.JPG" alt="Card image enpact">
+
+            </div>
+            <div class="col text-center">
+                <img class=" trust " src="../../static/frontend/images/enpact.png" alt="Card image mest">
+
+            </div>
+            <div class="col text-center">
+                <img class=" trust " src="../../static/frontend/images/home/mest.png" alt="Card image mest">
+            </div>
+
+
+
+
+
+
+    </div>
+
+        <!----mobile-->
+
+        <div class="row" style="margin-left: 0;margin-right: 0">
+        <div class="col-lg-12 text-center ">
+            <a class="btn btn-primary mt-3 " target="_blank" style="border-radius: 0;color: white" href="https://goo.gl/forms/DqLs3ezL36KWbMoW2">Become a partner</a>
+
+
+        </div>
+
+    </div>
+
+    </div>
+
+
+    <footer class="jumbotron jumbofoot">
+    <div class="container">
+        <div class="row">
+
+        <div class="col-6 col-md">
+          <h5>Menu</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="/pricing">Pricing</a></li>
+            <li><a class="text-muted" href="/accounts/login/">Testing</a></li>
+            <li><a class="text-muted" href="{% url 'transactions:sourcing' %}">Sourcing</a></li>
+              <li><a class="text-muted" href="/dev">Developer</a></li>
+
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Company</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="/privacy">Privacy</a></li>
+            <li><a class="text-muted" href="/terms">Terms</a></li>
+
+
+
+          </ul>
+        </div>
+        <div class="col col-md">
+          <h5>Contact</h5>
+
+
+          <ul class="list-unstyled text-small">
+              <li>
+              <a href="mailto:info@codeln.com" target="_top">
+                  <i><span data-feather="mail"></span> </i>
+              </a>
+              <li>
+                <a class="text-muted" href="https://www.linkedin.com/company/codeln/" target="_blank">
+                <i><span data-feather="linkedin"></span></i>
+                </a>
+            </li>
+            <li>
+                <a class="text-muted" href="https://twitter.com/Codeln_spaces" target="_blank">
+                <i><span data-feather="twitter"></span></i>
+                </a>
+            </li>
+            <li>
+                <a class="text-muted" href="https://www.facebook.com/CodelnSpaces/" target="_blank">
+                <i><span data-feather="facebook"></span></i>
+                </a>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+</footer>
+
+
+
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends 'recruiterbase.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <main role="main" class="col-md-10 col-lg-10 ml-lg-auto   px-4 ">
+    <div class="d-none d-lg-block">
+        <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                    <h5 >Answers</h5>
+                    <ul class="nav ml-auto">
+
+
+
+            {% if request.user.is_authenticated %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+            </li>
+
+            {% else %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+            </li>
+            <li class="nav-item">
+                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+            </li>
+            {% endif %}
+
+
+    </ul>
+                </nav>
+    </div>
+
+    <!-----md devices adaptation------>
+    <div class="container d-lg-none">
+        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+            <a class="logoadapt h5" style="text-decoration: none" href="">Projects in progress</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sidebar menu options
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/update_profile/">My profile</a>
+                        </div>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+<div class="d-none d-lg-block" style="margin-top: 6%">
+
+</div >
+
+<div class="d-lg-none"  style="margin-top: 7em">
+
+</div>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'teachers:quiz_change_list' %}">My Quizzes</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ quiz.name }}</li>
+    </ol>
+  </nav>
+  <h2 class="mb-3">
+
+    <a href="{% url 'teachers:quiz_results' quiz.pk %}" class="btn btn-primary float-right">View results</a>
+  </h2>
+  <div class="row mb-3">
+    <div class="col-md-6 col-sm-8 col-12">
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Save changes</button>
+        <a href="{% url 'teachers:quiz_change_list' %}" class="btn btn-outline-secondary" role="button">Nevermind</a>
+        <a href="{% url 'teachers:quiz_delete' quiz.pk %}" class="btn btn-danger float-right">Delete</a>
+      </form>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-10">
+          <strong>Questions</strong>
+        </div>
+        <div class="col-2">
+          <strong>Answers</strong>
+        </div>
+      </div>
+    </div>
+    <div class="list-group list-group-flush list-group-formset">
+      {% for question in questions %}
+        <div class="list-group-item">
+          <div class="row">
+            <div class="col-10">
+              <a href="{% url 'teachers:question_change' quiz.pk question.pk %}">{{ question.text }}</a>
+            </div>
+            <div class="col-2">
+              {{ question.answers.count }}
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="list-group-item text-center">
+          <p class="text-muted font-italic mb-0">You haven't created any questions yet. Go ahead and <a href="{% url 'teachers:question_add' quiz.pk %}">add the first question</a>.</p>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="card-footer">
+      <a href="{% url 'teachers:question_add' quiz.pk %}" class="btn btn-primary btn-sm">Add question</a>
+    </div>
+  </div>
+    <br>
+    <br>
+    <br>
+    </main>
+{% endblock %}

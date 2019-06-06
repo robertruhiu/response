@@ -1,0 +1,16 @@
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans %}
+
+Hello,
+
+You ({{ email }}) have been invited by a recruiter to take a test on codeln.com
+
+Use this link to activate account and the start test.
+Please go to {{ invite_url }}
+
+If already having an account login.A project invite will reflect in invites.
+Login http://beta.codeln.com/accounts/login/
+
+{% endblocktrans %}
+{% endautoescape %}

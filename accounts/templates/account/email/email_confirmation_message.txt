@@ -1,0 +1,13 @@
+{% load account %}
+
+{% user_display user as user_display %}
+{% load i18n %}{% autoescape off %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+    Hello
+
+    Thank you for registering.
+    Please use this link to confirm your account
+    {{ activate_url }}
+{% endblocktrans %}{% endautoescape %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Team CodeLn!
+{% endblocktrans %}

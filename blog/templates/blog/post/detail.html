@@ -1,0 +1,158 @@
+{% extends 'baseblog.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% load blog_tags %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<div class="section " style="margin-top: 6%">
+    <main class=" mb-2 mr-5 ml-5  ">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="wrap2 ">
+
+
+            <div class="container-fluid" >
+            <section class="shadow-sm">
+                <div class="wrap2 col-lg-8 mx-auto  ">
+                    {{ post.body|safe }}
+
+
+                </div>
+            </section>
+            <hr>
+            <div class="shadow-sm px-4">
+                <h6 class="col-lg-6 mx-auto " style="font-weight: bold">
+                        {% with comments.count as total_comments %}
+                            {{ total_comments }} comment{{ total_comments|pluralize }}
+                            </h6>
+                        {% endwith %}
+
+                    {% for comment in comments %}
+                        <div class="comment col-lg-6 mx-auto">
+                            <p class="info">
+                                Comment {{ forloop.counter }} by {{ comment.name }}
+                                {{ comment.created }}
+                            </p>
+                            {{ comment.body|linebreaks }}
+                        </div>
+                    {% empty %}
+                        <p class="col-lg-6 mx-auto">There are no comments yet.</p>
+                    {% endfor %}
+
+            </div>
+
+
+
+                    {% if new_comment %}
+                        <h6 class="mx-auto text-center">Your comment has been added.</h6>
+                    {% else %}
+                        <hr>
+                        <h6 class="mx-auto text-center" style="font-weight: bold; margin-top: 20px">Add a new
+                            comment</h6>
+
+                        <form action="." method="post" class="col-lg-6 mx-auto shadow-sm p-3">
+                            {% csrf_token %}
+                            {% bootstrap_form comment_form %}
+
+                            <button class="btn btn-primary">Add comment</button>
+                        </form>
+                    {% endif %}
+            </div>
+
+
+        </div>
+
+        </div>
+        <div class="col-lg-3 ">
+            <div class="shadow-sm p-3">
+                <h6>Other blogs</h6>
+                <hr>
+                {% if allposts %}
+                    {% for one_blog in allposts %}
+                        <div class="row shadow-sm p-3">
+
+                            <div class="col-5">
+                            <img class="img-fluid" src="{{ one_blog.blogsplashimage }}" alt="Card image cap">
+
+                        </div>
+                            <div class="col-7 border-left">
+                                <a style="" href="{% url 'blog:post_detail' one_blog.id %}">
+                                <p class="mt-2">{{ one_blog.title }}</p>
+                                     </a>
+
+                        </div>
+
+
+
+            </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+    </main>
+</div>
+
+
+    <footer class="footer jumbotron jumbofoot">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-6 col-md">
+                    <h5>Menu</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="/pricing">Pricing</a></li>
+                        <li><a class="text-muted" href="/accounts/login/">Testing</a></li>
+                        <li><a class="text-muted" href="{% url 'transactions:sourcing' %}">Sourcing</a></li>
+                        <li><a class="text-muted" href="/dev">Developer</a></li>
+
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Company</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="/privacy">Privacy</a></li>
+                        <li><a class="text-muted" href="/terms">Terms</a></li>
+
+
+                    </ul>
+                </div>
+                <div class="col col-md">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled  text-small">
+                        <li>
+                            <a href="mailto:info@codeln.com" target="_top">
+                                <i><span data-feather="mail"></span></i>
+                            </a>
+                        <li>
+                            <a class="text-muted" href="https://www.linkedin.com/company/codeln/" target="_blank">
+                                <i><span data-feather="linkedin"></span></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-muted" href="https://twitter.com/Codeln_spaces" target="_blank">
+                                <i><span data-feather="twitter"></span></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-muted" href="https://www.facebook.com/CodelnSpaces/" target="_blank">
+                                <i><span data-feather="facebook"></span></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+{% endblock %}

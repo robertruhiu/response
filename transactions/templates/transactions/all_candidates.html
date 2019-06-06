@@ -1,0 +1,240 @@
+{% extends 'recruiterbase.html' %}
+{% block title %}
+    Candidates
+{% endblock %}
+{% load static %}
+
+{% block content %}
+    <main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+        <div class="d-none d-lg-block">
+            <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                {% if candidates %}
+                <h5>Onboarded Candidates</h5>
+            {% else %}
+                    <h5>Open call packages</h5>
+            {% endif %}
+                <ul class="nav ml-auto">
+
+
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a href="/pricing" style="color: black" class="nav-link">Pricing</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{% url 'account_logout' %}" style="color: black" class="nav-link">Logout</a>
+                        </li>
+
+                    {% else %}
+
+                        <li class="nav-item">
+                            <a href="{% url 'account_login' %}" style="color: black" class="nav-link">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'account_signup' %}" style="color: black" class="nav-link">Register</a>
+                        </li>
+                    {% endif %}
+
+
+                </ul>
+            </nav>
+        </div>
+
+        <!-----md devices adaptation------>
+        <div class="container d-lg-none">
+            <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+                {% if candidates %}
+                <h5 class="logoadapt h5" style="text-decoration: none" href="/home">Onboard Candidates</h5>
+            {% else %}
+                    <h5 class="logoadapt h5" style="text-decoration: none" href="/home">Open call packages</h5>
+            {% endif %}
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdown"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Menu
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'frontend:my-activity' %}">Ongoing tests</a>
+                                <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
+                                <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
+                            </div>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a href="/home" style="color: white" class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account_logout' %}" style="color: white" class="nav-link">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'account_login' %}" style="color: white" class="nav-link">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account_signup' %}" style="color: white" class="nav-link">Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="d-none d-lg-block" style="margin-top: 8%">
+            {% if candidates %}
+                <div class="alert alert-primary" role="alert">
+                    Pricing is based on a 10 candidate package.
+                </div>
+            {% endif %}
+
+        </div>
+
+        <div class="d-lg-none" style="margin-top: 7em">
+            {% if candidates %}
+                <div class="alert alert-primary" role="alert">
+                    Pricing is based on a 10 candidate package.
+                </div>
+            {% endif %}
+
+        </div>
+        {% if candidates %}
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+
+                    <div class="card" style="box-shadow: 5px 5px 25px 0px rgba(46,61,73,0.2);">
+
+                        <div class="card-body">
+                            <h5>list of candidates</h5>
+                            <table class="table table-hover">
+                                <thead>
+
+                                <tr>
+
+                                    <th scope="col">First name</th>
+                                    <th scope="col">Last name</th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for candidate in candidates %}
+
+                                    <tr>
+
+                                        <td>{{ candidate.first_name }}</td>
+                                        <td>{{ candidate.last_name }}</td>
+                                        <td> <span class="is-pulled-right">
+
+                        </span></td>
+                                    </tr>
+                                {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                            <div style="text-align: -webkit-center;">
+                                <button disabled="" class="btn btn-info">Total Cost = ${{ total_amount }}</button>
+
+                                <a href="{% url 'payments:pay' current_transaction.id %}" class="btn btn-success">
+                                    Proceed to make Payment.</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+            <img style="margin-top:-30%;width: 50%;margin-left:34% " src="/static/frontend/images/networking.svg"
+                 alt="Card image cap">
+        </div>
+
+        {% else %}
+            <div class="alert alert-primary" role="alert">
+                Packages are limited by the number of candidates you can pick to build the project you just choose.Codeln will advertise the position and conduct
+                pre vets to ensure you get top tier candidates pool.
+            </div>
+            <div class="row mt-1  mb-5" style="margin: 0">
+    <div class=" col-lg-4 col-sm-6 col-md-6 col-12  " >
+        <div class="card   " style="height: 100%">
+            <div class="card-header" style="background-color: #2b2773;color: white;height: 7rem">
+                <h4 class="font-weight-normal text-center  " style="padding-top: 10%">Basic</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title text-center ">$400 </h1>
+                <ul class="list-unstyled mt-3 ">
+                    <li class="text-center">10 candidates </li>
+
+                </ul>
+
+
+            </div>
+            <div class="card-footer text-muted" style="background-color: white">
+                <a href="{% url 'payments:payoption1' current_transaction.id %}" style="color: white;text-decoration: none">
+                <button type="button" class="btn btn-lg btn-block btn-primary" style="border-radius: 0">
+                    Get started
+                </button>
+                    </a>
+            </div>
+        </div>
+    </div>
+
+    <div class=" col-lg-4 col-sm-6 col-md-6 col-12  ">
+        <div class="card shadow-sm" style="height: 100%">
+            <div class="card-header" style="background-color: #2b2773;color: white;height: 7rem">
+                <h4 class=" font-weight-normal text-center" style="padding-top: 10%">Pro</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title text-center ">$600 </h1>
+
+                <ul class="list-unstyled mt-3 mb-4 ">
+                    <li class="text-center">20 candidates</li>
+                </ul>
+
+            </div>
+            <div class="card-footer text-muted" style="background-color: white">
+                <a href="{% url 'payments:payoption2' current_transaction.id %}" style="text-decoration: none">
+                    <button type="button" class="btn btn-lg btn-block btn-primary" style="border-radius: 0">Get started</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class=" col-lg-4 col-sm-6 col-md-6 col-12 ">
+        <div class="card  shadow-sm" style="height: 100%">
+            <div class="card-header" style="background-color: #2b2773;color: white;height: 7rem">
+                <h4 class=" font-weight-normal  text-center" style="padding-top: 10%">Ultimate</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title text-center ">$800 </h1>
+                <ul class="list-unstyled mt-3 mb-4 ">
+
+                    <li class="text-center">30 candidates</li>
+
+
+
+
+                </ul>
+
+            </div>
+            <div class="card-footer text-muted" style="background-color: white">
+                <a href="{% url 'payments:payoption3' current_transaction.id %}" style="text-decoration: none">
+                    <button type="button" class="btn btn-lg btn-block btn-primary" style="border-radius: 0">Get started</button>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+        {% endif %}
+
+
+
+
+    </main>
+{% endblock %}

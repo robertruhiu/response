@@ -1,0 +1,406 @@
+{% extends 'base.html' %}
+{% block title %}
+Hire Skilled Software Developers
+{% endblock %}
+{%load static %}
+{% block content %}
+
+
+<!---- Hero image intro----->
+<div class="jumbotron1 theme--dark d-none d-lg-block" style="height: 30vmax;">
+    <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/storm.jpg" class="jumbotron1__image">
+        <div class="jumbotron1__background"
+             style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
+        <div class="hero-text">
+
+            <div class="display-2 h1 d-none d-lg-block" style="color: white" >Hire Skilled Software Developers — Faster</div>
+
+            <div class="d-lg-none h5 " style="color: white;margin-top: 4em;" >Hire Skilled Software Developers — Faster</div>
+
+
+
+            <div class="subheading d-none d-lg-block  mt-3 ">Codeln Offers Monitored Workspaces To Verify Coding Skills Using Real World Projects.  </div>
+            <!----for md to sm---->
+            <button type="button"  onclick="location.href='accounts/login';" value="Go to login" class="btn d-lg-none theme--dark primary  " style="border-radius: 0"><div class="btn__content"href="{% url 'account_login' %}">
+                Get started
+
+            </div></button>
+            <!----for lg to xl---->
+            <button type="button"  onclick="location.href='accounts/login';" value="Go to login" class="btn d-none d-lg-block theme--dark primary mt-3 " style="border-radius: 0;margin: auto"><div class="btn__content"href="{% url 'account_login' %}">
+                Get started
+            </div></button>
+
+
+        </div>
+
+    </div>
+</div>
+<!----hero image for mobile devices--->
+<div class="jumbotron1 theme--dark d-lg-none" style="height: 40vmax;">
+    <div class="jumbotron1__wrapper"><img src="../../static/frontend/images/storm.jpg" class="jumbotron1__image">
+        <div class="jumbotron1__background"
+             style="background: linear-gradient(to top, rgba(13, 3, 29, 0.85), rgba(25, 25, 38, 0.85));"></div>
+        <div class="hero-text">
+
+            <div class="display-2 h1 d-none d-lg-block" style="color: white" >Empower your workforce with better hires</div>
+
+            <div class="d-lg-none h5 " style="color: white;margin-top: 4em;" >Empower your workforce with better hires</div>
+
+
+
+            <div class="subheading d-none d-lg-block h4">We Validate and Verify Skills using Real World Projects</div>
+
+            <button type="button"  onclick="location.href='accounts/login';" value="Go to login" class="btn d-lg-none theme--dark primary  " style="border-radius: 0"><div class="btn__content"href="{% url 'account_login' %}">
+                Get started
+            </div></button>
+
+            <button type="button"  onclick="location.href='accounts/login';" value="Go to login" class="btn d-none d-lg-block theme--dark primary " style="border-radius: 0;margin: auto"><div class="btn__content"href="{% url 'account_login' %}">
+                Get started
+            </div></button>
+
+
+        </div>
+
+    </div>
+</div>
+
+<!--products-->
+<section class="jumbotron jumbo1" style="padding-top:-2%;margin-bottom: 0" >
+    <div class="row" style="margin-left: 0;margin-right: 0">
+        <div class="col-lg-12 text-center h3">
+            Products
+
+        </div>
+
+    </div>
+    <div class="row " style="margin-top: 2%">
+
+        <div class="col-lg-3 " style="margin-bottom: 2%;margin-left: auto;">
+
+                <div class="card productcard" style="width: 18rem;border: 0;">
+                    <img class="card-img-top product " style="margin-right: auto;margin-left: auto"  src="../../static/frontend/images/computer.svg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Screening</h5>
+                        <p class="card-text">A testing platform that helps you validate the coding skills of Programmers</p>
+                        <a href="{% url 'account_login' %}" class="card-link">Start testing</a>
+
+                    </div>
+                </div>
+
+
+
+
+        </div>
+        <div class="col-lg-3" style="margin-bottom: 2%;margin-right: auto;">
+
+                <div class="card productcard" style="width: 18rem;border: 0;">
+                    <img class="card-img-top product" style="margin-right: auto;margin-left: auto" src="../../static/frontend/images/pick.svg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Sourcing</h5>
+                        <p class="card-text">Get quick access to a pool of tested and certified Programmers
+                            based on your job requirement.</p>
+                        <a target="_blank" href="{% url 'transactions:sourcing' %}" class="card-link">Start sourcing</a>
+
+                    </div>
+                </div>
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+</section>
+
+
+
+<!--Call to action how it works-->
+<section class="jumbotron jumbo2" style="padding-bottom: 7%;padding-top: 2%;">
+    <div class="row" style="margin-left: 0;margin-right: 0;margin-top: 2%">
+        <div class="col-md-6 col-lg-6 col-xl-6 text-center" style="margin-left: auto;margin-right: auto">
+            <p class="h3">Curious About Our Screening Process?
+                <br>
+                <a class="btn theme--dark primary1 mt-3 " style="border-radius: 0;color: white" href="/howitworks">See How It Works</a>
+
+            </p>
+
+        </div>
+
+    </div>
+</section>
+<!--benefits-->
+<section class="jumbotron jumbo1" >
+    <div class="row" style="margin-left: 0;margin-right: 0">
+        <div class="col-lg-12 text-center h3">
+            Why Codeln
+        </div>
+    </div>
+    <div class="row" style="margin-left: 0;margin-right: 0">
+        <div class="col-lg-5 ">
+            <div class="card noed">
+                <img class="card-img-top yum" src="../../static/frontend/images/ill/stats.svg" alt="Card image benefits">
+
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="row how2 ">
+                <div class="col-lg-6">
+                    <div class="card noed" style="width: 18rem;">
+                        <div class="card-body">
+                            <div>
+                                <img class="card-img-top benefit  " src="../../static/frontend/images/home/bank.svg" alt="Card image cost">
+                            </div>
+                            <h6 class="card-subtitle mb-2 ">Reduce Recruitment Cost</h6>
+                            <p class="card-text text-muted">
+                                Save money, reduce overall recruitment cost
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card noed" style="width: 18rem;">
+                        <div class="card-body">
+                            <div>
+                                <img class="card-img-top benefit" src="../../static/frontend/images/home/time.svg" alt="Card image time">
+                            </div>
+                            <h6 class="card-subtitle mb-2 ">Reduce Recruitment time </h6>
+                            <p class="card-text text-muted">Save time, reduce overall hiring time</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row how2">
+                <div class="col-lg-6">
+                    <div class="card noed" style="width: 18rem;">
+                        <div class="card-body">
+                            <div>
+                                <img class="card-img-top benefit" src="../../static/frontend/images/home/screen.svg" alt="Card image skills">
+                            </div>
+                            <h6 class="card-subtitle mb-2 ">Validate Candidate’s Skills</h6>
+                            <p class="card-text text-muted">Verify a Candidate’s ability to build real-world projects</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card noed" style="width: 18rem;">
+                        <div class="card-body">
+                            <div>
+                                <img class="card-img-top benefit" src="../../static/frontend/images/home/workplace.svg"
+                                     alt="Card image quality">
+                            </div>
+                            <h6 class="card-subtitle mb-2 ">Improve the quality of hire</h6>
+                            <p class="card-text text-muted">
+                                Hiring a skills-fit reduces Employee turnover rate.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+<!---forbes quote-->
+
+<!--Languages and frameworks-->
+<section class="jumbotron jumbo8">
+    <div class="row">
+        <div class="col-lg-12 text-center ">
+            <h2>We support</h2>
+            <p class="h4 text-muted text-center">Programming Languages, Frameworks, and Libraries</p>
+        </div>
+
+    </div>
+    <div class="row" style="margin-bottom: 2% ">
+
+        <div class="col-lg-2 mt-3 mb-3" style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                    <div style="text-align: -webkit-center;">
+                        <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/icons8-javascript.svg"  alt="Card image cap">
+                    </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 mt-3 mb-3" style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/icons8-python.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 mt-3 mb-3" style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/icons8-php-logo.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 mt-3 mb-3" style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/java.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 mt-3 mb-3" style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/android.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 mt-3 mb-3" style="width: 100%;">
+            <div class="card homecard" style="margin: auto">
+
+
+
+                <div style="text-align: -webkit-center;">
+                    <img class="card-img-top categoriescard " src="../../static/frontend/images/languages/react.svg"  alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+   
+
+{% endblock %}
+<div class="col-lg-6 col-md-6 col-xl-3" style="margin-bottom: 2%;">
+            <div class="row productcard" style="margin-right: 0;margin-left: 0">
+                <div class="col-4 d-none d-lg-block" >
+                    <img class="img-fluid mt-xl-5 " style="margin-right: auto;margin-left: auto" src="../../static/frontend/images/computer.svg" alt="Card image cap">
+
+
+                </div>
+                <div class="col">
+
+                    <h6  style="margin-top: 10%">Pretest process</h6>
+                    <p>This stage will test your basic understanding
+                        of the tech stacks you selected on your profile
+                    </p>
+                    <p></p>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-xl-3" style="margin-bottom: 2%;">
+            <div class="row productcard" style="margin-right: 0;margin-left: 0" >
+                <div class="col-4 d-none d-lg-block" >
+                    <img class="img-fluid mt-xl-5 " style="margin-right: auto;margin-left: auto" src="../../static/frontend/images/coding.svg" alt="Card image cap">
+
+                </div>
+                <div class="col">
+                    <h6  style="margin-top: 10%">Build a Real world project</h6>
+                    <p class="card-text">After a successful pre-test, you will be assigned a project to build on our workspace.
+                    </p>
+                    <p></p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-xl-3" style="margin-bottom: 2%;">
+            <div class="row productcard" style="margin-right: 0;margin-left: 0">
+                <div class="col-4 d-none d-lg-block" >
+                    <img class="img-fluid mt-xl-5 " style="margin-right: auto;margin-left: auto" src="../../static/frontend/images/diploma.svg" alt="Card image cap">
+
+
+                </div>
+                <div class="col">
+                    <h6  style="margin-top: 10%">Certification</h6>
+                    <p class="card-text">We offer Certificates of Merit for excellent performance,
+                        these Certificates are accepted by our Clients and Partners.
+                    </p>
+                    <p></p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-xl-3" style="margin-bottom: 2%;">
+            <div class="row productcard" style="margin-right: 0;margin-left: 0" >
+                <div class="col-4 d-none d-lg-block" >
+                    <img class="img-fluid mt-xl-5 " style="margin-right: auto;margin-left: auto" src="../../static/frontend/images/notify.svg" alt="Card image cap">
+
+                </div>
+                <div class="col">
+                    <h6 style="margin-top: 10%">Job matching</h6>
+                    <p class="card-text">Finally, we match successful candidates to local and international job
+                        openings that match their skills and taste
+                    </p>
+                    <p></p>
+
+                </div>
+
+            </div>
+        </div>
+
+<div class="row" style="margin-left: 0;margin-right: 0">
+                            <div class="col-lg-4">
+                                <img style="width: 18rem" src="../../../static/frontend/images/how/dennis.jpg">
+
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="mt-3 ml-3">
+                                    <div><b>Candidate name:</b>dennis</div>
+                                    <div><b>Email:</b>dennis@codeln.com</div>
+                                    <div><a href="https://github.com/robertruhiu">Github profile</a></div>
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="card" style="width: 100%;border-radius: 0;margin-right: auto;margin-left: auto">
+
+                                    <div class="card-body text-center">
+                                        <div class="h5">Mean score</div>
+                                        <h1>67% <span class="badge badge-primary">B</span></h1>
+                                        <a class="btn theme--dark primary1 mt-3 " style="border-radius: 0;color: white" href="/">View Code base</a>
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>

@@ -1,0 +1,595 @@
+{% extends 'recruiterbase.html' %}
+{% block title %}
+report
+{% endblock %}
+{%load static %}
+{% block content %}
+<main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+    <div class="d-none d-lg-block">
+        <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                    <ul class="nav nav-tabs" style="border-bottom: 0" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active " id="overview-tab" data-toggle="tab" href="#overview" role="tab"
+                       aria-controls="overview" aria-selected="true">Report Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="criteria-tab" data-toggle="tab" href="#criteria" role="tab"
+                       aria-controls="criteria" aria-selected="false">Grading criteria </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="fraud-tab" data-toggle="tab" href="#fraud" role="tab"
+                       aria-controls="fraud" aria-selected="false">Cheat detection </a>
+                </li>
+
+
+            </ul>
+
+                </nav>
+    </div>
+
+    <!-----md devices adaptation------>
+    <div class="container d-lg-none">
+        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+            <ul class="nav nav-tabs" style="border-bottom: 0" id="myTab" role="tablist">
+                <li class="nav-item" style="margin-bottom: 1em;margin-top: 1em">
+                    <a class="nav-link1 active " style="color: white;text-decoration: none" id="overview-tab" data-toggle="tab" href="#overview" role="tab"
+                       aria-controls="overview" aria-selected="true">Report Overview</a>
+                </li>
+                <li class="nav-item" style="margin-bottom: 1em;margin-top: 1em">
+                    <a class="nav-link1 " id="criteria-tab" style="color: white;text-decoration: none" data-toggle="tab" href="#criteria" role="tab"
+                       aria-controls="criteria" aria-selected="false">Grading criteria </a>
+                </li>
+                <li class="nav-item" style="margin-bottom: 1em;margin-top: 1em">
+                    <a class="nav-link1 " id="fraud-tab" style="color: white;text-decoration: none" data-toggle="tab" href="#fraud" role="tab"
+                       aria-controls="fraud" aria-selected="false">Cheat detection </a>
+                </li>
+
+
+            </ul>
+            <button class="navbar-toggler ml-auto" style="margin-top: -2em" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+
+                <ul class="nav">
+
+
+                        <li class="nav-item">
+                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                        </li>
+
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+<div class="d-none d-lg-block" style="margin-top: 8%">
+
+</div >
+
+<div class="d-lg-none"  style="margin-top: 8em">
+
+</div>
+
+
+
+
+    <div class="tab-content" id="myTabContent">
+        <!---overview details-->
+        <div class="tab-pane fade show active " id="overview" role="tabpanel" aria-labelledby="overview-tab">
+            <section>
+                <div class="card" style="width: 100%;border-radius: 0">
+
+                    <div class="card-body">
+
+                        <div class="row" style="margin-left: 0;margin-right: 0">
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-3  ">
+                                <img class="d-none d-sm-block d-lg-block d-md-block" style="width: 18rem" src="{% static "frontend/images/model/2.JPG" %}" alt="My image">
+                                <img class="d-sm-none d-md-none d-lg-none " style="width: 15rem" src="{% static "frontend/images/model/2.JPG" %}" alt="My image">
+
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
+                                <div class="mt-3 ml-lg-5  ml-sm-5">
+                                    <div><b>Candidate name:</b>Jessica Freeman</div>
+                                    <div><b>Email:</b>freeman@testmail.com</div>
+                                    <div><a href="#">Github profile</a></div>
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-12 mb-3 ">
+                                <div class="card" style="width: 100%;border-radius: 0;margin-right: auto;margin-left: auto">
+
+                                    <div class="card-body text-center">
+                                        <div class="h5">Mean score</div>
+                                        <h1>68% <span class="badge badge-primary">B</span></h1>
+                                        <a class="btn theme--dark primary1 mt-3 " style="border-radius: 0;color: white" target="_blank" href="http://ide.codeln.com:8080/dashboard/#/ide/che/cryptowatcher">View Code base</a>
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <br>
+            <!-----Project details------>
+            <section>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="h5 text-center">Cryptoprize</div>
+
+
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 ">
+                        <div class="card" style="border: 0">
+
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Project description</h5>
+                                <p class="card-text">You have been approached by a client who has a healthy interest in Cryptocurrency. He wants to know how the various coins are performing against US Dollars. His Company is mostly interested in Bitcoin. What his team needs is a dashboard that shows the price of Bitcoin at any point in time without having to refresh the browser. They need the pricing information in realtime because that'd influence their decision whether to buy or sell.</p>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-center">
+                        <div class="card" style="border: 0">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Tech stack used</h5>
+                                <p class="card-text">
+                                    <span class="badge badge-info">react js</span>
+                                    <span class="badge badge-info">javascript</span>
+
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
+
+            <br>
+            <!-----deliverables------>
+            <section>
+                <div class="row" style="margin-left: 0;margin-right: 0">
+
+                    <div class="col-lg-12 col text-center h5">
+                        Project deliverables
+                    </div>
+                </div>
+                <div class="row" style="margin-left: 0;margin-right: 0">
+
+                    <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+
+                                        <th scope="col">Deliverable</th>
+
+                                        <th scope="col">status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+
+                                        <td>Improved UI/UX</td>
+
+                                        <td><span class="badge badge-success">Success</span></td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>Sign up for users at your Client's company</td>
+
+                                        <td><span class="badge badge-success">Success</span></td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>Login (you are free to use a package such as Passport for Authentication)
+                                        </td>
+                                        <td><span class="badge badge-success">Success</span></td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>Integration with at least 3 exchanges</td>
+                                        <td><span class="badge badge-warning">2/3 complete</span></td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>Persist the market data in a PostgreSQL database</td>
+                                        <td><span class="badge badge-danger">Incomplete</span></td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>Allow users to set up alerts for a certain price point</td>
+                                        <td><span class="badge badge-danger">Incomplete</span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+
+                </div>
+
+
+            </section>
+
+
+            <br>
+            <!-----Key competencies------>
+            <section>
+                <div class="row" style="margin-left: 0;margin-right: 0">
+                    <div class="col-lg-12 col text-center h5">
+                        Key competencies
+                    </div>
+                </div>
+                <div class="card" style="width: 100%;border-radius: 0">
+                    <div class="card-body">
+                        <div class="row text-center" style="margin-left: 0;margin-right: 0">
+
+                            <div class="col-lg-4 col-md-4 col-sm-6 col">
+                                <div class="h6"> Deliverables</div>
+                                <div class="card competencecard">
+
+
+                                    <div style="text-align: -webkit-center;">
+                                        <img style="width: 20%" class="card-img-top " src="../../static/frontend/images/delivery.svg" alt="Card image cap">
+                                    </div>
+
+                                    <div class="card" style="border: 0 ">
+
+
+                                        <div class="card-body">
+
+                                            <h6 class="card-title" style="text-align: -webkit-center;">63% <span class="badge badge-primary">B</span></h6>
+                                            <p class="card-text">Metric used: Tests passed</p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col">
+                                <div class="h6">Error handling</div>
+                                <div class="card competencecard">
+
+
+                                    <div style="text-align: -webkit-center;">
+                                        <img style="width: 20%" class="card-img-top " src="../../static/frontend/images/404.svg" alt="Card image cap">
+                                    </div>
+
+                                    <div class="card" style="border: 0 ">
+
+
+                                        <div class="card-body">
+
+                                            <h6 class="card-title" style="text-align: -webkit-center;">80% <span class="badge badge-primary">A</span></h6>
+                                            <p class="card-text">Metric used: Errors</p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col">
+                                <div class="h6"> Project security</div>
+                                <div class="card competencecard">
+
+
+                                    <div style="text-align: -webkit-center;">
+                                        <img style="width: 20%" class="card-img-top " src="../../static/frontend/images/security.svg" alt="Card image cap">
+                                    </div>
+
+                                    <div class="card " style="border: 0 ">
+
+
+                                        <div class="card-body">
+
+                                            <h6 class="card-title" style="text-align: -webkit-center;">80% <span class="badge badge-primary">A</span></h6>
+                                            <p class="card-text">Metric used: Bugs</p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col">
+                                <div class="h6"> Code readability</div>
+                                <div class="card competencecard">
+
+
+                                    <div style="text-align: -webkit-center;">
+                                        <img style="width: 20%" class="card-img-top " src="../../static/frontend/images/laptop.svg" alt="Card image cap">
+                                    </div>
+
+                                    <div class="card " style="border: 0 ">
+
+
+                                        <div class="card-body">
+
+                                            <h6 class="card-title" style="text-align: -webkit-center;">50% <span class="badge badge-primary">C</span></h6>
+                                            <p class="card-text">Metric used: Comments</p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col">
+                                <div class="h6">Time used</div>
+                                <div class="card competencecard">
+
+
+                                    <div style="text-align: -webkit-center;">
+                                        <img style="width: 20%" class="card-img-top " src="../../static/frontend/images/racing.svg" alt="Card image cap">
+                                    </div>
+
+                                    <div class="card " style="border: 0 ">
+
+
+                                        <div class="card-body">
+
+                                            <h6 class="card-title" style="text-align: -webkit-center;">340 minutes
+
+                                            </h6>
+                                            <p class="card-text">Metric used: Time</p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+        </div>
+        <!---metrics-->
+        <div class="tab-pane fade  " id="criteria" role="tabpanel" aria-labelledby="criteria-tab">
+
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                        <div class="card metric">
+                            <div class="card-body text-center">
+                                <div class="card-title h4"><strong>Tests Passed</strong></div>
+                                <p>(Number of Unit Tests Passed)</p>
+                                <h3 style="color:rgb(0, 128, 28);"><strong>6</strong></h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                        <div class="card metric">
+                            <div class="card-body text-center">
+                                <div class="card-title h4"><strong>Tests Failed</strong></div>
+                                <p>(Number of Unit Tests Failed)</p>
+                                <h3><strong>2</strong></h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                        <div class="card metric">
+                            <div class="card-body text-center">
+                                <div class="card-title h4"><strong>Warnings</strong></div>
+                                <p>(Total Number of warnings)</p>
+                                <h3 style="color:rgb(241, 7, 7);"><strong>8</strong></h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                        <div class="card metric">
+                            <div class="card-body text-center">
+                                <div class="card-title h4"><strong>Errors</strong></div>
+                                <p>(Total Number of errors)</p>
+                                <h3><strong>1</strong></h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                        <div class="card metric">
+                            <div class="card-body text-center">
+                                <div class="card-title h4"><strong>Lines of Code</strong></div>
+                                <p>(Number of code lines)</p>
+                                <h3><strong>169</strong></h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                        <div class="card metric">
+                            <div class="card-body text-center">
+                                <div class="card-title h4"><strong>Duplications</strong></div>
+                                <p>(Density of Duplication)</p>
+                                <h3><strong>0%</strong></h3>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                        <div class="card metric">
+                            <div class="card-body text-center">
+                                <div class="card-title h4"><strong>Classes</strong></div>
+                                <p>(Total Number of Classes)</p>
+                                <h3><strong>0</strong></h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                        <div class="card metric">
+                            <div class="card-body text-center">
+                                <div class="card-title h4"><strong>Comments</strong></div>
+                                <p>(Comment Line Density)</p>
+                                <h3><strong>0%</strong></h3>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                        <div class="card metric">
+                            <div class="card-body text-center">
+                                <div class="card-title h4"><strong>Dependencies</strong></div>
+                                <p>(Dependencies to cut)</p>
+                                <h3><strong>0</strong></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                        <div class="card metric">
+                            <div class="card-body text-center">
+                                <div class="card-title h4"><strong>Run time</strong></div>
+                                <p>(In seconds)</p>
+                                <h3><strong>1.39</strong></h3>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                        <div class="card metric">
+                            <div class="card-body text-center">
+                                <div class="card-title h4"><strong>Technical Debt</strong></div>
+                                <p>(Cost to fix maintainability Issues)</p>
+                                <h3><strong>Nil</strong></h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4  col-md-4 col-12 col-sm-6 mb-2 col-xl-3">
+                        <div class="card metric">
+                            <div class="card-body text-center">
+                                <div class="card-title h4"><strong>Quality Gates</strong></div>
+                                <p>(Rate of code quality)</p>
+                                <h3 style="color:green;"><strong>OK</strong></h3>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!---fraud detection-->
+        <div class="tab-pane fade  " id="fraud" role="tabpanel" aria-labelledby="fraud-tab">
+
+
+
+
+                <div class="row d-none d-sm-block " style="margin-left: 0;margin-right: 0;margin-bottom: 1em;background-color: aliceblue">
+                    <div class="col-md-12 col-lg-6 col-xl-6 text-center" style="margin-left: auto;margin-right: auto">
+                        <p class="h3">Cheat detection and mitigation
+                            <br>
+                        </p><p>Imagery of candidate during coding session</p>
+
+
+
+                        <br>
+
+                    </div>
+
+                </div>
+
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3 ">
+                    <img class="img-fluid" src="../../../static/frontend/images/model/coding/1.jpg">
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/model/coding/2.jpg">
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/model/coding/3.jpg">
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/model/coding/4.jpg">
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/model/coding/5.jpg">
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/model/coding/6.jpg">
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/model/coding/7.jpg">
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/model/coding/8.jpg">
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/model/coding/9.jpg">
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/model/coding/10.jpg">
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/model/coding/11.jpg">
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-6 col-sm-6 col-xl-3">
+                    <img class="img-fluid" src="../../../static/frontend/images/model/coding/12.jpg">
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+    <br>
+    <br>
+
+
+
+</main>
+{% endblock %}

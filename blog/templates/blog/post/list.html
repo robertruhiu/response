@@ -1,0 +1,95 @@
+{% extends 'baseblog.html' %}
+
+{% load blog_tags %}
+
+{% block title %}Blog{% endblock %}
+{% load static %}
+{% block content %}
+
+    <main class="container-fluid">
+        <div class="wrap ">
+            <section style="padding-top: 3em">
+
+
+                <div class="row mx-auto">
+                    {% for post in posts %}
+                        <a style="text-decoration: none;color:#000;" href="{% url 'blog:post_detail' post.id %}">
+                            <div class="card shadow-sm border-0 mb-4 ml-2 mr-2" style="width: 25rem;border-radius: 0;height: 24rem">
+                            <img style="height: 18rem" class="card-img-top" src={{ post.blogsplashimage }}>
+                            <div class="card-body">
+                                <h5 class="card-title text-center">{{ post.title }}</h5>
+                                <p class="date text-center">
+                                    {{ post.publish.date }}
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+
+
+                    {% endfor %}
+                </div>
+
+        </section>
+        </div>
+    </main>
+
+
+
+    <footer class="footer jumbotron jumbofoot">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-6 col-md">
+                    <h5>Menu</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="/pricing">Pricing</a></li>
+                        <li><a class="text-muted" href="/accounts/login/">Testing</a></li>
+                        <li><a class="text-muted" href="{% url 'transactions:sourcing' %}">Sourcing</a></li>
+                        <li><a class="text-muted" href="/dev">Developer</a></li>
+
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Company</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="/privacy">Privacy</a></li>
+                        <li><a class="text-muted" href="/terms">Terms</a></li>
+
+
+                    </ul>
+                </div>
+                <div class="col col-md">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled  text-small">
+                        <li>
+                            <a href="mailto:info@codeln.com" target="_top">
+                                <i><span data-feather="mail"></span></i>
+                            </a>
+                        <li>
+                            <a class="text-muted" href="https://www.linkedin.com/company/codeln/" target="_blank">
+                                <i><span data-feather="linkedin"></span></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-muted" href="https://twitter.com/Codeln_spaces" target="_blank">
+                                <i><span data-feather="twitter"></span></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-muted" href="https://www.facebook.com/CodelnSpaces/" target="_blank">
+                                <i><span data-feather="facebook"></span></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+{% endblock %}

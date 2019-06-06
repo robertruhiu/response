@@ -1,0 +1,135 @@
+{% extends 'recruiterbase.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block title %}
+    project details
+{% endblock %}
+{% block content %}
+    <main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+        <div class="d-none d-lg-block">
+            <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                <h5 >Add project</h5>
+                <ul class="nav ml-auto">
+
+
+
+                    {% if request.user.is_authenticated %}
+
+                        <li class="nav-item">
+                            <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+                        </li>
+
+                    {% else %}
+
+                        <li class="nav-item">
+                            <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+                        </li>
+                    {% endif %}
+
+
+                </ul>
+            </nav>
+        </div>
+
+        <!-----md devices adaptation------>
+        <div class="container d-lg-none">
+            <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+                <h5 class="logoadapt h5" style="text-decoration: none" href="/home">Add project</h5>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Menu
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'frontend:my-activity' %}" >Ongoing tests</a>
+                                <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
+                                <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
+                            </div>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="d-none d-lg-block" style="margin-top: 8%">
+
+        </div >
+
+        <div class="d-lg-none"  style="margin-top: 7em">
+
+        </div>
+    <form action="{% url 'frontend:addproject' %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-7">
+                {% bootstrap_field form.name placeholder=False %}
+                {% bootstrap_field form.level placeholder=False %}
+                {% bootstrap_field form.brief placeholder=False %}
+                {% bootstrap_field form.description placeholder=False %}
+                {% bootstrap_field form.framework placeholder=False %}
+                {% bootstrap_field form.hasvideo  %}
+                {% bootstrap_field form.projectimage1 placeholder=False %}
+                {% bootstrap_field form.projectimage2 placeholder=False %}
+                {% bootstrap_field form.projectimage3 placeholder=False %}
+                {% bootstrap_field form.projectimage4 placeholder=False %}
+                {% bootstrap_field form.projectimage5 placeholder=False %}
+                {% bootstrap_field form.projectimage6 placeholder=False %}
+                {% bootstrap_field form.projectimage7 placeholder=False %}
+                {% bootstrap_field form.projectimage8 placeholder=False %}
+                {% bootstrap_field form.projectimage9 placeholder=False %}
+                {% bootstrap_field form.projectimage10 placeholder=False %}
+
+
+            </div>
+            <div class="col-5">
+                {% bootstrap_field form.requirement1 placeholder=False %}
+                {% bootstrap_field form.requirement2 placeholder=False %}
+                {% bootstrap_field form.requirement3 placeholder=False %}
+                {% bootstrap_field form.requirement4 placeholder=False %}
+                {% bootstrap_field form.requirement5 placeholder=False %}
+                {% bootstrap_field form.requirement6 placeholder=False %}
+                {% bootstrap_field form.requirement7 placeholder=False %}
+                {% bootstrap_field form.requirement8 placeholder=False %}
+                {% bootstrap_field form.requirement9 placeholder=False %}
+                {% bootstrap_field form.requirement10 placeholder=False %}
+                {% bootstrap_field form.projecttype placeholder=False %}
+                {% bootstrap_field form.devtype placeholder=False %}
+                {% bootstrap_field form.owner placeholder=False %}
+
+                <button type="submit" class="btn btn-success">Submit changes</button>
+
+
+            </div>
+        </div>
+
+
+    </form>
+
+
+
+
+    </main>
+{% endblock %}

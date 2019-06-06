@@ -1,0 +1,168 @@
+{% extends 'base3.html' %}
+{% block title %}
+index
+{% endblock %}
+{%load static %}
+{% block content %}
+
+<div class="jumbotron jumbotron2">
+        <div class="container">
+          <div class="">
+
+            <div class=" h3 text-center d-none d-lg-block " style="color: white">Pricing</div>
+
+              <div class="d-lg-none h5 text-center" style="color: white;margin-top: 4em;">Pricing</div>
+        </div>
+        </div>
+      </div>
+
+
+    <div class="row mt-1 d-flex justify-content-center mb-5" style="margin: 0">
+    <div class=" col-lg-3 col-sm-6 col-md-6 col-12  " >
+        <div class="card   " style="height: 100%">
+            <div class="card-header" style="background-color: #2b2773;color: white;height: 7rem">
+                <h4 class="font-weight-normal text-center  " style="padding-top: 10%">Testing  pack</h4>
+                <p class="text-center ">Got your candidates to test?</p>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title text-center ">$200 </h1>
+                <ul class="list-unstyled mt-3 ml-5 ">
+                    <li class="">10 candidates </li>
+                    <li class="">1 project </li>
+                    <li class="">Practical real world projects</li>
+                    <li class="">Monitored workspaces </li>
+                    <li class="">Active cheat detection </li>
+                    <li class="">Code analysis</li>
+                    <li class="">Comprehensive reports </li>
+                    <li class="">Candidates progress tracking </li>
+
+
+                </ul>
+
+
+            </div>
+            <div class="card-footer text-muted" style="background-color: white">
+                <a href="/accounts/login/" style="color: white;text-decoration: none">
+                <button type="button" class="btn btn-lg btn-block btn-primary" style="border-radius: 0">
+                    Get started
+                </button>
+                    </a>
+            </div>
+        </div>
+    </div>
+
+    <div class=" col-lg-3 col-sm-6 col-md-6 col-12  ">
+        <div class="card shadow-sm" style="height: 100%">
+            <div class="card-header" style="background-color: #2b2773;color: white;height: 7rem">
+                <h4 class=" font-weight-normal text-center" style="padding-top: 10%">Enterprise</h4>
+            </div>
+            <div class="card-body">
+                <br>
+                <br>
+                <h5 class="text-center" style="margin-top: 1.2em;">sales@codeln.com </h5>
+                <ul class="list-unstyled mt-3 mb-4 ml-5">
+                    <li class="">Larger number of candidates?</li>
+                    <li class="">Want multiple projects? </li>
+                    <li class="">Want to Customize projects? </li>
+                    <li class="">API access </li>
+
+                </ul>
+
+            </div>
+            <div class="card-footer text-muted" style="background-color: white">
+                <a href="mailto:sales@codeln.com" style="text-decoration: none"><button type="button" class="btn btn-lg btn-block btn-primary" style="border-radius: 0">Contact us</button></a>
+            </div>
+        </div>
+    </div>
+
+    <div class=" col-lg-3 col-sm-6 col-md-6 col-12 ">
+        <div class="card  shadow-sm" style="height: 100%">
+            <div class="card-header" style="background-color: #18a7ff;color: white;height: 7rem">
+                <h4 class=" font-weight-normal  text-center" style="padding-top: 10%">Sourcing</h4>
+            </div>
+            <div class="card-body">
+                <h5 class="text-center" style="margin-top: 1.2em;">Enjoy a stress free recruitment </h5><br>
+                <h6 class="ml-5">We will handle:</h6>
+                <ul class="list-unstyled mt-3 mb-4 ml-5">
+
+                    <li>Position adverts</li>
+                    <li>Find relevant candidates</li>
+                    <li>Vet candidate's skills</li>
+                    <li>Recommend top tier candidates</li>
+
+
+
+                </ul>
+
+            </div>
+            <div class="card-footer text-muted" style="background-color: white">
+                <a target="_blank" href="/transactions/sourcing/" style="text-decoration: none">
+                    <button type="button" class="btn btn-lg btn-block btn-primary" style="border-radius: 0">Developer request form</button>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+ <footer class="jumbotron jumbofoot">
+    <div class="container">
+        <div class="row">
+
+        <div class="col-6 col-md">
+          <h5>Menu</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="/pricing">Pricing</a></li>
+            <li><a class="text-muted" href="/accounts/login/">Testing</a></li>
+            <li><a class="text-muted" href="{% url 'transactions:sourcing' %}">Sourcing</a></li>
+              <li><a class="text-muted" href="/dev">Developer</a></li>
+
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Company</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="/privacy">Privacy</a></li>
+            <li><a class="text-muted" href="/terms">Terms</a></li>
+
+
+          </ul>
+        </div>
+        <div class="col col-md">
+          <h5>Contact</h5>
+          <ul class="list-unstyled text-small">
+              <li>
+              <a href="mailto:info@codeln.com" target="_top">
+                  <i><span data-feather="mail"></span> </i>
+              </a>
+              <li>
+                <a class="text-muted" href="https://www.linkedin.com/company/codeln/" target="_blank">
+                <i><span data-feather="linkedin"></span></i>
+                </a>
+            </li>
+            <li>
+                <a class="text-muted" href="https://twitter.com/Codeln_spaces" target="_blank">
+                <i><span data-feather="twitter"></span></i>
+                </a>
+            </li>
+            <li>
+                <a class="text-muted" href="https://www.facebook.com/CodelnSpaces/" target="_blank">
+                <i><span data-feather="facebook"></span></i>
+                </a>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+{% endblock %}

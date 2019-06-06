@@ -1,0 +1,143 @@
+{% extends 'recruiterbase.html' %}
+{% block title %}
+Add candidates
+{% endblock %}
+{%load static %}
+
+{% block content %}
+<main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+    <div class="d-none d-lg-block">
+        <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                    <h5 >Onboard  Candidates</h5>
+                    <ul class="nav ml-auto">
+
+
+
+            {% if request.user.is_authenticated %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+            </li>
+
+            {% else %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+            </li>
+            <li class="nav-item">
+                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+            </li>
+            {% endif %}
+
+
+    </ul>
+                </nav>
+    </div>
+
+    <!-----md devices adaptation------>
+    <div class="container d-lg-none">
+        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+            <h5 class="logoadapt h5" style="text-decoration: none" href="/home">Onboard Candidates</h5>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Menu
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'frontend:my-activity' %}" >Ongoing tests</a>
+                            <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
+                            <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
+                        </div>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="d-none d-lg-block" style="margin-top: 8%">
+
+</div >
+
+    <div class="d-lg-none"  style="margin-top: 7em">
+
+</div>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 " style="margin-right: auto;margin-left: auto">
+            <div class="card" >
+
+
+                <div class="card-body">
+
+                    <form action="." method="post">
+                        {% csrf_token %}
+                        <label class="label ">First name</label>
+                        <div >
+                            <input type="text" name="first_name" maxlength="255" class="form-control" required="" id="id_first_name">
+                        </div>
+                        <label class="label  ">Last name</label>
+                        <div >
+                            <input type="text" name="last_name" maxlength="255" class="form-control" required="" id="id_last_name">
+                        </div>
+                        <label class="label ">Email</label>
+                        <div >
+                            <input type="email" name="email" maxlength="254" class="form-control" required="" id="id_email">
+                        </div>
+                        <br>
+
+                        <button class="btn btn-success "  name="add_another" value="addanother" type="submit">Save and
+                            Add Another
+                        </button>
+                        <button class="btn btn-warning " name="and_continue" value="continue" type="submit">Save and
+                            Continue
+                        </button>
+
+
+
+                </form>
+
+            </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 " style="margin-right: auto;margin-left: auto">
+            <div class="shadow-sm p-3 mb-5">
+                <img src="{% static 'frontend/images/community.svg' %}" style="width: 50%;margin-left: 25%;margin-right: 25%">
+                <h5 class="text-center">Dont have your own candidates?</h5>
+                <h6 class="text-center">Allow the Codeln community developers to apply.</h6>
+                <p class="text-center">You will recieve ranked applicants from them you can pick of your preference to build the project you choose.</p>
+                <div class="d-flex justify-content-center">
+                    <a href="{% url 'transactions:opencall' mule %}">
+                        <button class="btn btn-primary " type="submit">Allow Open call</button></a>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+</main>
+{% endblock %}

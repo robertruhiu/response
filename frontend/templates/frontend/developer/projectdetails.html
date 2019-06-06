@@ -1,0 +1,382 @@
+{% extends 'candidatesbase.html' %}
+{% load bootstrap4 %}
+{% block title %}
+    project details
+{% endblock %}
+{% load static %}
+{% block content %}
+    <main role="main" class="col-md-12 col-lg-10 ml-lg-auto   px-4 ">
+        <div class="d-none d-lg-block">
+            <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                <h5>Project prerequisites</h5>
+                <ul class="nav ml-auto">
+
+
+                    {% if request.user.is_authenticated %}
+
+                        <li class="nav-item">
+                            <a href="{% url 'account_logout' %}" style="color: black" class="nav-link">Logout</a>
+                        </li>
+
+                    {% else %}
+
+                        <li class="nav-item">
+                            <a href="{% url 'account_login' %}" style="color: black" class="nav-link">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'account_signup' %}" style="color: black" class="nav-link">Register</a>
+                        </li>
+                    {% endif %}
+
+
+                </ul>
+            </nav>
+        </div>
+
+        <!-----md devices adaptation------>
+        <div class="container d-lg-none">
+            <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+                <a class="logoadapt h5" style="text-decoration: none" href="/home">Home</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdown"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Sidebar menu options
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/">Dashboard</a>
+                                <a class="dropdown-item" href="{% url 'frontend:buildproject' %}">Build a Project</a>
+                                <a class="dropdown-item" href="{% url 'students:tests' %}">Skill assessment</a>
+                                <a class="dropdown-item" href="{% url 'frontend:calltoapply' %}">Companies
+                                    recruiting</a>
+                                <a class="dropdown-item" href="/update_profile/">My profile</a>
+                            </div>
+                        </li>
+                        {% if request.user.is_authenticated %}
+
+                            <li class="nav-item">
+                                <a href="{% url 'account_logout' %}" style="color: white" class="nav-link">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'account_login' %}" style="color: white" class="nav-link">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account_signup' %}" style="color: white" class="nav-link">Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="d-none d-lg-block" style="margin-top: 8%">
+
+        </div>
+
+        <div class="d-lg-none " style="margin-top: 7em">
+
+        </div>
+        <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-3 col-6 text-center">
+                <h6>Check that your internet is working and stable</h6>
+                <img src="https://i.ibb.co/Ct7qgSm/building.png" height="80" alt="..."> <br><br>
+                <div class="btn-group" role="group" aria-label="Basic example">
+
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-6 text-center">
+                <h6>Ensure your webcam is unobstructed during test time</h6>
+                <img src="https://i.ibb.co/P4hPrLP/webcam.png" height="80" alt="..."> <br><br>
+                <div class="btn-group" role="group" aria-label="Basic example">
+
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-6  text-center">
+                <h6>Don't use any VPN (virtual Private Network)</h6>
+                <img src="https://i.ibb.co/wpq2Pq0/vpn.png" height="80" alt="...">
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-6  text-center">
+                <h6>Project deadline:No changes will be accepted when this timer runs out</h6>
+                <div style="font-size: 20px;font-weight: 500" id="cd"></div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 5%">
+            <div class="col-lg-12 col-sm-12 col-md-12 ">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                           aria-controls="home" aria-selected="true">Project details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                           aria-controls="contact" aria-selected="false">Project resources</a>
+                    </li>
+
+
+
+                </ul>
+            </div>
+            <div class="col-lg-12 col-sm-12 col-md-12">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-lg-8 col-sm-8 col-md-9" style="text-align: left">
+
+
+                                <div class="card5" style="text-align: left">
+                                    <div class="card-body">
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>Note!</strong>Imagery used to represent project are crude in design.Make yours way better.
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        {% if project.transaction.project.hasvideo %}
+                                            <div class="embed-responsive embed-responsive-16by9">
+                                                <iframe class="embed-responsive-item"
+                                                        src="{{ project.transaction.project.projectimage2 }}"
+                                                        frameborder="0"
+                                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                        allowfullscreen></iframe>
+                                            </div>
+
+
+                                        {% else %}
+                                            <img class="img-fluid"
+                                                 src="{{ project.transaction.project.projectimage1 }}">
+
+
+
+                                        {% endif %}
+
+                                        <h5 class="card-subtitle mb-2 mt-2 ">{{ project.transaction.project.name }}</h5>
+                                        <hr>
+
+                                        <p class="card-text ">
+                                            {{ project.transaction.project.description }}
+
+                                        </p>
+
+
+                                        <h5 class="card-subtitle mb-2 ">Deliverables</h5>
+                                        <hr>
+                                        <p class="card-text ">
+                                        </p>
+                                        <ul>
+
+
+                                            {% if project.transaction.project.requirement1 %}
+                                                <li>{{ project.transaction.project.requirement1 }}</li>
+                                            {% endif %}
+                                            {% if project.transaction.project.requirement2 %}
+                                                <li>{{ project.transaction.project.requirement2 }}</li>
+                                            {% endif %}
+                                            {% if project.transaction.project.requirement3 %}
+                                                <li>{{ project.transaction.project.requirement3 }}</li>
+                                            {% endif %}
+                                            {% if project.transaction.project.requirement4 %}
+                                                <li>{{ project.transaction.project.requirement4 }}</li>
+                                            {% endif %}
+                                            {% if project.transaction.project.requirement5 %}
+                                                <li>{{ project.transaction.project.requirement5 }}</li>
+                                            {% endif %}
+                                            {% if project.transaction.project.requirement6 %}
+                                                <li>{{ project.transaction.project.requirement6 }}</li>
+                                            {% endif %}
+                                            {% if project.transaction.project.requirement7 %}
+                                                <li>{{ project.transaction.project.requirement7 }}</li>
+                                            {% endif %}
+                                            {% if project.transaction.project.requirement8 %}
+                                                <li>{{ project.transaction.project.requirement8 }}</li>
+                                            {% endif %}
+                                            {% if project.transaction.project.requirement9 %}
+                                                <li>{{ project.transaction.project.requirement9 }}</li>
+                                            {% endif %}
+                                            {% if project.transaction.project.requirement10 %}
+                                                <li>{{ project.transaction.project.requirement10 }}</li>
+                                            {% endif %}
+
+
+                                        </ul>
+
+
+                                        <p></p>
+
+
+                                        <h5 class="card-subtitle mb-2 ">Enviroment variables</h5>
+                                        <hr>
+                                        <p class="card-text ">
+                                        </p>
+                                        <ul>
+
+                                            <li>Framework to use :{{ project.transaction.framework.name }} </li>
+
+
+                                        </ul>
+
+                                        <p></p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-lg-4 col-sm-4 col-md-3 " style="text-align: left">
+                                <div class="card5" style="width: 100%;">
+                                    <div class="card-body">
+
+
+{#                                        <div id="cc" style="font-size: 20px;font-weight: 500">#}
+
+                                        </div>
+                                        <div id="submission">
+                                            <h5 class="card-subtitle mb-2 text-muted">Project submission details</h5>
+
+
+
+
+                                            {% if project.stage == 'project-in-progress' %}
+
+                                                {% if opencall %}
+                                                    <h6>Have you completed project?</h6>
+
+
+
+                                                    <form action="{% url 'frontend:update_finishedopencall' project.id  project.transaction.id %}"
+                                                          method="post">
+                                                        {% csrf_token %}
+                                                        {% bootstrap_field form.demolink show_label=False placeholder='demo link' %}
+                                                        {% bootstrap_field form.repositorylink show_label=False placeholder='repository link' %}
+                                                        <div style="text-align: right">
+                                                            <button type="submit" class="btn btn-success">Submit
+                                                            </button>
+                                                        </div>
+                                                    </form>
+
+                                                {% else %}
+                                                    <p>Coding area workspace or home</p>
+                                                    <h6>Have you completed project?</h6>
+                                                    <a href="/update_finished/{{ project.id }}/{{ project.transaction.id }}">
+                                                        <button class="btn btn-outline-success" style="border-radius: 0"
+                                                                type="submit">Finish Project
+                                                        </button>
+                                                    </a>
+
+                                                {% endif %}
+                                            {% elif project.stage == 'invite-accepted' %}
+                                                <div class="alert alert-primary" role="alert">
+                                                    Start project to see submission guidelines
+                                                </div>
+                                                <hr>
+                                                <a href="/update_candidateprojects/{{ project.id }}/{{ project.transaction.id }}">
+                                                    <button class="btn btn-outline-primary" style="border-radius: 0"
+                                                            type="submit">Start project
+                                                    </button>
+                                                </a>
+                                            {% else %}
+                                                <h6 class="alert alert-primary">Project completed.Recruiter will now get
+                                                    a
+                                                    report of how you performed.</h6>
+                                            {% endif %}
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="row">
+
+
+                            {% if project.transaction.project.projectimage1 %}
+                                <div class="col-4">
+                                    <img class=" img-fluid" src="{{ project.transaction.project.projectimage1 }}">
+                                </div>
+
+
+                            {% endif %}
+                            {% if project.transaction.project.hasvideo == False %}
+                                {% if project.transaction.project.projectimage2 %}
+                                    <div class="col-4">
+                                        <img class=" img-fluid" src="{{ project.transaction.project.projectimage2 }}">
+                                    </div>
+
+                                {% endif %}
+
+                            {% endif %}
+
+                            {% if project.transaction.project.projectimage3 %}
+                                <div class="col-4">
+                                    <img class=" img-fluid" src="{{ project.transaction.project.projectimage3 }}">
+                                </div>
+
+                            {% endif %}
+                            {% if project.transaction.project.projectimage4 %}
+                                <div class="col-4">
+                                    <img class=" img-fluid" src="{{ project.transaction.project.projectimage4 }}">
+                                </div>
+
+                            {% endif %}
+                            {% if project.transaction.project.projectimage5 %}
+                                <div class="col-4">
+                                    <img class=" img-fluid" src="{{ project.transaction.project.projectimage5 }}">
+                                </div>
+
+                            {% endif %}
+                            {% if project.transaction.project.projectimage6 %}
+                                <div class="col-4">
+                                    <img class=" img-fluid" src="{{ project.transaction.project.projectimage6 }}">
+                                </div>
+
+                            {% endif %}
+                            {% if project.transaction.project.projectimage7 %}
+                                <div class="col-4">
+                                    <img class=" img-fluid" src="{{ project.transaction.project.projectimage7 }}">
+                                </div>
+
+                            {% endif %}
+                            {% if project.transaction.project.projectimage8 %}
+                                <div class="col-4">
+                                    <img class=" img-fluid" src="{{ project.transaction.project.projectimage8 }}">
+                                </div>
+
+                            {% endif %}
+                            {% if project.transaction.project.projectimage9 %}
+                                <div class="col-4">
+                                    <img class=" img-fluid" src="{{ project.transaction.project.projectimage9 }}">
+                                </div>
+
+                            {% endif %}
+                            {% if project.transaction.project.projectimage10 %}
+                                <div class="col-4">
+                                    <img class=" img-fluid" src="{{ project.transaction.project.projectimage10 }}">
+                                </div>
+
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+{% endblock %}

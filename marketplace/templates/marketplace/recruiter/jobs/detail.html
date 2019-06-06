@@ -1,0 +1,397 @@
+{% extends 'recruiterbase.html' %}
+{% load bootstrap4 %}
+{% block title %}
+    recruiter dashboard
+{% endblock %}
+{% load static %}
+{% block content %}
+    <main role="main" class="col-md-12 col-lg-10 ml-lg-auto   px-4 ">
+        <div class="d-none d-lg-block">
+            <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                <h5>Details</h5>
+                <ul class="nav ml-auto">
+
+
+                    {% if request.user.is_authenticated %}
+
+
+                        <li class="nav-item">
+                            <a href="{% url 'account_logout' %}" style="color: black" class="nav-link">Logout</a>
+                        </li>
+
+                    {% else %}
+
+                        <li class="nav-item">
+                            <a href="{% url 'account_login' %}" style="color: black" class="nav-link">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'account_signup' %}" style="color: black" class="nav-link">Register</a>
+                        </li>
+                    {% endif %}
+
+
+                </ul>
+            </nav>
+        </div>
+
+        <!-----md devices adaptation------>
+        <div class="container d-lg-none">
+            <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+                <a class="logoadapt h5" style="text-decoration: none" href="/home">Details</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdown"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Sidebar menu options
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {#                                <a class="dropdown-item" href="{% url 'frontend:inprogress' %}">Ongoing#}
+                                {#                                    Projects</a>#}
+                                <a class="dropdown-item" href="/update_profile/">My profile</a>
+                            </div>
+                        </li>
+                        {% if request.user.is_authenticated %}
+
+                            <li class="nav-item">
+                                <a href="{% url 'account_logout' %}" style="color: white" class="nav-link">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'account_login' %}" style="color: white" class="nav-link">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account_signup' %}" style="color: white" class="nav-link">Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="d-none d-lg-block" style="margin-top: 6%">
+
+        </div>
+        <div class="d-lg-none" style="margin-top: 7em">
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8 col mb-2" style="width: 100%;">
+
+                <div class="shadow-lg p-3 mb-2 bg-white rounded">
+                    {{ job.title }} ({{ job.engagement_type }})
+                    <br>
+
+                    <span data-feather="map-pin"></span> {{ job.location.name }} |
+                    <span data-feather="codepen"></span> {{ job.tech_stack }} | {{ job.company }}
+
+
+                    <hr>
+                    {{ job.description|safe }}
+                </div>
+
+
+            </div>
+            <div class="col-lg-4">
+                <a href="{% url 'marketplace:edit_job' job.id %}" class="btn btn-primary">Edit job</a>
+            </div>
+
+
+        </div>
+        <nav>
+            {% if selected_candidates %}
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                       aria-controls="nav-profile" aria-selected="false">Picked candidates</a>
+                    <a class="nav-item nav-link " id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                       aria-controls="nav-home" aria-selected="true">New applicants</a>
+                    <a class="nav-item nav-link" id="nav-recommend-tab" data-toggle="tab" href="#nav-recommend"
+                       role="tab"
+                       aria-controls="nav-recommend" aria-selected="false">Recommended candidates</a>
+
+                </div>
+            {% else %}
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                       aria-controls="nav-home" aria-selected="true">New applicants</a>
+                    <a class="nav-item nav-link" id="nav-recommend-tab" data-toggle="tab" href="#nav-recommend"
+                       role="tab"
+                       aria-controls="nav-recommend" aria-selected="false">Recommended candidates</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                       aria-controls="nav-profile" aria-selected="false">Picked candidates</a>
+                </div>
+            {% endif %}
+
+        </nav>
+
+        {% if selected_candidates %}
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">email</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Cv</th>
+                        <th scope="col">Github</th>
+                        <th scope="col">Linkedin</th>
+                        <th>Action</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for dev in applicants %}
+                        <tr>
+                            <td> {{ forloop.counter }} </td>
+                            <td>{{ dev.first_name }} {{ dev.last_name }}</td>
+                            <td>{{ dev.email }}</td>
+                            <td>{{ dev.profile.country.name }}</td>
+
+                            <td><a href=" {{ dev.profile.file.url }}">Cv link</a></td>
+                            <td><a href="{{ dev.profile.github_repo }}" target="_blank">github account</a></td>
+                            <td><a href="{{ dev.profile.linkedin_url }}" target="_blank">linkedin</a></td>
+
+                            <td><a style="text-decoration: none"
+                                   href="{% url 'marketplace:select_candidate' job.id dev.id %}"><span
+                                    class="btn-sm btn-primary ">Pick</span></a>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="tab-pane fade" id="nav-recommend" role="tabpanel" aria-labelledby="nav-recommend-tab">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">email</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Cv</th>
+                        <th scope="col">Github</th>
+                        <th scope="col">Linkedin</th>
+                        <th>Action</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for dev in recommended %}
+                        <tr>
+                            <td> {{ forloop.counter }} </td>
+                            <td>{{ dev.first_name }} {{ dev.last_name }}</td>
+                            <td>{{ dev.email }}</td>
+                            <td>{{ dev.profile.country.name }}</td>
+
+                            <td><a href=" {{ dev.profile.file.url }}">Cv link</a></td>
+                            <td><a href="{{ dev.profile.github_repo }}" target="_blank">github account</a></td>
+                            <td><a href="{{ dev.profile.linkedin_url }}" target="_blank">linkedin</a></td>
+
+                            <td><a style="text-decoration: none"
+                                   href="{% url 'marketplace:select_candidate' job.id dev.id %}"><span
+                                    class="btn-sm btn-primary ">Pick</span></a>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                {% if selected_candidates %}
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">email</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Cv</th>
+                        <th scope="col">Github</th>
+                        <th scope="col">Linkedin</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for dev in selected_candidates %}
+                            <tr>
+                            <td> {{ forloop.counter }} </td>
+                            <td>{{ dev.first_name }} {{ dev.last_name }}</td>
+                            <td>{{ dev.email }}</td>
+                            <td>{{ dev.profile.country.name }}</td>
+
+                            <td><a href=" {{ dev.profile.file.url }}">Cv link</a></td>
+                            <td><a href="{{ dev.profile.github_repo }}" target="_blank">github account</a></td>
+                            <td><a href="{{ dev.profile.linkedin_url }}" target="_blank">linkedin</a></td>
+
+
+                        </tr>
+
+                        {% endfor %}
+
+
+                        </tbody>
+                    </table>
+                {% else %}
+                    <br>
+                    <br>
+                    <p class="text-center" style="color: #c91452">You have not picked any candidate for this job
+                        yet.</p>
+
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+            <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">email</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Cv</th>
+                        <th scope="col">Github</th>
+                        <th scope="col">Linkedin</th>
+                        <th>Action</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for dev in applicants %}
+                        <tr>
+                            <td> {{ forloop.counter }} </td>
+                            <td>{{ dev.first_name }} {{ dev.last_name }}</td>
+                            <td>{{ dev.email }}</td>
+                            <td>{{ dev.profile.country.name }}</td>
+
+                            <td><a href=" {{ dev.profile.file.url }}">Cv link</a></td>
+                            <td><a href="{{ dev.profile.github_repo }}" target="_blank">github account</a></td>
+                            <td><a href="{{ dev.profile.linkedin_url }}" target="_blank">linkedin</a></td>
+
+                            <td><a style="text-decoration: none"
+                                   href="{% url 'marketplace:select_candidate' job.id dev.id %}"><span
+                                    class="btn-sm btn-primary ">Pick</span></a>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="tab-pane fade" id="nav-recommend" role="tabpanel" aria-labelledby="nav-recommend-tab">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">email</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Cv</th>
+                        <th scope="col">Github</th>
+                        <th scope="col">Linkedin</th>
+                        <th>Action</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for dev in recommended %}
+                        <tr>
+                            <td> {{ forloop.counter }} </td>
+                            <td>{{ dev.first_name }} {{ dev.last_name }}</td>
+                            <td>{{ dev.email }}</td>
+                            <td>{{ dev.profile.country.name }}</td>
+
+                            <td><a href=" {{ dev.profile.file.url }}">Cv link</a></td>
+                            <td><a href="{{ dev.profile.github_repo }}" target="_blank">github account</a></td>
+                            <td><a href="{{ dev.profile.linkedin_url }}" target="_blank">linkedin</a></td>
+
+                            <td><a style="text-decoration: none"
+                                   href="{% url 'marketplace:select_candidate' job.id dev.id %}"><span
+                                    class="btn-sm btn-primary ">Pick</span></a>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                {% if selected_candidates %}
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">email</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Cv</th>
+                        <th scope="col">Github</th>
+                        <th scope="col">Linkedin</th>
+                        <th>Action</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for dev in selected_candidates %}
+                            <tr>
+                            <td> {{ forloop.counter }} </td>
+                            <td>{{ dev.first_name }} {{ dev.last_name }}</td>
+                            <td>{{ dev.email }}</td>
+                            <td>{{ dev.profile.country.name }}</td>
+
+                            <td><a href=" {{ dev.profile.file.url }}">Cv link</a></td>
+                            <td><a href="{{ dev.profile.github_repo }}" target="_blank">github account</a></td>
+                            <td><a href="{{ dev.profile.linkedin_url }}" target="_blank">linkedin</a></td>
+
+                            <td><a style="text-decoration: none"
+                                   href="{% url 'marketplace:select_candidate' job.id dev.id %}"><span
+                                    class="btn-sm btn-primary ">Pick</span></a>
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+
+                        </tbody>
+                    </table>
+                {% else %}
+                    <br>
+                    <br>
+                    <p class="text-center" style="color: #c91452">You have not picked any candidate for this job
+                        yet.</p>
+
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+    </main>
+
+{% endblock %}

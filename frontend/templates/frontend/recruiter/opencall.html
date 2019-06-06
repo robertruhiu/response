@@ -1,0 +1,207 @@
+{% extends 'recruiterbase.html' %}
+{% block title %}
+application tracker
+{% endblock %}
+{% block content %}
+<main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+    <div class="d-none d-lg-block">
+        <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                    <h5 >Applicants tracker</h5>
+                    <ul class="nav ml-auto">
+
+
+
+            {% if request.user.is_authenticated %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+            </li>
+
+            {% else %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+            </li>
+            <li class="nav-item">
+                <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+            </li>
+            {% endif %}
+
+
+    </ul>
+                </nav>
+    </div>
+
+    <!-----md devices adaptation------>
+    <div class="container d-lg-none">
+        <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+            <a class="logoadapt h5" style="text-decoration: none" href="/home">Applicants tracker</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Menu
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'frontend:my-activity' %}" >Ongoing tests</a>
+                            <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
+                            <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
+                        </div>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+<div class="d-none d-lg-block" style="margin-top: 8%">
+
+</div >
+
+<div class="d-lg-none"  style="margin-top: 4em">
+
+</div>
+
+    <div class="row ">
+        <div class="col-4 d-none d-lg-block">
+
+            <div class="card trackercard" >
+                <div class="card-body">
+                    <h5 class="card-title">Quiz stage</h5>
+                    <p class="card-text">Number of applicants :{{ candidates.count}}</p>
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-4 d-none d-lg-block">
+            <a href="{% url 'frontend:tracker' trans_id %}">
+            <div class="card trackercard ">
+                <div class="card-body">
+                    <h5 class="card-title">Project stage</h5>
+                    <p class="card-text">{{ picked.count }} picked</p>
+
+                </div>
+            </div>
+            </a>
+        </div>
+
+
+    </div>
+<br>
+
+
+    <br>
+
+
+   <table class="table" style="width: 100%">
+        <thead class="thead-dark">
+        <tr>
+
+            <th scope="col">Rank</th>
+            <th scope="col">Name</th>
+            <th scope="col">Country</th>
+            {% if request.user.id == 492 %}
+                <th scope="col">Email</th>
+                <th scope="col">Linkedin profile</th>
+
+                {% else %}
+                <th scope="col">Availability</th>
+
+            {% endif %}
+
+            <th scope="col">{{ candidate.project.framework }} score</th>
+
+            <th scope="col">Action</th>
+
+
+
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for candidate in candidates %}
+
+        <tr>
+            <td> {{ forloop.counter }} </td>
+            <td>{{ candidate.candidate.first_name}} {{ candidate.candidate.last_name}}  </td>
+            <td>
+                {{ candidate.candidate.profile.country.name }}
+
+            </td>
+        {% if  request.user.id == 492 %}
+            <td>
+                {{ candidate.candidate.email }}
+            </td>
+            <td>
+               <a TARGET="_blank" href="{{ candidate.candidate.profile.linkedin_url }}">{{ candidate.candidate.profile.linkedin_url }}</a>
+            </td>
+
+            {% else %}
+            <td>
+                {{ candidate.candidate.profile.availabilty }}
+
+            </td>
+
+        {% endif %}
+
+            <td>
+                {{ candidate.score }}
+            </td>
+
+
+            <td>
+                {% if candidate.stage == 'application sent' %}
+                <a style="text-decoration: none" href="{% url 'frontend:pickcandidates' trans_id candidate.candidate_id %}">
+                    <span class="btn-sm btn-primary">Pick for next stage</span>
+                </a>
+                    {% elif candidate.stage == 'accepted' %}
+                    <span class="btn-sm btn-primary" style="background-color: #b627a1">Picked</span>
+                {% endif %}
+            </td>
+
+
+
+
+
+
+
+
+
+        </tr>
+        {% endfor %}
+
+
+
+
+
+        </tbody>
+    </table>
+
+
+
+
+</main>
+
+{% endblock %}

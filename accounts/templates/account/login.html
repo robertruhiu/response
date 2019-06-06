@@ -1,0 +1,81 @@
+{% extends "account/base.html" %}
+{% load bootstrap4 %}
+{% load i18n %}
+{% load account socialaccount %}
+{% block title %}
+    Sign In
+{% endblock %}
+{%load static %}
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid" style="margin-top: 5%">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 d-none d-lg-block mt-5 ">
+                <div class="cardno great gr">
+                    <div class="card-body">
+                        <div class="h4">Welcome Back</div>
+
+                        <img class="beer" src="{%static 'frontend/images/ill/work.svg' %}">
+
+
+
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-lg-4" style="margin-top: 5em">
+                <h5>Login</h5>
+
+
+                    {% providers_media_js %}
+
+                <form method="POST" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+                {% bootstrap_form_errors form %}
+                <div class="form-group">
+                    <label for="id_login">E-mail</label>
+                    <input type="email" name="login"  autofocus="autofocus" class="form-control" title="" required="" id="id_login">
+                </div>
+                <div class="form-group">
+                    <label for="id_password">Password</label>
+                    <input type="password" name="password"  class="form-control" title="" required="" id="id_password">
+                </div>
+
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" name="remember" class="form-check-input" id="id_remember">
+                        <label class="form-check-label" for="id_remember">Remember Me</label>
+                    </div>
+                </div>
+
+
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+
+                    <button class="btn theme--dark primary px-4 " style="border-radius: 0;color: white" type="submit">{% trans "Sign In" %}</button>
+                    <a class="btn btn-link" href="{% url 'account_reset_password' %}">
+                        {% trans "Forgot Password?" %}
+                    </a>
+                    <a class="btn btn-link" href="{{ signup_url }}">
+                        I dont have an account
+                    </a>
+
+                </form>
+
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock %}

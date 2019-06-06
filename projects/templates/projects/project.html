@@ -1,0 +1,219 @@
+{% extends 'recruiterbase.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block title %}
+    project details
+{% endblock %}
+{% block content %}
+    <main role="main" class="col-md-12 ml-lg-auto  col-lg-10 px-4 ">
+        <div class="d-none d-lg-block">
+            <nav class="navbar  navbar-light fixed-top fine border-bottom">
+                <h5 >Project details</h5>
+                <ul class="nav ml-auto">
+
+
+
+                    {% if request.user.is_authenticated %}
+
+                        <li class="nav-item">
+                            <a  href="{% url 'account_logout' %}" style="color: black" class="nav-link" >Logout</a>
+                        </li>
+
+                    {% else %}
+
+                        <li class="nav-item">
+                            <a  href="{% url 'account_login' %}" style="color: black" class="nav-link" >Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'account_signup' %}" style="color: black" class="nav-link" >Register</a>
+                        </li>
+                    {% endif %}
+
+
+                </ul>
+            </nav>
+        </div>
+
+        <!-----md devices adaptation------>
+        <div class="container d-lg-none">
+            <nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+                <h5 class="logoadapt h5" style="text-decoration: none" href="/home">Project details</h5>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span  class="navbar-toggler-icon">
+                    <span style="color: white" data-feather="menu"></span>
+                </span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Menu
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'frontend:my-activity' %}" >Ongoing tests</a>
+                                <a class="dropdown-item" href="{% url 'projects:categories' %}">Create a test</a>
+                                <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Source candidates</a>
+                            </div>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a  href="/home" style="color: white" class="nav-link" >Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="d-none d-lg-block" style="margin-top: 8%">
+
+        </div >
+
+        <div class="d-lg-none"  style="margin-top: 7em">
+
+        </div>
+
+
+
+        <div class="row">
+
+
+            <div class="col-lg-7 col-md-7" >
+            {% if project.hasvideo == False %}
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    {% if project.projectimage2 %}
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    {% endif %}
+                    {% if project.projectimage3 %}
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    {% endif %}
+                </ol>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="{{project.projectimage1}}" alt="First slide">
+                    </div>
+                    {% if project.projectimage2 %}
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="{{project.projectimage2}}" alt="Second slide">
+                    </div>
+                    {% endif %}
+                    {% if project.projectimage3 %}
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="{{project.projectimage3}}" alt="Third slide">
+                        </div>
+                    {% endif %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+                {% else %}
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="{{ project.projectimage2 }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            {% endif %}
+
+
+
+                <div class="card" style="border-radius: 0">
+
+
+                    <div class="card-body">
+                        <h6 >{{ project.name }}
+                            <span class="badge badge-primary">Level : {{ project.level }}</span>
+                        </h6>
+                        {% if project.concept %}
+                            <p><strong>Concepts tested:</strong> {{ project.concept }}</p>
+
+                        {% endif %}
+
+                        <p> {{ project.description }}</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-5 col-md-5" >
+                <div class="card" style="height: available;border-radius: 0" >
+
+                    <div class="card-body">
+
+                        <h6 class="card-title">Requirements</h6>
+                        <ul>
+                            {% if project.requirement1 %}
+                                <li>{{ project.requirement1 }}</li>
+                            {% endif %}
+                            {% if project.requirement2 %}
+                                <li>{{ project.requirement2 }}</li>
+                            {% endif %}
+                            {% if project.requirement3 %}
+                                <li>{{ project.requirement3 }}</li>
+                            {% endif %}
+                            {% if project.requirement4 %}
+                                <li>{{ project.requirement4 }}</li>
+                            {% endif %}
+                            {% if project.requirement5 %}
+                                <li>{{ project.requirement5 }}</li>
+                            {% endif %}
+                            {% if project.requirement6 %}
+                                <li>{{ project.requirement6 }}</li>
+                            {% endif %}
+                            {% if project.requirement7 %}
+                                <li>{{ project.requirement7 }}</li>
+                            {% endif %}
+                            {% if project.requirement8 %}
+                                <li>{{ project.requirement8 }}</li>
+                            {% endif %}
+                            {% if project.requirement9 %}
+                                <li>{{ project.requirement9 }}</li>
+                            {% endif %}
+                            {% if project.requirement10 %}
+                                <li>{{ project.requirement10 }}</li>
+                            {% endif %}
+
+
+                        </ul>
+                        <p>Recommended framework:<span class="badge badge-primary"> {{ project.framework.name }}</span></p>
+                        <p></p>
+                        <h6 class="card-title">Pick a tech stack</h6>
+                        <form action="{% url 'transactions:transaction' project.id %}" method="post">
+                            {% csrf_token %}
+                                {% bootstrap_form framework_form show_label=False%}
+
+
+                            <div style="text-align: right">
+                               <a class="btn btn-primary" href="{% url 'projects:categories'%}" >
+                                   Go back
+                              </a>
+                                <button type="submit" class="btn btn-success">Choose project</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <br>
+        <br>
+    </main>
+{% endblock %}

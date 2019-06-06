@@ -1,0 +1,131 @@
+{% load static %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="{% static 'frontend/images/how/coding.png' %}">
+    <meta name="theme-color" content="#272339">
+    <title>{% block title %}
+
+        {% endblock %} | Codeln</title>
+
+
+
+
+
+
+    <link rel="stylesheet" href="{% static 'frontend/css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'frontend/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/stay.css' %}">
+
+
+    {% block css %}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130019198-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-130019198-1');
+</script>
+
+
+
+    {% endblock %}
+</head>
+<body>
+<div class="container">
+<nav class=" navbar loginbar navbar-expand-md navbar-light fixed-top ">
+    <a class="navbar-brand1" href="/home">
+        <img src="{%static 'frontend/images/logo/logo.svg' %}" class="img-fluid ml-4  mt-2" width="120" alt="">
+    </a>
+
+
+   <button class="navbar-toggler"  data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+        <span style="color: white" data-feather="menu"></span>
+
+  </button>
+
+
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+
+
+        <ul class="nav">
+            <li class="nav-item">
+                <a href="{% url 'marketplace:job_list' %}" style="color: white" class="nav-link  ">Jobs</a>
+            </li>
+            <li class="nav-item dropdown d-none d-md-block">
+                <a class="nav-link dropdown-toggle" style="color: white"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Products
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'account_login' %}" >Screening</a>
+                    <a class="dropdown-item" href="{% url 'transactions:sourcing' %}">Sourcing</a>
+
+
+
+                </div>
+            </li>
+             {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'frontend:index' %}" style="color: white" class="nav-link">My account</a>
+                </li>
+            <li class="nav-item">
+                <a  href="{% url 'account_logout' %}" style="color: white" class="nav-link" >Logout</a>
+            </li>
+
+            {% else %}
+
+            <li class="nav-item">
+                <a  href="{% url 'account_login' %}" style="color: white" class="nav-link" >Login</a>
+            </li>
+            <li class="nav-item">
+                <a  href="{% url 'account_signup' %}" style="color: white" class="nav-link" >Register</a>
+            </li>
+            {% endif %}
+
+
+
+
+        </ul>
+    </div>
+</nav>
+</div>
+{% block content %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        {% bootstrap_javascript %}
+        <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+        <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script>
+            feather.replace()
+        </script>
+
+
+
+
+
+{% block script %}
+
+{% endblock %}
+</body>
+</html>
