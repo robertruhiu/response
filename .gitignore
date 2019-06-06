@@ -101,6 +101,6 @@ db.sqlite3
 
 /.scannerwork/
 /frontend/static/frontend/mail.csv
-/frontend/tasks.py
+
 /frontend/templates/invitations/email/mestsubmission.html
 /test.html
