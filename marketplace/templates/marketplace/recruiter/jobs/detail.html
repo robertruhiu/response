@@ -226,7 +226,7 @@
                         <th scope="col">Cv</th>
                         <th scope="col">Github</th>
                         <th scope="col">Linkedin</th>
-                        <th>Action</th>
+
 
                         </tr>
                         </thead>
@@ -243,10 +243,7 @@
                             <td><a href="{{ dev.profile.github_repo }}" target="_blank">github account</a></td>
                             <td><a href="{{ dev.profile.linkedin_url }}" target="_blank">linkedin</a></td>
 
-                            <td><a style="text-decoration: none"
-                                   href="{% url 'marketplace:select_candidate' job.id dev.id %}"><span
-                                    class="btn-sm btn-primary ">Pick</span></a>
-                            </td>
+
                         </tr>
 
                         {% endfor %}
