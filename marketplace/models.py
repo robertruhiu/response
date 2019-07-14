@@ -47,6 +47,9 @@ class Job(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     position_filled = models.BooleanField(default=False)
+    published = models.BooleanField(default=False)
+    verified = models.BooleanField(default=False)
+    deadline = models.DateTimeField(null=True,blank=True)
 
     class Meta:
         ordering = ('created',)
@@ -59,6 +62,7 @@ class JobApplication(models.Model):
     job = models.ForeignKey(Job, related_name='job_applications', on_delete=models.CASCADE)
     candidate = models.ForeignKey(User, on_delete=models.CASCADE, related_name='devs')
     selected = models.BooleanField(default=False)
+    stage =models.CharField(max_length=500, null=True)
 
 
 class DevRequest(models.Model):

@@ -128,6 +128,7 @@ def take(request, pk):
 
                         else:
                             default_answer = StudentAnswer(quiz=quiz,student=student,answer=Answer.objects.filter(question_id = question.id).last())
+                            #TO DO add a conditional to ensure only wrong option is choosen when no answer provided
                             default_answer.save()
                             randomquizinstance = RandomQuiz.objects.get(quiz_id=pk,student_id=student.id)
                             randomquizinstance.questions = unanswered_questions

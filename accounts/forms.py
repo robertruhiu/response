@@ -20,7 +20,7 @@ class DeveloperFillingDetailsForm(forms.ModelForm):
         model = Profile
 
         fields = ['github_repo','gender','phone_number', 'linkedin_url',
-                  'portfolio','years','country','language', 'framework','availabilty','csa','about']
+                  'portfolio','years','country','language', 'framework','availabilty','csa','about',]
 
 
     # PROGRAMMING_LANGUAGE_CHOICES = (('python', 'Python'),)

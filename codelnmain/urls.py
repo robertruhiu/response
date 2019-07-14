@@ -19,7 +19,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import handler404, handler500
-
+from rest_framework_jwt.views import obtain_jwt_token,refresh_jwt_token
 from accounts.views import profile
 
 urlpatterns = [
@@ -38,7 +38,11 @@ urlpatterns = [
     path('blog/',include('blog.urls',namespace='blog')),
     path('martor/', include('martor.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('api-auth/', include('rest_framework.urls'))
+    path('api-auth/', include('rest_framework.urls')),
+    path('api-token',obtain_jwt_token),
+    path('api-token-refress',refresh_jwt_token),
+    path('rest-auth/', include('rest_auth.urls')),
+    path('rest-auth/registration/', include('rest_auth.registration.urls'))
 
 ]
 

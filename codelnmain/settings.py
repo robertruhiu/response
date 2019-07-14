@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 from builtins import bool
-
+import datetime
 import dj_database_url
 import django_heroku
 from decouple import config
@@ -26,7 +26,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = config('SECRET_KEY', default='SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ENVIRONMENT = config('ENVIRONMENT', default='local')
 
@@ -74,13 +74,47 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
+    'rest_auth',
+    'rest_auth.registration',
 
 
 
 
 
 ]
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
 
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
+JWT_AUTH = {
+    'JWT_VERIFY': True,
+    'JWT_VERIFY_EXPIRATION': True,
+    'JWT_LEEWAY': 0,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=86400),
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+}
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8000',
+    'http://localhost:8080',
+    'http://localhost:8081',
+
+)
+
+REST_USE_JWT = True
 # Application definition
 SITE_ID = 1
 
@@ -88,6 +122,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -130,6 +165,36 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'mrembo',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Pokerface1994',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'delfm8a38hujqh',
+#         'USER': 'zwoyihgclnpxxl',
+#         'PASSWORD': 'b8c1c02d756826889dd0c32024144b07f7e09216b6b225ab73a19f2ae92b20a3',
+#         'HOST': 'ec2-54-228-207-163.eu-west-1.compute.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'dfrqm5mpfa2bvr',
+#         'USER': 'lhhjslensqrmsl',
+#         'PASSWORD': '45a798f60492d72aa0d8017b48816b10a184a5f6c93494e9253730be18eeeb49',
+#         'HOST': 'ec2-79-125-124-30.eu-west-1.compute.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -292,11 +357,4 @@ CKEDITOR_CONFIGS = {
         'toolbar': None,
 
     },
-}
-REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
 }

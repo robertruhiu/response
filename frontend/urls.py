@@ -1,6 +1,6 @@
 from django.urls import path
 
-from frontend.views import index
+from frontend.views import index, UserList
 from frontend.views import home,activity,tracker,update_candidateprojects,\
     sample,inprogress,projectinvites,update_finished,invites,\
     projectdetails,pendingproject,terms,dev,pricing,howitworks,privacy,\
@@ -8,7 +8,8 @@ from frontend.views import home,activity,tracker,update_candidateprojects,\
     editproject,deleteproject,addproject,edittransactions\
     ,deletetransaction,buildproject,calltoapply,apply,opencalltracker,competitions,newproject,\
     passedquizzes,failedquizzes,pickcandidates,update_finishedopencall,portfolio,experience,closetransaction,\
-    editportfolioproject,about,management,grading,storegrades,analytics
+    editportfolioproject,about,management,grading,storegrades,analytics,ProfileUpdate,Profileget,Talentget,Experienceget,\
+    Portfolioget,AllUsers,Userget
 from frontend.tasks import reminderforprofiledevs,applyreminder,massmail,submission
 from accounts.views import update_profile
 
@@ -71,7 +72,16 @@ urlpatterns = [
     path('about',about,name='about'),
     path('management',management,name='management'),
     path('grading/<int:candidate_id>/<int:transaction_id>',grading,name='grading'),
-    path('storegrades/<int:candidate_id>/<int:transaction_id>',storegrades,name='storegrades')
+    path('storegrades/<int:candidate_id>/<int:transaction_id>',storegrades,name='storegrades'),
+    path('users/', UserList.as_view()),
+    path('allusers/', AllUsers.as_view()),
+    path('updater/<int:pk>', ProfileUpdate.as_view()),
+    path('getuser/<int:pk>', Userget.as_view()),
+    path('getprofile/<int:pk>', Profileget.as_view()),
+    path('gettalent/<int:pk>', Talentget.as_view()),
+    path('getexperience/<int:pk>', Experienceget.as_view()),
+    path('getportofolio/<int:pk>', Portfolioget.as_view()),
+
 
 
 ]

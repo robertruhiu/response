@@ -26,6 +26,98 @@ from .forms import JobForm
 from accounts.models import Profile
 from django.utils.safestring import mark_safe
 import json
+from rest_framework.permissions import IsAuthenticated
+from .serializers import DevRequestSerializer,JobRequestSerializer,JobApplicationsRequestSerializer
+from rest_framework import generics
+
+class DevRequestlist(generics.RetrieveUpdateDestroyAPIView):
+
+    serializer_class = DevRequestSerializer
+    def get_queryset(self):
+
+        user_id = self.kwargs['pk']
+        dev = self.kwargs['dev']
+        user=User.objects.get(id=user_id)
+
+
+        try:
+            dev_list = []
+            dev_req = DevRequest.objects.filter(owner=user, paid=False, closed=False).get()
+            for onedev in dev_req.developers:
+                dev_list.append(onedev)
+            dev_list.append(str(dev))
+            dev_req.developers = dev_list
+            dev_req.save()
+            return DevRequest.objects.all()
+
+
+        except DevRequest.DoesNotExist:
+            devlist = []
+            devlist.append(dev)
+            dev_req = DevRequest(owner=user, paid=False, closed=False, developers=devlist)
+            dev_req.save()
+            return DevRequest.objects.all()
+
+
+class Alldevsrequests(generics.RetrieveAPIView):
+    queryset = DevRequest.objects.all()
+    serializer_class = DevRequestSerializer
+    lookup_field = 'owner'
+
+class Myjobapplication(generics.ListAPIView):
+    serializer_class = JobApplicationsRequestSerializer
+    def get_queryset(self):
+        job_id = self.kwargs['job']
+        candidate_id = self.kwargs['candidate']
+        job = Job.objects.get(id=job_id)
+        user = User.objects.get(id=candidate_id)
+        return JobApplication.objects.filter(job=job).filter(candidate=user)
+
+
+class JobsList(generics.ListCreateAPIView):
+    queryset = Job.objects.all()
+    serializer_class = JobRequestSerializer
+
+
+class Myjobsrequests(generics.ListAPIView):
+    serializer_class = JobRequestSerializer
+
+    def get_queryset(self):
+
+        user_id = self.kwargs['posted_by']
+        user =User.objects.get(id=user_id)
+        return Job.objects.filter(posted_by=user)
+class Jobsapplicants(generics.ListAPIView):
+    serializer_class = JobApplicationsRequestSerializer
+
+    def get_queryset(self):
+        job_id = self.kwargs['job']
+        job = Job.objects.get(id=job_id)
+        return JobApplication.objects.filter(job=job)
+class Specificjob(generics.RetrieveAPIView):
+    queryset = Job.objects.all()
+    serializer_class = JobRequestSerializer
+
+class SpecificJobsapplicants(generics.ListAPIView):
+    serializer_class = JobApplicationsRequestSerializer
+
+    def get_queryset(self):
+        job_id = self.kwargs['job']
+        job = Job.objects.get(id=job_id)
+        return JobApplication.objects.filter(job=job)
+
+class JobUpdate(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated,)
+
+    serializer_class = JobRequestSerializer
+
+class JobCreateUpdate(generics.CreateAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Job.objects.all()
+    serializer_class = JobRequestSerializer
+
+
+
 
 def job_list(request):
     if request.user.is_authenticated:
@@ -84,21 +176,10 @@ def job_details(request, id):
 
     # recommended=Profile.objects.filter(profile_tags__icontains=job.tech_stack.lower())
 
-    profiletags= User.objects.filter(profile__user_type='developer').filter(Q(profile__profile_tags__icontains=job.tech_stack.lower()))
 
-    languages = User.objects.filter(profile__user_type='developer').filter(
-        Q(profile__language__icontains=job.tech_stack.lower()))
-
-    frameworks = User.objects.filter(profile__user_type='developer').filter(
-        Q(profile__framework__icontains=job.tech_stack.lower()))
 
     alldevs = []
-    for onedev in profiletags:
-        alldevs.append(onedev.id)
-    for onelanguage in languages:
-        alldevs.append(onelanguage.id)
-    for oneframework in frameworks:
-        alldevs.append(oneframework.id)
+
 
     listofdevs=list(set(alldevs))
 
@@ -133,6 +214,8 @@ def create_or_edit_job(request, _id=None):
 def apply_for_job(request, job_id):
     job=Job.objects.get(id=job_id)
     if request.method == 'POST':
+        newapply = JobApplication(candidate=request.user, job=job)
+        newapply.save()
 
         subject = job.title + 'Application sent by' + request.user.first_name + request.user.last_name
         html_message = render_to_string('invitations/email/jobapplications.html',
@@ -149,8 +232,7 @@ def apply_for_job(request, job_id):
         from_email = 'codeln@codeln.com'
         to = [request.user.email]
         mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
-        newapply = JobApplication(candidate=request.user, job=job)
-        newapply.save()
+
         return redirect(reverse('marketplace:job_list'))
     else:
         return redirect(reverse('marketplace:job_list'))
@@ -172,6 +254,8 @@ def manage_posted_jobs(request):
 def pick_candidate(request, job_id, dev_id):
     job = Job.objects.get(id=job_id)
     dev = User.objects.get(id=dev_id)
+    newpick = JobApplication(job=job, candidate=dev, selected=True)
+    newpick.save()
     subject = 'Shortlisted for job'
     html_message = render_to_string('invitations/email/accepted.html',
                                     {'dev': dev, 'job': job})
@@ -179,8 +263,7 @@ def pick_candidate(request, job_id, dev_id):
     from_email = 'codeln@codeln.com'
     to = [dev.email]
     mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
-    newpick = JobApplication(job=job, candidate=dev, selected=True)
-    newpick.save()
+
 
     return HttpResponseRedirect(reverse('marketplace:recruiter_job_detail', args=(job_id,)))
 
@@ -188,6 +271,8 @@ def pick_candidate(request, job_id, dev_id):
 def select_candidate(request, job_id, dev_id):
     candidate = User.objects.get(id=dev_id)
     job = JobApplication.objects.filter(job_id=job_id).filter(candidate=candidate).get()
+    job.selected = True
+    job.save()
     subject = 'Shortlisted for job'
     html_message = render_to_string('invitations/email/accepted.html',
                                     {'dev': candidate, 'job': job})

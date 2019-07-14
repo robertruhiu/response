@@ -58,6 +58,7 @@ class Profile(models.Model):
     years = models.CharField(choices=YEARS_ACTIVE_CHOICES, null=True, max_length=30)
     about = models.CharField(null=True, max_length=300)
     profile_tags = SeparatedValuesField(null=True, max_length=150, token=',')
+    skills = models.CharField(max_length=900, null=True, blank=True)
     country = CountryField(null=True, max_length=30)
     availabilty = models.CharField(choices=CONTRACT_CHOICES, null=True, max_length=30)
 

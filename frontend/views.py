@@ -13,7 +13,7 @@ from datetime import date,datetime,time
 from django.core.mail import send_mail
 import json
 from decouple import config
-
+from rest_framework.permissions import IsAuthenticated
 import base64
 import urllib.parse
 from django.contrib import messages
@@ -29,6 +29,73 @@ from frontend.form import Projectinvite, EditProjectForm,Submissions,Portfolio_f
 from frontend.models import candidatesprojects,submissions,Portfolio,Experience,Report
 from classroom.models import TakenQuiz,Student,Quiz
 from marketplace.models import Job
+from .serializers import UserSerializer,ProfileSerializer,ExperienceSerializer,ProjectSerializer
+from rest_framework import generics, permissions
+
+class UserList(generics.ListAPIView):
+
+    serializer_class = ProfileSerializer
+
+    def get_queryset(self):
+
+        return Profile.objects.filter(user_type='developer')
+
+class AllUsers(generics.ListAPIView):
+
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+
+        return User.objects.all()
+
+
+
+class Talentget(generics.RetrieveAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+
+class Portfolioget(generics.RetrieveAPIView):
+    serializer_class = ProfileSerializer
+
+    def get_queryset(self):
+        user = self.kwargs['pk']
+        try:
+            projects = Portfolio.objects.filter(candidate_id=user)
+            return projects
+        except Portfolio.DoesNotExist:
+            projects = None
+            return projects
+
+
+
+class Experienceget(generics.RetrieveAPIView):
+    serializer_class = ProfileSerializer
+    def get_queryset(self):
+        user = self.kwargs['pk']
+        try:
+
+            work = Experience.objects.filter(candidate_id=user)
+            return work
+        except Experience.DoesNotExist:
+            work = []
+            return work
+
+
+class Profileget(generics.RetrieveAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+class Userget(generics.RetrieveAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class ProfileUpdate(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
 
 @login_required
 def developer_filling_details(request, current_profile):

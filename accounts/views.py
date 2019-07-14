@@ -11,9 +11,9 @@ from accounts.models import Profile
 # Create your views here.
 
 @login_required
-def profile(request, username=None):
-    if username:
-        u = User.objects.get(username=username)
+def profile(request, pk=None):
+    if pk:
+        u = User.objects.get(id=pk)
         user = u
     else:
         user = request.user
