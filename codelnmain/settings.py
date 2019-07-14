@@ -83,6 +83,7 @@ INSTALLED_APPS = [
 
 
 
+
 ]
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -111,6 +112,7 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:8000',
     'http://localhost:8080',
     'http://localhost:8081',
+    'https://mulan.herokuapp.com/'
 
 )
 
