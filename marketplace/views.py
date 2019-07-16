@@ -116,6 +116,12 @@ class JobCreateUpdate(generics.CreateAPIView):
     queryset = Job.objects.all()
     serializer_class = JobRequestSerializer
 
+class PickReject(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = JobApplication.objects.all()
+    serializer_class = JobApplicationsRequestSerializer
+
+
 
 
 

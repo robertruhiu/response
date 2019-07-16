@@ -49,6 +49,7 @@ class Project(models.Model):
     description = models.CharField(max_length=2000, blank=True, null=True, )
     level = models.CharField(max_length=200, blank=True, null=True, )
     concept = models.CharField(max_length=200, blank=True, null=True, )
+    tags = models.CharField(max_length=900, null=True, blank=True)
     projectimage1 = models.CharField(max_length=500, blank=True, null=True, )
     projectimage2 = models.CharField(max_length=500, blank=True, null=True, )
     projectimage3 = models.CharField(max_length=500, blank=True, null=True, )

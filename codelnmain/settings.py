@@ -112,7 +112,7 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:8000',
     'http://localhost:8080',
     'http://localhost:8081',
-    'https://mulan.herokuapp.com/'
+    'https://mulan.herokuapp.com'
 
 )
 
@@ -190,10 +190,10 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'dfrqm5mpfa2bvr',
-#         'USER': 'lhhjslensqrmsl',
-#         'PASSWORD': '45a798f60492d72aa0d8017b48816b10a184a5f6c93494e9253730be18eeeb49',
-#         'HOST': 'ec2-79-125-124-30.eu-west-1.compute.amazonaws.com',
+#         'NAME': 'dbeqvronr59rp3',
+#         'USER': 'unyokuvzspuixp',
+#         'PASSWORD': 'e2c5c2d852cca022ee1e09b7c2bba04a0b08acbeeb2f1c6ef8c6db1efd1bb7c8',
+#         'HOST': 'ec2-54-217-234-157.eu-west-1.compute.amazonaws.com',
 #         'PORT': '5432',
 #     }
 # }
