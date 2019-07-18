@@ -63,6 +63,8 @@ class JobApplication(models.Model):
     candidate = models.ForeignKey(User, on_delete=models.CASCADE, related_name='devs')
     selected = models.BooleanField(default=False)
     stage =models.CharField(max_length=500, null=True)
+    interview = models.DateTimeField(null=True,blank=True)
+    notes = models.CharField(max_length=1500,null=True)
 
 
 class DevRequest(models.Model):

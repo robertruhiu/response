@@ -87,6 +87,7 @@ class Myjobsrequests(generics.ListAPIView):
         user_id = self.kwargs['posted_by']
         user =User.objects.get(id=user_id)
         return Job.objects.filter(posted_by=user)
+
 class Jobsapplicants(generics.ListAPIView):
     serializer_class = JobApplicationsRequestSerializer
 
@@ -108,10 +109,15 @@ class SpecificJobsapplicants(generics.ListAPIView):
 
 class JobUpdate(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
-
+    queryset = Job.objects.all()
     serializer_class = JobRequestSerializer
 
-class JobCreateUpdate(generics.CreateAPIView):
+class JobUnpublish(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Job.objects.all()
+    serializer_class = JobRequestSerializer
+
+class JobCreate(generics.CreateAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Job.objects.all()
     serializer_class = JobRequestSerializer
@@ -120,6 +126,13 @@ class PickReject(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = JobApplication.objects.all()
     serializer_class = JobApplicationsRequestSerializer
+
+class PickRecommended(generics.CreateAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = JobApplication.objects.all()
+    serializer_class = JobApplicationsRequestSerializer
+
+
 
 
 
@@ -220,7 +233,7 @@ def create_or_edit_job(request, _id=None):
 def apply_for_job(request, job_id):
     job=Job.objects.get(id=job_id)
     if request.method == 'POST':
-        newapply = JobApplication(candidate=request.user, job=job)
+        newapply = JobApplication(candidate=request.user, job=job,stage='new')
         newapply.save()
 
         subject = job.title + 'Application sent by' + request.user.first_name + request.user.last_name

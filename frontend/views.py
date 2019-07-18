@@ -55,31 +55,28 @@ class Talentget(generics.RetrieveAPIView):
     serializer_class = ProfileSerializer
 
 
-class Portfolioget(generics.RetrieveAPIView):
-    serializer_class = ProfileSerializer
+class Portfolioget(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = ProjectSerializer
 
     def get_queryset(self):
-        user = self.kwargs['pk']
-        try:
-            projects = Portfolio.objects.filter(candidate_id=user)
-            return projects
-        except Portfolio.DoesNotExist:
-            projects = None
-            return projects
+        candidate_id = self.kwargs['candidate_id']
+        user = User.objects.get(id=candidate_id)
+        return Portfolio.objects.filter(candidate_id=user)
 
 
 
-class Experienceget(generics.RetrieveAPIView):
-    serializer_class = ProfileSerializer
+
+class Experienceget(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = ExperienceSerializer
+
     def get_queryset(self):
-        user = self.kwargs['pk']
-        try:
 
-            work = Experience.objects.filter(candidate_id=user)
-            return work
-        except Experience.DoesNotExist:
-            work = []
-            return work
+        candidate_id = self.kwargs['candidate_id']
+        user = User.objects.get(id=candidate_id)
+        return Experience.objects.filter(candidate=user)
+
 
 
 class Profileget(generics.RetrieveAPIView):

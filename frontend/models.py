@@ -28,6 +28,7 @@ class Portfolio(models.Model):
     repository_link = models.CharField(null=True, max_length=400)
     demo_link = models.CharField(null=True, max_length=400)
     verified = models.BooleanField(default=False)
+    tech_tags = models.CharField(max_length=500, blank=True, null=True, )
 
 
 class Experience(models.Model):
@@ -37,6 +38,7 @@ class Experience(models.Model):
     description = models.CharField(null=True, max_length=100)
     location = CountryField(null=True, max_length=30)
     duration = models.IntegerField(null=True)
+    tech_tags = models.CharField(max_length=500, blank=True, null=True, )
 
 class Report(models.Model):
     candidate = models.ForeignKey(User, on_delete=models.CASCADE)

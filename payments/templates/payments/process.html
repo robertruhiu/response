@@ -113,7 +113,7 @@
         const SuccessUrl = '{% url 'payments:flutter-done' transaction.id %}';
         const CancelledUrl = '{% url 'payments:canceled' transaction.id %}';
 
-        function payWithRave(amnt) {
+        payWithRave(amnt) {
             var x = getpaidSetup({
                 PBFPubKey: API_publicKey,
                 customer_email: '{{ transaction.user.email }}',

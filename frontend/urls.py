@@ -79,8 +79,8 @@ urlpatterns = [
     path('getuser/<int:pk>', Userget.as_view()),
     path('getprofile/<int:pk>', Profileget.as_view()),
     path('gettalent/<int:pk>', Talentget.as_view()),
-    path('getexperience/<int:pk>', Experienceget.as_view()),
-    path('getportofolio/<int:pk>', Portfolioget.as_view()),
+    path('getexperience/<int:candidate_id>', Experienceget.as_view()),
+    path('getportofolio/<int:candidate_id>', Portfolioget.as_view()),
 
 
 

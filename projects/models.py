@@ -74,6 +74,7 @@ class Project(models.Model):
     devtype = models.ForeignKey(Devtype, on_delete=False, null=True)
     projecttype = models.ForeignKey(Projecttype, on_delete=False, null=True)
     hasvideo=models.BooleanField(default=False)
+    tech_tags = models.CharField(max_length=500,blank=True, null=True,)
 
     def __str__(self):
         return self.name
