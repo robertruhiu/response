@@ -30,39 +30,24 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import DevRequestSerializer,JobRequestSerializer,JobApplicationsRequestSerializer
 from rest_framework import generics
 
-class DevRequestlist(generics.RetrieveUpdateDestroyAPIView):
-
+class DevRequestpick(generics.CreateAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = DevRequest.objects.all()
     serializer_class = DevRequestSerializer
-    def get_queryset(self):
-
-        user_id = self.kwargs['pk']
-        dev = self.kwargs['dev']
-        user=User.objects.get(id=user_id)
 
 
-        try:
-            dev_list = []
-            dev_req = DevRequest.objects.filter(owner=user, paid=False, closed=False).get()
-            for onedev in dev_req.developers:
-                dev_list.append(onedev)
-            dev_list.append(str(dev))
-            dev_req.developers = dev_list
-            dev_req.save()
-            return DevRequest.objects.all()
-
-
-        except DevRequest.DoesNotExist:
-            devlist = []
-            devlist.append(dev)
-            dev_req = DevRequest(owner=user, paid=False, closed=False, developers=devlist)
-            dev_req.save()
-            return DevRequest.objects.all()
-
-
-class Alldevsrequests(generics.RetrieveAPIView):
+class DevRequests(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
     queryset = DevRequest.objects.all()
     serializer_class = DevRequestSerializer
     lookup_field = 'owner'
+
+class MyApplicants(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = JobApplication.objects.all()
+    serializer_class = JobApplicationsRequestSerializer
+    lookup_field = 'recruiter'
+
 
 class Myjobapplication(generics.ListAPIView):
     serializer_class = JobApplicationsRequestSerializer
@@ -78,6 +63,9 @@ class JobsList(generics.ListCreateAPIView):
     queryset = Job.objects.all()
     serializer_class = JobRequestSerializer
 
+class Jobdetails(generics.RetrieveAPIView):
+    queryset = Job.objects.all()
+    serializer_class = JobRequestSerializer
 
 class Myjobsrequests(generics.ListAPIView):
     serializer_class = JobRequestSerializer
@@ -132,9 +120,23 @@ class PickRecommended(generics.CreateAPIView):
     queryset = JobApplication.objects.all()
     serializer_class = JobApplicationsRequestSerializer
 
+class CandidateManager(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = DevRequest.objects.all()
+    serializer_class = DevRequestSerializer
 
+class JobApply(generics.CreateAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = JobApplication.objects.all()
+    serializer_class = JobApplicationsRequestSerializer
 
-
+class CandidateJobs(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = JobApplicationsRequestSerializer
+    def get_queryset(self):
+        candidate_id = self.kwargs['candidate']
+        user = User.objects.get(id=candidate_id)
+        return JobApplication.objects.filter(candidate=user)
 
 
 
@@ -233,7 +235,7 @@ def create_or_edit_job(request, _id=None):
 def apply_for_job(request, job_id):
     job=Job.objects.get(id=job_id)
     if request.method == 'POST':
-        newapply = JobApplication(candidate=request.user, job=job,stage='new')
+        newapply = JobApplication(candidate=request.user, job=job,stage='new',recruiter=job.posted_by)
         newapply.save()
 
         subject = job.title + 'Application sent by' + request.user.first_name + request.user.last_name

@@ -78,6 +78,15 @@ class Experienceget(generics.ListAPIView):
         return Experience.objects.filter(candidate=user)
 
 
+class AllPortfolioget(generics.ListAPIView):
+    queryset = Portfolio.objects.all()
+    serializer_class = ProjectSerializer
+
+
+class AllExperienceget(generics.ListAPIView):
+    queryset = Experience.objects.all()
+    serializer_class = ExperienceSerializer
+
 
 class Profileget(generics.RetrieveAPIView):
     permission_classes = (IsAuthenticated,)

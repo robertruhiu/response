@@ -49,7 +49,7 @@ class Job(models.Model):
     position_filled = models.BooleanField(default=False)
     published = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
-    deadline = models.DateTimeField(null=True,blank=True)
+    deadline = models.DateField(null=True,blank=True)
 
     class Meta:
         ordering = ('created',)
@@ -65,13 +65,16 @@ class JobApplication(models.Model):
     stage =models.CharField(max_length=500, null=True)
     interview = models.DateTimeField(null=True,blank=True)
     notes = models.CharField(max_length=1500,null=True)
+    recruiter = models.ForeignKey(User, related_name='jobrecruiter', on_delete=models.CASCADE,null=True,blank=True)
 
 
 class DevRequest(models.Model):
     owner = models.ForeignKey(User, related_name='owner', on_delete=models.CASCADE)
-    developers = SeparatedValuesField(null=True,max_length=150,token=',')
-    created = models.DateTimeField(auto_now_add=True)
-    completed = models.DateTimeField(auto_now=True)
+    developer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='devaccount',null=True,)
     paid = models.BooleanField(default=False)
-    closed = models.BooleanField(default=False)
+    stage = models.CharField(max_length=500, null=True)
+    interview = models.DateTimeField(null=True, blank=True)
+    notes = models.CharField(max_length=1500, null=True)
+
+
 
