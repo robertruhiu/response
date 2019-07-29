@@ -9,7 +9,7 @@ from frontend.views import home,activity,tracker,update_candidateprojects,\
     ,deletetransaction,buildproject,calltoapply,apply,opencalltracker,competitions,newproject,\
     passedquizzes,failedquizzes,pickcandidates,update_finishedopencall,portfolio,experience,closetransaction,\
     editportfolioproject,about,management,grading,storegrades,analytics,ProfileUpdate,Profileget,Talentget,Experienceget,\
-    Portfolioget,AllUsers,Userget,AllExperienceget,AllPortfolioget
+    Portfolioget,AllUsers,Userget,AllExperienceget,AllPortfolioget,ProjectAssignment
 from frontend.tasks import reminderforprofiledevs,applyreminder,massmail,submission
 from accounts.views import update_profile
 
@@ -83,6 +83,8 @@ urlpatterns = [
     path('getportofolio/<int:candidate_id>', Portfolioget.as_view()),
     path('getallexperience', AllExperienceget.as_view()),
     path('getallportofolio', AllPortfolioget.as_view()),
+    path('asignproject', ProjectAssignment.as_view()),
+
 
 
 

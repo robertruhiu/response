@@ -1,12 +1,44 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-
+from marketplace.models import Job
 from projects.forms import FrameworkForm
 from projects.models import Project,Projecttype,Devtype,Framework
+from rest_framework.permissions import IsAuthenticated
+from .serializers import Projectserializer
+from rest_framework import generics
+import random
+class Projects(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = Projectserializer
+    def get_queryset(self):
+        job_id = self.kwargs['id']
+        job = Job.objects.get(id=job_id)
+        projects = Project.objects.all()
+        tags = job.tech_stack.split(",")
+        randomlist =[]
+        for oneproject  in projects :
+            for onetag in tags:
+                if onetag in oneproject.tags:
+                    randomlist.append(oneproject.id)
+        print(randomlist)
+        if len(randomlist) > 0:
+            projectid = random.choice(randomlist)
+        else:
+            projectid = randomlist[0]
 
 
+        return Project.objects.filter(pk=projectid)
 
+class Allprojects(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Project.objects.all()
+    serializer_class = Projectserializer
+
+class ProjectDetails(generics.RetrieveAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Project.objects.all()
+    serializer_class = Projectserializer
 # Create your views here.
 # def project_categories(request):
 #     # list all project categories

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from accounts.models import Profile
-from frontend.models import Experience,Portfolio
+from frontend.models import Experience,Portfolio,candidatesprojects
 from rest_framework import serializers
 from django_countries import Countries
 
@@ -32,4 +32,9 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Portfolio
+        fields = '__all__'
+class ProjectAsign(serializers.ModelSerializer):
+
+    class Meta:
+        model = candidatesprojects
         fields = '__all__'

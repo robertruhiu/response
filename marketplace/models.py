@@ -6,7 +6,7 @@ from django.urls import reverse
 from django_countries.fields import CountryField
 from django.contrib.auth.models import User
 from separatedvaluesfield.models import SeparatedValuesField
-
+from projects.models import Project
 
 class Job(models.Model):
     ENGAGEMENT_TYPE = (
@@ -66,6 +66,10 @@ class JobApplication(models.Model):
     interview = models.DateTimeField(null=True,blank=True)
     notes = models.CharField(max_length=1500,null=True)
     recruiter = models.ForeignKey(User, related_name='jobrecruiter', on_delete=models.CASCADE,null=True,blank=True)
+    test_stage = models.CharField(max_length=500, null=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE,null=True)
+    projectname = models.CharField(max_length=100, null=True)
+    report = models.CharField(max_length=500, null=True)
 
 
 class DevRequest(models.Model):
@@ -75,6 +79,10 @@ class DevRequest(models.Model):
     stage = models.CharField(max_length=500, null=True)
     interview = models.DateTimeField(null=True, blank=True)
     notes = models.CharField(max_length=1500, null=True)
+    test_stage = models.CharField(max_length=500, null=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE,null=True)
+    projectname = models.CharField(max_length=100, null=True)
+    report = models.CharField(max_length=500, null=True)
 
 
 
