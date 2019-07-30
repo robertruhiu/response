@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from projects.views import project_list, project,categories,devtypes,Projects,ProjectDetails,Allprojects
+from projects.views import project_list, project,categories,devtypes,Projects,ProjectDetails,Allprojects,RecentProjects,MyRecentProjects,RecommendedProjects
 
 app_name = 'projects'
 urlpatterns = [
@@ -25,7 +25,10 @@ urlpatterns = [
     path('categories/', categories, name='categories'),
     path('project/<int:id>/', project, name='project'),
     path('projects/<int:id>', Projects.as_view()),
+    path('recommendedprojects/<int:id>', RecommendedProjects.as_view()),
     path('allprojects', Allprojects.as_view()),
     path('projectdetails/<int:pk>', ProjectDetails.as_view()),
+    path('recentprojects/<int:id>', RecentProjects.as_view()),
+    path('myrecentprojects/<int:id>', MyRecentProjects.as_view()),
 
 ]

@@ -63,13 +63,15 @@ class JobApplication(models.Model):
     candidate = models.ForeignKey(User, on_delete=models.CASCADE, related_name='devs')
     selected = models.BooleanField(default=False)
     stage =models.CharField(max_length=500, null=True)
-    interview = models.DateTimeField(null=True,blank=True)
+    interviewstarttime = models.DateTimeField(null=True,blank=True)
+    interviewendtime = models.DateTimeField(null=True, blank=True)
     notes = models.CharField(max_length=1500,null=True)
     recruiter = models.ForeignKey(User, related_name='jobrecruiter', on_delete=models.CASCADE,null=True,blank=True)
     test_stage = models.CharField(max_length=500, null=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE,null=True)
-    projectname = models.CharField(max_length=100, null=True)
+    name = models.CharField(max_length=100, null=True)
     report = models.CharField(max_length=500, null=True)
+    interviewstatus = models.CharField(max_length=500, null=True)
 
 
 class DevRequest(models.Model):
@@ -77,12 +79,14 @@ class DevRequest(models.Model):
     developer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='devaccount',null=True,)
     paid = models.BooleanField(default=False)
     stage = models.CharField(max_length=500, null=True)
-    interview = models.DateTimeField(null=True, blank=True)
+    interviewstarttime = models.DateTimeField(null=True, blank=True)
+    interviewendtime = models.DateTimeField(null=True, blank=True)
     notes = models.CharField(max_length=1500, null=True)
     test_stage = models.CharField(max_length=500, null=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE,null=True)
-    projectname = models.CharField(max_length=100, null=True)
+    name = models.CharField(max_length=100, null=True)
     report = models.CharField(max_length=500, null=True)
+    interviewstatus = models.CharField(max_length=500, null=True)
 
 
 

@@ -8,6 +8,9 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import Projectserializer
 from rest_framework import generics
 import random
+from django.contrib.auth.models import User
+from marketplace.models import JobApplication,DevRequest
+from accounts.models import Profile
 class Projects(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = Projectserializer
@@ -19,7 +22,7 @@ class Projects(generics.ListAPIView):
         randomlist =[]
         for oneproject  in projects :
             for onetag in tags:
-                if onetag in oneproject.tags:
+                if oneproject.tags.find(onetag.lower()):
                     randomlist.append(oneproject.id)
         print(randomlist)
         if len(randomlist) > 0:
@@ -27,6 +30,27 @@ class Projects(generics.ListAPIView):
         else:
             projectid = randomlist[0]
 
+
+        return Project.objects.filter(pk=projectid)
+
+class RecommendedProjects(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = Projectserializer
+    def get_queryset(self):
+        user_id = self.kwargs['id']
+        user = User.objects.get(pk=user_id)
+        userprofile = Profile.objects.get(user=user)
+        projects = Project.objects.all()
+        tags = userprofile.skills.split(",")
+        randomlist =[]
+        for oneproject  in projects :
+            for onetag in tags:
+                if oneproject.tags.find(onetag.lower()):
+                    randomlist.append(oneproject.id)
+        if len(randomlist) > 0:
+            projectid = random.choice(randomlist)
+        else:
+            projectid = randomlist[0]
 
         return Project.objects.filter(pk=projectid)
 
@@ -39,6 +63,36 @@ class ProjectDetails(generics.RetrieveAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Project.objects.all()
     serializer_class = Projectserializer
+
+class RecentProjects(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = Projectserializer
+    def get_queryset(self):
+        user_id = self.kwargs['id']
+        user = User.objects.get(pk=user_id)
+        recentprojects = JobApplication.objects.filter(recruiter=user)[:2]
+        project_ids = []
+        for oneproject in recentprojects:
+            project_ids.append(oneproject.project.id)
+        return Project.objects.filter(pk__in=project_ids)
+class MyRecentProjects(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = Projectserializer
+    def get_queryset(self):
+        user_id = self.kwargs['id']
+        user = User.objects.get(pk=user_id)
+        recentprojects = DevRequest.objects.filter(owner=user)[:2]
+        project_ids = []
+        for oneproject in recentprojects:
+            project_ids.append(oneproject.project)
+        return project_ids
+
+
+
+
+
+
+
 # Create your views here.
 # def project_categories(request):
 #     # list all project categories
