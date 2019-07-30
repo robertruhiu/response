@@ -49,7 +49,8 @@ class Job(models.Model):
     position_filled = models.BooleanField(default=False)
     published = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
-    deadline = models.DateField(null=True,blank=True)
+    deadline = models.DateTimeField(null=True, blank=True)
+
 
     class Meta:
         ordering = ('created',)
