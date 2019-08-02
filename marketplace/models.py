@@ -71,8 +71,10 @@ class JobApplication(models.Model):
     test_stage = models.CharField(max_length=500, null=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE,null=True)
     name = models.CharField(max_length=100, null=True)
+    candidatename = models.CharField(max_length=100, null=True)
     report = models.CharField(max_length=500, null=True)
     interviewstatus = models.CharField(max_length=500, null=True)
+    eventcolor = models.CharField(max_length=100, null=True,default='blue')
 
 
 class DevRequest(models.Model):
@@ -86,8 +88,11 @@ class DevRequest(models.Model):
     test_stage = models.CharField(max_length=500, null=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE,null=True)
     name = models.CharField(max_length=100, null=True)
+    candidatename = models.CharField(max_length=100, null=True)
     report = models.CharField(max_length=500, null=True)
     interviewstatus = models.CharField(max_length=500, null=True)
+    eventcolor = models.CharField(max_length=100, null=True, default='blue')
+
 
 
 
