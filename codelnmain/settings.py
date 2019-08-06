@@ -114,7 +114,8 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:8081',
     'http://localhost:8082',
     'https://mulan.herokuapp.com',
-    'https://leanapp.herokuapp.com'
+    'https://leanapp.herokuapp.com',
+    'https://mulan.herokuapp.com/#/'
 
 )
 
