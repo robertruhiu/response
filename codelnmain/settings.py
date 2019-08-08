@@ -50,8 +50,6 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'cloudinary',
 
-
-
     'transactions',
     'payments',
     'marketplace',
@@ -78,11 +76,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_auth',
     'rest_auth.registration',
-
-
-
-
-
 
 ]
 REST_FRAMEWORK = {
@@ -115,7 +108,8 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:8082',
     'https://mulan.herokuapp.com',
     'https://leanapp.herokuapp.com',
-
+    'http://mulan.herokuapp.com',
+    'http://leanapp.herokuapp.com',
 
 )
 
@@ -253,8 +247,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-
-#email settings
+# email settings
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='DEFAULT_FROM_EMAIL')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -307,14 +300,12 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-
 ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
 INVITATIONS_INVITATION_EXPIRY = 7
 INVITATIONS_CONFIRM_INVITE_ON_GET = True
 INVITATIONS_ALLOW_JSON_INVITES = True
 INVITATIONS_ADAPTER = ACCOUNT_ADAPTER
 INVITATIONS_EMAIL_SUBJECT_PREFIX = 'Codeln'
-
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='AWS_SECRET_ACCESS_KEY')
@@ -341,11 +332,11 @@ if ENVIRONMENT != 'local':
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
 
 CLOUDINARY = {
-  'cloud_name': 'dwtvwjhn3',
-  'api_key': '748889632162181',
-  'api_secret': 'ecbWIeK33ka7-1wyy9TiB6pVwAw',
+    'cloud_name': 'dwtvwjhn3',
+    'api_key': '748889632162181',
+    'api_secret': 'ecbWIeK33ka7-1wyy9TiB6pVwAw',
 }
-CLOUDINARY_STORAGE={
+CLOUDINARY_STORAGE = {
 
     'CLOUD_NAME': 'dwtvwjhn3',
     'API_KEY': '748889632162181',
